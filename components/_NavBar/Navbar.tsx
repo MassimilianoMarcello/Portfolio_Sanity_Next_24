@@ -5,21 +5,21 @@ import styles from "../../app/main.module.scss";
 const Navbar: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  // Funzione per aprire/chiudere il dropdown
-  const toggleDropdown = () => {
-    setIsDropdownOpen((prev) => !prev);
+  // Funzione per aprire il dropdown
+  const handleMouseEnter = () => {
+    setIsDropdownOpen(true);
   };
 
-  // Funzione per chiudere il dropdown quando il mouse lascia il sottomenu
+  // Funzione per chiudere il dropdown
   const handleMouseLeave = () => {
     setIsDropdownOpen(false);
   };
 
   return (
-    <nav className={styles.navbar}>
+    <nav className={styles.navbar}  onMouseLeave={handleMouseLeave} >
       <div className={styles["navbar-content"]}>
         {/* Logo */}
-        <Link href="/" className={styles.logo}>
+        <Link href="/" className={styles.logo} >
           <img src="/logo-massdev.webp" alt="Logo" />
         </Link>
 
@@ -27,14 +27,15 @@ const Navbar: React.FC = () => {
         <div className={styles["navbar-links"]}>
           {/* Projects dropdown */}
           <div
-            className={styles["nav-link"]}
-            onClick={toggleDropdown} // Toggle il dropdown con click
-            onMouseLeave={handleMouseLeave} // Chiude il menu quando il mouse lascia il sottomenu
+            className={styles["nav-link"]} 
+            onMouseEnter={handleMouseEnter} // Apre il dropdown quando il mouse entra
+        
           >
             Projects
             {isDropdownOpen && (
               <div
                 className={styles.dropdownMenu}
+                onMouseEnter={handleMouseEnter} // Non chiude il menu se il mouse è sopra
                 onMouseLeave={handleMouseLeave} // Chiude il dropdown quando il mouse lascia il menu
               >
                 <a href="#main" className={styles.dropdownItem}>
@@ -61,6 +62,10 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
+
+
+
+
 
 
 
