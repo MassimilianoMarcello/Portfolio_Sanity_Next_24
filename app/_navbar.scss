@@ -40,6 +40,16 @@
   padding: 1rem  5rem 0 0;
   border-bottom: 0.01rem solid $primary-color;
 
+  .triangleContainer {
+    display: inline-block; // Assicura che il triangolo sia considerato un elemento di blocco inline
+    transition: transform 0.3s ease; // Transizione fluida per lo spostamento
+  
+    &:hover {
+      transform: translateX(2rem); // Sposta verso destra di 2rem
+    }
+  }
+  
+
   .navbar-content {
     display: flex;
     justify-content: space-between;

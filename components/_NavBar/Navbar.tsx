@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import styles from "../../app/main.module.scss";
+import TriangleIcon from "../ΩΩElements/TriangleIcon";
 
 const Navbar: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -16,10 +17,10 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className={styles.navbar}  onMouseLeave={handleMouseLeave} >
+    <nav className={styles.navbar} onMouseLeave={handleMouseLeave}>
       <div className={styles["navbar-content"]}>
         {/* Logo */}
-        <Link href="/" className={styles.logo} >
+        <Link href="/" className={styles.logo}>
           <img src="/logo-massdev.webp" alt="Logo" />
         </Link>
 
@@ -27,13 +28,19 @@ const Navbar: React.FC = () => {
         <div className={styles["navbar-links"]}>
           {/* Projects dropdown */}
           <div
-            className={styles["nav-link"]} 
+            className={styles["nav-link"]}
             onMouseEnter={handleMouseEnter} // Apre il dropdown quando il mouse entra
-        
           >
-                      Projects
+            Projects
+            <span className={styles.triangleContainer}>
+  <TriangleIcon />
+</span>
+
+         
             <div
-              className={`${styles.dropdownMenu} ${isDropdownOpen ? styles.show : ''}`}
+              className={`${styles.dropdownMenu} ${
+                isDropdownOpen ? styles.show : ""
+              }`}
             >
               <a href="#main" className={styles.dropdownItem}>
                 Main Projects
@@ -48,8 +55,8 @@ const Navbar: React.FC = () => {
           </div>
 
           {/* Contacts link */}
-          <Link href="/contacts" className={styles["nav-link"]}>
-            Contacts
+          <Link href="#contact" className={styles["nav-link"]}>
+            Contact
           </Link>
         </div>
       </div>

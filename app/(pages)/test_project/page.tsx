@@ -1,13 +1,12 @@
-
-import ProjectTest from '@/components/ΩTest/TestHomeProject'
-import React from 'react'
+import ProjectTest from "@/components/ΩΩElements/TestHomeProject";
+import React from "react";
 
 const page = () => {
   return (
     <div>
-        <ProjectTest/>
-        </div>
-  )
-}
+      <ProjectTest />
+    </div>
+  );
+};
 
-export default page
+export default page;

@@ -7,6 +7,7 @@ import HeaderSection from './HeaderSection';
 import ProjectList from './ProjectList';
 import ProjectFilter from './ProjectFilter';
 import styles from "./ProjectHome.module.scss"; 
+import Contact from '../Contact/Contact';
 
 // Importa il file SASS
 
@@ -48,6 +49,7 @@ export default function Home() {
     
         
         />
+        <Contact />
       </section>
     );
   }
