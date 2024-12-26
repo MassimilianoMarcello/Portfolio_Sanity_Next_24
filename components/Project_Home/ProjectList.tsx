@@ -55,7 +55,13 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
 
   const importanceOrder = ["main", "secondary", "testing"];
   const sortedCategories = importanceOrder.filter((category) => groupedProjects[category]);
+ // Category descriptions
 
+const categoryDescriptions: Record<string, string> = {
+  main: "Projects that demonstrate core skills and expertise, serving as the strongest examples of professional capabilities.",
+  secondary: "Projects that showcase additional skills and knowledge, complementing the main projects by highlighting versatility and depth.",
+  testing: "Projects focused on exploring and experimenting with new technologies, providing a foundation for innovation in future work.",
+};
   return (
     <div className={styles.projectListContainer}>
       {/* Filtro per categoria */}
@@ -72,7 +78,11 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
           className={`${styles.categorySection} ${styles.fadeIn}`}
           style={{ animationDelay: `${index * 0.2}s` }}
         >
-          <div className={styles.categoryLabel}>{category.toUpperCase()}</div>
+          <div className={styles.categoryLabel}>{category.toUpperCase()}
+          <p className={styles.categoryDescription}>{categoryDescriptions[category]}</p>
+          </div>
+       
+        
           <div className={styles.projectCards}>
             {groupedProjects[category]?.map((project) => (
               <div

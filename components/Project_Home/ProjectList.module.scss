@@ -26,8 +26,19 @@
   color: $primary-color;
   // background-color: $background-color;
   padding: 1rem;
-  width: 150px;
+  width: 50px;
   text-align: right;
+}
+.categoryDescription{
+  font-size: 1rem;
+  font-weight: 100;
+  text-align:left;
+  color: $primary-color;
+  // background-color: $background-color;
+  padding: 1rem;
+  margin-left: 2rem;
+  width: 250px;
+
 }
 
 .projectCards {
@@ -46,6 +57,7 @@
 // border-bottom: 1px solid $neutral-gray;
 transition: transform 0.2s ease;
 margin-left: 20rem;
+margin-right: 5rem;
 box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
 
   &:hover {
