@@ -36,67 +36,78 @@
 //     }
 //   }
 
-  .navbar {
-    padding: 1rem  5rem 0 0;
- 
-    border-bottom: 0.01rem solid $primary-color;
-  
-    .navbar-content {
+.navbar {
+  padding: 1rem  5rem 0 0;
+  border-bottom: 0.01rem solid $primary-color;
+
+  .navbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .logo img {
+      height: 50px;
+      margin-left: 1rem;
+    }
+
+    .navbar-links {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-  
-      .logo img {
-        height: 50px;
-        margin-left: 1rem;
-      }
-  
-      .navbar-links {
-        display: flex;
-        gap: 4rem;
-        margin-right: 5rem;
- 
-  
-        .nav-link {
-          position: relative;
-          color: $primary-color;
-          font-size: large;
-          font-weight: 100;
-          text-decoration: none;
-          height: 100%;
-          cursor: pointer;
-  
-          &:hover {
-            color: $secondary-color;
+      gap: 4rem;
+      margin-right: 5rem;
+
+      .nav-link {
+        position: relative;
+        color: $primary-color;
+        font-size: large;
+        font-weight: 100;
+        text-decoration: none;
+        height: 100%;
+        cursor: pointer;
+
+        &:hover {
+          color: $secondary-color;
+        }
+
+        .dropdownMenu {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          background-color: white;
+          border: 0.01rem solid $primary-color;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          display: flex;
+          flex-direction: column;
+          z-index: 10;
+          width: 12rem;
+          margin-top: .9rem;
+
+          opacity: 0; // Inizialmente invisibile
+          transform: translateY(-10px); // Inizialmente spostato verso l'alto
+          visibility: hidden; // Per evitare che venga cliccato prima che appaia
+          transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s; // Transizione fluida
+
+          &.show {
+            opacity: 1; // Quando visibile
+            transform: translateY(0); // Quando visibile, torna alla posizione normale
+            visibility: visible; // Mostra il menu
+            transition: opacity 0.3s ease, transform 0.3s ease; // Attiva la transizione immediatamente
           }
-  
-          .dropdownMenu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: white;
-            border: 0.01rem solid $primary-color;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            z-index: 10;
-            width: 12rem;
-            margin-top: .9rem;
-  
-            .dropdownItem {
-              padding: 8px 16px;
-              color: $primary-color;
-              text-decoration: none;
-  
-              &:hover {
-                background-color: $secondary-color;
-                // color: white;
-              }
+
+          .dropdownItem {
+            padding: 8px 16px;
+            color: $primary-color;
+            text-decoration: none;
+
+            &:hover {
+              background-color: $secondary-color;
+              // color: white;
             }
           }
         }
       }
     }
   }
+}
+
   
   

@@ -31,24 +31,20 @@ const Navbar: React.FC = () => {
             onMouseEnter={handleMouseEnter} // Apre il dropdown quando il mouse entra
         
           >
-            Projects
-            {isDropdownOpen && (
-              <div
-                className={styles.dropdownMenu}
-                onMouseEnter={handleMouseEnter} // Non chiude il menu se il mouse è sopra
-                onMouseLeave={handleMouseLeave} // Chiude il dropdown quando il mouse lascia il menu
-              >
-                <a href="#main" className={styles.dropdownItem}>
-                  Main Projects
-                </a>
-                <a href="#secondary" className={styles.dropdownItem}>
-                  Secondary Projects
-                </a>
-                <a href="#testing" className={styles.dropdownItem}>
-                  Testing Projects
-                </a>
-              </div>
-            )}
+                      Projects
+            <div
+              className={`${styles.dropdownMenu} ${isDropdownOpen ? styles.show : ''}`}
+            >
+              <a href="#main" className={styles.dropdownItem}>
+                Main Projects
+              </a>
+              <a href="#secondary" className={styles.dropdownItem}>
+                Secondary Projects
+              </a>
+              <a href="#testing" className={styles.dropdownItem}>
+                Testing Projects
+              </a>
+            </div>
           </div>
 
           {/* Contacts link */}
@@ -62,10 +58,3 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
-
-
-
-
-
-
-
