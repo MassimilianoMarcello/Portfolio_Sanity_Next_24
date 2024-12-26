@@ -37,20 +37,10 @@
 //   }
 
 .navbar {
-  padding: 1rem  5rem 0 0;
+  padding: 1rem 5rem 0 0;
   border-bottom: 0.01rem solid $primary-color;
 
-  .triangleContainer {
-    display: inline-block; // Assicura che il triangolo sia considerato un elemento di blocco inline
-    transition: transform 0.3s ease; // Transizione fluida per lo spostamento
-  
-    &:hover {
-      transform: translateX(2rem); // Sposta verso destra di 2rem
-    }
-  }
-  
-
-  .navbar-content {
+  .navbarContent {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -60,22 +50,33 @@
       margin-left: 1rem;
     }
 
-    .navbar-links {
+    .navbarLinks {
       display: flex;
       gap: 4rem;
       margin-right: 5rem;
 
-      .nav-link {
+      .navLink {
         position: relative;
         color: $primary-color;
         font-size: large;
         font-weight: 100;
         text-decoration: none;
-        height: 100%;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem; // Space between text and triangle
         cursor: pointer;
 
         &:hover {
           color: $secondary-color;
+        }
+
+        &:hover .triangleContainer {
+          transform: translateX(2rem); // Move triangle on hover
+        }
+
+        .triangleContainer {
+          display: inline-block;
+          transition: transform 0.3s ease; // Smooth animation
         }
 
         .dropdownMenu {
@@ -89,18 +90,18 @@
           flex-direction: column;
           z-index: 10;
           width: 12rem;
-          margin-top: .9rem;
+          margin-top: 0.9rem;
 
-          opacity: 0; // Inizialmente invisibile
-          transform: translateY(-10px); // Inizialmente spostato verso l'alto
-          visibility: hidden; // Per evitare che venga cliccato prima che appaia
-          transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s; // Transizione fluida
+          opacity: 0; // Initially invisible
+          transform: translateY(-10px); // Initially shifted up
+          visibility: hidden; // Prevent early clicks
+          transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s; // Smooth transition
 
           &.show {
-            opacity: 1; // Quando visibile
-            transform: translateY(0); // Quando visibile, torna alla posizione normale
-            visibility: visible; // Mostra il menu
-            transition: opacity 0.3s ease, transform 0.3s ease; // Attiva la transizione immediatamente
+            opacity: 1; // Visible state
+            transform: translateY(0); // Normal position
+            visibility: visible; // Show the menu
+            transition: opacity 0.3s ease, transform 0.3s ease; // Immediate transition
           }
 
           .dropdownItem {
@@ -110,7 +111,6 @@
 
             &:hover {
               background-color: $secondary-color;
-              // color: white;
             }
           }
         }
@@ -118,6 +118,3 @@
     }
   }
 }
-
-  
-  

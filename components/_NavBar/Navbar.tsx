@@ -1,3 +1,4 @@
+// Navbar.tsx
 import React, { useState } from "react";
 import Link from "next/link";
 import styles from "../../app/main.module.scss";
@@ -6,37 +7,33 @@ import TriangleIcon from "../ΩΩElements/TriangleIcon";
 const Navbar: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  // Funzione per aprire il dropdown
   const handleMouseEnter = () => {
     setIsDropdownOpen(true);
   };
 
-  // Funzione per chiudere il dropdown
   const handleMouseLeave = () => {
     setIsDropdownOpen(false);
   };
 
   return (
     <nav className={styles.navbar} onMouseLeave={handleMouseLeave}>
-      <div className={styles["navbar-content"]}>
+      <div className={styles.navbarContent}>
         {/* Logo */}
         <Link href="/" className={styles.logo}>
           <img src="/logo-massdev.webp" alt="Logo" />
         </Link>
 
         {/* Links */}
-        <div className={styles["navbar-links"]}>
+        <div className={styles.navbarLinks}>
           {/* Projects dropdown */}
           <div
-            className={styles["nav-link"]}
-            onMouseEnter={handleMouseEnter} // Apre il dropdown quando il mouse entra
+            className={styles.navLink}
+            onMouseEnter={handleMouseEnter}
           >
             Projects
             <span className={styles.triangleContainer}>
-  <TriangleIcon />
-</span>
-
-         
+              <TriangleIcon />
+            </span>
             <div
               className={`${styles.dropdownMenu} ${
                 isDropdownOpen ? styles.show : ""
@@ -55,7 +52,7 @@ const Navbar: React.FC = () => {
           </div>
 
           {/* Contacts link */}
-          <Link href="#contact" className={styles["nav-link"]}>
+          <Link href="#contact" className={styles.navLink}>
             Contact
           </Link>
         </div>
@@ -65,3 +62,4 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
+
