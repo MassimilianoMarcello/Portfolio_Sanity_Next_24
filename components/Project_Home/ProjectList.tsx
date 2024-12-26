@@ -75,6 +75,7 @@ const categoryDescriptions: Record<string, string> = {
       {sortedCategories.map((category, index) => (
         <div
           key={category}
+          id={category}
           className={`${styles.categorySection} ${styles.fadeIn}`}
           style={{ animationDelay: `${index * 0.2}s` }}
         >

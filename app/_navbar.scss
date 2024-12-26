@@ -1,38 +1,101 @@
 // _navbar.scss
-.navbar {
+// .navbar {
   
-    // background-color: $primary-color;
-    // padding: $spacing-unit;
-    padding: 1rem 0;
-    border-bottom: 0.01rem solid $primary-color;
-    .navbar-content {
-      background-color: white;
-      @include flex-center;
-      justify-content: space-between;
-      .logo {
+//     // background-color: $primary-color;
+//     // padding: $spacing-unit;
+//     padding: 1rem 0;
+//     border-bottom: 0.01rem solid $primary-color;
+//     .navbar-content {
+//       background-color: white;
+//       @include flex-center;
+//       justify-content: space-between;
+//       .logo {
 
-        img {
-          height: 50px;
-          margin-left: 4rem;
-          // width: 20px;
-        }
+//         img {
+//           height: 50px;
+//           margin-left: 4rem;
+//           // width: 20px;
+//         }
+//       }
+//       .navbar-links {
+//         display: flex;
+//   font-family:var(--font-zeitung-pro) ;
+//   font-weight: 100;
+
+//         gap: $spacing-unit;
+//         .nav-link {
+//           color: $primary-color; 
+//           text-decoration: none;
+//           margin-right: 1rem;
+//           padding: 8px;
+//           &:hover {
+//             color: $secondary-color;
+//           }
+//         }
+//       }
+//     }
+//   }
+
+  .navbar {
+    padding: 1rem  5rem 0 0;
+ 
+    border-bottom: 0.01rem solid $primary-color;
+  
+    .navbar-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  
+      .logo img {
+        height: 50px;
+        margin-left: 1rem;
       }
+  
       .navbar-links {
         display: flex;
-  font-family:var(--font-zeitung-pro) ;
-  font-weight: 100;
-
-        gap: $spacing-unit;
+        gap: 4rem;
+        margin-right: 5rem;
+        margin-bottom: 0rem;
+  
         .nav-link {
-          color: $primary-color; 
+          position: relative;
+          color: $primary-color;
+          font-size: large;
+          font-weight: 100;
           text-decoration: none;
-          margin-right: 1rem;
-          padding: 8px;
+          cursor: pointer;
+  
           &:hover {
             color: $secondary-color;
+          }
+  
+          .dropdownMenu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            border: 0.01rem solid $primary-color;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            z-index: 10;
+            width: 12rem;
+            margin-top: 1rem;
+  
+            .dropdownItem {
+              padding: 8px 16px;
+              color: $primary-color;
+              text-decoration: none;
+  
+              &:hover {
+                background-color: $secondary-color;
+                // color: white;
+              }
+            }
           }
         }
       }
     }
   }
+  
   
