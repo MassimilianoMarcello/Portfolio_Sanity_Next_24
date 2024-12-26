@@ -1,40 +1,4 @@
-// _navbar.scss
-// .navbar {
-  
-//     // background-color: $primary-color;
-//     // padding: $spacing-unit;
-//     padding: 1rem 0;
-//     border-bottom: 0.01rem solid $primary-color;
-//     .navbar-content {
-//       background-color: white;
-//       @include flex-center;
-//       justify-content: space-between;
-//       .logo {
 
-//         img {
-//           height: 50px;
-//           margin-left: 4rem;
-//           // width: 20px;
-//         }
-//       }
-//       .navbar-links {
-//         display: flex;
-//   font-family:var(--font-zeitung-pro) ;
-//   font-weight: 100;
-
-//         gap: $spacing-unit;
-//         .nav-link {
-//           color: $primary-color; 
-//           text-decoration: none;
-//           margin-right: 1rem;
-//           padding: 8px;
-//           &:hover {
-//             color: $secondary-color;
-//           }
-//         }
-//       }
-//     }
-//   }
 
 .navbar {
   padding: 1rem 5rem 0 0;
@@ -58,6 +22,10 @@
       .navLink {
         position: relative;
         color: $primary-color;
+        // background-color: red;
+        padding-bottom: 1rem;
+        padding-right: 2rem;
+        margin-bottom: -1rem;
         font-size: large;
         font-weight: 100;
         text-decoration: none;
@@ -89,8 +57,8 @@
           display: flex;
           flex-direction: column;
           z-index: 10;
-          width: 12rem;
-          margin-top: 0.9rem;
+          width: 10rem;
+          margin-top: 0rem;
 
           opacity: 0; // Initially invisible
           transform: translateY(-10px); // Initially shifted up

@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className={styles.navbar} onMouseLeave={handleMouseLeave}>
+    <nav className={styles.navbar} >
       <div className={styles.navbarContent}>
         {/* Logo */}
         <Link href="/" className={styles.logo}>
@@ -29,6 +29,7 @@ const Navbar: React.FC = () => {
           <div
             className={styles.navLink}
             onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
             Projects
             <span className={styles.triangleContainer}>
