@@ -40,15 +40,15 @@ const Navbar: React.FC = () => {
                 isDropdownOpen ? styles.show : ""
               }`}
             >
-              <a href="#main" className={styles.dropdownItem}>
+              <Link href="#main" className={styles.dropdownItem}>
                 Main Projects
-              </a>
-              <a href="#secondary" className={styles.dropdownItem}>
+              </Link>
+              <Link href="#secondary" className={styles.dropdownItem}>
                 Secondary Projects
-              </a>
-              <a href="#testing" className={styles.dropdownItem}>
+              </Link>
+              <Link href="#testing" className={styles.dropdownItem}>
                 Testing Projects
-              </a>
+              </Link>
             </div>
           </div>
 
