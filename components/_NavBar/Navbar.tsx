@@ -1,4 +1,3 @@
-// Navbar.tsx
 import React, { useState } from "react";
 import Link from "next/link";
 import styles from "../../app/main.module.scss";
@@ -15,8 +14,23 @@ const Navbar: React.FC = () => {
     setIsDropdownOpen(false);
   };
 
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      window.scrollTo({
+        top: element.offsetTop,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const handleLinkClick = (e: React.MouseEvent, id: string) => {
+    e.preventDefault();
+    scrollToSection(id);
+  };
+
   return (
-    <nav className={styles.navbar} >
+    <nav className={styles.navbar}>
       <div className={styles.navbarContent}>
         {/* Logo */}
         <Link href="/" className={styles.logo}>
@@ -40,22 +54,38 @@ const Navbar: React.FC = () => {
                 isDropdownOpen ? styles.show : ""
               }`}
             >
-              <Link href="#main" className={styles.dropdownItem}>
+              <a
+                href="#main"
+                onClick={(e) => handleLinkClick(e, "main")}
+                className={styles.dropdownItem}
+              >
                 Main Projects
-              </Link>
-              <Link href="#secondary" className={styles.dropdownItem}>
+              </a>
+              <a
+                href="#secondary"
+                onClick={(e) => handleLinkClick(e, "secondary")}
+                className={styles.dropdownItem}
+              >
                 Secondary Projects
-              </Link>
-              <Link href="#testing" className={styles.dropdownItem}>
+              </a>
+              <a
+                href="#testing"
+                onClick={(e) => handleLinkClick(e, "testing")}
+                className={styles.dropdownItem}
+              >
                 Testing Projects
-              </Link>
+              </a>
             </div>
           </div>
 
           {/* Contacts link */}
-          <Link href="#contact" className={styles.navLink}>
+          <a
+            href="#contact"
+            onClick={(e) => handleLinkClick(e, "contact")}
+            className={styles.navLink}
+          >
             Contact
-          </Link>
+          </a>
         </div>
       </div>
     </nav>
@@ -63,4 +93,5 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
+
 
