@@ -8,6 +8,7 @@ import ProjectList from './ProjectList';
 import ProjectFilter from './ProjectFilter';
 import styles from "./ProjectHome.module.scss"; 
 import Contact from '../Contact/Contact';
+import Navbar from '../_NavBar/Navbar';
 
 // Importa il file SASS
 
@@ -33,6 +34,7 @@ export default function Home() {
   
     return (
       <section className={styles.homesection}>
+        <Navbar />
         <HeaderSection
           // projects={projects}
           // setFilteredProjects={setFilteredProjects}
