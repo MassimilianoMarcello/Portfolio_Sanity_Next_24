@@ -1,3 +1,6 @@
+@import "../../app/main.module.scss";
+
+
 .filterContainer {
     display: flex;
     flex-direction: column;
@@ -31,6 +34,7 @@
   
   .theButton:hover {
     background-color: #cff5fb;
+  
     color: #9175ba;
     transform: scale(1.1);
   }

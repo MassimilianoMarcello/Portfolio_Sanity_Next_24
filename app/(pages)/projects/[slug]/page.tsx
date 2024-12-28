@@ -101,7 +101,8 @@ import { getProject } from "@/sanity/sanity.query";
 import { PortableText } from "@portabletext/react";
 import Link from "next/link";
 import styles from "./singleProject.module.scss";
-import ChallengeLink from "./ChallangeLink"; // Importiamo il Client Component
+import ChallengeLink from "./ChallangeLink";
+import { portableTextComponents } from "./portableTextComponents"; // Importa i componenti PortableText personalizzati
 
 type Props = {
   params: { slug: string };
@@ -134,7 +135,10 @@ export default async function Project({ params }: Props) {
         </div>
         <div className={styles.projectDescription}>
           {project.content ? (
-            <PortableText value={project.content} />
+            <PortableText
+              value={project.content}
+              components={portableTextComponents} // Usa i componenti personalizzati
+            />
           ) : (
             <p>No content available for this project.</p>
           )}
@@ -169,7 +173,12 @@ export default async function Project({ params }: Props) {
                 >
                   <h5>{challenge.title}</h5>
                   {challenge.description && <p>{challenge.description}</p>}
-                  {challenge.content && <PortableText value={challenge.content} />}
+                  {challenge.content && (
+                    <PortableText
+                      value={challenge.content}
+                      components={portableTextComponents} // Usa i componenti personalizzati
+                    />
+                  )}
                 </div>
               );
             })}
