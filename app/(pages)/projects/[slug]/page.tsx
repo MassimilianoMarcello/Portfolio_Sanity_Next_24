@@ -23,7 +23,7 @@ export default async function Project({ params }: Props) {
     <div className={styles.projectContainer}>
       <div className={styles.contentWrapper}>
         <div className={styles.titleContainer}>
-          <h1 className={styles.howIMade}>How I Made</h1>
+          <h1 className={styles.howIMade}>How I Made: </h1>
           <h1 className={styles.titleProject}>{project.name}</h1>
           <div className={styles.buttons}>
             <div className={styles.styledButton}>

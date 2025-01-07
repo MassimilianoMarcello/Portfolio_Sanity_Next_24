@@ -5,10 +5,10 @@
 // singleProject.module.scss
 
 .projectContainer {
-  background-color: #ffffff; // Sfondo bianco
-  border: 1px solid #e0e0e0; // Bordi sottili grigi
-  border-radius: 8px; // Angoli arrotondati
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // Leggera ombra
+  background-color: #ffffff; 
+  border: 1px solid #e0e0e0; 
+  border-radius: 8px; 
+
   padding: 20px;
   margin: 20px auto;
   max-width: 1200px;
@@ -19,22 +19,24 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  color: $primary-color;
 }
 
 .titleContainer {
-  border-bottom: 2px solid #e0e0e0; // Linea sottile tra il titolo e il contenuto
+  border-bottom: 2px solid #e0e0e0; 
   padding-bottom: 10px;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .howIMade {
-  color: #5f6368; // Colore grigio scuro
-  font-size: 1.5rem;
-  font-weight: 600;
+  // color: #5f6368; 
+  font-size: 2rem;
+  font-weight: 400;
 }
 
 .titleProject {
-  color: #1f1f1f; // Colore nero/grigio scuro
+  color: #1f1f1f; 
   font-size: 2.5rem;
   font-weight: 700;
 }
