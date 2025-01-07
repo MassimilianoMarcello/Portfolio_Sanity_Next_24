@@ -7,6 +7,8 @@ import Link from "next/link";
 import styles from "./singleProject.module.scss";
 import ChallengeLink from "./ChallangeLink";
 import { portableTextComponents } from "./portableTextComponents"; // Importa i componenti PortableText personalizzati
+import Image from "next/image";
+import RepoAndWebSiteButtons from "@/components/ΩΩElements/RepoAndWebSiteButtons";
 
 type Props = {
   params: { slug: string };
@@ -25,16 +27,10 @@ export default async function Project({ params }: Props) {
         <div className={styles.titleContainer}>
           <h1 className={styles.howIMade}>How I Made: </h1>
           <h1 className={styles.titleProject}>{project.name}</h1>
-          <div className={styles.buttons}>
-            <div className={styles.styledButton}>
-              <Link href={project.githubUrl}>Github</Link>
-            </div>
-            <div className={styles.styledButton}>
-              <Link href={project.url}>Visit Website</Link>
-            </div>
-            <div className={styles.styledButton}>
-              <Link href={`/`}>Return</Link>
-            </div>
+       
+          <RepoAndWebSiteButtons githubUrl={project.githubUrl} url={project.url} />
+          <div className={styles.styledButton}>
+            <Link href={`/`}>Return</Link>
           </div>
         </div>
         <div className={styles.projectDescription}>
