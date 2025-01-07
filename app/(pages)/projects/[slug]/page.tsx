@@ -51,8 +51,9 @@ export default async function Project({ params }: Props) {
 
       {project.challenges && project.challenges.length > 0 ? (
         <div className={styles.challengesSection}>
-          <h4>Challenges Index:</h4>
+       
           <ul className={styles.challengesList}>
+          <h4>Challenges Index:</h4>
             {project.challenges.map((challenge) => {
               const challengeId = `challenge-${challenge.title.replace(/\s+/g, '-').toLowerCase()}`;
 

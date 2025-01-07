@@ -24,7 +24,7 @@
   font-size: 1.5rem;
   font-weight: 200;
   color: $primary-color;
-  // background-color: $background-color;
+
   padding: 1rem;
   width: 50px;
   text-align: right;
@@ -34,7 +34,7 @@
   font-weight: 100;
   text-align:left;
   color: $primary-color;
-  // background-color: $background-color;
+
   padding: 1rem;
   margin-left: 2rem;
   width: 250px;
@@ -46,7 +46,7 @@
   flex-direction: column;
   gap: 1.5rem;
   flex: 1;
-  // background-color: gold;
+
   border-top: 1px solid $primary-color;
   padding-bottom: 2rem;
 }
@@ -54,7 +54,7 @@
 .projectCard {
   display: grid;
   grid-template-columns: 1fr 1fr 2fr;
-// border-bottom: 1px solid $neutral-gray;
+
 transition: transform 0.2s ease;
 margin-left: 20rem;
 margin-right: 2rem;
@@ -62,11 +62,11 @@ box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
 
   &:hover {
     transform: translateY(-1px);
-    // box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
+
     border-bottom: 1px solid $primary-color;
      border: 0.001rem solid $primary-color;
   }
-  // background-color: red;
+
   height: 100%;
   position: relative;
   padding: 2rem;

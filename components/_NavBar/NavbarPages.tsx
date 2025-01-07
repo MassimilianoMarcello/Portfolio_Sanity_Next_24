@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import styles from "../../app/main.module.scss";
 import TriangleIcon from "../ΩΩElements/TriangleIcon";
+import Space from "./Space";
 
 const Navbar: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -30,6 +31,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
+    <div>
     <nav className={styles.navbar}>
       <div className={styles.navbarContent}>
         {/* Logo */}
@@ -89,6 +91,8 @@ const Navbar: React.FC = () => {
         </div>  */}
       </div>
     </nav>
+<Space />
+    </div>
   );
 };
 

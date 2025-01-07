@@ -3,8 +3,15 @@
 .navbar {
   padding: 1rem 5rem 0 0;
   border-bottom: 0.01rem solid $primary-color;
-  
-
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 60px;
+width: 100%;
+  z-index: 1000;
+  background-color: white;
+margin-bottom: 20rem;
   .navbarContent {
     display: flex;
     justify-content: space-between;
@@ -87,3 +94,5 @@
     }
   }
 }
+
+
