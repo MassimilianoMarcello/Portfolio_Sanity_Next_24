@@ -1,5 +1,10 @@
-.visitRepoAndWebsiteButtons {
 
+
+
+.visitRepoAndWebsiteButtons {
+    // position: absolute;
+    // top: 28rem; 
+    // left: 34rem;
     display: flex;
     align-items: center;
     margin-bottom: 0rem;
@@ -8,6 +13,7 @@
     img{
       margin-bottom: -.2rem;
       margin-left: .5rem;
+      transition: transform 0.3s ease;
       // background-color: yellow;
     }
   }
@@ -27,6 +33,9 @@
       text-decoration: none;
       list-style: none
     }
+    &:hover img {
+        transform: translateX(5px); // Sposta l'icona a destra di 5px
+      }
   
     // &:hover {
     //   background-color: $primary-color;
@@ -37,7 +46,7 @@
   // Estendi la classe base per i due bottoni
   .styledButtonGit {
     @extend .styledButton;
-  
+
     img{
       margin-bottom: -.5rem;
       
@@ -46,9 +55,48 @@
   
   .styledButtonWebsite {
     @extend .styledButton;
+
     img{
       margin-bottom: -.3rem;
       
         }
   }
+
+
+
+
+
+
+
+//   .visitRepoAndWebsiteButtons {
+//     display: flex;
+//     align-items: center;
+//     margin-bottom: 0rem;
+//     gap: 10px;
+//     padding: 0;
+  
+//     img {
+//       margin-bottom: -.2rem;
+//       margin-left: .5rem;
+//       transition: transform 0.3s ease; // Aggiungi la transizione per il movimento dell'icona
+//     }
+//   }
+
+// .styledButton {
+//     padding: 1rem;
+//     width: 15rem;
+//     border-radius: 5px;
+//     font-size: 14px;
+//     text-align: center;
+//     text-decoration: none;
+//     font-weight: 100;
+//     transition: background-color 0.3s ease;
+  
+//     a {
+//       color: inherit;
+//       text-decoration: none;
+//       list-style: none;
+//       display: flex;
+//       align-items: center;
+//     }
   

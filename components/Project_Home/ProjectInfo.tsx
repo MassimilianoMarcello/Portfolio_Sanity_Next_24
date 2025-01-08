@@ -23,11 +23,11 @@ const ProjectInfos: React.FC<ProjectInfosProps> = ({ project, openProjectId }) =
           {/* <h4 className={styles.titleBubble}>Challenges Faced:</h4> */}
           <div className={styles.styledButton}>
           <h3>{project.name.toUpperCase()}</h3>
-            <Link href={`/projects/${project.slug}`}>Challanges Faced Page
+            <Link href={`/projects/${project.slug}`}> GO to See How i made it
                   <Image src="/forward.svg" alt="external link" width={20} height={20} />
             </Link>
           </div>
-          <p>Index:</p>
+          <p>Challanges Faced List:</p>
           {project.challenges.map((challenge) => {
             // Genera lo stesso ID basato sul titolo della challenge
             // Converte il titolo di una challenge in una stringa "slug-friendly", 

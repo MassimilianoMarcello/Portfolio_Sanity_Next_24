@@ -248,34 +248,41 @@ align-items: center;
   color: $primary-color;
   text-align: center;
   margin-top: 0rem;
-  
+  border-bottom: 1px solid $primary-color;
+
   h3 {
     font-size: 1.2rem;
     font-weight: 200;
     color: $primary-color;
     text-align: center;
     margin-top: 0rem;
+    
+    
   }
 
 
   .titleBubble{
-    font-size: 1.5rem;
+ 
     font-weight: 100;
    
     
     color: $primary-color;
     text-align: center;
     margin-top: 0rem;
+    
   
   }
 a{   
 
+  &:hover img {
+    transform: translateX(5px); // Sposta l'icona a destra di 5px
+  }
   
   // @extend .styledButton;
   img{
     margin-bottom: -.3rem;
     margin-left: .3rem;
-    
+    transition: transform 0.3s ease;
       }
 }
  

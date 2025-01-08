@@ -13,8 +13,10 @@ const RepoAndWebSiteButtons: React.FC<Project> = (project) => {
         <div>
             <div className={styles.visitRepoAndWebsiteButtons}>
                 <div className={styles.styledButtonGit}>
-                    <Link href={project.githubUrl}>GitHub</Link>
+                    <Link href={project.githubUrl}>GitHub
                     <Image src="/github.svg" alt="external link" width={28} height={28} />
+                    </Link>
+                
                 </div>
                 <div className={styles.styledButtonWebsite}>
                     <Link href={project.url}>
