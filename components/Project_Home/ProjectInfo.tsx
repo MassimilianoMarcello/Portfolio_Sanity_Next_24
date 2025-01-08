@@ -1,6 +1,6 @@
 import { Project } from "@/types/projects";
 import Link from "next/link";
-import style from "./ProjectInfo.module.scss";
+
 import styles from "./ProjectList.module.scss";
 import Image from "next/image";
 
@@ -9,33 +9,45 @@ interface ProjectInfosProps {
   openProjectId: string | null;
 }
 
-const ProjectInfos: React.FC<ProjectInfosProps> = ({ project, openProjectId }) => {
+const ProjectInfos: React.FC<ProjectInfosProps> = ({
+  project,
+  openProjectId,
+}) => {
   return (
     <div
       className={`${styles.projectInfo} ${
         project._id === openProjectId ? styles.visible : styles.hidden
       }`}
     >
-      {/* <h3>{project.name}</h3> */}
-
       {project.challenges && project.challenges.length > 0 ? (
         <ul className={styles.challengesList}>
-          {/* <h4 className={styles.titleBubble}>Challenges Faced:</h4> */}
           <div className={styles.styledButton}>
-          <h3>{project.name.toUpperCase()}</h3>
-            <Link href={`/projects/${project.slug}`}> GO to See How i made it
-                  <Image src="/forward.svg" alt="external link" width={20} height={20} />
+          <h3 className={styles.titleBubble}>{project.name.toUpperCase()}</h3>
+            <Link href={`/projects/${project.slug}`} className={styles.blogLinkPrimary}>
+           
+           <p>   See How I Made It</p>
+              <Image
+                src="/forward.svg"
+                alt="external link"
+                width={20}
+                height={20}
+              />
+               <Image
+                src="/forward.svg"
+                alt="external link"
+                width={20}
+                height={20}
+              />
             </Link>
           </div>
-          <p>Challanges Faced List:</p>
+<div className={styles.challangesFacedContainer}></div>
+          <h4>Challenges Faced:</h4>
           {project.challenges.map((challenge) => {
-            // Genera lo stesso ID basato sul titolo della challenge
-            // Converte il titolo di una challenge in una stringa "slug-friendly", 
-            // sostituendo gli spazi con trattini (-) e rendendola tutta in minuscolo
-            const challengeId = `challenge-${challenge.title.replace(/\s+/g, '-').toLowerCase()}`;
-
+            const challengeId = `challenge-${challenge.title
+              .replace(/\s+/g, "-")
+              .toLowerCase()}`;
             return (
-              <li key={challenge._id}>
+              <li key={challenge._id} className={styles.challengesListItem}>
                 <Link href={`/projects/${project.slug}#${challengeId}`}>
                   {challenge.title}
                 </Link>
@@ -47,27 +59,34 @@ const ProjectInfos: React.FC<ProjectInfosProps> = ({ project, openProjectId }) =
         <p>No challenges faced for this project.</p>
       )}
 
-<div className={styles.visitRepoAndWebsiteButtons}>
-                  <div className={styles.styledButtonGit}>
-                    <Link href={project.githubUrl}>GitHub</Link>
-                    <Image src="/github.svg" alt="external link" width={28} height={28} />
-                  </div>
-                  <div className={styles.styledButtonWebsite}>
-                    <Link href={project.url}>Visit Website
-                    <Image src="/forward.svg" alt="external link" width={20} height={20} />
-                    </Link>
-              
-                </div>
-   
+      <div className={styles.visitRepoAndWebsiteButtons}>
+        <div className={styles.styledButtonGit}>
+          <Link href={project.githubUrl} aria-label="Go to GitHub repository">
+            GitHub
+          </Link>
+          <Image
+            src="/github.svg"
+            alt="external link"
+            width={28}
+            height={28}
+            aria-hidden="true"
+          />
+        </div>
+        <div className={styles.styledButtonWebsite}>
+          <Link href={project.url} aria-label="Visit project website">
+            Visit Website
+            <Image
+              src="/forward.svg"
+              alt="external link"
+              width={20}
+              height={20}
+              aria-hidden="true"
+            />
+          </Link>
         </div>
       </div>
-  
+    </div>
   );
 };
 
 export default ProjectInfos;
-
-
-
-
-

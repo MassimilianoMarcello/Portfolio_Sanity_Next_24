@@ -29,16 +29,15 @@
   width: 50px;
   text-align: right;
 }
-.categoryDescription{
+.categoryDescription {
   font-size: 1rem;
   font-weight: 100;
-  text-align:left;
+  text-align: left;
   color: $primary-color;
 
   padding: 1rem;
   margin-left: 2rem;
   width: 250px;
-
 }
 
 .projectCards {
@@ -55,16 +54,16 @@
   display: grid;
   grid-template-columns: 1fr 1fr 2fr;
 
-transition: transform 0.2s ease;
-margin-left: 20rem;
-margin-right: 2rem;
-box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+  margin-left: 20rem;
+  margin-right: 2rem;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
 
   &:hover {
     transform: translateY(-1px);
 
     border-bottom: 1px solid $primary-color;
-     border: 0.001rem solid $primary-color;
+    border: 0.001rem solid $primary-color;
   }
 
   height: 100%;
@@ -101,9 +100,9 @@ box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
 }
 
 .portableStyle {
-  p{
+  p {
     font-weight: 100;
-    font-size: .8rem;
+    font-size: 0.8rem;
   }
 }
 
@@ -116,16 +115,15 @@ box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
   height: 12rem;
   object-fit: cover;
   border-radius: 8px;
-  margin:  3rem ;
+  margin: 3rem;
   padding: 1rem;
-
 }
 
 .projectImage {
   // width: 10rem;
   height: 90%;
   padding: 1rem;
-align-items: center;
+  align-items: center;
   object-fit: cover;
   border-radius: 8px;
 }
@@ -139,9 +137,9 @@ align-items: center;
   margin-bottom: 0rem;
   gap: 10px;
   padding: 0;
-  img{
-    margin-bottom: -.2rem;
-    margin-left: .5rem;
+  img {
+    margin-bottom: -0.2rem;
+    margin-left: 0.5rem;
     // background-color: yellow;
   }
 }
@@ -159,7 +157,7 @@ align-items: center;
   a {
     color: inherit;
     text-decoration: none;
-    list-style: none
+    list-style: none;
   }
 
   // &:hover {
@@ -172,18 +170,16 @@ align-items: center;
 .styledButtonGit {
   @extend .styledButton;
 
-  img{
-    margin-bottom: -.5rem;
-    
-      }
+  img {
+    margin-bottom: -0.5rem;
+  }
 }
 
 .styledButtonWebsite {
   @extend .styledButton;
-  img{
-    margin-bottom: -.3rem;
-    
-      }
+  img {
+    margin-bottom: -0.3rem;
+  }
 }
 
 .technologiesUsed {
@@ -194,7 +190,7 @@ align-items: center;
   left: 0;
   margin-bottom: -1rem;
 
-  margin-left: .5rem;
+  margin-left: 0.5rem;
   padding: 1rem 0;
 }
 
@@ -230,9 +226,7 @@ align-items: center;
   height: 100%;
   z-index: 1000;
   border-bottom: 1px solid $primary-color;
-  // border-left: 1px solid $primary-color;
 
-  // border-radius: 8px;
   opacity: 0;
   animation: fadeInUp 0.5s ease forwards;
   transition: opacity 0.5s ease;
@@ -241,50 +235,70 @@ align-items: center;
 .infoBubble.exit {
   animation: fadeOutDown 0.5s ease forwards;
 }
-.projectInfo{
-
+.projectInfo {
   font-size: 1.2rem;
   font-weight: 100;
   color: $primary-color;
   text-align: center;
   margin-top: 0rem;
-  border-bottom: 1px solid $primary-color;
-
-  h3 {
-    font-size: 1.2rem;
-    font-weight: 200;
-    color: $primary-color;
-    text-align: center;
-    margin-top: 0rem;
-    
-    
-  }
 
 
-  .titleBubble{
- 
+
+
+  .titleBubble {
     font-weight: 100;
-   
-    
+    font-size: 1.2rem;
     color: $primary-color;
     text-align: center;
     margin-top: 0rem;
-    
-  
+    border: 0.1rem solid $primary-color;
+    border-radius: 4px;
+    width: auto;
+    display: inline-block; 
+  width: auto;
   }
-a{   
+  .challengesList{
+    display: inline-block; // o block
+    width: auto;
+    text-align: center;
+    background-color: red;
+    align-items: center;
+  }
 
-  &:hover img {
-    transform: translateX(5px); // Sposta l'icona a destra di 5px
+  .challengesListItem {
+    list-style: none;
+    padding: 0.5rem;
+    margin: 0;
+    a {
+      align-items: left;
+      background-color: red;
+    }
   }
-  
-  // @extend .styledButton;
-  img{
-    margin-bottom: -.3rem;
-    margin-left: .3rem;
-    transition: transform 0.3s ease;
-      }
 }
- 
 
+.blogLinkPrimary {
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  // max-width: 15rem;
+
+
+  p {
+    text-align: center;
+    font-size: 1.3rem;
+    margin-top: -1rem;
+
+    padding-right: 0.5rem;
+    font-weight: 400;
+  }
+
+  img {
+    margin-bottom: -0.3rem;
+    margin-left: 0.3rem;
+    transition: transform 0.3s ease;
+  }
+  &:hover img {
+    transform: translateX(10px);
+  }
 }
