@@ -40,7 +40,7 @@ const ProjectInfos: React.FC<ProjectInfosProps> = ({
               />
             </Link>
           </div>
-<div className={styles.challangesFacedContainer}></div>
+
           <h4>Challenges Faced:</h4>
           {project.challenges.map((challenge) => {
             const challengeId = `challenge-${challenge.title
