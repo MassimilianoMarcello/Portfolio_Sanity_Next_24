@@ -21,25 +21,28 @@ const ProjectInfos: React.FC<ProjectInfosProps> = ({
     >
       {project.challenges && project.challenges.length > 0 ? (
         <ul className={styles.challengesList}>
-          <div className={styles.styledButton}>
+       
           <h3 className={styles.titleBubble}>{project.name.toUpperCase()}</h3>
-            <Link href={`/projects/${project.slug}`} className={styles.blogLinkPrimary}>
+          <div className={styles.blogLinkContainer}>
+          <Link href={`/projects/${project.slug}`} className={styles.blogLinkPrimary}>
            
            <p>   See How I Made It</p>
               <Image
                 src="/forward.svg"
                 alt="external link"
-                width={20}
-                height={20}
+                width={15}
+                height={15}
               />
                <Image
                 src="/forward.svg"
                 alt="external link"
-                width={20}
-                height={20}
+                width={15}
+                height={15}
               />
             </Link>
           </div>
+     
+        
 
           <h4>Challenges Faced:</h4>
           {project.challenges.map((challenge) => {
