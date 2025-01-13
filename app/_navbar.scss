@@ -6,11 +6,10 @@
   right: 0;
   top: 0;
   height: 60px;
-  width: 100%;
+width: 100%;
   z-index: 1000;
   background-color: white;
-  margin-bottom: 20rem;
-
+margin-bottom: 20rem;
   .navbarContent {
     display: flex;
     justify-content: space-between;
@@ -29,6 +28,7 @@
       .navLink {
         position: relative;
         color: $primary-color;
+        // background-color: red;
         padding-bottom: 1rem;
         padding-right: 2rem;
         margin-bottom: -1rem;
@@ -37,7 +37,7 @@
         text-decoration: none;
         display: flex;
         align-items: center;
-        gap: 0.5rem; // Spazio tra testo e icona triangolo
+        gap: 0.5rem; // Space between text and triangle
         cursor: pointer;
 
         &:hover {
@@ -45,28 +45,64 @@
         }
 
         &:hover .triangleContainer {
-          transform: translateX(2rem); // Sposta il triangolo a destra
+          transform: translateX(2rem); // Move triangle on hover
         }
 
         .triangleContainer {
           display: inline-block;
-          transition: transform 0.3s ease; // Animazione fluida
+          transition: transform 0.3s ease; // Smooth animation
         }
-      }
 
+        .dropdownMenu {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          background-color: white;
+          border: 0.01rem solid $primary-color;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          display: flex;
+          flex-direction: column;
+          z-index: 10;
+          width: 10rem;
+          margin-top: 0rem;
+
+          opacity: 0; // Initially invisible
+          transform: translateY(-10px); // Initially shifted up
+          visibility: hidden; // Prevent early clicks
+          transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s; // Smooth transition
+
+          &.show {
+            opacity: 1; // Visible state
+            transform: translateY(0); // Normal position
+            visibility: visible; // Show the menu
+            transition: opacity 0.3s ease, transform 0.3s ease; // Immediate transition
+          }
+
+          .dropdownItem {
+            padding: 8px 16px;
+            color: $primary-color;
+            text-decoration: none;
+
+            &:hover {
+              background-color: $secondary-color;
+            }
+          }
+     
+        }
+
+      }
       .contactContainer {
         display: flex;
         align-items: center;
-
+  
         .envelopeContainer {
-          margin-left: -1.4rem;
+          transition: transform 0.3s ease;
           margin-top: .5rem;
-          display: inline-block;
-          transition: transform 0.3s ease; // Animazione fluida
-        }
-
-        .moveRight {
-          transform: translateX(1.5rem); // Sposta l'icona della busta a destra
+          margin-left: -1.4rem;
+  
+          &.moveRight {
+            transform: translateX(1rem); // Sposta a destra l'icona
+          }
         }
       }
     }

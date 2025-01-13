@@ -6,13 +6,14 @@ import Space from "./Space";
 import EnvelopeIcon from "../ΩΩElements/EnvelopeIcon";
 
 const Navbar: React.FC = () => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isContactHovered, setIsContactHovered] = useState(false);
 
-  const handleContactMouseEnter = () => {
+  const handleMouseEnterContact = () => {
     setIsContactHovered(true);
   };
 
-  const handleContactMouseLeave = () => {
+  const handleMouseLeaveContact = () => {
     setIsContactHovered(false);
   };
 
@@ -43,18 +44,49 @@ const Navbar: React.FC = () => {
           {/* Links */}
           <div className={styles.navbarLinks}>
             {/* Projects dropdown */}
-            <div className={styles.navLink}>
+            <div
+              className={styles.navLink}
+              onMouseEnter={() => setIsDropdownOpen(true)}
+              onMouseLeave={() => setIsDropdownOpen(false)}
+            >
               Projects
               <span className={styles.triangleContainer}>
                 <TriangleIcon />
               </span>
+              <div
+                className={`${styles.dropdownMenu} ${
+                  isDropdownOpen ? styles.show : ""
+                }`}
+              >
+                <a
+                  href="#main"
+                  onClick={(e) => handleLinkClick(e, "main")}
+                  className={styles.dropdownItem}
+                >
+                  Main Projects
+                </a>
+                <a
+                  href="#secondary"
+                  onClick={(e) => handleLinkClick(e, "secondary")}
+                  className={styles.dropdownItem}
+                >
+                  Secondary Projects
+                </a>
+                <a
+                  href="#testing"
+                  onClick={(e) => handleLinkClick(e, "testing")}
+                  className={styles.dropdownItem}
+                >
+                  Testing Projects
+                </a>
+              </div>
             </div>
 
             {/* Contacts link */}
             <div
               className={styles.contactContainer}
-              onMouseEnter={handleContactMouseEnter}
-              onMouseLeave={handleContactMouseLeave}
+              onMouseEnter={handleMouseEnterContact}
+              onMouseLeave={handleMouseLeaveContact}
             >
               <a
                 href="#contact"
@@ -80,5 +112,3 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
-
-
