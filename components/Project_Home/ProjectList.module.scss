@@ -9,6 +9,7 @@
 }
 
 .categorySection {
+
   display: flex;
   align-items: flex-start;
   gap: 2rem;
@@ -16,13 +17,14 @@
   transform: translateY(20px);
   animation: fadeInUp 0.5s ease forwards;
 
+
 }
 
 // .fadeIn {}
 
 .categoryLabel {
   position: sticky;
-  top: 0;
+  top: 3rem;
   font-size: 1.5rem;
   font-weight: 200;
   color: $primary-color;
@@ -31,6 +33,7 @@
   padding-top: 2rem;
   width: 50px;
   text-align: right;
+
 }
 .categoryDescription {
   font-size: 1rem;
@@ -61,6 +64,7 @@
   transition: transform 0.2s ease;
   margin-left: 20rem;
   margin-right: 2rem;
+  margin-top: 5rem;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
 
   &:hover {
