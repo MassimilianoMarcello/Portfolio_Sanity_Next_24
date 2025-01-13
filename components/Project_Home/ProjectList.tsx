@@ -7,6 +7,7 @@ import CategoryFilter from "./CategoryFilter";
 import styles from "./ProjectList.module.scss";
 import Link from "next/link";
 import Image from "next/image";
+import TriangleIcon from "../ΩΩElements/TriangleIcon";
 
 interface ProjectListProps {
   projects: Project[];
@@ -93,6 +94,10 @@ const categoryDescriptions: Record<string, string> = {
                 onMouseLeave={handleMouseLeave}
               >
                 <div className={styles.boxTextProject}>
+                  <div className={styles.triangleIcon}>
+                    <p>Click for details</p>
+                    <TriangleIcon />
+                  </div>
                   <h3>{project.name.toUpperCase()}</h3>
                   <div className={styles.portableStyle}>
                     <PortableText value={project.content[0]} />
