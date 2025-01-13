@@ -3,6 +3,7 @@ import Link from "next/link";
 import styles from "../../app/main.module.scss";
 import TriangleIcon from "../ΩΩElements/TriangleIcon";
 import Space from "./Space";
+import EnvelopeIcon from "../ΩΩElements/EnvelopeIcon";
 
 const Navbar: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -81,6 +82,7 @@ const Navbar: React.FC = () => {
           </div>
 
           {/* Contacts link */}
+          <div  className={styles.contactContainer}>
           <a
             href="#contact"
             onClick={(e) => handleLinkClick(e, "contact")}
@@ -88,6 +90,11 @@ const Navbar: React.FC = () => {
           >
             Contact
           </a>
+          <span className={styles.envelopeContainer}>
+          <EnvelopeIcon />
+    </span>
+          </div>
+ 
         </div>
       </div>
     </nav>
