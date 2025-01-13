@@ -6,14 +6,14 @@ import Space from "./Space";
 import EnvelopeIcon from "../ΩΩElements/EnvelopeIcon";
 
 const Navbar: React.FC = () => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isContactHovered, setIsContactHovered] = useState(false);
 
-  const handleMouseEnter = () => {
-    setIsDropdownOpen(true);
+  const handleContactMouseEnter = () => {
+    setIsContactHovered(true);
   };
 
-  const handleMouseLeave = () => {
-    setIsDropdownOpen(false);
+  const handleContactMouseLeave = () => {
+    setIsContactHovered(false);
   };
 
   const scrollToSection = (id: string) => {
@@ -33,72 +33,48 @@ const Navbar: React.FC = () => {
 
   return (
     <div>
-    <nav className={styles.navbar}>
-      <div className={styles.navbarContent}>
-        {/* Logo */}
-        <Link href="/" className={styles.logo}>
-          <img src="/logo-massdev.webp" alt="Logo" />
-        </Link>
+      <nav className={styles.navbar}>
+        <div className={styles.navbarContent}>
+          {/* Logo */}
+          <Link href="/" className={styles.logo}>
+            <img src="/logo-massdev.webp" alt="Logo" />
+          </Link>
 
-        {/* Links */}
-        <div className={styles.navbarLinks}>
-          {/* Projects dropdown */}
-          <div
-            className={styles.navLink}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          >
-            Projects
-            <span className={styles.triangleContainer}>
-              <TriangleIcon />
-            </span>
+          {/* Links */}
+          <div className={styles.navbarLinks}>
+            {/* Projects dropdown */}
+            <div className={styles.navLink}>
+              Projects
+              <span className={styles.triangleContainer}>
+                <TriangleIcon />
+              </span>
+            </div>
+
+            {/* Contacts link */}
             <div
-              className={`${styles.dropdownMenu} ${
-                isDropdownOpen ? styles.show : ""
-              }`}
+              className={styles.contactContainer}
+              onMouseEnter={handleContactMouseEnter}
+              onMouseLeave={handleContactMouseLeave}
             >
               <a
-                href="#main"
-                onClick={(e) => handleLinkClick(e, "main")}
-                className={styles.dropdownItem}
+                href="#contact"
+                onClick={(e) => handleLinkClick(e, "contact")}
+                className={styles.navLink}
               >
-                Main Projects
+                Contact
               </a>
-              <a
-                href="#secondary"
-                onClick={(e) => handleLinkClick(e, "secondary")}
-                className={styles.dropdownItem}
+              <span
+                className={`${styles.envelopeContainer} ${
+                  isContactHovered ? styles.moveRight : ""
+                }`}
               >
-                Secondary Projects
-              </a>
-              <a
-                href="#testing"
-                onClick={(e) => handleLinkClick(e, "testing")}
-                className={styles.dropdownItem}
-              >
-                Testing Projects
-              </a>
+                <EnvelopeIcon />
+              </span>
             </div>
           </div>
-
-          {/* Contacts link */}
-          <div  className={styles.contactContainer}>
-          <a
-            href="#contact"
-            onClick={(e) => handleLinkClick(e, "contact")}
-            className={styles.navLink}
-          >
-            Contact
-          </a>
-          <span className={styles.envelopeContainer}>
-          <EnvelopeIcon />
-    </span>
-          </div>
- 
         </div>
-      </div>
-    </nav>
-<Space />
+      </nav>
+      <Space />
     </div>
   );
 };
