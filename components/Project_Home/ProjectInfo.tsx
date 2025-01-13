@@ -66,14 +66,15 @@ const ProjectInfos: React.FC<ProjectInfosProps> = ({
         <div className={styles.styledButtonGit}>
           <Link href={project.githubUrl} aria-label="Go to GitHub repository">
             GitHub
-          </Link>
-          <Image
+            <Image
             src="/github.svg"
             alt="external link"
             width={28}
             height={28}
             aria-hidden="true"
           />
+          </Link>
+
         </div>
         <div className={styles.styledButtonWebsite}>
           <Link href={project.url} aria-label="Visit project website">

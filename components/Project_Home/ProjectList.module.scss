@@ -168,10 +168,10 @@
     list-style: none;
   }
 
-  // &:hover {
-  //   background-color: $primary-color;
-  //   color: white;
-  // }
+  &:hover {
+    transform: scale(1.09);
+
+  }
 }
 
 // Estendi la classe base per i due bottoni
