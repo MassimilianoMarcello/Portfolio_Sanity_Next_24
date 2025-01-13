@@ -46,11 +46,14 @@ export default function Home() {
           setFilteredProjects={setFilteredProjects}
           setOpenProjectId={setOpenProjectId}
         />
-        <ProjectList
+  
+       <ProjectList
           projects={filteredProjects}
     
         
         />
+  
+
         <Contact />
       </section>
     );

@@ -1,6 +1,7 @@
 @import "../../app/main.module.scss";
 
 .projectListContainer {
+
   display: flex;
   flex-direction: column;
   gap: 3rem;
@@ -31,6 +32,7 @@
 
   padding: 1rem;
   padding-top: 2rem;
+  margin-left: 4rem;
   width: 50px;
   text-align: right;
 
@@ -42,7 +44,7 @@
   color: $primary-color;
 
   padding: 1rem;
-  margin-left: 2rem;
+  margin-left: -1rem;
   width: 250px;
 }
 
@@ -65,6 +67,7 @@
   margin-left: 20rem;
   margin-right: 2rem;
   margin-top: 5rem;
+  margin-bottom: 5rem;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
 
   &:hover {
@@ -100,7 +103,7 @@
   padding: 0 1rem;
   h3 {
     font-size: 1.2rem;
-    font-weight: 200;
+    font-weight: 700;
     color: $primary-color;
     text-align: center;
     margin-top: 0rem;
