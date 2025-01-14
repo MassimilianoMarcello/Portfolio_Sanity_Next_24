@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import styles from "./NoProject.module.scss";
 
@@ -13,14 +13,16 @@ const NoProjectsMessage: React.FC<NoProjectsMessageProps> = ({
 }) => {
   const technologiesList = selectedTechnologies.join(", ");
 
+  useEffect(() => {
+    document.body.classList.add("no-scroll"); // Blocca lo scrolling
+    return () => {
+      document.body.classList.remove("no-scroll"); // Ripristina lo scrolling
+    };
+  }, []);
+
   return (
     <div className={styles.MessageContainer}>
-      <Image
-        src="/logo.png"
-        alt="mass dev logo"
-        width={400}
-        height={120}
-      />
+      <Image src="/logo.png" alt="mass dev logo" width={200} height={60} />
       <h1>Oops! No projects match your selection.</h1>
       {selectedTechnologies.length > 0 && (
         <p>
@@ -38,5 +40,6 @@ const NoProjectsMessage: React.FC<NoProjectsMessageProps> = ({
 };
 
 export default NoProjectsMessage;
+
 
 
