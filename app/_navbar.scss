@@ -17,7 +17,7 @@ margin-bottom: 20rem;
 
     .logo img {
       height: 50px;
-      margin-left: 1rem;
+      margin-left: 2rem;
     }
 
     .navbarLinks {
@@ -46,7 +46,7 @@ margin-bottom: 20rem;
         }
 
         &:hover .triangleContainer {
-          transform: translateX(2rem); // Move triangle on hover
+          transform: translateX(.5rem); // Move triangle on hover
         }
 
         .triangleContainer {
@@ -102,7 +102,7 @@ margin-bottom: 20rem;
           margin-left: -1.4rem;
   
           &.moveRight {
-            transform: translateX(1rem); // Sposta a destra l'icona
+            transform: translateX(.2rem); // Sposta a destra l'icona
           }
         }
       }

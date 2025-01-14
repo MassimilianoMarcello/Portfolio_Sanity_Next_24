@@ -105,7 +105,7 @@
     font-size: 1.2rem;
     font-weight: 700;
     color: $primary-color;
-    text-align: center;
+    text-align: left;
     margin-top: 0rem;
   }
 }
@@ -287,12 +287,12 @@ top: 0.04rem;
 
 
   .titleBubble {
-    font-weight: 100;
+    font-weight: 700;
     font-size: 1.2rem;
     color: $primary-color;
-    text-align: center;
+    text-align: left;
     margin-top: 0rem;
-    border: 0.1rem solid $primary-color;
+    // border: 0.1rem solid $primary-color;
     border-radius: 4px;
     width: auto;
     display: inline-block; 
@@ -371,4 +371,14 @@ top: 0.04rem;
   &:hover img {
     transform: translateX(10px);
   }
+}
+.projectStatus{
+  background-color: #eeffff;
+  position: absolute;
+  bottom: 0rem;
+  left: 0;
+font-size: .8rem;
+text-transform: uppercase;
+margin-bottom: 0rem;
+padding: .5rem;
 }
