@@ -101,6 +101,7 @@
   grid-column: 2 / 5;
   grid-row: 1 / 4;
   padding: 0 1rem;
+  margin-top: 2rem;
   h3 {
     font-size: 1.2rem;
     font-weight: 700;
@@ -126,14 +127,15 @@
   height: 12rem;
   object-fit: cover;
   border-radius: 8px;
-  margin: 3rem;
+  margin:2rem 3rem 3rem 1rem;
+
   padding: 1rem;
 }
 
 .projectImage {
-  // width: 10rem;
-  height: 90%;
-  padding: 1rem;
+  width: 100%;
+  height: auto;
+  padding-top: .3rem;
   align-items: center;
   object-fit: cover;
   border-radius: 8px;
