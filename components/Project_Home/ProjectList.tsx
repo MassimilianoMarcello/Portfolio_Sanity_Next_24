@@ -8,6 +8,7 @@ import styles from "./ProjectList.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 import TriangleIcon from "../ΩΩElements/TriangleIcon";
+import { urlFor } from "@/sanity/sanity.client";
 
 interface ProjectListProps {
   projects: Project[];
@@ -24,7 +25,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
       setTimeout(() => {
         setOpenProjectId(null);
         setIsExiting(false);
-      }, 500); // Tempo dell'animazione
+      }, 500);
     } else {
       setOpenProjectId(projectId);
     }
@@ -35,10 +36,9 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
     setTimeout(() => {
       setOpenProjectId(null);
       setIsExiting(false);
-    }, 200); // Tempo dell'animazione
+    }, 200);
   };
 
-  // Filtra i progetti in base alla categoria selezionata
   const filteredProjects = useMemo(() => {
     if (selectedCategory) {
       return projects.filter((project) => project.importance === selectedCategory);
@@ -56,23 +56,15 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
 
   const importanceOrder = ["main", "secondary", "testing"];
   const sortedCategories = importanceOrder.filter((category) => groupedProjects[category]);
- // Category descriptions
 
-const categoryDescriptions: Record<string, string> = {
-  main: "Projects that demonstrate core skills and expertise, serving as the strongest examples of professional capabilities.",
-  secondary: "Projects that showcase additional skills and knowledge, complementing the main projects by highlighting versatility and depth.",
-  testing: "Projects focused on exploring and experimenting with new technologies, providing a foundation for innovation in future work.",
-};
+  const categoryDescriptions: Record<string, string> = {
+    main: "Projects that demonstrate core skills and expertise, serving as the strongest examples of professional capabilities.",
+    secondary: "Projects that showcase additional skills and knowledge, complementing the main projects by highlighting versatility and depth.",
+    testing: "Projects focused on exploring and experimenting with new technologies, providing a foundation for innovation in future work.",
+  };
+
   return (
     <div className={styles.projectListContainer}>
-      {/* Filtro per categoria */}
-      {/* <CategoryFilter
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-        importanceOrder={importanceOrder}
-      /> */}
-
-      {/* Lista dei progetti */}
       {sortedCategories.map((category, index) => (
         <div
           key={category}
@@ -80,11 +72,11 @@ const categoryDescriptions: Record<string, string> = {
           className={`${styles.categorySection} ${styles.fadeIn}`}
           style={{ animationDelay: `${index * 0.2}s` }}
         >
-          <div className={styles.categoryLabel}>{category.toUpperCase()}
-          <p className={styles.categoryDescription}>{categoryDescriptions[category]}</p>
+          <div className={styles.categoryLabel}>
+            {category.toUpperCase()}
+            <p className={styles.categoryDescription}>{categoryDescriptions[category]}</p>
           </div>
-       
-        
+
           <div className={styles.projectCards}>
             {groupedProjects[category]?.map((project) => (
               <div
@@ -104,22 +96,27 @@ const categoryDescriptions: Record<string, string> = {
                   </div>
                 </div>
                 <div className={styles.boxImageProject}>
-                  <img
+                  {/* Usa urlFor di Sanity per ottenere l'URL ottimizzato e passalo a Image di Next.js */}
+                  <Image
                     className={styles.projectImage}
-                    src={project.image}
-                    alt={project.imageAlt}
+                    src={urlFor(project.image).width(500).height(500).fit('crop').url()} // Immagine di Sanity ottimizzata
+                    alt={project.imageAlt || "Project image"}
+                    width={500}
+                    height={300}
+                    priority
                   />
                 </div>
                 <div className={styles.visitRepoAndWebsiteButtons}>
                   <div className={styles.styledButtonGit}>
-                    <Link href={project.githubUrl || "#"}>GitHub
-                    <Image src="/github.svg" alt="external link" width={28} height={28} />
+                    <Link href={project.githubUrl || "#"}>
+                      GitHub
+                      <Image src="/github.svg" alt="external link" width={28} height={28} />
                     </Link>
-                
                   </div>
                   <div className={styles.styledButtonWebsite}>
-                    <Link href={project.url}>Visit Website
-                    <Image src="/forward.svg" alt="external link" width={20} height={20} />
+                    <Link href={project.url}>
+                      Visit Website
+                      <Image src="/forward.svg" alt="external link" width={20} height={20} />
                     </Link>
                   </div>
                 </div>
@@ -145,6 +142,8 @@ const categoryDescriptions: Record<string, string> = {
 };
 
 export default React.memo(ProjectList);
+
+
 
 
 
