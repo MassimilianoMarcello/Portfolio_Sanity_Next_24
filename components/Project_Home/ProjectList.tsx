@@ -108,13 +108,13 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
                 </div>
                 <div className={styles.visitRepoAndWebsiteButtons}>
                   <div className={styles.styledButtonGit}>
-                    <Link href={project.githubUrl || "#"}>
+                    <Link href={project.githubUrl} aria-label="Go to GitHub repository" target="_blank" rel="noopener noreferrer">
                       GitHub
                       <Image src="/github.svg" alt="external link" width={28} height={28} />
                     </Link>
                   </div>
                   <div className={styles.styledButtonWebsite}>
-                    <Link href={project.url}>
+                    <Link href={project.url} target="_blank" rel="noopener noreferrer">
                       Visit Website
                       <Image src="/forward.svg" alt="external link" width={20} height={20} />
                     </Link>

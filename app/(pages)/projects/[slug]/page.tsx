@@ -25,7 +25,7 @@ export default async function Project({ params }: Props) {
     <div className={styles.projectContainer}>
       <div className={styles.contentWrapper}>
         <div className={styles.titleContainer}>
-          <h1 className={styles.howIMade}>How I Design: </h1>
+          <h1 className={styles.howIMade}>How Designed: </h1>
           <h1 className={styles.titleProject}>{project.name}</h1>
        
           <RepoAndWebSiteButtons githubUrl={project.githubUrl} url={project.url} />

@@ -24,9 +24,9 @@ const ProjectInfos: React.FC<ProjectInfosProps> = ({
        
        
           <div className={styles.blogLinkContainer}>
-          <Link href={`/projects/${project.slug}`} className={styles.blogLinkPrimary}>
+          <Link href={`/projects/${project.slug}` } target="_blank" rel="noopener noreferrer" className={styles.blogLinkPrimary}>
            
-           <p className={styles.bubbleTitle}>   See How I Design It</p>
+           <p className={styles.bubbleTitle}>   See How I Designed It</p>
               <Image
                 src="/forward.svg"
                 alt="external link"
@@ -60,7 +60,7 @@ const ProjectInfos: React.FC<ProjectInfosProps> = ({
 
       <div className={styles.visitRepoAndWebsiteButtons}>
         <div className={styles.styledButtonGit}>
-          <Link href={project.githubUrl} aria-label="Go to GitHub repository">
+          <Link href={project.githubUrl} aria-label="Go to GitHub repository" target="_blank" rel="noopener noreferrer">
             GitHub
             <Image
             src="/github.svg"
@@ -73,7 +73,7 @@ const ProjectInfos: React.FC<ProjectInfosProps> = ({
 
         </div>
         <div className={styles.styledButtonWebsite}>
-          <Link href={project.url} aria-label="Visit project website">
+          <Link href={project.url} aria-label="Visit project website" target="_blank" rel="noopener noreferrer">
             Visit Website
             <Image
               src="/forward.svg"
