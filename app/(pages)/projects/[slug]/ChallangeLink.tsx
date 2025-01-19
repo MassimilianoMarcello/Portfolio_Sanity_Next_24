@@ -3,7 +3,7 @@
 import React from 'react';
 
 type ChallengeProps = {
-  challengeId: string;
+  challengeId: string ;
   title: string;
 };
 

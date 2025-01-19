@@ -112,7 +112,7 @@ const categoryDescriptions: Record<string, string> = {
                 </div>
                 <div className={styles.visitRepoAndWebsiteButtons}>
                   <div className={styles.styledButtonGit}>
-                    <Link href={project.githubUrl}>GitHub
+                    <Link href={project.githubUrl || "#"}>GitHub
                     <Image src="/github.svg" alt="external link" width={28} height={28} />
                     </Link>
                 
