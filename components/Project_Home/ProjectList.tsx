@@ -92,7 +92,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
                   </div>
                   <h3>{project.name.toUpperCase()}</h3>
                   <div className={styles.portableStyle}>
-                    <PortableText value={project.content[0]} />
+                    <PortableText value={project.content} />
                   </div>
                 </div>
                 <div className={styles.boxImageProject}>
