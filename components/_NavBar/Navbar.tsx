@@ -38,7 +38,7 @@ const Navbar: React.FC = () => {
         <div className={styles.navbarContent}>
           {/* Logo */}
           <Link href="/" className={styles.logo}>
-            <img src="/logo-massdev.webp" alt="Logo" />
+            <img src="/logo-grey.webP" alt="Logo" />
           </Link>
 
           {/* Links */}

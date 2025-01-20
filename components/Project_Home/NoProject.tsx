@@ -22,7 +22,7 @@ const NoProjectsMessage: React.FC<NoProjectsMessageProps> = ({
 
   return (
     <div className={styles.MessageContainer}>
-      <Image src="/logo.png" alt="mass dev logo" width={200} height={60} />
+      <Image src="/logo-grey.webP" alt="mass dev logo" width={200} height={60} />
       <h1>Oops! No projects match your selection.</h1>
       {selectedTechnologies.length > 0 && (
         <p>
