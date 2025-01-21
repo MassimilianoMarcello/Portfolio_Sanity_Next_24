@@ -54,13 +54,13 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
     return acc;
   }, {} as Record<string, Project[]>);
 
-  const importanceOrder = ["main", "secondary", "testing"];
+  const importanceOrder = ["main", "secondary", "sandbox"];
   const sortedCategories = importanceOrder.filter((category) => groupedProjects[category]);
 
   const categoryDescriptions: Record<string, string> = {
-    main: "Projects that demonstrate core skills and expertise, serving as the strongest examples of professional capabilities.",
-    secondary: "Projects that showcase additional skills and knowledge, complementing the main projects by highlighting versatility and depth.",
-    testing: "Projects focused on exploring and experimenting with new technologies, providing a foundation for innovation in future work.",
+    "main": "Projects that demonstrate core skills and expertise, serving as the strongest examples of professional capabilities.",
+    "secondary": "Projects that showcase additional skills and knowledge, complementing the main projects by highlighting versatility and depth.",
+    "sandbox": "Projects focused on exploring and experimenting with new technologies, providing a foundation for innovation in future work.",
   };
 
   return (

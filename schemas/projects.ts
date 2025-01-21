@@ -67,7 +67,7 @@ const project = {
         list: [
           { title: "Main", value: "main" },
           { title: "Secondary", value: "secondary" },
-          { title: "Testing Technologies", value: "testing" },
+          { title: "Testing  New Technologies", value: "sandbox" },
         ],
         layout: "radio",
       },
