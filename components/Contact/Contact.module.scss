@@ -22,7 +22,7 @@
     color: $primary-color;
     font-size: 1.5rem;
     font-weight: 600;
-    padding:4rem 0 .5rem 2rem;
+    padding:4rem 0 .5rem 4rem;
   
   }
 
@@ -31,7 +31,7 @@
     font-weight: 200;
     margin-top: -1rem;
     margin-bottom: 2rem;
-    padding: 0rem 0 .5rem 2rem;
+    padding: 0rem 0 .5rem 4rem;
     color: $primary-color;
  
   }
@@ -44,7 +44,7 @@
     margin-bottom: 1rem;
     margin-top: .5rem;
     text-decoration: none;
-    padding: 0rem 0 .5rem 2rem;
+    padding: 0rem 0 .5rem 4rem;
     color: $primary-color;
     transition: color 0.3s ease, text-decoration 0.3s ease;
 
@@ -90,9 +90,9 @@
   font-size: 0.7rem;
   transition: background-color 0.3s ease, border-color 0.3s ease;
   cursor: pointer;
-  margin-top: 2rem;
+  margin-top: 4rem;
   margin-bottom: 4rem;
-  margin-left: 2rem;
+  margin-left:4rem;
   text-decoration: none;
 
 
