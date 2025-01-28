@@ -3,16 +3,18 @@ import Link from "next/link";
 import styles from "../../app/main.module.scss";
 import TriangleIcon from "../ΩΩElements/TriangleIcon";
 import Space from "./Space";
+import EnvelopeIcon from "../ΩΩElements/EnvelopeIcon";
 
 const Navbar: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isContactHovered, setIsContactHovered] = useState(false);
 
-  const handleMouseEnter = () => {
-    setIsDropdownOpen(true);
+  const handleMouseEnterContact = () => {
+    setIsContactHovered(true);
   };
 
-  const handleMouseLeave = () => {
-    setIsDropdownOpen(false);
+  const handleMouseLeaveContact = () => {
+    setIsContactHovered(false);
   };
 
   const scrollToSection = (id: string) => {
@@ -32,66 +34,32 @@ const Navbar: React.FC = () => {
 
   return (
     <div>
-    <nav className={styles.navbar}>
-      <div className={styles.navbarContent}>
-        {/* Logo */}
-        <Link href="/" className={styles.logo}>
-          <img src="/logo-grey" alt="Logo" />
-        </Link>
+      <nav className={styles.navbar}>
+        <div className={styles.navbarContent}>
+          <div className={styles.navbarLinks}>
+            {/* Logo */}
+            <Link href="/" className={styles.logo}>
+              <img src="/logo-grey.webp" alt="Logo" />
+            </Link>
 
-        {/* Links */}
-        {/* <div className={styles.navbarLinks}>
-          {/* Projects dropdown */}
-          {/* <div
-            className={styles.navLink}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          >
-            Projects
-            <span className={styles.triangleContainer}>
-              <TriangleIcon />
-            </span>
             <div
-              className={`${styles.dropdownMenu} ${
-                isDropdownOpen ? styles.show : ""
-              }`}
+              className={styles.navLink}
+              onMouseEnter={() => setIsDropdownOpen(true)}
+              onMouseLeave={() => setIsDropdownOpen(false)}
             >
-              <a
-                href="#main"
-                onClick={(e) => handleLinkClick(e, "main")}
-                className={styles.dropdownItem}
-              >
-                Main Projects
-              </a>
-              <a
-                href="#secondary"
-                onClick={(e) => handleLinkClick(e, "secondary")}
-                className={styles.dropdownItem}
-              >
-                Secondary Projects
-              </a>
-              <a
-                href="#testing"
-                onClick={(e) => handleLinkClick(e, "testing")}
-                className={styles.dropdownItem}
-              >
-                Testing Projects
-              </a>
-            </div>
-          </div>
+              <Link href="/" className={styles.linkProjectsReturn}>
+                {" "}
+                Projects
+              </Link>
 
-    
-          <a
-            href="#contact"
-            onClick={(e) => handleLinkClick(e, "contact")}
-            className={styles.navLink}
-          >
-            Contact
-          </a>
-        </div>  */}
-      </div>
-    </nav>
-<Space />
+              <span className={styles.triangleContainer}>
+                <TriangleIcon />
+              </span>
+            </div>
+          </div>{" "}
+        </div>
+      </nav>
+      <Space />
     </div>
   );
 };
