@@ -109,6 +109,44 @@
 
 }
 
+.challengesIndexContainer {
+
+  display: flex;
+  gap: .5rem;
+  margin-top: 2rem;
+display: inline-block;
+padding: .5rem  2rem;
+position:relative;
+
+  .squareIndex {
+    background-color: $text-color;
+    border: solid 1px $primary-color;
+    // border-right: none;
+    height: 2.35rem;
+    width: 0.73rem;
+  position: absolute;
+  left: 0rem;
+  top: 1.814rem;
+    font-size: 1.5rem;
+   
+  }
+  .challengesIndexTitle {
+    color: $primary-color;
+    font-size: 1rem;
+    font-weight: 400;
+   padding: .4rem .8rem;
+   margin-left: -1rem;
+    border: solid 1px $primary-color;
+
+  }
+}
+
+
+
+
+
+
+
 .challengesList {
   list-style: none;
   position: fixed;
