@@ -1,6 +1,7 @@
 import { Project } from "@/types/projects";
 import Link from "next/link";
-
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import styles from "./ProjectList.module.scss";
 import Image from "next/image";
 
@@ -13,6 +14,26 @@ const ProjectInfos: React.FC<ProjectInfosProps> = ({
   project,
   openProjectId,
 }) => {
+  const router = useRouter();
+
+  // Funzione per gestire la navigazione e lo scroll
+  const handleScrollToChallenge = (challengeId: string) => {
+    // Prima naviga alla pagina del progetto
+    router.push(`/projects/${project.slug}`);
+    setTimeout(() => {
+      // Dopo un breve ritardo, scorri fino alla sezione specifica
+      setTimeout(() => {
+        const element = document.getElementById(challengeId);
+        if (element) {
+          element.scrollIntoView({
+            behavior: "smooth", // Animazione di scroll
+            block: "start",     // Posiziona l'elemento in cima
+          });
+        }
+    }, 500);
+      }, 300);
+    };
+
   return (
     <div
       className={`${styles.projectInfo} ${
@@ -21,24 +42,23 @@ const ProjectInfos: React.FC<ProjectInfosProps> = ({
     >
       {project.challenges && project.challenges.length > 0 ? (
         <ul className={styles.challengesList}>
-       
-       
           <div className={styles.blogLinkContainer}>
-          <Link href={`/projects/${project.slug}` } target="_blank" rel="noopener noreferrer" className={styles.blogLinkPrimary}>
-           
-           <p className={styles.bubbleTitle}>   See How I Designed It</p>
+            <Link
+              href={`/projects/${project.slug}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.blogLinkPrimary}
+            >
+              <p className={styles.bubbleTitle}>See How I Designed It</p>
               <Image
                 src="/forward.svg"
                 alt="external link"
                 width={15}
                 height={15}
               />
-      
             </Link>
             <p className={styles.projectStatus}>status: {project.status}</p>
           </div>
-     
-        
 
           <h4 className={styles.challangesFaced}>Challenges Faced:</h4>
           {project.challenges.map((challenge) => {
@@ -47,9 +67,11 @@ const ProjectInfos: React.FC<ProjectInfosProps> = ({
               .toLowerCase()}`;
             return (
               <li key={challenge._id} className={styles.challengesListItem}>
-                <Link href={`/projects/${project.slug}#${challengeId}`}>
+                <button
+                  onClick={() => handleScrollToChallenge(challengeId)}
+                >
                   {challenge.title}
-                </Link>
+                </button>
               </li>
             );
           })}
@@ -60,20 +82,29 @@ const ProjectInfos: React.FC<ProjectInfosProps> = ({
 
       <div className={styles.visitRepoAndWebsiteButtons}>
         <div className={styles.styledButtonGit}>
-          <Link href={project.githubUrl} aria-label="Go to GitHub repository" target="_blank" rel="noopener noreferrer">
+          <Link
+            href={project.githubUrl}
+            aria-label="Go to GitHub repository"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             GitHub
             <Image
-            src="/github.svg"
-            alt="external link"
-            width={28}
-            height={28}
-            aria-hidden="true"
-          />
+              src="/github.svg"
+              alt="external link"
+              width={28}
+              height={28}
+              aria-hidden="true"
+            />
           </Link>
-
         </div>
         <div className={styles.styledButtonWebsite}>
-          <Link href={project.url} aria-label="Visit project website" target="_blank" rel="noopener noreferrer">
+          <Link
+            href={project.url}
+            aria-label="Visit project website"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Visit Website
             <Image
               src="/forward.svg"
@@ -90,3 +121,7 @@ const ProjectInfos: React.FC<ProjectInfosProps> = ({
 };
 
 export default ProjectInfos;
+
+
+
+
