@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import style from "./singleProject.module.scss";
 
 type ChallengeProps = {
   challengeId: string ;
@@ -14,7 +14,7 @@ const ChallengeLink = ({ challengeId, title }: ChallengeProps) => {
   };
 
   return (
-    <li>
+    <li className={style.challengeListItem}>
       <a href={`#${challengeId}`} onClick={handleClick}>
         {title}
       </a>

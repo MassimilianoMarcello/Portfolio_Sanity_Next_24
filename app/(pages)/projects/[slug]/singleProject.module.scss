@@ -10,7 +10,7 @@
   // border-radius: 8px; 
   border-left: 1px solid $primary-color;
   padding: 2rem 4rem;
-  margin: 2rem 0rem 2rem 30rem;
+  margin: 2rem 0rem 2rem 35rem;
   max-width: 1000px;
   overflow: hidden;
 }
@@ -105,22 +105,39 @@
   margin: 0;
 
 }
+.challengeListItem a{
+  list-style: square;
+  text-decoration: none;
+  color: $primary-color;
+
+  font-size: .89rem;
+
+  &:hover {
+    color: $text-color;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+}
+
+
+
 
 .linkContainer {
   margin-bottom: 10px;
 }
 
-.linkContainer a {
-  color: #1f1f1f;
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
+// .linkContainer a {
+//   color: #1f1f1f;
 
-.linkContainer a:hover {
-  color: #5f6368;
-}
+//   text-decoration: none;
+//   font-size: 1rem;
+//   font-weight: 500;
+//   transition: color 0.3s ease;
+// }
+
+// .linkContainer a:hover {
+//   color: #5f6368;
+// }
 
 .challengeDetails {
   margin-top: 20px;
@@ -145,3 +162,11 @@
   font-size: 1rem;
   color: #666666;
 }
+
+// .challengeLink{
+//   color: #1f1f1f;
+//   font-size: 1rem;
+//   font-weight: 500;
+//   text-decoration: none;
+//   transition: color 0.3s ease;
+// }
