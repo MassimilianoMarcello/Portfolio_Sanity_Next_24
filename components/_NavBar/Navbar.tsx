@@ -73,8 +73,8 @@ const Navbar: React.FC = () => {
                   Secondary Projects
                 </a>
                 <a
-                  href="#testing"
-                  onClick={(e) => handleLinkClick(e, "testing")}
+                  href="#sandbox"
+                  onClick={(e) => handleLinkClick(e, "sandbox")}
                   className={styles.dropdownItem}
                 >
                 Sandbox
