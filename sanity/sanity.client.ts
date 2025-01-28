@@ -4,7 +4,7 @@ import { createClient, type ClientConfig } from "@sanity/client";
 import imageUrlBuilder from '@sanity/image-url';  // Importa imageUrlBuilder
 
 const config: ClientConfig = {
-    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '',  
+    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'qpv8frw8',  
     dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production', 
     apiVersion: '2023-07-16',
     useCdn: false,
