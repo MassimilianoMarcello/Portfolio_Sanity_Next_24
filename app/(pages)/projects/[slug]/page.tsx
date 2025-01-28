@@ -1,15 +1,13 @@
-
-
-
 import { getProject } from "@/sanity/sanity.query";
 import { PortableText } from "@portabletext/react";
 import Link from "next/link";
 import styles from "./singleProject.module.scss";
 import ChallengeLink from "./ChallangeLink";
-import { portableTextComponents } from "./portableTextComponents"; // Importa i componenti PortableText personalizzati
-import Image from "next/image";
+import BackToTopButton from "./BackTopButton"; // Importa il Client Component
+import { portableTextComponents } from "./portableTextComponents";
 import RepoAndWebSiteButtons from "@/components/ΩΩElements/RepoAndWebSiteButtons";
-
+import TriangleIcon   from "@/components/ΩΩElements/TriangleIcon";
+import  TriangleIconLeftDoubled  from "@/components/ΩΩElements/TriangleIconLeftDoubled";
 type Props = {
   params: { slug: string };
 };
@@ -22,22 +20,23 @@ export default async function Project({ params }: Props) {
   }
 
   return (
-    <div className={styles.projectContainer}>
+    <div id="top" className={styles.projectContainer}>
       <div className={styles.contentWrapper}>
         <div className={styles.titleContainer}>
-          <h1 className={styles.howIMade}>How Designed: </h1>
+          <h1 className={styles.howIMade}>How Designed:</h1>
           <h1 className={styles.titleProject}>{project.name}</h1>
+
+          <RepoAndWebSiteButtons
+            githubUrl={project.githubUrl}
+            url={project.url}
+          />
        
-          <RepoAndWebSiteButtons githubUrl={project.githubUrl} url={project.url} />
-          <div className={styles.styledButton}>
-            <Link href={`/`}>Return</Link>
-          </div>
         </div>
         <div className={styles.projectDescription}>
           {project.content ? (
             <PortableText
               value={project.content}
-              components={portableTextComponents} // Usa i componenti personalizzati
+              components={portableTextComponents}
             />
           ) : (
             <p>No content available for this project.</p>
@@ -47,11 +46,12 @@ export default async function Project({ params }: Props) {
 
       {project.challenges && project.challenges.length > 0 ? (
         <div className={styles.challengesSection}>
-       
           <ul className={styles.challengesList}>
-          <h4 >Challenges Index:</h4>
+            <h4>Challenges Index:</h4>
             {project.challenges.map((challenge) => {
-              const challengeId = `challenge-${challenge.title.replace(/\s+/g, '-').toLowerCase()}`;
+              const challengeId = `challenge-${challenge.title
+                .replace(/\s+/g, "-")
+                .toLowerCase()}`;
 
               return (
                 <ChallengeLink
@@ -61,11 +61,23 @@ export default async function Project({ params }: Props) {
                 />
               );
             })}
+           
+        
+         
+          <div className={styles.buttonsIndex}>
+    
+            <Link href={`/`} className={styles.backToProject}>   <TriangleIconLeftDoubled /><span>Back to project</span></Link>
+          
+            <BackToTopButton />
+        
+          </div>
           </ul>
 
           <div className={styles.challengeDetails}>
             {project.challenges.map((challenge) => {
-              const challengeId = `challenge-${challenge.title.replace(/\s+/g, '-').toLowerCase()}`;
+              const challengeId = `challenge-${challenge.title
+                .replace(/\s+/g, "-")
+                .toLowerCase()}`;
               return (
                 <div
                   id={challengeId}
@@ -77,13 +89,16 @@ export default async function Project({ params }: Props) {
                   {challenge.content && (
                     <PortableText
                       value={challenge.content}
-                      components={portableTextComponents} // Usa i componenti personalizzati
+                      components={portableTextComponents}
                     />
                   )}
                 </div>
               );
             })}
           </div>
+
+        
+        
         </div>
       ) : (
         <p>No challenges faced for this project.</p>
@@ -91,3 +106,5 @@ export default async function Project({ params }: Props) {
     </div>
   );
 }
+
+
