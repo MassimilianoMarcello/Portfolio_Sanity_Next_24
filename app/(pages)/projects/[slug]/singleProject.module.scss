@@ -13,6 +13,7 @@
   overflow: hidden;
   padding-bottom: 5rem;
   margin-bottom: -5rem;
+
 }
 
 .contentWrapper {
@@ -111,6 +112,7 @@ border-top: none;
   font-size: 1rem;
   line-height: 1.6;
   margin: 15px 0;
+
 }
 
 .portableText h2,
@@ -121,14 +123,26 @@ border-top: none;
   margin-top: 20px;
 }
 
-.portableText p {
-  margin-bottom: 15px;
+.portableText p{
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-weight: 200;
+  color: #333333;
+
+
 }
 
 .challengesSection {
   margin-top: 30px;
   padding-top: 20px;
   // border-top: 2px solid #e0e0e0;
+p{
+
+  font-size: 1.1rem;
+  font-weight: 100;
+
+}
+
 
 }
 
@@ -163,6 +177,7 @@ position:relative;
     border: solid 1px $primary-color;
 
   }
+
 }
 
 
@@ -193,6 +208,7 @@ position:relative;
     text-decoration: underline;
     text-underline-offset: 4px;
   }
+
 }
 
 // .linkContainer {
@@ -215,7 +231,12 @@ position:relative;
   padding: 15px;
   border-bottom: 1px solid #e0e0e0;
   padding-top: 9rem;
-
+  :nth-child(5){
+    // background-color: red;
+    padding-bottom: 4rem;
+    margin-bottom: 4rem;
+    border-bottom: 5px solid $borders-color;
+  }
 
 }
 
@@ -297,6 +318,9 @@ transition: background-color 0.3s ease;
     font-size: 1.3rem;
  
     padding: .5rem 1rem;
+    margin-bottom: 1rem;
+
+ 
 
   
 }

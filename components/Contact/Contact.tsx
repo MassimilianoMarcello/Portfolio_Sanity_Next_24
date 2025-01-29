@@ -6,7 +6,9 @@ import SquareElement from "../ΩΩElements/squareElement"; // Adjust the path as
 const Contact = () => {
   return (
     <>
+  
       <div className={styles.contactContainer} id="contact">
+      <div className={styles.mainBox}>  
       <SquareElement
   title="Contact"
   positions={[
@@ -15,6 +17,7 @@ const Contact = () => {
   ]}
   colors={["#a4a9cf"]}
 />
+</div>
         <div className={styles.contactContent}>
         <div className={styles.getInTouchContainer} >
           <h2 className={styles.titleContact}>Get in touch</h2>
@@ -75,6 +78,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
+    
     </>
   );
 };

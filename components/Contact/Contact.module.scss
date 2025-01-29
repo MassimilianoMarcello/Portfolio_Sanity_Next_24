@@ -1,11 +1,20 @@
 @import "../../app/main.module.scss";
 
+
+
+
 .contactContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   min-height: 42rem;
   border-top: 0.01rem solid $primary-color;
+  :nth-child(3) {
+    margin-top: 5rem;
+  }
 }
+.mainBox {
+  margin-top: 4rem;
+  }
 
 .contactContent {
   grid-column: 2 / 4;
@@ -16,14 +25,11 @@
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
   padding-left: 4rem;
 
-
-
   .titleContact {
     color: $primary-color;
     font-size: 1.5rem;
     font-weight: 600;
-    padding:4rem 0 .5rem 4rem;
-  
+    padding: 6rem 0 0.5rem 4rem;
   }
 
   .titleDescription {
@@ -31,9 +37,8 @@
     font-weight: 200;
     margin-top: -1rem;
     margin-bottom: 2rem;
-    padding: 0rem 0 .5rem 4rem;
+    padding: 0rem 0 0.5rem 4rem;
     color: $primary-color;
- 
   }
 
   // Aggiungiamo una classe generale per i link
@@ -42,9 +47,9 @@
     font-size: 1rem;
     font-weight: 100;
     margin-bottom: 1rem;
-    margin-top: .5rem;
+    margin-top: 0.5rem;
     text-decoration: none;
-    padding: 0rem 0 .5rem 4rem;
+    padding: 0rem 0 0.5rem 4rem;
     color: $primary-color;
     transition: color 0.3s ease, text-decoration 0.3s ease;
 
@@ -54,22 +59,21 @@
     }
   }
 
-  .label{
+  .label {
     // color: #465567;
     font-weight: 400;
   }
-  .labelContent{
+  .labelContent {
     font-weight: 100;
     margin-left: 2rem;
     background-color: #eeffff;
-    padding: .2rem .5rem;
+    padding: 0.2rem 0.5rem;
   }
 
   .mailLink,
   .Linkdin,
   .twitter,
   .github {
-   
     word-break: break-word;
     margin-bottom: 1rem;
   }
@@ -92,10 +96,8 @@
   cursor: pointer;
   margin-top: 4rem;
   margin-bottom: 4rem;
-  margin-left:4rem;
+  margin-left: 4rem;
   text-decoration: none;
-
-
 
   &:hover {
     background-color: $primary-color;
@@ -107,6 +109,4 @@
 .getInTouchContainer {
   border: solid 0.01rem $primary-color;
   margin: 4rem 2rem;
- 
 }
-

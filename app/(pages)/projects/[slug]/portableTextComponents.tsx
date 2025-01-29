@@ -12,6 +12,7 @@ const CodeBlock = ({ value }: { value: { code: string; language: string } }) => 
       borderRadius: "8px",       // Aggiungi angoli arrotondati
       padding: "16px",           // Aggiungi padding
       fontSize: "14px",          // Cambia dimensione del testo
+ 
     }}
   >
     {value.code}
@@ -23,6 +24,7 @@ export const portableTextComponents = {
   types: {
     code: ({ value }: any) => <CodeBlock value={value} />, // Render blocchi di codice
   },
+  
 };
 
 
