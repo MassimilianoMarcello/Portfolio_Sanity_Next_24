@@ -10,7 +10,12 @@ const challenge = {
       },
       {
         name: "description",
-        title: "Description",
+        title: "Description Problem",
+        type: "text"
+      },
+      {
+        name: "solution",
+        title: "Description Solution",
         type: "text"
       },
       {

@@ -32,7 +32,8 @@ export async function getProjects(): Promise<Project[]> {
         title,
         "slug": slug.current,
         content,
-        description
+        description,
+        solution
       }
       }`
 
@@ -66,7 +67,8 @@ export async function getProject(slug: string): Promise<Project> {
         title,
         "slug": slug.current,
         content,
-        description
+        description,
+        solution
       }
  }`,
     { slug },

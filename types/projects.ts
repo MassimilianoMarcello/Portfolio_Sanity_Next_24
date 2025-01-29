@@ -10,6 +10,7 @@ export interface Technology {
     _id: string;
     title: string;
     description: string;
+    solution: string;
     slug: { current: string }; // Sanity genera spesso slug in questo formato
   
     content: PortableTextBlock[];
