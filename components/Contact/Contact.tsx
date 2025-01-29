@@ -1,12 +1,20 @@
 import React from "react";
 import styles from "./Contact.module.scss";
 import Link from "next/link";
+import SquareElement from "../ΩΩElements/squareElement"; // Adjust the path as necessary
 
 const Contact = () => {
   return (
     <>
       <div className={styles.contactContainer} id="contact">
-        <h1>Contact</h1>
+      <SquareElement
+  title="Contact"
+  positions={[
+    { top: "35%", left: "6%" },
+   
+  ]}
+  colors={["#a4a9cf"]}
+/>
         <div className={styles.contactContent}>
         <div className={styles.getInTouchContainer} >
           <h2 className={styles.titleContact}>Get in touch</h2>

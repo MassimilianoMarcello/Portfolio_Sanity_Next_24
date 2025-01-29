@@ -9,6 +9,7 @@ import ProjectFilter from './ProjectFilter';
 import styles from "./ProjectHome.module.scss"; 
 import Contact from '../Contact/Contact';
 import Navbar from '../_NavBar/Navbar';
+import SquareElement from '../ΩΩElements/squareElement'; // Adjust the path as necessary
 
 // Importa il file SASS
 
@@ -40,7 +41,15 @@ export default function Home() {
           // setFilteredProjects={setFilteredProjects}
           // setOpenProjectId={setOpenProjectId}
         />
-        <h1>Projects</h1>
+        <SquareElement
+  title="Projects"
+  positions={[
+    { top: "35%", left: "6%" },
+   
+  ]}
+  colors={["#a4a9cf"]}
+/>
+        {/* <h1 className={styles.projectTitle}>Projects</h1> */}
         <ProjectFilter
           projects={projects}
           setFilteredProjects={setFilteredProjects}
