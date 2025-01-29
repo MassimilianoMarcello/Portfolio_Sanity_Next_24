@@ -33,6 +33,7 @@ export default async function Project({ params }: Props) {
        
         </div>
         <div className={styles.projectDescription}>
+          <div className={styles.projectDescriptionBorderTop}></div>
           {project.content ? (
             <PortableText
               value={project.content}
@@ -70,7 +71,7 @@ export default async function Project({ params }: Props) {
          
           <div className={styles.buttonsIndex}>
     
-            <Link href={`/`} className={styles.backToProject}>   <TriangleIconLeftDoubled /><span>Back to project</span></Link>
+            <Link href={`/`} className={styles.backToProject}>   <TriangleIconLeftDoubled /><span>Back</span></Link>
           
             <BackToTopButton />
         

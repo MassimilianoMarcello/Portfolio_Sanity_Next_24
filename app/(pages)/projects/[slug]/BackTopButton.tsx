@@ -12,7 +12,7 @@ const BackToTopButton: React.FC = () => {
 
   return (<>
    <a className={styles.backToTopButton} onClick={handleScrollToTop}>
-     <span>Back to Top</span> 
+     <span>top</span> 
       <TriangleIconInverted />
     </a>
 
