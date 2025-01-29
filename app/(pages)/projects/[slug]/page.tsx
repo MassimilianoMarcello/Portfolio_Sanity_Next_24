@@ -88,9 +88,14 @@ export default async function Project({ params }: Props) {
                   id={challengeId}
                   key={challenge._id}
                   className={styles.challengeItem}
-                >
-                  <h5>{challenge.title}</h5>
-                  {challenge.description && <p>{challenge.description}</p>}
+>
+  {/* same classes than index */}
+                  <div className={styles.challengesIndexContainer}>
+                  <h5 className={styles.challengesIndexTitle}>{challenge.title}</h5>
+                  <div className={styles.squareIndex}></div>
+                  </div>
+                
+                  {challenge.description && <p className={styles.challangeDescription}>{challenge.description}</p>}
                   {challenge.content && (
                     <PortableText
                       value={challenge.content}
