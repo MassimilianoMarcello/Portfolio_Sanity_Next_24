@@ -95,7 +95,7 @@ export default async function Project({ params }: Props) {
                     </h5>
                     <div className={styles.squareIndex}></div>
                   </div>
-                  <h5>Problem</h5>
+                  <h5>Challange</h5>
                   {challenge.description && (
                     <p className={styles.challangeDescription}>
                       {challenge.description}
