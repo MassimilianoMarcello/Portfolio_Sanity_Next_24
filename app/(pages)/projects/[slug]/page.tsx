@@ -8,6 +8,8 @@ import { portableTextComponents } from "./portableTextComponents";
 import RepoAndWebSiteButtons from "@/components/ΩΩElements/RepoAndWebSiteButtons";
 import TriangleIcon from "@/components/ΩΩElements/TriangleIcon";
 import TriangleIconLeftDoubled from "@/components/ΩΩElements/TriangleIconLeftDoubled";
+import SquareElement from "@/components/ΩΩElements/squareElement";
+import SquareDecoration from '@/components/ΩΩElements/squareDecoration';
 type Props = {
   params: { slug: string };
 };
@@ -32,6 +34,18 @@ export default async function Project({ params }: Props) {
           />
         </div>
         <div className={styles.projectDescription}>
+      
+      <SquareDecoration
+        squares={[
+          { top: '-2rem', left: '-3.5rem', size: '15px' },
+          { bottom: '-2rem', right: '-3.5rem', size: '25px' },
+          { bottom: '-21.93rem', left: '-3.5rem', size: '20px' },
+          { bottom: '-21.93rem', right: '-3.5rem', size: '20px' },
+          { bottom: '-21.93rem', left: '-3.5rem', size: '20px' },
+
+        ]}
+      />
+
           <div className={styles.projectDescriptionBorderTop}></div>
           {project.content ? (
             <PortableText
@@ -68,7 +82,6 @@ export default async function Project({ params }: Props) {
 
             <div className={styles.buttonsIndex}>
               <Link href={`/`} className={styles.backToProject}>
-                {" "}
                 <TriangleIconLeftDoubled />
                 <span>Back</span>
               </Link>
