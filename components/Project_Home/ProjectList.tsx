@@ -39,48 +39,45 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects, openProjectId, togg
     }, 200);
   };
 
-  const filteredProjects = useMemo(() => {
-    if (selectedCategory) {
-      return projects.filter((project) => project.importance === selectedCategory);
-    }
-    return projects;
+  // Filtro e raggruppamento semplificato in un'unica fase
+  const groupedProjects = useMemo(() => {
+    return projects
+      .filter((project) => !selectedCategory || project.importance === selectedCategory)
+      .reduce((acc, project) => {
+        if (!acc[project.importance]) {
+          acc[project.importance] = [];
+        }
+        acc[project.importance].push(project);
+        return acc;
+      }, {} as Record<string, Project[]>);
   }, [projects, selectedCategory]);
 
-  const groupedProjects = useMemo(() => {
-    return filteredProjects.reduce((acc, project) => {
-      if (!acc[project.importance]) {
-        acc[project.importance] = [];
-      }
-      acc[project.importance].push(project);
-      return acc;
-    }, {} as Record<string, Project[]>);
-  }, [filteredProjects]);
+  // Uniamo ordine categorie e descrizioni in un array
+  const categories = [
+    { value: "main", label: "Projects that demonstrate core skills and expertise, serving as the strongest examples of professional capabilities." },
+    { value: "secondary", label: "Projects that showcase additional skills and knowledge, complementing the main projects by highlighting versatility and depth." },
+    { value: "sandbox", label: "Projects focused on exploring and experimenting with new technologies, providing a foundation for innovation in future work." },
+  ];
 
-  const importanceOrder = ["main", "secondary", "sandbox"];
-  const sortedCategories = importanceOrder.filter((category) => groupedProjects[category]);
-
-  const categoryDescriptions: Record<string, string> = {
-    "main": "Projects that demonstrate core skills and expertise, serving as the strongest examples of professional capabilities.",
-    "secondary": "Projects that showcase additional skills and knowledge, complementing the main projects by highlighting versatility and depth.",
-    "sandbox": "Projects focused on exploring and experimenting with new technologies, providing a foundation for innovation in future work.",
-  };
+  // Ordiniamo le categorie esplicitamente
+  const sortedCategories = categories.filter(category => groupedProjects[category.value]);
 
   return (
     <div className={styles.projectListContainer}>
       {sortedCategories.map((category, index) => (
         <div
-          key={category}
-          id={category}
+          key={category.value}
+          id={category.value}
           className={`${styles.categorySection} ${styles.fadeIn}`}
           style={{ animationDelay: `${index * 0.2}s` }}
         >
           <div className={styles.categoryLabel}>
-            {category.toUpperCase()}
-            <p className={styles.categoryDescription}>{categoryDescriptions[category]}</p>
+            {category.value.toUpperCase()}
+            <p className={styles.categoryDescription}>{category.label}</p>
           </div>
 
           <div className={styles.projectCards}>
-            {groupedProjects[category]?.map((project) => (
+            {groupedProjects[category.value]?.map((project) => (
               <div
                 key={project._id}
                 className={styles.projectCard}
@@ -126,9 +123,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects, openProjectId, togg
                 </div>
                 {openProjectId === project._id && (
                   <div
-                    className={`${styles.infoBubble} ${
-                      isExiting ? styles.exit : ""
-                    }`}
+                    className={`${styles.infoBubble} ${isExiting ? styles.exit : ""}`}
                   >
                     <ProjectInfo project={project} openProjectId={openProjectId} />
                   </div>
@@ -143,6 +138,9 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects, openProjectId, togg
 };
 
 export default React.memo(ProjectList);
+
+
+
 
 
 
