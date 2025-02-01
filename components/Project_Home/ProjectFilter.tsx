@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useMemo, useCallback, useEffect } from "react";
 import NoProjectsMessage from "./NoProject";
 import { Project } from "@/types/projects";
 import styles from "./ProjectFilter.module.scss";
@@ -14,12 +14,7 @@ const ProjectFilter: React.FC<ProjectFilterProps> = ({
   setFilteredProjects,
   setOpenProjectId,
 }) => {
-  const [selectedTechnologies, setSelectedTechnologies] = useState<string[]>(
-    []
-  );
-  const [localFilteredProjects, setLocalFilteredProjects] = useState<Project[]>(
-    projects
-  );
+  const [selectedTechnologies, setSelectedTechnologies] = useState<string[]>([]);
 
   const handleToggleTechnology = useCallback((technology: string) => {
     setSelectedTechnologies((prev) =>
@@ -33,9 +28,21 @@ const ProjectFilter: React.FC<ProjectFilterProps> = ({
     setSelectedTechnologies([]);
   };
 
+  const uniqueTechnologies = useMemo(
+    () =>
+      Array.from(
+        new Set(
+          projects.flatMap(
+            (project) => project.technologies?.map((tech) => tech.name) || []
+          )
+        )
+      ),
+    [projects]
+  );
+
   useEffect(() => {
     if (projects.length === 0) {
-      setLocalFilteredProjects([]);
+      setFilteredProjects([]); // Non c'è nulla da filtrare
       return;
     }
 
@@ -48,22 +55,9 @@ const ProjectFilter: React.FC<ProjectFilterProps> = ({
             )
           );
 
-    setLocalFilteredProjects(filteredProjects);
-    setFilteredProjects(filteredProjects); // Aggiorna lo stato esterno
-    setOpenProjectId(null);
+    setFilteredProjects(filteredProjects);
+    setOpenProjectId(null); // Chiudi il progetto selezionato, se presente
   }, [selectedTechnologies, projects, setFilteredProjects, setOpenProjectId]);
-
-  const uniqueTechnologies = useMemo(
-    () =>
-      Array.from(
-        new Set(
-          projects.flatMap(
-            (project) => project.technologies?.map((tech) => tech.name) || []
-          )
-        )
-      ),
-    [projects]
-  );
 
   return (
     <div className={styles.filterContainer}>
@@ -89,7 +83,11 @@ const ProjectFilter: React.FC<ProjectFilterProps> = ({
         </span>
       </section>
       {/* Controllo per mostrare NoProjectsMessage */}
-      {localFilteredProjects.length === 0 && selectedTechnologies.length > 0 && (
+      {selectedTechnologies.length > 0 && !projects.some((project) =>
+        selectedTechnologies.every((tech) =>
+          project.technologies?.some((t) => t.name === tech)
+        )
+      ) && (
         <NoProjectsMessage
           selectedTechnologies={selectedTechnologies}
           handleClearSelection={handleClearSelection}
@@ -100,6 +98,7 @@ const ProjectFilter: React.FC<ProjectFilterProps> = ({
 };
 
 export default React.memo(ProjectFilter);
+
 
 
 
