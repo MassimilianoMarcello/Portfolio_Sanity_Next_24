@@ -41,7 +41,7 @@ export default async function Project({ params }: Props) {
           { bottom: '-2rem', right: '-3.5rem', size: '25px' },
           { bottom: '-21.93rem', left: '-3.5rem', size: '20px' },
           { bottom: '-21.93rem', right: '-3.5rem', size: '20px' },
-          { bottom: '-21.93rem', left: '-3.5rem', size: '20px' },
+          
 
         ]}
       />

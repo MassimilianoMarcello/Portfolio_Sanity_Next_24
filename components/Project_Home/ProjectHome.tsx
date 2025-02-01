@@ -36,11 +36,8 @@ export default function Home() {
     return (
       <section className={styles.homesection}>
         <Navbar />
-        <HeaderSection
-          // projects={projects}
-          // setFilteredProjects={setFilteredProjects}
-          // setOpenProjectId={setOpenProjectId}
-        />
+        <HeaderSection/>
+      
         <SquareElement
   title="Projects"
   positions={[
