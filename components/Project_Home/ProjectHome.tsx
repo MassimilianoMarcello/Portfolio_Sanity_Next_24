@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { getProjects } from '@/sanity/sanity.query';
 import { Project } from '@/types/projects';
 import HeaderSection from './HeaderSection';
@@ -13,19 +13,25 @@ export default function Home() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [openProjectId, setOpenProjectId] = useState<string | null>(null);
   const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const toggleProjectInfo = (projectId: string | null) => {
+  const toggleProjectInfo = useCallback((projectId: string | null) => {
     setOpenProjectId(projectId === openProjectId ? null : projectId);
-  };
+  }, [openProjectId]);
 
   useEffect(() => {
     const fetchProjects = async () => {
       const projectsData: Project[] = await getProjects();
       setProjects(projectsData);
       setFilteredProjects(projectsData);
+      setLoading(false);
     };
     fetchProjects();
   }, []);
+
+  if (loading) {
+    return <div>Loading projects...</div>;
+  }
 
   return (
     <section className={styles.homesection}>
@@ -50,3 +56,4 @@ export default function Home() {
     </section>
   );
 }
+

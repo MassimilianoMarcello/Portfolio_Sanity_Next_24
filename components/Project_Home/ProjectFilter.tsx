@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import NoProjectsMessage from "./NoProject";
 import { Project } from "@/types/projects";
 import styles from "./ProjectFilter.module.scss";
@@ -21,6 +21,18 @@ const ProjectFilter: React.FC<ProjectFilterProps> = ({
     projects
   );
 
+  const handleToggleTechnology = useCallback((technology: string) => {
+    setSelectedTechnologies((prev) =>
+      prev.includes(technology)
+        ? prev.filter((tech) => tech !== technology)
+        : [...prev, technology]
+    );
+  }, []);
+
+  const handleClearSelection = () => {
+    setSelectedTechnologies([]);
+  };
+
   useEffect(() => {
     if (projects.length === 0) {
       setLocalFilteredProjects([]);
@@ -40,18 +52,6 @@ const ProjectFilter: React.FC<ProjectFilterProps> = ({
     setFilteredProjects(filteredProjects); // Aggiorna lo stato esterno
     setOpenProjectId(null);
   }, [selectedTechnologies, projects, setFilteredProjects, setOpenProjectId]);
-
-  const handleToggleTechnology = (technology: string) => {
-    setSelectedTechnologies((prev) =>
-      prev.includes(technology)
-        ? prev.filter((tech) => tech !== technology)
-        : [...prev, technology]
-    );
-  };
-
-  const handleClearSelection = () => {
-    setSelectedTechnologies([]);
-  };
 
   const uniqueTechnologies = useMemo(
     () =>
@@ -99,7 +99,8 @@ const ProjectFilter: React.FC<ProjectFilterProps> = ({
   );
 };
 
-export default ProjectFilter;
+export default React.memo(ProjectFilter);
+
 
 
 

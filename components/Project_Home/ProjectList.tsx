@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useCallback } from "react";
 import ProjectInfo from "./ProjectInfo";
 import TechnologiesUsed from "./TechnologiesUsed";
 import { PortableText } from "@portabletext/react";
@@ -19,7 +19,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects, openProjectId, togg
   const [isExiting, setIsExiting] = React.useState(false);
   const [selectedCategory, setSelectedCategory] = React.useState<string | null>(null);
 
-  const toggleProjectInfoHandler = (projectId: string) => {
+  const toggleProjectInfoHandler = useCallback((projectId: string) => {
     if (openProjectId === projectId) {
       setIsExiting(true);
       setTimeout(() => {
@@ -29,7 +29,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects, openProjectId, togg
     } else {
       toggleProjectInfo(projectId);
     }
-  };
+  }, [openProjectId, toggleProjectInfo]);
 
   const handleMouseLeave = () => {
     setIsExiting(true);
@@ -46,13 +46,15 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects, openProjectId, togg
     return projects;
   }, [projects, selectedCategory]);
 
-  const groupedProjects = filteredProjects.reduce((acc, project) => {
-    if (!acc[project.importance]) {
-      acc[project.importance] = [];
-    }
-    acc[project.importance].push(project);
-    return acc;
-  }, {} as Record<string, Project[]>);
+  const groupedProjects = useMemo(() => {
+    return filteredProjects.reduce((acc, project) => {
+      if (!acc[project.importance]) {
+        acc[project.importance] = [];
+      }
+      acc[project.importance].push(project);
+      return acc;
+    }, {} as Record<string, Project[]>);
+  }, [filteredProjects]);
 
   const importanceOrder = ["main", "secondary", "sandbox"];
   const sortedCategories = importanceOrder.filter((category) => groupedProjects[category]);
@@ -141,6 +143,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects, openProjectId, togg
 };
 
 export default React.memo(ProjectList);
+
 
 
 
