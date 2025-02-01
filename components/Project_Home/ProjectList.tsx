@@ -1,40 +1,40 @@
-import React, { useState, useMemo } from "react";
+import React, { useMemo } from "react";
 import ProjectInfo from "./ProjectInfo";
 import TechnologiesUsed from "./TechnologiesUsed";
 import { PortableText } from "@portabletext/react";
 import { Project } from "@/types/projects";
-import CategoryFilter from "./CategoryFilter";
-import styles from "./ProjectList.module.scss";
-import Link from "next/link";
-import Image from "next/image";
 import TriangleIcon from "../ΩΩElements/TriangleIcon";
 import { urlFor } from "@/sanity/sanity.client";
+import Link from "next/link";
+import Image from "next/image";
+import styles from "./ProjectList.module.scss";
 
 interface ProjectListProps {
   projects: Project[];
+  openProjectId: string | null;
+  toggleProjectInfo: (projectId: string | null) => void;
 }
 
-const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
-  const [openProjectId, setOpenProjectId] = useState<string | null>(null);
-  const [isExiting, setIsExiting] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+const ProjectList: React.FC<ProjectListProps> = ({ projects, openProjectId, toggleProjectInfo }) => {
+  const [isExiting, setIsExiting] = React.useState(false);
+  const [selectedCategory, setSelectedCategory] = React.useState<string | null>(null);
 
-  const toggleProjectInfo = (projectId: string) => {
+  const toggleProjectInfoHandler = (projectId: string) => {
     if (openProjectId === projectId) {
       setIsExiting(true);
       setTimeout(() => {
-        setOpenProjectId(null);
+        toggleProjectInfo(null);
         setIsExiting(false);
       }, 500);
     } else {
-      setOpenProjectId(projectId);
+      toggleProjectInfo(projectId);
     }
   };
 
   const handleMouseLeave = () => {
     setIsExiting(true);
     setTimeout(() => {
-      setOpenProjectId(null);
+      toggleProjectInfo(null);
       setIsExiting(false);
     }, 200);
   };
@@ -82,7 +82,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
               <div
                 key={project._id}
                 className={styles.projectCard}
-                onClick={() => toggleProjectInfo(project._id)}
+                onClick={() => toggleProjectInfoHandler(project._id)}
                 onMouseLeave={handleMouseLeave}
               >
                 <div className={styles.boxTextProject}>
@@ -96,10 +96,9 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
                   </div>
                 </div>
                 <div className={styles.boxImageProject}>
-                  {/* Usa urlFor di Sanity per ottenere l'URL ottimizzato e passalo a Image di Next.js */}
                   <Image
                     className={styles.projectImage}
-                    src={urlFor(project.image).width(500).height(500).fit('crop').url()} // Immagine di Sanity ottimizzata
+                    src={urlFor(project.image).width(500).height(500).fit('crop').url()}
                     alt={project.imageAlt || "Project image"}
                     width={500}
                     height={300}
@@ -142,6 +141,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
 };
 
 export default React.memo(ProjectList);
+
 
 
 
