@@ -29,13 +29,6 @@ export default function Home() {
     fetchProjects();
   }, []);
 
-  // if (loading) {
-  //   return (
-  //     <div className={styles.loadingContainer}>
-  //       <div className={styles.loadingMessage}>Loading projects...</div>
-  //     </div>
-  //   );
-  // }
   
 
   return (
