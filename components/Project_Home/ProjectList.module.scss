@@ -142,60 +142,6 @@ margin: 3rem 2rem 3rem 0rem;
   border-radius: 8px;
 }
 
-.visitRepoAndWebsiteButtons {
-  position: absolute;
-  bottom: 0px; /* Distanza dal basso */
-  right: 0px; /* Distanza da destra */
-  display: flex;
-  align-items: center;
-  margin-bottom: 0rem;
-  gap: 10px;
-  padding: 0;
-  img {
-    margin-bottom: -0.2rem;
-    margin-left: 0.5rem;
-    // background-color: yellow;
-  }
-}
-
-// Classe base con proprietà comuni
-.styledButton {
-  padding: 1rem;
-  border-radius: 5px;
-  font-size: 14px;
-  text-align: center;
-  text-decoration: none;
-  font-weight: 100;
-  transition: background-color 0.3s ease;
-
-  a {
-    color: inherit;
-    text-decoration: none;
-    list-style: none;
-  }
-
-  &:hover {
-    transform: scale(1.09);
-
-  }
-}
-
-// Estendi la classe base per i due bottoni
-.styledButtonGit {
-  @extend .styledButton;
-
-  img {
-    margin-bottom: -0.5rem;
-  }
-}
-
-.styledButtonWebsite {
-  @extend .styledButton;
-  img {
-    margin-bottom: -0.3rem;
-  }
-}
-
 .technologiesUsed {
   // grid-column: 1 / 4;
   // grid-row: 4 / 5;
@@ -211,7 +157,7 @@ margin: 3rem 2rem 3rem 0rem;
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px); /* Movimento più leggero */
+    transform: translateY(20px); 
   }
   to {
     opacity: 1;
@@ -226,7 +172,7 @@ margin: 3rem 2rem 3rem 0rem;
   }
   to {
     opacity: 0;
-    transform: translateY(20px); /* Movimento più leggero */
+    transform: translateY(20px); 
   }
 }
 // stiles from link open bubble

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import styles from "./ProjectList.module.scss";
 import Image from "next/image";
+import RepoAndWebSiteButtons from "../ΩΩElements/RepoAndWebSiteButtons";
 
 interface ProjectInfosProps {
   project: Project;
@@ -74,43 +75,15 @@ const handleScrollToChallenge = (challengeId: string) => {
       ) : (
         <p>No challenges faced for this project.</p>
       )}
-
-      <div className={styles.visitRepoAndWebsiteButtons}>
-        <div className={styles.styledButtonGit}>
-          <Link
-            href={project.githubUrl}
-            aria-label="Go to GitHub repository"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            GitHub
-            <Image
-              src="/github.svg"
-              alt="external link"
-              width={28}
-              height={28}
-              aria-hidden="true"
-            />
-          </Link>
-        </div>
-        <div className={styles.styledButtonWebsite}>
-          <Link
-            href={project.url}
-            aria-label="Visit project website"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Visit Website
-            <Image
-              src="/forward.svg"
-              alt="external link"
-              width={20}
-              height={20}
-              aria-hidden="true"
-            />
-          </Link>
-        </div>
-      </div>
+                <RepoAndWebSiteButtons
+  githubUrl={project.githubUrl}
+  url={project.url}
+  isAbsolute 
+  bottom="0rem"
+  right="2rem"
+/>
+ 
+   
     </div>
   );
 };

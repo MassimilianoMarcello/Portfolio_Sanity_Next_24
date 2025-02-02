@@ -8,6 +8,7 @@ import { urlFor } from "@/sanity/sanity.client";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./ProjectList.module.scss";
+import RepoAndWebSiteButtons from "../ΩΩElements/RepoAndWebSiteButtons";
 
 interface ProjectListProps {
   projects: Project[];
@@ -105,18 +106,14 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects, openProjectId, togg
                   />
                 </div>
                 <div className={styles.visitRepoAndWebsiteButtons}>
-                  <div className={styles.styledButtonGit}>
-                    <Link href={project.githubUrl} aria-label="Go to GitHub repository" target="_blank" rel="noopener noreferrer">
-                      GitHub
-                      <Image src="/github.svg" alt="external link" width={28} height={28} />
-                    </Link>
-                  </div>
-                  <div className={styles.styledButtonWebsite}>
-                    <Link href={project.url} target="_blank" rel="noopener noreferrer">
-                      Visit Website
-                      <Image src="/forward.svg" alt="external link" width={20} height={20} />
-                    </Link>
-                  </div>
+                <RepoAndWebSiteButtons
+  githubUrl={project.githubUrl}
+  url={project.url}
+  isAbsolute 
+  bottom="0rem"
+  right="2rem"
+/>
+
                 </div>
                 <div className={styles.technologiesUsed}>
                   <TechnologiesUsed technologies={project.technologies} />
