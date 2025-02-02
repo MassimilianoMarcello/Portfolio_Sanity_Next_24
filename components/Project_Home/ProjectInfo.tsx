@@ -66,7 +66,7 @@ const handleScrollToChallenge = (challengeId: string) => {
           <h4 className={styles.challangesFaced}>Challenges Faced:</h4>
           {project.challenges.map((challenge) => (
             <li key={challenge._id} className={styles.challengesListItem}>
-              <button onClick={() => handleScrollToChallenge(generateChallengeId(challenge.title))}>
+              <button className={styles.buttonChallange} onClick={() => handleScrollToChallenge(generateChallengeId(challenge.title))}>
                 {challenge.title}
               </button>
             </li>

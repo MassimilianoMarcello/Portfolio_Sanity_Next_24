@@ -3,6 +3,7 @@
   align-items: center;
   gap: 10px;
   padding: 0;
+  background-color: #fafbff;
 }
 
 .absolutePosition {
@@ -33,14 +34,18 @@
   img {
     transition: transform 0.3s ease;
     // padding-left: 1.5rem;
+    background-color: #fafbff;
+    
  
   }
   .github{
     margin-right: -1.5rem;
+    background-color: #fafbff;
   }
   span{
     width: 6rem;
     margin-right: -.4rem;
+    background-color: #fafbff;
   }
 
   &:hover img {
