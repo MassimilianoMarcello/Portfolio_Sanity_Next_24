@@ -29,9 +29,14 @@ export default function Home() {
     fetchProjects();
   }, []);
 
-  if (loading) {
-    return <div>Loading projects...</div>;
-  }
+  // if (loading) {
+  //   return (
+  //     <div className={styles.loadingContainer}>
+  //       <div className={styles.loadingMessage}>Loading projects...</div>
+  //     </div>
+  //   );
+  // }
+  
 
   return (
     <section className={styles.homesection}>
