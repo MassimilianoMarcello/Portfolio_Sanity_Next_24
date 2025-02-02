@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 import NoProjectsMessage from "./NoProject";
 import { Project } from "@/types/projects";
 import styles from "./ProjectFilter.module.scss";
@@ -16,90 +16,54 @@ const ProjectFilter: React.FC<ProjectFilterProps> = ({
 }) => {
   const [selectedTechnologies, setSelectedTechnologies] = useState<string[]>([]);
 
-  const handleToggleTechnology = useCallback((technology: string) => {
+  const toggleTechnology = useCallback((tech: string) => {
     setSelectedTechnologies((prev) =>
-      prev.includes(technology)
-        ? prev.filter((tech) => tech !== technology)
-        : [...prev, technology]
+      prev.includes(tech) ? prev.filter((t) => t !== tech) : [...prev, tech]
     );
   }, []);
 
-  const handleClearSelection = () => {
-    setSelectedTechnologies([]);
-  };
+  const clearSelection = () => setSelectedTechnologies([]);
 
   const uniqueTechnologies = useMemo(
-    () =>
-      Array.from(
-        new Set(
-          projects.flatMap(
-            (project) => project.technologies?.map((tech) => tech.name) || []
-          )
-        )
-      ),
+    () => Array.from(new Set(projects.flatMap((p) => p.technologies?.map((t) => t.name) || []))),
     [projects]
   );
 
   useEffect(() => {
-    if (projects.length === 0) {
-      setFilteredProjects([]); // Non c'è nulla da filtrare
-      return;
-    }
+    const filtered = selectedTechnologies.length
+      ? projects.filter((p) => selectedTechnologies.every((tech) => p.technologies?.some((t) => t.name === tech)))
+      : projects;
 
-    const filteredProjects =
-      selectedTechnologies.length === 0
-        ? projects
-        : projects.filter((project) =>
-            selectedTechnologies.every((tech) =>
-              project.technologies?.some((t) => t.name === tech)
-            )
-          );
-
-    setFilteredProjects(filteredProjects);
-    setOpenProjectId(null); // Chiudi il progetto selezionato, se presente
+    setFilteredProjects(filtered);
+    setOpenProjectId(null);
   }, [selectedTechnologies, projects, setFilteredProjects, setOpenProjectId]);
 
   return (
     <div className={styles.filterContainer}>
       <section className={styles.filter}>
-        {uniqueTechnologies.map((technology) => (
+        {uniqueTechnologies.map((tech) => (
           <button
-            key={technology}
-            onClick={() => handleToggleTechnology(technology)}
-            className={`${styles.theButton} ${
-              selectedTechnologies.includes(technology) ? styles.active : ""
-            }`}
+            key={tech}
+            onClick={() => toggleTechnology(tech)}
+            className={`${styles.theButton} ${selectedTechnologies.includes(tech) ? styles.active : ""}`}
           >
-            {technology}
+            {tech}
           </button>
         ))}
         <span className={styles.clearButtonContainer}>
-          <button
-            className={styles.clearButton}
-            onClick={handleClearSelection}
-          >
-            Clear
-          </button>
+          <button className={styles.clearButton} onClick={clearSelection}>Clear</button>
         </span>
       </section>
-      {/* Controllo per mostrare NoProjectsMessage */}
-      {selectedTechnologies.length > 0 && !projects.some((project) =>
-        selectedTechnologies.every((tech) =>
-          project.technologies?.some((t) => t.name === tech)
-        )
+      {selectedTechnologies.length > 0 && !projects.some((p) =>
+        selectedTechnologies.every((tech) => p.technologies?.some((t) => t.name === tech))
       ) && (
-        <NoProjectsMessage
-          selectedTechnologies={selectedTechnologies}
-          handleClearSelection={handleClearSelection}
-        />
+        <NoProjectsMessage selectedTechnologies={selectedTechnologies} handleClearSelection={clearSelection} />
       )}
     </div>
   );
 };
 
 export default React.memo(ProjectFilter);
-
-
 
 
 
