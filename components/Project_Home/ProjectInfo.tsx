@@ -1,7 +1,6 @@
 import { Project } from "@/types/projects";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import styles from "./ProjectList.module.scss";
 import Image from "next/image";
 
@@ -16,23 +15,26 @@ const ProjectInfos: React.FC<ProjectInfosProps> = ({
 }) => {
   const router = useRouter();
 
-  // Funzione per gestire la navigazione e lo scroll
-  const handleScrollToChallenge = (challengeId: string) => {
-    // Prima naviga alla pagina del progetto
-    router.push(`/projects/${project.slug}`);
+// Funzione per gestire la navigazione e lo scroll
+const handleScrollToChallenge = (challengeId: string) => {
+  // Prima naviga alla pagina del progetto
+  router.push(`/projects/${project.slug}`);
+  setTimeout(() => {
+    // Dopo un breve ritardo, scorri fino alla sezione specifica
     setTimeout(() => {
-      // Dopo un breve ritardo, scorri fino alla sezione specifica
-      setTimeout(() => {
-        const element = document.getElementById(challengeId);
-        if (element) {
-          element.scrollIntoView({
-            behavior: "smooth", // Animazione di scroll
-            block: "start",     // Posiziona l'elemento in cima
-          });
-        }
-    }, 500);
-      }, 300);
-    };
+      const element = document.getElementById(challengeId);
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth", // Animazione di scroll
+          block: "start",     // Posiziona l'elemento in cima
+        });
+      }
+  }, 500);
+    }, 300);
+  };
+  
+
+  const generateChallengeId = (title: string) => `challenge-${title.replace(/\s+/g, "-").toLowerCase()}`;
 
   return (
     <div
@@ -40,7 +42,7 @@ const ProjectInfos: React.FC<ProjectInfosProps> = ({
         project._id === openProjectId ? styles.visible : styles.hidden
       }`}
     >
-      {project.challenges && project.challenges.length > 0 ? (
+      {project.challenges?.length ? (
         <ul className={styles.challengesList}>
           <div className={styles.blogLinkContainer}>
             <Link
@@ -61,20 +63,13 @@ const ProjectInfos: React.FC<ProjectInfosProps> = ({
           </div>
 
           <h4 className={styles.challangesFaced}>Challenges Faced:</h4>
-          {project.challenges.map((challenge) => {
-            const challengeId = `challenge-${challenge.title
-              .replace(/\s+/g, "-")
-              .toLowerCase()}`;
-            return (
-              <li key={challenge._id} className={styles.challengesListItem}>
-                <button
-                  onClick={() => handleScrollToChallenge(challengeId)}
-                >
-                  {challenge.title}
-                </button>
-              </li>
-            );
-          })}
+          {project.challenges.map((challenge) => (
+            <li key={challenge._id} className={styles.challengesListItem}>
+              <button onClick={() => handleScrollToChallenge(generateChallengeId(challenge.title))}>
+                {challenge.title}
+              </button>
+            </li>
+          ))}
         </ul>
       ) : (
         <p>No challenges faced for this project.</p>
@@ -121,6 +116,7 @@ const ProjectInfos: React.FC<ProjectInfosProps> = ({
 };
 
 export default ProjectInfos;
+
 
 
 
