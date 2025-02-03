@@ -10,6 +10,7 @@ import TriangleIcon from "@/components/ΩΩElements/TriangleIcon";
 import TriangleIconLeftDoubled from "@/components/ΩΩElements/TriangleIconLeftDoubled";
 import SquareElement from "@/components/ΩΩElements/squareElement";
 import SquareDecoration from '@/components/ΩΩElements/squareDecoration';
+import challenge from "@/schemas/challenge";
 type Props = {
   params: { slug: string };
 };
@@ -60,8 +61,14 @@ export default async function Project({ params }: Props) {
 
       {project.challenges && project.challenges.length > 0 ? (
         <div className={styles.challengesSection}>
+      
           <ul className={styles.challengesList}>
+<div className={styles.titleProjectOnIndexContainer}>
+<h5 className={styles.titleProjectOnIndex}>{project.name}</h5>
+</div>
+        
             <div className={styles.challengesIndexContainer}>
+          
               <span className={styles.squareIndex}></span>
               <h4 className={styles.challengesIndexTitle}>Challenges Index:</h4>
             </div>

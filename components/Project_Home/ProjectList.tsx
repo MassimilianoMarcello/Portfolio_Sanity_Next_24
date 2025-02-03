@@ -18,7 +18,6 @@ interface ProjectListProps {
 
 const ProjectList: React.FC<ProjectListProps> = ({ projects, openProjectId, toggleProjectInfo }) => {
   const [isExiting, setIsExiting] = React.useState(false);
-  const [selectedCategory, setSelectedCategory] = React.useState<string | null>(null);
 
   const toggleProjectInfoHandler = useCallback((projectId: string) => {
     if (openProjectId === projectId) {
@@ -40,27 +39,25 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects, openProjectId, togg
     }, 200);
   };
 
-  // Filtro e raggruppamento semplificato in un'unica fase
+  // Raggruppiamo i progetti in base alla categoria (main, secondary, sandbox)
   const groupedProjects = useMemo(() => {
-    return projects
-      .filter((project) => !selectedCategory || project.importance === selectedCategory)
-      .reduce((acc, project) => {
-        if (!acc[project.importance]) {
-          acc[project.importance] = [];
-        }
-        acc[project.importance].push(project);
-        return acc;
-      }, {} as Record<string, Project[]>);
-  }, [projects, selectedCategory]);
+    return projects.reduce((acc, project) => {
+      if (!acc[project.importance]) {
+        acc[project.importance] = [];
+      }
+      acc[project.importance].push(project);
+      return acc;
+    }, {} as Record<string, Project[]>);
+  }, [projects]);
 
-  // Uniamo ordine categorie e descrizioni in un array
+  // Le categorie sono fisse: "main", "secondary", "sandbox"
   const categories = [
     { value: "main", label: "Projects that demonstrate core skills and expertise, serving as the strongest examples of professional capabilities." },
     { value: "secondary", label: "Projects that showcase additional skills and knowledge, complementing the main projects by highlighting versatility and depth." },
     { value: "sandbox", label: "Projects focused on exploring and experimenting with new technologies, providing a foundation for innovation in future work." },
   ];
 
-  // Ordiniamo le categorie esplicitamente
+  // Ordiniamo le categorie per assicurarsi che vengano visualizzate sempre nell'ordine giusto
   const sortedCategories = categories.filter(category => groupedProjects[category.value]);
 
   return (
@@ -106,14 +103,13 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects, openProjectId, togg
                   />
                 </div>
                 <div className={styles.visitRepoAndWebsiteButtons}>
-                <RepoAndWebSiteButtons
-  githubUrl={project.githubUrl}
-  url={project.url}
-  isAbsolute 
-  bottom="0rem"
-  right="2rem"
-/>
-
+                  <RepoAndWebSiteButtons
+                    githubUrl={project.githubUrl}
+                    url={project.url}
+                    isAbsolute
+                    bottom="0rem"
+                    right="2rem"
+                  />
                 </div>
                 <div className={styles.technologiesUsed}>
                   <TechnologiesUsed technologies={project.technologies} />
@@ -135,6 +131,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects, openProjectId, togg
 };
 
 export default React.memo(ProjectList);
+
 
 
 
