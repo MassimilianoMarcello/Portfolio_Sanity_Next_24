@@ -67,7 +67,7 @@ export default async function Project({ params }: Props) {
 <h5 className={styles.titleProjectOnIndex}>{project.name}</h5>
 </div>
         
-            <div className={styles.challengesIndexContainer}>
+            <div className={styles.challengesIndexContainer }>
           
               <span className={styles.squareIndex}></span>
               <h4 className={styles.challengesIndexTitle}>Challenges Index:</h4>
@@ -109,7 +109,7 @@ export default async function Project({ params }: Props) {
                   className={styles.challengeItem}
                 >
                   {/* same classes than index */}
-                  <div className={styles.challengesIndexContainer}>
+                  <div className={`${styles.challengesIndexContainer} ${styles.withborder}`}>
                     <h5 className={styles.challengesIndexTitle}>
                       {challenge.title}
                     </h5>
