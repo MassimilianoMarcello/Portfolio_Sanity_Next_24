@@ -22,12 +22,11 @@ const Contact = () => {
         <div className={styles.getInTouchContainer} >
           <h2 className={styles.titleContact}>Get in touch</h2>
           <p className={styles.titleDescription}>
-            If you'd like to discuss a project, collaboration, or speaking
-            opportunity, feel free to reach out.
-          </p>
+          If you're interested in discussing a project, collaboration, or potential employment opportunity, feel free to reach out.
+</p>
           <div>
             <Link href="mailto:massdev@gmail.com" className={styles.link}>
-              <span className={styles.label}> Email: </span>    <span className={styles.labelContent}>massdev@gmail.com</span> 
+              <span className={styles.label}> Email: </span>    <span className={styles.labelContent}>massdevone@gmail.com</span> 
             </Link>
             <Link
               href="https://www.linkedin.com/in/massimiliano-marcello-4195681a7/"
