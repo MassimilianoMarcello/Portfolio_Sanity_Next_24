@@ -14,7 +14,7 @@
   overflow: hidden;
   padding-bottom: 5rem;
   margin-bottom: -5rem;
-  @include responsive("md","max") {
+  @include responsive("lg","max") {
     width: 100%;
     margin:  0rem;
     padding: 0rem;
@@ -30,7 +30,7 @@
 
   margin-top: -4rem;
   
-  @include responsive("md","max") {
+  @include responsive("lg","max") {
   
   }
 
@@ -230,7 +230,7 @@ div.challengesIndexContainer.withborder {
   margin: 0;
 
 
-  @include responsive("md","max") {
+  @include responsive("lg","max") {
    position: relative;
    margin-top: 4rem;
    }
@@ -283,7 +283,7 @@ div.challengesIndexContainer.withborder {
   left: 25.5rem;
   margin-top: 25rem;
 display: inline-block;
-@include responsive("md","max") {
+@include responsive("lg","max") {
   top: 1rem;
   left: 22.5rem;
   margin-top: 1rem;
@@ -296,7 +296,7 @@ display: inline-block;
     padding: 7px 10px;
     text-decoration: none;
     font-size: 1rem;
-    @include responsive("md","max") {
+    @include responsive("lg","max") {
       border: none;
       .iconTriangle {
         display: none;
@@ -319,7 +319,7 @@ display: inline-block;
 font-size: 1rem;
 cursor: pointer;
 transition: background-color 0.3s ease;
-@include responsive("md","max") {
+@include responsive("lg","max") {
   border: none;
   .iconTriangle {
     display: none;
