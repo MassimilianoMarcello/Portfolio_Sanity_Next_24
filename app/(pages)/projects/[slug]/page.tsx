@@ -89,7 +89,10 @@ export default async function Project({ params }: Props) {
 
             <div className={styles.buttonsIndex}>
               <Link href={`/`} className={styles.backToProject}>
-                <TriangleIconLeftDoubled />
+              <span className={styles.iconTriangle}>
+              <TriangleIconLeftDoubled />
+              </span>
+               
                 <span>Back</span>
               </Link>
 

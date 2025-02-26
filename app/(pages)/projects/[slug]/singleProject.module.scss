@@ -14,7 +14,11 @@
   overflow: hidden;
   padding-bottom: 5rem;
   margin-bottom: -5rem;
-
+  @include responsive("md","max") {
+    width: 100%;
+    margin:  0rem;
+    padding: 0rem;
+  }
 }
 
 .contentWrapper {
@@ -25,6 +29,10 @@
   color: $primary-color;
 
   margin-top: -4rem;
+  
+  @include responsive("md","max") {
+  
+  }
 
 
 }
@@ -183,6 +191,7 @@ position:relative;
    margin-top: 2.2rem;
     border: solid 1px $primary-color;
 display: block;
+
   }
 
 }
@@ -197,6 +206,7 @@ font-weight: 500;
   padding:  .5rem;
   max-width: 40rem;
   display:inline-block;
+
 }}
 
 div.challengesIndexContainer.withborder {
@@ -219,6 +229,11 @@ div.challengesIndexContainer.withborder {
   padding: 0;
   margin: 0;
 
+
+  @include responsive("md","max") {
+   position: relative;
+   margin-top: 4rem;
+   }
 
 }
 .challengeListItem a {
@@ -256,6 +271,7 @@ div.challengesIndexContainer.withborder {
 
 .challengeItem:last-child {
   border-bottom: none;
+ 
 
 }
 
@@ -266,9 +282,13 @@ div.challengesIndexContainer.withborder {
   top: 10rem;
   left: 25.5rem;
   margin-top: 25rem;
-
-
-  display: inline-block;
+display: inline-block;
+@include responsive("md","max") {
+  top: 1rem;
+  left: 22.5rem;
+  margin-top: 1rem;
+  z-index: 1000000;
+}
   .backToProject {
     background-color: #f9fbff;
     border-left: $primary-color 1px solid;
@@ -276,13 +296,19 @@ div.challengesIndexContainer.withborder {
     padding: 7px 10px;
     text-decoration: none;
     font-size: 1rem;
-
+    @include responsive("md","max") {
+      border: none;
+      .iconTriangle {
+        display: none;
+      }
+    }
     &:hover {
       color: $text-color;
     }
   }
 
   .backToTopButton {
+    
     background-color: #f9fbff;
     padding: 3px 10px;
     color: $primary-color;
@@ -293,7 +319,12 @@ div.challengesIndexContainer.withborder {
 font-size: 1rem;
 cursor: pointer;
 transition: background-color 0.3s ease;
-
+@include responsive("md","max") {
+  border: none;
+  .iconTriangle {
+    display: none;
+  }
+}
 &:hover {
       color: $text-color;
     }

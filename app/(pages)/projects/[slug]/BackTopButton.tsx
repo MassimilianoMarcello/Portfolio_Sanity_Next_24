@@ -13,7 +13,9 @@ const BackToTopButton: React.FC = () => {
   return (<>
    <a className={styles.backToTopButton} onClick={handleScrollToTop}>
      <span>top</span> 
+     <span className={styles.iconTriangle}>
       <TriangleIconInverted />
+      </span>
     </a>
 
   
