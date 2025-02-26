@@ -8,6 +8,7 @@
   grid-template-columns: 1fr 1fr 1fr;
   min-height: 42rem;
   border-top: 0.01rem solid $primary-color;
+
   :nth-child(3) {
     margin-top: 5rem;
   }
@@ -24,12 +25,23 @@
   margin-right: 2rem;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
   padding-left: 4rem;
+ 
+  @include responsive("md", "max") {
+    grid-column: 1 / 4;
+    margin-top: -3rem;
+    padding:0 2rem;
+    margin-right: -3rem;
+  
+  }
 
   .titleContact {
     color: $primary-color;
     font-size: 1.5rem;
     font-weight: 600;
     padding: 6rem 0 0.5rem 4rem;
+    @include responsive("md", "max") {
+      padding: 2rem;
+      }
   }
 
   .titleDescription {
@@ -39,6 +51,9 @@
     margin-bottom: 2rem;
     padding: 0rem 0 0.5rem 4rem;
     color: $primary-color;
+    @include responsive("md", "max") {
+    padding:0 2rem;
+    }
   }
 
   // Aggiungiamo una classe generale per i link
@@ -52,10 +67,17 @@
     padding: 0rem 0 0.5rem 4rem;
     color: $primary-color;
     transition: color 0.3s ease, text-decoration 0.3s ease;
-
+    @include responsive("md", "max") {
+      padding:0 2rem;
+      margin: 3rem 0;
+    }
     &:hover {
       color: $background-color;
       text-decoration: underline;
+    }
+
+    @include responsive("md", "max") {
+      padding:0 2rem;
     }
   }
 
@@ -68,6 +90,7 @@
     margin-left: 2rem;
     background-color: #eeffff;
     padding: 0.2rem 0.5rem;
+
   }
 
   .mailLink,
@@ -76,6 +99,8 @@
   .github {
     word-break: break-word;
     margin-bottom: 1rem;
+
+
   }
 }
 
@@ -98,6 +123,7 @@
   margin-bottom: 4rem;
   margin-left: 4rem;
   text-decoration: none;
+  
 
   &:hover {
     background-color: $primary-color;
@@ -109,4 +135,5 @@
 .getInTouchContainer {
   border: solid 0.01rem $primary-color;
   margin: 4rem 2rem;
+  
 }
