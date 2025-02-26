@@ -84,7 +84,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects, openProjectId, togg
               >
                 <div className={styles.boxTextProject}>
                   <div className={styles.triangleIcon}>
-                    <p>Click for details</p>
+                    <p className={styles.detailsText}>Click for details</p>
                     <TriangleIcon />
                   </div>
                   <h3>{project.name.toUpperCase()}</h3>

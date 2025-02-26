@@ -1,3 +1,6 @@
+@import "breakpoints";
+@import "mixins";
+
 .navbar {
   padding: 1rem 5rem 0 0;
   border-bottom: 0.01rem solid $primary-color;
@@ -20,7 +23,12 @@ margin-bottom: 20rem;
     .logo img {
       height: 65px;
       margin-left: 5rem;
-  
+      @include responsive("md","max") {
+       margin-left:1rem;
+      height: 45px;
+      margin-top: .5rem;
+      margin-right: 5rem;
+      }
 
     }
 
@@ -28,11 +36,14 @@ margin-bottom: 20rem;
       display: flex;
       gap: 4rem;
       margin-right: 5rem;
+      @include responsive("md","max") {
+        margin-right: 2rem;
+      }
 
       .navLink {
         position: relative;
         color: $primary-color;
-        // background-color: red;
+      
         padding-bottom: 1rem;
         padding-right: 2rem;
         margin-bottom: -1rem;
@@ -43,7 +54,10 @@ margin-bottom: 20rem;
         align-items: center;
         gap: 0.5rem; // Space between text and triangle
         cursor: pointer;
-
+        @include responsive("md","max") {
+          font-size: small;
+          margin-right: .1rem;
+        }
         &:hover {
         transform-style: flat;
           // transform: scale(1.1);
@@ -99,6 +113,9 @@ margin-bottom: 20rem;
       .contactContainer {
         display: flex;
         align-items: center;
+        @include responsive("md","max") {
+margin-left: -4rem;
+        }
   
         .envelopeContainer {
           transition: transform 0.3s ease;
