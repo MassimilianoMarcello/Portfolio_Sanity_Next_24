@@ -69,6 +69,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects, openProjectId, togg
           className={`${styles.categorySection} ${styles.fadeIn}`}
           style={{ animationDelay: `${index * 0.2}s` }}
         >
+
           <div className={styles.categoryLabel}>
             {category.value.toUpperCase()}
             <p className={styles.categoryDescription}>{category.label}</p>
@@ -76,23 +77,28 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects, openProjectId, togg
 
           <div className={styles.projectCards}>
             {groupedProjects[category.value]?.map((project) => (
+              
               <div
                 key={project._id}
                 className={styles.projectCard}
                 onClick={() => toggleProjectInfoHandler(project._id)}
                 onMouseLeave={handleMouseLeave}
               >
+                  <h3 className={styles.titleMobile}>{project.name.toUpperCase()}</h3>
                 <div className={styles.boxTextProject}>
+               
                   <div className={styles.triangleIcon}>
                     <p className={styles.detailsText}>Click for details</p>
                     <TriangleIcon />
                   </div>
-                  <h3>{project.name.toUpperCase()}</h3>
+                  <h3 className={styles.titleDesktop}>{project.name.toUpperCase()}</h3>
                   <div className={styles.portableStyle}>
                     <PortableText value={project.content} />
                   </div>
                 </div>
+                
                 <div className={styles.boxImageProject}>
+                  
                   <Image
                     className={styles.projectImage}
                     src={urlFor(project.image).width(500).height(500).fit('crop').url()}
