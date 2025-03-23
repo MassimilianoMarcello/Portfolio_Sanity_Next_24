@@ -29,7 +29,7 @@ const Contact = () => {
               <span className={styles.label}> Email: </span>    <span className={styles.labelContent}>massdevone@gmail.com</span> 
             </Link>
             <Link
-              href="https://www.linkedin.com/in/massimiliano-marcello-4195681a7/"
+              href="https://www.linkedin.com/in/massimiliano-marcello-4195681a7"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.link}
@@ -44,7 +44,13 @@ const Contact = () => {
             >
               {" "}
             </a>
-            <button className={styles.messageButton}>Send a Message</button>
+            <button className={styles.messageButton}>     <a
+              href="mailto:massdev@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+          Send a Message
+            </a></button>
             </div>
           </div>
           <div className={styles.followMeContainer} >
