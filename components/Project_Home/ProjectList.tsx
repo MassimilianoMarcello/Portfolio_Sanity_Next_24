@@ -39,7 +39,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects, openProjectId, togg
     }, 200);
   };
 
-  // Raggruppiamo i progetti in base alla categoria (main, secondary, sandbox)
+  // Group projects by category (main, secondary, sandbox)
   const groupedProjects = useMemo(() => {
     return projects.reduce((acc, project) => {
       if (!acc[project.importance]) {
@@ -50,14 +50,14 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects, openProjectId, togg
     }, {} as Record<string, Project[]>);
   }, [projects]);
 
-  // Le categorie sono fisse: "main", "secondary", "sandbox"
+  // categories are fixed
   const categories = [
     { value: "main", label: "Projects that demonstrate core skills and expertise, serving as the strongest examples of professional capabilities." },
     { value: "secondary", label: "Projects that showcase additional skills and knowledge, complementing the main projects by highlighting versatility and depth." },
     { value: "sandbox", label: "Projects focused on exploring and experimenting with new technologies, providing a foundation for innovation in future work." },
   ];
 
-  // Ordiniamo le categorie per assicurarsi che vengano visualizzate sempre nell'ordine giusto
+  // categories alwais in the right order
   const sortedCategories = categories.filter(category => groupedProjects[category.value]);
 
   return (

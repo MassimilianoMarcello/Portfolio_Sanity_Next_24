@@ -16,18 +16,18 @@
   display: flex;
   align-items: flex-start;
   gap: 2rem;
-  opacity: 0; // Valore iniziale per l'animazione
+  opacity: 0; 
   transform: translateY(20px);
   animation: fadeInUp 0.5s ease forwards;
   @include responsive("md", "max") {
-    flex-direction: column;  // Cambia la disposizione delle categorie in colonna per mobile
+    flex-direction: column;  
   }
 
 }
 
 
 
-// .fadeIn {}
+
 
 .categoryLabel {
   position: sticky;
@@ -42,10 +42,10 @@
   width: 45px;
   text-align: right;
   @include responsive("md", "max") {
-    position: static; // Rimuovi la posizione sticky per dispositivi mobili
-    font-size: 1.2rem; // Riduci la dimensione del font sui dispositivi mobili
+    position: static; // Remove stickiness on mobile
+    font-size: 1.2rem; // Reduce font size for mobile
     margin-left: 0;
-    width:90%; // Rendi la larghezza 100% per mobile
+    width:90%; // Set width to 90% on mobile
     text-align: left;
     padding-top: 6rem;
     border-top: solid 1px $primary-color;
@@ -63,7 +63,7 @@
   width: 250px;
 
   @include responsive("md", "max") {
-    width: 100%; // Rendi la larghezza 100% per mobile
+    width: 100%; 
     margin-left: 0;
     padding: 0.5rem;
   }
@@ -74,8 +74,7 @@
   flex-direction: column;
   gap: 1.5rem;
   flex: 1;
-
-  border-top: 1px solid $primary-color;
+border-top: 1px solid $primary-color;
   padding-bottom: 2rem;
   padding-top: 2rem;
   @include responsive("md", "max") {
@@ -105,10 +104,10 @@
   position: relative;
   padding: 2rem;
   @include responsive("md", "max") {
-    margin-left: 0; // Rimuovi il margine sinistro su mobile
-    margin-right: 0; // Rimuovi il margine destro su mobile
-    margin-top: 1rem; // Riduci il margine superiore
-    margin-bottom: 1rem; // Riduci il margine inferiore
+    margin-left: 0; 
+    margin-right: 0; 
+    margin-top: 1rem; 
+    margin-bottom: 1rem; 
     grid-template-columns: 1fr; // Metti tutto in una colonna su dispositivi mobili
   }
 }
@@ -154,7 +153,7 @@
 .portableStyle {
   p {
     font-weight: 100;
-    font-size: 0.8rem;
+    font-size: 1.1rem;
   }
 }
 
@@ -187,9 +186,9 @@
   @include responsive("md", "max") {
     grid-column: 1/2;
     grid-row: 2/3;
-    width: 90%; // Imposta la larghezza al 100% su mobile
-    height: 90%; // Adatta l'altezza in modo responsivo
-    margin: 0 0 1rem 0; // Aggiungi margine inferiore per separare le carte
+    width: 90%; 
+    height: 90%; 
+    margin: 0 0 1rem 0; 
   }
 }
 
@@ -203,8 +202,7 @@
 }
 
 .technologiesUsed {
-  // grid-column: 1 / 4;
-  // grid-row: 4 / 5;
+
   position: absolute;
   bottom: 0rem;
   left: 0;
@@ -255,9 +253,7 @@
   top: 0.04rem;
   left: 0rem;
   padding: 0.1rem 0.5rem;
-  // transform: translateX(-50%);
-  // width: 0;
-  // height: 0;
+
 
   z-index: 1000;
   p {
