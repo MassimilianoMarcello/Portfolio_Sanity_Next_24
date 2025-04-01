@@ -30,8 +30,8 @@ const handleScrollToChallenge = (challengeId: string) => {
           block: "start",     // Posiziona l'elemento in cima
         });
       }
-  }, 500);
-    }, 300);
+  }, 100);
+    }, 100);
   };
   
 

@@ -25,7 +25,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects, openProjectId, togg
       setTimeout(() => {
         toggleProjectInfo(null);
         setIsExiting(false);
-      }, 500);
+      }, 100);
     } else {
       toggleProjectInfo(projectId);
     }
