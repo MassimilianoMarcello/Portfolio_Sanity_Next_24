@@ -9,7 +9,7 @@
   border-radius: 8px;
   border-bottom: none;
   padding: 2rem 4rem ;
-  margin: 4rem 0rem 2rem 35rem;
+  margin: 4.5rem 0rem 2rem 35rem;
   max-width: 1000px;
   overflow: hidden;
   padding-bottom: 5rem;
@@ -204,9 +204,9 @@ display: block;
  font-size: 1.2rem;
 font-weight: 500;
   padding:  .5rem;
-  max-width: 40rem;
+  max-width: 30rem;
   display:inline-block;
-
+ 
 }}
 
 div.challengesIndexContainer.withborder {
@@ -310,7 +310,9 @@ display: inline-block;
   .backToTopButton {
     
     background-color: #f9fbff;
-    padding: 3px 10px;
+    padding-top:  .2rem;
+    padding-bottom: .2rem;
+    padding-left: .25rem;
     color: $primary-color;
     border: $primary-color 1px solid;
    border-right: none;

@@ -18,16 +18,16 @@ const ProjectInfos: React.FC<ProjectInfosProps> = ({
 
 // Funzione per gestire la navigazione e lo scroll
 const handleScrollToChallenge = (challengeId: string) => {
-  // Prima naviga alla pagina del progetto
+  // First you go to the page
   router.push(`/projects/${project.slug}`);
   setTimeout(() => {
-    // Dopo un breve ritardo, scorri fino alla sezione specifica
+    // After a small delay go to the point of the page
     setTimeout(() => {
       const element = document.getElementById(challengeId);
       if (element) {
         element.scrollIntoView({
-          behavior: "smooth", // Animazione di scroll
-          block: "start",     // Posiziona l'elemento in cima
+          behavior: "smooth", // scrolla animation
+          block: "start",     // start from the top
         });
       }
   }, 100);
