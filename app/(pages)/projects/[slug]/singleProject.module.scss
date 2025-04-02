@@ -1,6 +1,6 @@
 @import "../../../main.module.scss";
 
-// singleProject.module.scss
+
 
 .projectContainer {
 
@@ -14,6 +14,9 @@
   overflow: hidden;
   padding-bottom: 5rem;
   margin-bottom: -5rem;
+
+
+ 
   @include responsive("lg","max") {
     width: 100%;
     margin:  0rem;
@@ -48,7 +51,7 @@
 }
 
 .howIMade {
-  // color: #5f6368;
+ 
   font-size: 1.5rem;
   font-weight: 400;
   padding:1rem 1rem;
@@ -206,7 +209,7 @@ font-weight: 500;
   padding:  .5rem;
   max-width: 30rem;
   display:inline-block;
- 
+
 }}
 
 div.challengesIndexContainer.withborder {
@@ -228,6 +231,7 @@ div.challengesIndexContainer.withborder {
   top: 8rem;
   padding: 0;
   margin: 0;
+
 
 
   @include responsive("lg","max") {
@@ -261,7 +265,7 @@ div.challengesIndexContainer.withborder {
 
 .challengeItem {
   padding: 15px;
-  // border-bottom: 1px solid #e0e0e0;
+
   padding-top: 9rem;
  
    
@@ -283,6 +287,7 @@ div.challengesIndexContainer.withborder {
   left: 25.5rem;
   margin-top: 25rem;
 display: inline-block;
+
 @include responsive("lg","max") {
   top: 1rem;
   left: 22.5rem;
