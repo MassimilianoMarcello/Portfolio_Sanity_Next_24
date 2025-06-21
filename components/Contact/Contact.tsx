@@ -8,8 +8,9 @@ const Contact = () => {
     <>
   
       <div className={styles.contactContainer} id="contact">
-      <div className={styles.mainBox}>  
-      <SquareElement
+      <div className={styles.mainBox}> 
+        <div className={styles.squareTitleContainer}>
+                <SquareElement
   title="Contact"
   positions={[
     { top: "35%", left: "6%" },
@@ -17,6 +18,8 @@ const Contact = () => {
   ]}
   colors={["#a4a9cf"]}
 />
+        </div>
+
 </div>
         <div className={styles.contactContent}>
         <div className={styles.getInTouchContainer} >
@@ -37,20 +40,24 @@ const Contact = () => {
               <span className={styles.label}> LinkedIn:</span>{" "}
            <span className={styles.labelContent}>   https://www.linkedin.com/in/massimiliano-marcello-4195681a7/</span>
             </Link>
-            <a
+            <Link
               href="mailto:massdev@gmail.com"
               target="_blank"
               rel="noopener noreferrer"
             >
-              {" "}
-            </a>
-            <button className={styles.messageButton}>     <a
+         
+            </Link >
+            <button className={styles.followButton}>     <Link 
               href="mailto:massdev@gmail.com"
               target="_blank"
               rel="noopener noreferrer"
+              className={styles.styleLink}
             >
-          Send a Message
-            </a></button>
+
+            
+              Send a Message
+            </Link>
+            </button>
             </div>
           </div>
           <div className={styles.followMeContainer} >
