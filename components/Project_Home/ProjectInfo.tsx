@@ -16,26 +16,23 @@ const ProjectInfos: React.FC<ProjectInfosProps> = ({
 }) => {
   const router = useRouter();
 
-// Funzione per gestire la navigazione e lo scroll
-const handleScrollToChallenge = (challengeId: string) => {
-  // First you go to the page
-  router.push(`/projects/${project.slug}`);
-  setTimeout(() => {
-    // After a small delay go to the point of the page
+  const generateChallengeId = (title: string) =>
+    `challenge-${title.replace(/\s+/g, "-").toLowerCase()}`;
+
+  const handleScrollToChallenge = (challengeId: string) => {
+    router.push(`/projects/${project.slug}`);
+
+    // Un solo timeout, più pulito
     setTimeout(() => {
       const element = document.getElementById(challengeId);
       if (element) {
         element.scrollIntoView({
-          behavior: "smooth", // scrolla animation
-          block: "start",     // start from the top
+          behavior: "smooth",
+          block: "start",
         });
       }
-  }, 100);
-    }, 100);
+    }, 300); // Tempo sufficiente per montare il DOM (puoi regolare)
   };
-  
-
-  const generateChallengeId = (title: string) => `challenge-${title.replace(/\s+/g, "-").toLowerCase()}`;
 
   return (
     <div
@@ -64,9 +61,15 @@ const handleScrollToChallenge = (challengeId: string) => {
           </div>
 
           <h4 className={styles.challangesFaced}>Challenges Faced:</h4>
+
           {project.challenges.map((challenge) => (
             <li key={challenge._id} className={styles.challengesListItem}>
-              <button className={styles.buttonChallange} onClick={() => handleScrollToChallenge(generateChallengeId(challenge.title))}>
+              <button
+                className={styles.buttonChallange}
+                onClick={() =>
+                  handleScrollToChallenge(generateChallengeId(challenge.title))
+                }
+              >
                 {challenge.title}
               </button>
             </li>
@@ -75,20 +78,20 @@ const handleScrollToChallenge = (challengeId: string) => {
       ) : (
         <p>No challenges faced for this project.</p>
       )}
-                <RepoAndWebSiteButtons
-  githubUrl={project.githubUrl}
-  url={project.url}
-  isAbsolute 
-  bottom="0rem"
-  right="2rem"
-/>
- 
-   
+
+      <RepoAndWebSiteButtons
+        githubUrl={project.githubUrl}
+        url={project.url}
+        isAbsolute
+        bottom="0rem"
+        right="2rem"
+      />
     </div>
   );
 };
 
 export default ProjectInfos;
+
 
 
 
