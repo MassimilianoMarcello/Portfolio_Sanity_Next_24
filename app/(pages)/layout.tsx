@@ -2,11 +2,6 @@
 
 import NavbarPages from '@/components/_NavBar/NavbarPages'; // Adjust the path as necessary
 
-
-
-
-
-
 export default function PagesLayout({
   children,
 }: {
