@@ -1,87 +1,83 @@
 @import "../../app/main.module.scss";
 
-
 .filterContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    // padding: 1rem;
-    margin-left: 11.2rem;
-    @include responsive("md","max") {
-      margin-left: 1rem;
-    }
-  }
-  
-  .filter {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    justify-content: center;
-    // border: #9175ba .1px solid;
-    padding: .5rem;
-  }
-  
-  .theButton {
-    padding: 0.25rem .6rem;
-    border: .01rem solid #9175ba;
-    border-radius: 25px;
-    background-color: transparent;
-    color: #9175ba;
-    font-size: .6rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    @include responsive("md","max") {
-      margin: .2rem;
-    }
-  }
-  
-  .theButton:hover {
-    background-color: #cff5fb;
-  
-    color: #9175ba;
-    transform: scale(1.1);
-  }
-  
-  .active {
-    background-color: #9175ba;
-    color: #eeffff;
-    border-color: #9175ba;
-    box-shadow: 0px 4px 10px rgba(145, 117, 186, 0.4);
-  }
-  .active:hover {
-    background-color: #9175ba;
-    color: #eeffff;
-    border-color: #9175ba;
-    box-shadow: 0px 4px 10px rgba(145, 117, 186, 0.4);
-  }
-  .clearButtonContainer {
-    border-left: .1rem solid #9175ba;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  margin-left: 11.2rem;
+  @include responsive("md", "max") {
     margin-left: 1rem;
-   
   }
-  .clearButton {
-    padding: 0.5rem 1rem;
- 
-    background-color: #eeffff;
-    color: #9175ba;
-    border: 2px solid #9175ba;
-    border-radius: 25px;
-    border-left: none;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    font-size: 0.9rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
+}
+
+.filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  // border: #9175ba .1px solid;
+  padding: 0.5rem;
+}
+
+.theButton {
+  padding: 0.25rem 0.6rem;
+  border: 0.01rem solid #9175ba;
+  border-radius: 25px;
+  background-color: transparent;
+  color: #9175ba;
+  font-size: 0.6rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  @include responsive("md", "max") {
+    margin: 0.2rem;
   }
-  
-  .clearButton:hover {
-    background-color: #9175ba;
-    color: #eeffff;
-    transform: scale(1.1);
-  }
-  
-  
+}
+
+.theButton:hover {
+  background-color: #cff5fb;
+
+  color: #9175ba;
+  transform: scale(1.1);
+}
+
+.active {
+  background-color: #9175ba;
+  color: #eeffff;
+  border-color: #9175ba;
+  box-shadow: 0px 4px 10px rgba(145, 117, 186, 0.4);
+}
+.active:hover {
+  background-color: #9175ba;
+  color: #eeffff;
+  border-color: #9175ba;
+  box-shadow: 0px 4px 10px rgba(145, 117, 186, 0.4);
+}
+.clearButtonContainer {
+  border-left: 0.1rem solid #9175ba;
+  margin-left: 1rem;
+}
+.clearButton {
+  padding: 0.5rem 1rem;
+
+  background-color: #eeffff;
+  color: #9175ba;
+  border: 2px solid #9175ba;
+  border-radius: 25px;
+  border-left: none;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.clearButton:hover {
+  background-color: #9175ba;
+  color: #eeffff;
+  transform: scale(1.1);
+}

@@ -1,8 +1,5 @@
 @import "../../app/main.module.scss";
 
-
-
-
 .contactContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -16,12 +13,12 @@
 .mainBox {
   margin-top: 4rem;
 
-.squareTitleContainer {
- 
-  position: sticky;
-  top: 2rem; 
-  z-index: 10; 
-}}
+  .squareTitleContainer {
+    position: sticky;
+    top: 2rem;
+    z-index: 10;
+  }
+}
 
 .contactContent {
   grid-column: 2 / 4;
@@ -31,16 +28,12 @@
   margin-right: 2rem;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
   padding-left: 4rem;
-  
-  
 
- 
   @include responsive("md", "max") {
     grid-column: 1 / 4;
     margin-top: -3rem;
-    padding:0 2rem;
+    padding: 0 2rem;
     margin-right: -3rem;
-  
   }
 
   .titleContact {
@@ -48,11 +41,10 @@
     font-size: 1.5rem;
     font-weight: 600;
     padding: 6rem 0 0.5rem 4rem;
-    
-  
+
     @include responsive("md", "max") {
       padding: 2rem;
-      }
+    }
   }
 
   .titleDescription {
@@ -64,13 +56,12 @@
     color: $primary-color;
 
     @include responsive("md", "max") {
-    padding:0 2rem;
+      padding: 0 2rem;
     }
   }
 
   // Aggiungiamo una classe generale per i link
   .link {
-     
     display: block;
     font-size: 1rem;
     font-weight: 100;
@@ -81,7 +72,7 @@
     color: $primary-color;
     transition: color 0.3s ease, text-decoration 0.3s ease;
     @include responsive("md", "max") {
-      padding:0 2rem;
+      padding: 0 2rem;
       margin: 3rem 0;
     }
     &:hover {
@@ -90,7 +81,7 @@
     }
 
     @include responsive("md", "max") {
-      padding:0 2rem;
+      padding: 0 2rem;
     }
   }
 
@@ -103,7 +94,6 @@
     margin-left: 2rem;
     background-color: #eeffff;
     padding: 0.2rem 0.5rem;
-
   }
 
   .mailLink,
@@ -112,8 +102,6 @@
   .github {
     word-break: break-word;
     margin-bottom: 1rem;
-
-
   }
 }
 
@@ -121,7 +109,7 @@
 .followButton {
   display: block;
   background-color: white;
-  color: $primary-color ;
+  color: $primary-color;
   font-family: var(--font-zeitung-pro);
   text-transform: uppercase;
   font-weight: 300;
@@ -136,31 +124,28 @@
   margin-bottom: 4rem;
   margin-left: 4rem;
   text-decoration: none;
-    list-style: none;
-       text-decoration: none;
-  
+  list-style: none;
+  text-decoration: none;
 
   &:hover {
     background-color: $primary-color;
     color: $background-color;
   }
-
 }
 
 .followMeContainer,
 .getInTouchContainer {
   border: solid 0.01rem $primary-color;
   margin: 4rem 2rem;
-  
 }
 
-  .styleLink {
-   color: $primary-color;
-    font-weight: 400;
-    text-decoration: none;
- 
+.styleLink {
+  color: $primary-color;
+  font-weight: 400;
+  text-decoration: none;
+
   &:hover {
     background-color: $primary-color;
     color: $background-color;
   }
-  }
+}

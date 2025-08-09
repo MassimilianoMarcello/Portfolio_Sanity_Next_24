@@ -1,26 +1,16 @@
-@import '../../app/main.module.scss';
+@import "../../app/main.module.scss";
 
-
-
-
-.about-container{
-    border-bottom: 0.01rem solid $primary-color;
-    p{
-        font-family:var(--font-zeitung-pro) ;
-        font-weight: 100;
-        font-size: 1rem;
-        margin: 0 50rem 0 5rem;
-        padding: 2rem 0;
-        @include responsive("md","max") {
-            margin: 2rem 1rem;
-            padding: 1rem ;
-        }
-    
-  
+.about-container {
+  border-bottom: 0.01rem solid $primary-color;
+  p {
+    font-family: var(--font-zeitung-pro);
+    font-weight: 100;
+    font-size: 1rem;
+    margin: 0 50rem 0 5rem;
+    padding: 2rem 0;
+    @include responsive("md", "max") {
+      margin: 2rem 1rem;
+      padding: 1rem;
     }
+  }
 }
-
-
-
-
-  
