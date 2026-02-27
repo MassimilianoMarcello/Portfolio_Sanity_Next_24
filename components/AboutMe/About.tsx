@@ -6,13 +6,9 @@ const About = () => {
   return (
     <div className="about-container">
       <p>
-        Hi, my name is MassDev (Massimiliano), and I’m a full stack web
-        developer. After completing Full Stack Web Development training at Vdab,
-        I have continued to develop strong skills in JavaScript, React, Node.js,
-        and SQL. Outside of coding, I draw inspiration from my love of music and
-        design, always looking for creative ways to bring those passions into my
-        projects. I'm eager to find opportunities where I can apply these skills
-        and collaborate with forward-thinking web development teams.
+    Hi, I'm Massimiliano — full stack developer based in Brussels, currently the only developer at a pre-seed startup building on Google Cloud Platform with Kubernetes and Terraform.
+My path here wasn't linear — communications, radio journalism, restaurant kitchens, social work. What connects all of it is learning complex systems quickly and making them work for real people. I bring that same approach to code: structure, clarity, and attention to who actually uses the product.
+Right now I'm expanding into Elixir and Phoenix, with a long-term focus on distributed systems and real-time applications.
       </p>
     </div>
   );
