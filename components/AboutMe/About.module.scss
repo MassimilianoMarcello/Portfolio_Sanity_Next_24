@@ -8,12 +8,10 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto;
   column-gap: 4rem;
-  row-gap: 0;
 
   @include responsive("lg", "max") {
     grid-template-columns: 1fr;
     padding: 3.5rem 1.2rem 3rem;
-    column-gap: 0;
   }
 }
 
@@ -29,7 +27,7 @@
   margin-bottom: 2.5rem;
 }
 
-// ─── Hero (name + role) ───────────────────────────────────────────────────────
+// ─── Hero ─────────────────────────────────────────────────────────────────────
 .hero {
   grid-column: 1;
   grid-row: 2;
@@ -45,30 +43,33 @@
   }
 }
 
-.name {
+// Role/what as the big statement — not the name
+.headline {
   font-family: $font-serif;
-  font-size: clamp(2.8rem, 5vw, 4.5rem);
-  font-weight: 700;
-  line-height: 1.0;
-  letter-spacing: -0.03em;
-  // Violet→indigo gradient — consistent with project titles
-  background: linear-gradient(130deg, $violet-600 0%, $indigo-600 50%, $indigo-800 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 1rem;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: $indigo-800;
+  margin-bottom: 1.2rem;
 }
 
-.role {
-  font-family: $font-mono;
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: $ink-3;
+.headlineMuted {
+  // Second line slightly lighter — creates internal rhythm
+  color: $indigo-600;
   font-weight: 400;
 }
 
-// ─── Body copy ────────────────────────────────────────────────────────────────
+// Name is a byline — present but not dominant
+.byline {
+  font-family: $font-mono;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: $ink-3;
+}
+
+// ─── Body ─────────────────────────────────────────────────────────────────────
 .body {
   grid-column: 2;
   grid-row: 2;
@@ -85,23 +86,16 @@
   p {
     font-family: $font-body;
     font-weight: 300;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     color: $ink-2;
     line-height: 1.85;
     margin: 0;
-
-    @include responsive("md", "max") {
-      font-size: 0.9rem;
-    }
   }
 }
 
-// Last paragraph — current focus, slightly muted to de-emphasize
 .current {
   color: $ink-3 !important;
   font-style: italic;
-
-  // Subtle left accent
   padding-left: 1rem;
   border-left: 2px solid $violet-200;
 }

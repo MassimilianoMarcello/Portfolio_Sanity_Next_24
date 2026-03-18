@@ -15,7 +15,6 @@ const ProjectInfos: React.FC<ProjectInfosProps> = ({ project }) => {
     `challenge-${title.replace(/\s+/g, "-").toLowerCase()}`;
 
   const handleScrollToChallenge = (challengeId: string) => {
-    // Push first, then observe DOM readiness via requestAnimationFrame
     router.push(`/projects/${project.slug}`);
     const attempt = (retries: number) => {
       requestAnimationFrame(() => {
@@ -27,7 +26,6 @@ const ProjectInfos: React.FC<ProjectInfosProps> = ({ project }) => {
         }
       });
     };
-    // Give the page a few frames to mount after navigation
     setTimeout(() => attempt(10), 100);
   };
 
@@ -37,6 +35,8 @@ const ProjectInfos: React.FC<ProjectInfosProps> = ({ project }) => {
 
   return (
     <div className={styles.drawerContent}>
+
+      {/* Header */}
       <div className={styles.drawerHeader}>
         <Link
           href={`/projects/${project.slug}`}
@@ -55,10 +55,21 @@ const ProjectInfos: React.FC<ProjectInfosProps> = ({ project }) => {
             />
           </svg>
         </Link>
-        <span className={styles.statusBadge}>Status: {project.status}</span>
+
+        {/* data-status drives the dot color via CSS attribute selector */}
+        <span
+          className={styles.statusBadge}
+          data-status={project.status}
+        >
+          {project.status}
+        </span>
       </div>
 
-      <div className={styles.challengesLabel}>Challenges &amp; solutions</div>
+      {/* Challenges label — pill style */}
+      <div className={styles.challengesLabel}>
+        <span>Challenges &amp; solutions</span>
+      </div>
+
       <ul className={styles.challengeGrid}>
         {project.challenges.map((challenge, i) => (
           <li key={challenge._id} className={styles.challengeItem}>
@@ -76,6 +87,7 @@ const ProjectInfos: React.FC<ProjectInfosProps> = ({ project }) => {
           </li>
         ))}
       </ul>
+
     </div>
   );
 };

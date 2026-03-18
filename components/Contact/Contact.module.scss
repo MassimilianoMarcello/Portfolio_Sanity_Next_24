@@ -1,3 +1,4 @@
+// components/Contact/Contact.module.scss
 @import "../../app/main.module.scss";
 
 // ─── Container ────────────────────────────────────────────────────────────────
@@ -10,17 +11,26 @@
   }
 }
 
-// ─── Section kicker ───────────────────────────────────────────────────────────
+// ─── Section kicker — same bordered pill as "Case studies" ───────────────────
 .sectionKicker {
   font-family: $font-mono;
-  font-size: 0.6rem;
-  color: $ink-3;
+  font-size: 0.72rem;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.18em;
   padding: 2.5rem 0 0.8rem;
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 1rem;
+
+  span {
+    color: $violet-600;
+    border: 1px solid $violet-200;
+    border-radius: $radius-sm;
+    padding: 0.25rem 0.75rem 0.3rem;
+    background: $violet-50;
+    letter-spacing: 0.16em;
+    white-space: nowrap;
+  }
 
   &::after {
     content: '';
@@ -30,11 +40,12 @@
   }
 }
 
-// ─── Grid ─────────────────────────────────────────────────────────────────────
+// ─── Layout: sidebar left (empty spacer) + content right ─────────────────────
+// Mirrors the ProjectList categorySection grid so contact aligns with projects
 .contactGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem 4rem;
+  grid-template-columns: 200px 1fr;
+  gap: 0 3rem;
   margin-top: 3rem;
 
   @include responsive("md", "max") {
@@ -43,11 +54,31 @@
   }
 }
 
-// ─── Block ────────────────────────────────────────────────────────────────────
-.contactBlock {
-  border-top: 1px solid $rule;
-  padding-top: 2rem;
+// Empty left column — keeps visual alignment with project sidebars
+.contactSpacer {
+  border-right: 1px solid $rule;
+
+  @include responsive("md", "max") {
+    display: none;
+  }
 }
+
+// Right column — holds both blocks
+.contactBlocks {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 3rem;
+  border-top: 1px solid $rule;
+  padding-top: 2.5rem;
+
+  @include responsive("md", "max") {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+// ─── Block ────────────────────────────────────────────────────────────────────
+.contactBlock {}
 
 .blockKicker {
   display: block;
@@ -117,7 +148,7 @@
   transition: color 0.2s ease;
 }
 
-// ─── Action button ────────────────────────────────────────────────────────────
+// ─── Action button — identical to ProjectList actionLink ──────────────────────
 .actionBtn {
   display: inline-flex;
   align-items: center;
@@ -154,13 +185,7 @@
   &:hover {
     color: $indigo-600;
 
-    &::before {
-      color: $indigo-600;
-      transform: scale(1.4);
-    }
-
-    &::after {
-      transform: scaleX(1);
-    }
+    &::before { color: $indigo-600; transform: scale(1.4); }
+    &::after  { transform: scaleX(1); }
   }
 }

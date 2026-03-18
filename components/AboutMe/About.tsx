@@ -6,24 +6,26 @@ const About = () => {
       <span className={styles.kicker}>01 — Intro</span>
 
       <div className={styles.hero}>
-        <h1 className={styles.name}>Massimiliano<br />Marcello</h1>
-        <p className={styles.role}>Full-stack developer · Brussels</p>
+        <h1 className={styles.headline}>
+          Full-stack developer<br />
+          <span className={styles.headlineMuted}>building production systems.</span>
+        </h1>
+        <p className={styles.byline}>Massimiliano Marcello · Brussels</p>
       </div>
 
       <div className={styles.body}>
         <p>
-          Currently the only developer at a pre-seed startup building on
+          Currently the only developer at a pre-seed startup — building on
           Google Cloud Platform with Kubernetes and Terraform.
         </p>
         <p>
-          My path here wasn't linear — communications, radio journalism,
-          restaurant kitchens, social work. What connects all of it is learning
-          complex systems quickly and making them work for real people. I bring
-          that same approach to code: structure, clarity, and attention to who
-          actually uses the product.
+          My path wasn't linear: communications, radio journalism, restaurant
+          kitchens, social work. What connects all of it is learning complex
+          systems quickly and making them work for real people. Same approach
+          to code — structure, clarity, attention to who uses the product.
         </p>
         <p className={styles.current}>
-          Expanding into Elixir and Phoenix — long-term focus on distributed
+          Expanding into Elixir and Phoenix. Long-term focus on distributed
           systems and real-time applications.
         </p>
       </div>

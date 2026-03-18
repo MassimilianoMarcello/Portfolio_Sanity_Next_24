@@ -1,4 +1,6 @@
-import React, { useMemo, useCallback, useState } from 'react';
+"use client";
+
+import React, { useMemo, useCallback, useState, useRef } from 'react';
 import ProjectInfo from './ProjectInfo';
 import TechnologiesUsed from './TechnologiesUsed';
 import { PortableText } from '@portabletext/react';
@@ -38,15 +40,26 @@ const CATEGORIES = [
   },
 ] as const;
 
+const STATUS_LABEL: Record<string, string> = {
+  live:     'Live',
+  wip:      'In progress',
+  archived: 'Archived',
+};
+
 const ProjectList: React.FC<ProjectListProps> = ({
   projects,
   openProjectId,
   toggleProjectInfo,
 }) => {
   const [exitingId, setExitingId] = useState<string | null>(null);
+  // Ref to track the auto-close timeout so we can cancel it on re-enter
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleToggle = useCallback(
     (projectId: string) => {
+      // Cancel any pending auto-close
+      if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+
       if (openProjectId === projectId) {
         setExitingId(projectId);
         setTimeout(() => {
@@ -59,6 +72,26 @@ const ProjectList: React.FC<ProjectListProps> = ({
     },
     [openProjectId, toggleProjectInfo]
   );
+
+  // Auto-close after 1.5s when mouse leaves the card
+  const handleMouseLeave = useCallback(
+    (projectId: string) => {
+      if (openProjectId !== projectId) return;
+      closeTimerRef.current = setTimeout(() => {
+        setExitingId(projectId);
+        setTimeout(() => {
+          toggleProjectInfo(null);
+          setExitingId(null);
+        }, 280);
+      }, 1500);
+    },
+    [openProjectId, toggleProjectInfo]
+  );
+
+  // Cancel auto-close if mouse re-enters the card
+  const handleMouseEnter = useCallback(() => {
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+  }, []);
 
   const groupedProjects = useMemo(
     () =>
@@ -76,7 +109,10 @@ const ProjectList: React.FC<ProjectListProps> = ({
 
   return (
     <div className={styles.projectListContainer}>
-      <div className={styles.sectionKicker}>Case studies</div>
+
+      <div className={styles.sectionKicker}>
+        <span>Case studies</span>
+      </div>
 
       {activeCategories.map((cat) => (
         <div key={cat.value} className={styles.categorySection} id={cat.value}>
@@ -88,13 +124,16 @@ const ProjectList: React.FC<ProjectListProps> = ({
 
           <div className={styles.projectCards}>
             {groupedProjects[cat.value].map((project, idx) => {
-              const isOpen = openProjectId === project._id;
+              const isOpen    = openProjectId === project._id;
               const isExiting = exitingId === project._id;
+              const status    = project.status || 'archived';
 
               return (
                 <article
                   key={project._id}
                   className={`${styles.projectCard} ${isOpen ? styles.cardOpen : ''}`}
+                  onMouseLeave={() => handleMouseLeave(project._id)}
+                  onMouseEnter={handleMouseEnter}
                 >
                   {/* Image */}
                   <div className={styles.cardImageWrap}>
@@ -128,7 +167,6 @@ const ProjectList: React.FC<ProjectListProps> = ({
 
                       <div className={styles.cardFooter}>
                         <div className={styles.cardLinks}>
-                          {/* GitHub — same square marker style */}
                           {project.githubUrl && (
                             <Link
                               href={project.githubUrl}
@@ -139,7 +177,6 @@ const ProjectList: React.FC<ProjectListProps> = ({
                               GitHub ↗
                             </Link>
                           )}
-                          {/* Website — same square marker style */}
                           {project.url && (
                             <Link
                               href={project.url}
@@ -147,10 +184,9 @@ const ProjectList: React.FC<ProjectListProps> = ({
                               rel="noopener noreferrer"
                               className={styles.actionLink}
                             >
-                              Live site ↗
+                              Live ↗
                             </Link>
                           )}
-                          {/* Case study — slightly different indigo shade */}
                           <button
                             className={styles.caseStudyBtn}
                             onClick={() => handleToggle(project._id)}
@@ -160,19 +196,18 @@ const ProjectList: React.FC<ProjectListProps> = ({
                           </button>
                         </div>
 
-                        <div className={`${styles.statusPill} ${styles[project.status] || ''}`}>
-                          <span className={styles.statusDot} />
-                          {project.status === 'live'
-                            ? 'Live'
-                            : project.status === 'wip'
-                            ? 'In progress'
-                            : project.status}
+                        <div className={styles.statusPill}>
+                          <span
+                            className={styles.statusDot}
+                            data-status={status}
+                          />
+                          {STATUS_LABEL[status] ?? status}
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  {/* Inline challenges drawer */}
+                  {/* Drawer */}
                   <div
                     className={`${styles.drawer} ${isOpen && !isExiting ? styles.drawerOpen : ''} ${isExiting ? styles.drawerExit : ''}`}
                   >
@@ -181,7 +216,7 @@ const ProjectList: React.FC<ProjectListProps> = ({
                     </div>
                   </div>
 
-                  {/* Toggle button */}
+                  {/* Toggle */}
                   <button
                     className={`${styles.toggleIcon} ${isOpen ? styles.toggleOpen : ''}`}
                     onClick={() => handleToggle(project._id)}

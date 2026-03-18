@@ -1,6 +1,57 @@
 // components/Project_Home/ProjectList.module.scss
 @import "../../app/main.module.scss";
-// All tokens ($violet-*, $indigo-*, $font-*, $rule, etc.) come from main → _variables
+
+// ─── Mixin: action link (▪ + underline grow) ──────────────────────────────────
+@mixin action-link($color, $hover-color) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: $font-mono;
+  font-size: 0.75rem;           // was 0.62rem — GitHub/Live più leggibili
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $color;
+  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s ease;
+
+  &::before {
+    content: '▪';
+    font-size: 0.55rem;
+    color: $color;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: $color;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+
+  &:hover {
+    color: $hover-color;
+
+    &::before {
+      color: $hover-color;
+      transform: scale(1.4);
+    }
+
+    &::after {
+      transform: scaleX(1);
+    }
+  }
+}
 
 // ─── Outer container ──────────────────────────────────────────────────────────
 .projectListContainer {
@@ -11,17 +62,26 @@
   }
 }
 
-// ─── Section kicker ───────────────────────────────────────────────────────────
+// ─── Section kicker — bordered pill ──────────────────────────────────────────
 .sectionKicker {
-    font-family: var(--font-zeitung);
-  font-size: 0.6rem;
-  color: $ink-3;
+  font-family: $font-mono;
+  font-size: 0.72rem;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.18em;
   padding: 2.5rem 0 0.8rem;
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 1rem;
+
+  span {
+    color: $violet-400;           // was $violet-600 — più chiaro
+    border: 1px solid $violet-200;
+    border-radius: $radius-sm;
+    padding: 0.25rem 0.75rem 0.3rem;
+    background: $violet-50;
+    letter-spacing: 0.16em;
+    white-space: nowrap;
+  }
 
   &::after {
     content: '';
@@ -54,7 +114,7 @@
 // ─── Sidebar ──────────────────────────────────────────────────────────────────
 .catSidebar {
   position: sticky;
-  top: 2rem;
+  top: 5rem;
   height: fit-content;
   padding-right: 2rem;
   border-right: 1px solid $rule;
@@ -82,7 +142,7 @@
   font-family: $font-serif;
   font-size: 1.45rem;
   font-weight: 600;
-  background: linear-gradient(135deg, $violet-600 0%, $indigo-600 100%);
+  background: linear-gradient(135deg, $violet-400 0%, $indigo-400 100%); // was 600→600, now lighter
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -111,27 +171,18 @@
   grid-template-rows: auto auto;
   gap: 2rem;
   padding: 2.5rem 1rem 2.5rem 0;
-  margin:0 0 4.5rem 0  ;
   border-bottom: 1px solid $rule;
   position: relative;
-  transition: background 0.25s ease, padding 0.25s ease, margin 0.25s ease;
+  transition: background 0.25s ease;
 
   &:hover {
     background: $bg-surface;
-
-
   }
 
   @include responsive("md", "max") {
     grid-template-columns: 1fr;
     gap: 1.2rem;
     padding: 1.8rem 0;
-
-    &:hover {
-      margin: 0;
-      padding-left: 0;
-      padding-right: 0;
-    }
   }
 }
 
@@ -190,8 +241,8 @@
 
 .cardIndex {
   font-family: $font-mono;
-  font-size: 0.58rem;
-  color: $ink-4;
+  font-size: 0.62rem;           // was 0.58rem
+  color: $ink-3;                // was $ink-4 — più visibile
   letter-spacing: 0.12em;
   margin-bottom: 0.35rem;
 }
@@ -200,7 +251,7 @@
   font-family: $font-serif;
   font-size: 1.6rem;
   font-weight: 600;
-  background: linear-gradient(120deg, $violet-600 0%, $indigo-600 60%, $indigo-800 100%);
+  background: linear-gradient(120deg, $violet-400 0%, $indigo-400 60%, $indigo-600 100%); // lighter
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -211,7 +262,7 @@
 
 .cardDesc {
   font-family: $font-body;
-  font-size: 0.88rem;
+  font-size: 0.92rem;           // was 0.88rem
   color: $ink-2;
   line-height: 1.75;
   font-weight: 300;
@@ -237,112 +288,13 @@
 .cardLinks {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.2rem;
   flex-wrap: wrap;
 }
 
-// ─── Shared action link style (square ▪ + label) — GitHub, Website, Case study
-.actionLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-family: $font-mono;
-  font-size: 0.62rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: $violet-600;
-  text-decoration: none;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  position: relative;
-  transition: color 0.2s ease;
-
-  &::before {
-    content: '▪';
-    font-size: 0.5rem;
-    color: $violet-400;
-    transition: color 0.2s ease, transform 0.2s ease;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: $violet-400;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.25s ease;
-  }
-
-  &:hover {
-    color: $indigo-600;
-
-    &::before {
-      color: $indigo-600;
-      transform: scale(1.4);
-    }
-
-    &::after {
-      transform: scaleX(1);
-    }
-  }
-}
-
-.caseStudyBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-family: $font-mono;
-  font-size: 0.62rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: $indigo-400;
-  text-decoration: none;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  position: relative;
-  transition: color 0.2s ease;
-
-  &::before {
-    content: '▪';
-    font-size: 0.5rem;
-    color: $indigo-400;
-    transition: color 0.2s ease, transform 0.2s ease;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: $indigo-400;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.25s ease;
-  }
-
-  &:hover {
-    color: $indigo-600;
-
-    &::before {
-      color: $indigo-600;
-      transform: scale(1.4);
-    }
-
-    &::after {
-      transform: scaleX(1);
-    }
-  }
-}
+// lighter violet for action links — was $violet-600 (too dark)
+.actionLink   { @include action-link($violet-400, $indigo-400); }
+.caseStudyBtn { @include action-link($indigo-400, $indigo-600); }
 
 // ─── Status pill ──────────────────────────────────────────────────────────────
 .statusPill {
@@ -350,7 +302,7 @@
   align-items: center;
   gap: 0.4rem;
   font-family: $font-mono;
-  font-size: 0.58rem;
+  font-size: 0.6rem;            // was 0.58rem
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: $ink-3;
@@ -362,11 +314,11 @@
   border-radius: 50%;
   background: $ink-4;
   flex-shrink: 0;
-}
 
-.live     .statusDot { background: $success-color; }
-.wip      .statusDot { background: $warning-color; }
-.archived .statusDot { background: $ink-4; }
+  &[data-status="live"]     { background: $success-color; }
+  &[data-status="wip"]      { background: $warning-color; }
+  &[data-status="archived"] { background: $ink-4; }
+}
 
 // ─── Challenges drawer ────────────────────────────────────────────────────────
 .drawer {
@@ -382,7 +334,7 @@
 }
 
 .drawerOpen  { max-height: 600px; opacity: 1; }
-.drawerExit  { max-height: 0;      opacity: 0; }
+.drawerExit  { max-height: 0;     opacity: 0; }
 
 .drawerInner {
   background: linear-gradient(160deg, $violet-50 0%, $bg-surface 100%);
@@ -413,7 +365,7 @@
 
   &:hover {
     border-color: $violet-400;
-    color: $violet-600;
+    color: $violet-400;
   }
 
   @include responsive("md", "max") {
@@ -423,7 +375,7 @@
 }
 
 .toggleOpen {
-  background: linear-gradient(135deg, $violet-600, $indigo-600);
+  background: linear-gradient(135deg, $violet-400, $indigo-400); // lighter gradient
   border-color: transparent;
   color: #fff;
 
@@ -435,6 +387,5 @@
   from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-
 
 
