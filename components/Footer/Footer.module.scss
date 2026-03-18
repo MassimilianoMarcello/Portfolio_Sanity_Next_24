@@ -1,0 +1,76 @@
+// components/Footer/Footer.module.scss
+@import "../../app/main.module.scss";
+
+.footer {
+  border-top: 1px solid $rule;
+  padding: 1.8rem 3rem;
+
+  @include responsive("md", "max") {
+    padding: 1.5rem 1.2rem;
+  }
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+// ─── Copyright ────────────────────────────────────────────────────────────────
+.copy {
+  font-family: $font-mono;
+  font-size: 0.56rem;
+  color: $ink-4;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+// ─── Nav links ────────────────────────────────────────────────────────────────
+.links {
+  display: flex;
+  gap: 1.8rem;
+}
+
+.link {
+  font-family: $font-mono;
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: $ink-3;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.2s ease;
+
+  // Underline grow on hover — consistent with other action links
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: $violet-400;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.22s ease;
+  }
+
+  &:hover {
+    color: $violet-600;
+
+    &::after {
+      transform: scaleX(1);
+    }
+  }
+}
+
+// ─── Location ────────────────────────────────────────────────────────────────
+.location {
+  font-family: $font-mono;
+  font-size: 0.56rem;
+  color: $ink-4;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}

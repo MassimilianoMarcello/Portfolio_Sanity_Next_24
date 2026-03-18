@@ -8,17 +8,21 @@ const Contact = () => {
       <div className={styles.sectionKicker}>Contact</div>
 
       <div className={styles.contactGrid}>
+
         {/* Get in touch */}
         <div className={styles.contactBlock}>
-          <span className={styles.blockKicker}>02 — Get in touch</span>
+          <span className={styles.blockKicker}>Get in touch</span>
           <h2 className={styles.blockTitle}>Let's talk</h2>
           <p className={styles.blockDesc}>
-            Interested in a project, collaboration, or potential opportunity?
-            Feel free to reach out.
+            Open to projects, collaborations, and opportunities.
+            I read every message.
           </p>
 
           <div className={styles.linkList}>
-            <Link href="mailto:massdevone@gmail.com" className={styles.contactLink}>
+            <Link
+              href="mailto:massdevone@gmail.com"
+              className={styles.contactLink}
+            >
               <span className={styles.linkLabel}>Email</span>
               <span className={styles.linkValue}>massdevone@gmail.com</span>
             </Link>
@@ -33,29 +37,23 @@ const Contact = () => {
             </Link>
           </div>
 
-          <Link href="mailto:massdevone@gmail.com" className={styles.actionBtn}>
+          <Link
+            href="mailto:massdevone@gmail.com"
+            className={styles.actionBtn}
+          >
             Send a message ↗
           </Link>
         </div>
 
-        {/* Follow me */}
+        {/* Code */}
         <div className={styles.contactBlock}>
-          <span className={styles.blockKicker}>03 — Follow me</span>
-          <h2 className={styles.blockTitle}>Stay updated</h2>
+          <span className={styles.blockKicker}>Code</span>
+          <h2 className={styles.blockTitle}>See the work</h2>
           <p className={styles.blockDesc}>
-            Latest projects, thoughts, and insights.
+            All projects, contributions, and experiments live on GitHub.
           </p>
 
           <div className={styles.linkList}>
-            <Link
-              href="https://x.com/MassDev"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.contactLink}
-            >
-              <span className={styles.linkLabel}>Twitter</span>
-              <span className={styles.linkValue}>@massdev</span>
-            </Link>
             <Link
               href="https://github.com/massimilianomarcello"
               target="_blank"
@@ -65,17 +63,27 @@ const Contact = () => {
               <span className={styles.linkLabel}>GitHub</span>
               <span className={styles.linkValue}>massimilianomarcello</span>
             </Link>
+            <Link
+              href="https://x.com/MassDev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.contactLink}
+            >
+              <span className={styles.linkLabel}>Twitter</span>
+              <span className={styles.linkValue}>@massdev</span>
+            </Link>
           </div>
 
           <Link
-            href="https://x.com/MassDev"
+            href="https://github.com/massimilianomarcello"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.actionBtn}
           >
-            Follow on Twitter ↗
+            View GitHub profile ↗
           </Link>
         </div>
+
       </div>
     </section>
   );

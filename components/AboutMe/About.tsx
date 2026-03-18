@@ -1,27 +1,33 @@
-import "./About.scss";
-import React from "react";
+import styles from "./About.module.scss";
 
 const About = () => {
   return (
-    <div className="about-container">
-      <span className="about-kicker">01 — Intro</span>
-      <p className="about-body">
-        Hi, I'm Massimiliano — full stack developer based in Brussels, currently
-        the only developer at a pre-seed startup building on Google Cloud
-        Platform with Kubernetes and Terraform.
-      </p>
-      <p className="about-body">
-        My path here wasn't linear — communications, radio journalism,
-        restaurant kitchens, social work. What connects all of it is learning
-        complex systems quickly and making them work for real people. I bring
-        that same approach to code: structure, clarity, and attention to who
-        actually uses the product.
-      </p>
-      <p className="about-body about-body--last">
-        Right now I'm expanding into Elixir and Phoenix, with a long-term focus
-        on distributed systems and real-time applications.
-      </p>
-    </div>
+    <section className={styles.container}>
+      <span className={styles.kicker}>01 — Intro</span>
+
+      <div className={styles.hero}>
+        <h1 className={styles.name}>Massimiliano<br />Marcello</h1>
+        <p className={styles.role}>Full-stack developer · Brussels</p>
+      </div>
+
+      <div className={styles.body}>
+        <p>
+          Currently the only developer at a pre-seed startup building on
+          Google Cloud Platform with Kubernetes and Terraform.
+        </p>
+        <p>
+          My path here wasn't linear — communications, radio journalism,
+          restaurant kitchens, social work. What connects all of it is learning
+          complex systems quickly and making them work for real people. I bring
+          that same approach to code: structure, clarity, and attention to who
+          actually uses the product.
+        </p>
+        <p className={styles.current}>
+          Expanding into Elixir and Phoenix — long-term focus on distributed
+          systems and real-time applications.
+        </p>
+      </div>
+    </section>
   );
 };
 
