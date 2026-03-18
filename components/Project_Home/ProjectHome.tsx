@@ -1,33 +1,16 @@
-import React, { useEffect, useState, useCallback } from 'react';
+// components/Project_Home/ProjectHome.tsx
+// Server Component — fetch happens at build/request time, not client-side
 import { getProjects } from '@/sanity/sanity.query';
 import { Project } from '@/types/projects';
 import HeaderSection from './HeaderSection';
-import ProjectList from './ProjectList';
+import ProjectListClient from './ProjectListClient';
 import styles from './ProjectHome.module.scss';
 import Contact from '../Contact/Contact';
 import Navbar from '../_NavBar/Navbar';
 import SquareElement from '../ui/squareElement';
 
-export default function Home() {
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [openProjectId, setOpenProjectId] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  const toggleProjectInfo = useCallback(
-    (projectId: string | null) => {
-      setOpenProjectId((prev) => (prev === projectId ? null : projectId));
-    },
-    []
-  );
-
-  useEffect(() => {
-    const fetchProjects = async () => {
-      const projectsData: Project[] = await getProjects();
-      setProjects(projectsData);
-      setLoading(false);
-    };
-    fetchProjects();
-  }, []);
+export default async function Home() {
+  const projects: Project[] = await getProjects();
 
   return (
     <section className={styles.homesection}>
@@ -38,21 +21,8 @@ export default function Home() {
         positions={[{ top: '35%', left: '6%' }]}
         colors={['#a4a9cf']}
       />
-      {loading ? (
-        <div className={styles.loading}>
-          <span className={styles.loadingDot} />
-          <span className={styles.loadingDot} />
-          <span className={styles.loadingDot} />
-        </div>
-      ) : (
-        <ProjectList
-          projects={projects}
-          openProjectId={openProjectId}
-          toggleProjectInfo={toggleProjectInfo}
-        />
-      )}
+      <ProjectListClient projects={projects} />
       <Contact />
     </section>
   );
 }
-
