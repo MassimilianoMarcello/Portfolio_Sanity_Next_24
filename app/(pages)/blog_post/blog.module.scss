@@ -1,0 +1,676 @@
+@import "../../main.module.scss";
+
+// ─── Blog list ────────────────────────────────────────────────────────────────
+
+.blogContainer {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 5rem 3.5rem 8rem;
+
+  @include responsive("md", "max") {
+    padding: 3rem 1.4rem 6rem;
+  }
+
+  @include responsive("sm", "max") {
+    padding: 2rem 1rem 5rem;
+  }
+}
+
+.blogHeader {
+  margin-bottom: 5rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid $rule;
+
+  @include responsive("sm", "max") {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+  }
+}
+
+.headerKicker {
+  display: block;
+  font-family: $font-mono;
+  font-size: 0.6rem;
+  color: $primary-color;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin-bottom: 0.8rem;
+}
+
+.blogTitle {
+  font-family: $font-serif;
+  font-size: 2.6rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, $primary-dark 0%, $title-color 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin-bottom: 1rem;
+
+  @include responsive("sm", "max") {
+    font-size: 2rem;
+  }
+}
+
+.blogSubtitle {
+  font-family: $font-body;
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: $ink-3;
+  line-height: 1.7;
+  max-width: 52ch;
+}
+
+.empty {
+  font-family: $font-mono;
+  font-size: 0.78rem;
+  color: $ink-3;
+  padding: 4rem 0;
+}
+
+// ─── Post list ────────────────────────────────────────────────────────────────
+
+.postList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.postItem {
+  border-bottom: 1px solid $rule;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.postLink {
+  display: grid;
+  grid-template-columns: 2rem auto 1fr;
+  gap: 0 1.8rem;
+  align-items: start;
+  padding: 2.5rem 0;
+  text-decoration: none;
+  transition: background 0.18s ease;
+
+  &:hover {
+    .postTitle { color: $primary-dark; }
+    .postReadMore { color: $primary-dark; gap: 0.5rem; }
+    .postThumbImg { transform: scale(1.03); }
+  }
+
+  // Senza cover image — solo indice e content
+  &:not(:has(.postThumb)) {
+    grid-template-columns: 2rem 1fr;
+  }
+
+  @include responsive("sm", "max") {
+    grid-template-columns: 1.5rem 1fr;
+    gap: 0 1rem;
+    padding: 2rem 0;
+
+    // Nascondi thumb su mobile
+    .postThumb { display: none; }
+  }
+}
+
+.postIndex {
+  font-family: $font-mono;
+  font-size: 0.6rem;
+  color: $primary-color;
+  letter-spacing: 0.1em;
+  padding-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+.postThumb {
+  position: relative;
+  width: 120px;
+  height: 80px;
+  border-radius: $radius-md;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: $bg-surface;
+}
+
+.postThumbImg {
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.postContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.postMeta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.postDate {
+  font-family: $font-mono;
+  font-size: 0.58rem;
+  color: $ink-4;
+  letter-spacing: 0.06em;
+}
+
+.postTags {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.postTag {
+  font-family: $font-mono;
+  font-size: 0.52rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: $primary-dark;
+  background: $tag-bg;
+  border: 1px solid $border-color;
+  border-radius: 20px;
+  padding: 0.2rem 0.6rem;
+}
+
+.postTitle {
+  font-family: $font-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: $ink;
+  line-height: 1.2;
+  transition: color 0.18s ease;
+
+  @include responsive("sm", "max") {
+    font-size: 1.1rem;
+  }
+}
+
+.postExcerpt {
+  font-family: $font-body;
+  font-size: 0.88rem;
+  font-weight: 300;
+  color: $ink-3;
+  line-height: 1.7;
+  max-width: 60ch;
+}
+
+.postReadMore {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: $font-mono;
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $ink-3;
+  margin-top: 0.4rem;
+  transition: color 0.18s ease, gap 0.18s ease;
+}
+
+// ─── Single post layout ───────────────────────────────────────────────────────
+
+.postContainer {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 0 5rem;
+  min-height: 100vh;
+  padding: 5rem 3.5rem 8rem;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @include responsive("lg", "max") {
+    grid-template-columns: 1fr;
+    padding: 2rem 1.4rem 5rem;
+  }
+
+  @include responsive("sm", "max") {
+    padding: 1.5rem 1rem 4rem;
+  }
+}
+
+.notFound {
+  font-family: $font-mono;
+  font-size: 0.78rem;
+  color: $ink-3;
+  padding: 4rem 3rem;
+}
+
+// ─── Post sidebar ─────────────────────────────────────────────────────────────
+
+.postSidebar {
+  position: sticky;
+  top: 2.5rem;
+  height: fit-content;
+  background: $bg-surface;
+  border-radius: $radius-md;
+  padding: 1.8rem 1.6rem;
+
+  @include responsive("lg", "max") {
+    position: static;
+    margin-bottom: 2.5rem;
+  }
+
+  @include responsive("sm", "max") {
+    padding: 1.2rem 1rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.sidebarKicker {
+  display: block;
+  font-family: $font-mono;
+  font-size: 0.62rem;
+  color: $primary-color;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.4rem;
+}
+
+.sidebarTitle {
+  font-family: $font-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: $text-color;
+  margin-bottom: 2rem;
+  line-height: 1.3;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid $rule;
+}
+
+.sidebarTags {
+  margin-bottom: 1.5rem;
+}
+
+.sidebarTagsLabel {
+  display: block;
+  font-family: $font-mono;
+  font-size: 0.6rem;
+  color: $neutral-gray;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.6rem;
+}
+
+.sidebarTagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.sidebarTag {
+  font-family: $font-mono;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: $primary-dark;
+  background: $tag-bg;
+  border: 1px solid $border-color;
+  border-radius: 20px;
+  padding: 0.25rem 0.65rem;
+}
+
+.sidebarDate {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.sidebarDateLabel {
+  font-family: $font-mono;
+  font-size: 0.6rem;
+  color: $neutral-gray;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.sidebarDate time {
+  font-family: $font-mono;
+  font-size: 0.65rem;
+  color: $ink-2;
+}
+
+.sidebarActions {
+  padding-top: 1.5rem;
+  border-top: 1px solid $rule;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  font-family: $font-mono;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $ink-2;
+  text-decoration: none;
+  background: $bg-page;
+  border: 1px solid $rule-strong;
+  border-radius: $radius-sm;
+  padding: 0.6rem 1rem;
+  width: 100%;
+  transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+
+  &:hover {
+    color: $primary-dark;
+    border-color: $primary-color;
+    background: $bg-elevated;
+  }
+}
+
+// ─── Post main content ────────────────────────────────────────────────────────
+
+.postMain {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.postHeader {
+  border-bottom: 1px solid $rule;
+  padding-bottom: 3rem;
+
+  @include responsive("sm", "max") {
+    padding-bottom: 2rem;
+  }
+}
+
+.postHeaderKicker {
+  display: block;
+  font-family: $font-mono;
+  font-size: 0.6rem;
+  color: $primary-color;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin-bottom: 0.8rem;
+
+  @include responsive("sm", "max") {
+    display: none; // già nella sidebar
+  }
+}
+
+// .postTitle riusato sia in lista che in singolo post
+.postTitle {
+  font-family: $font-serif;
+  font-size: 2.4rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, $primary-dark 0%, $title-color 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin-bottom: 1.2rem;
+
+  @include responsive("sm", "max") {
+    font-size: 1.8rem;
+  }
+}
+
+.postHeaderExcerpt {
+  font-family: $font-body;
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: $ink-3;
+  line-height: 1.75;
+  max-width: 60ch;
+  margin-bottom: 2rem;
+}
+
+.coverImageWrap {
+  margin: 0;
+  border-radius: $radius-md;
+  overflow: hidden;
+  background: $bg-surface;
+}
+
+.coverImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.coverCaption {
+  font-family: $font-mono;
+  font-size: 0.6rem;
+  color: $ink-4;
+  letter-spacing: 0.06em;
+  padding: 0.6rem 0.8rem;
+  background: $bg-surface;
+  text-align: center;
+}
+
+// ─── Post article content ─────────────────────────────────────────────────────
+
+.postContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+// ─── Portable Text ────────────────────────────────────────────────────────────
+
+.ptParagraph {
+  font-family: $font-body;
+  font-size: 1rem;
+  font-weight: 300;
+  color: $text-color;
+  line-height: 1.9;
+  margin: 0 0 1.4rem;
+  max-width: 68ch;
+
+  &:last-child { margin-bottom: 0; }
+
+  @include responsive("sm", "max") {
+    font-size: 0.95rem;
+  }
+}
+
+.ptH2 {
+  font-family: $font-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: $ink;
+  line-height: 1.2;
+  margin: 3rem 0 1.2rem;
+
+  @include responsive("sm", "max") {
+    font-size: 1.25rem;
+    margin: 2.5rem 0 1rem;
+  }
+}
+
+.ptH3 {
+  font-family: $font-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: $ink-2;
+  line-height: 1.2;
+  margin: 2.5rem 0 1rem;
+}
+
+.ptH4 {
+  font-family: $font-mono;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: $ink-3;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 2rem 0 0.8rem;
+}
+
+.ptBlockquote {
+  margin: 2.5rem 0;
+  padding: 1.2rem 1.8rem;
+  border-left: 2px solid $primary-color;
+  font-family: $font-serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: $text-color;
+  background: $tag-bg;
+  border-radius: 0 $radius-md $radius-md 0;
+}
+
+.ptList {
+  margin: 1rem 0 1.8rem 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 65ch;
+}
+
+.ptListOrdered {
+  counter-reset: pt-list;
+}
+
+.ptListItem {
+  font-family: $font-body;
+  font-size: 1rem;
+  font-weight: 300;
+  color: $text-color;
+  line-height: 1.75;
+  position: relative;
+  padding-left: 1.4rem;
+
+  .ptList:not(.ptListOrdered) &::before {
+    content: '▪';
+    position: absolute;
+    left: 0;
+    font-size: 0.42rem;
+    top: 0.55em;
+    color: $primary-color;
+  }
+
+  .ptListOrdered &::before {
+    counter-increment: pt-list;
+    content: counter(pt-list) '.';
+    position: absolute;
+    left: 0;
+    font-family: $font-mono;
+    font-size: 0.72rem;
+    color: $primary-color;
+    top: 0.05em;
+  }
+}
+
+.ptStrong { font-weight: 600; color: $ink; }
+.ptEm     { font-style: italic; color: $text-color; }
+
+.ptInlineCode {
+  font-family: $font-mono;
+  font-size: 0.82em;
+  background: $tag-bg;
+  border: 1px solid $border-color;
+  border-radius: $radius-sm;
+  padding: 0.1em 0.45em;
+  color: $primary-dark;
+}
+
+.ptLink {
+  color: $primary-dark;
+  text-decoration: underline;
+  text-decoration-color: $borders-color;
+  text-underline-offset: 2px;
+  transition: text-decoration-color 0.18s ease, color 0.18s ease;
+
+  &:hover {
+    color: $title-color;
+    text-decoration-color: $title-color;
+  }
+}
+
+// Immagine inline nel PortableText
+.ptImage {
+  margin: 2.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.ptImageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: $radius-md;
+  overflow: hidden;
+  background: $bg-surface;
+}
+
+.ptImageImg {
+  object-fit: cover;
+}
+
+.ptImageCaption {
+  font-family: $font-mono;
+  font-size: 0.6rem;
+  color: $ink-4;
+  letter-spacing: 0.06em;
+  padding: 0.6rem 0.8rem;
+  background: $bg-surface;
+  border-radius: 0 0 $radius-md $radius-md;
+  text-align: center;
+}
+
+// ─── Code Block ───────────────────────────────────────────────────────────────
+
+.codeBlock {
+  margin: 2rem 0;
+  border-radius: $radius-md;
+  border: 1px solid $rule-strong;
+  overflow: hidden;
+  font-family: $font-mono;
+
+  &:last-child { margin-bottom: 0; }
+}
+
+.codeBlockHeader {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0.55rem 1.2rem;
+  background: $bg-elevated;
+  border-bottom: 1px solid $rule-strong;
+}
+
+.codeBlockLang {
+  font-family: $font-mono;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $primary-color;
+}
+
+.codeBlockBody {
+  :global(pre[class*="language-"]) {
+    margin: 0 !important;
+    padding: 1.4rem 1.6rem !important;
+    border-radius: 0 !important;
+    font-size: 0.82rem !important;
+    line-height: 1.75 !important;
+    font-family: $font-mono !important;
+
+    @include responsive("sm", "max") {
+      font-size: 0.78rem !important;
+      padding: 1.2rem 1rem !important;
+    }
+  }
+
+  :global(code[class*="language-"]) {
+    font-family: $font-mono !important;
+    font-size: inherit !important;
+  }
+}

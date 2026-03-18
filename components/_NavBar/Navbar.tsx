@@ -39,13 +39,15 @@ const Navbar: React.FC = () => {
         }}
       >
         <div className={styles.navbarContent}>
+
           {/* Logo */}
           <Link href="/" className={styles.logo}>
             <img src="/logo-grey.webP" alt="Logo" />
           </Link>
 
-          {/* Links */}
-          <div className={styles.navbarLinks}>
+          {/* Desktop links */}
+          <div className={`${styles.navbarLinks} ${styles.navDesktop}`}>
+
             {/* Projects dropdown */}
             <div
               className={styles.navItem}
@@ -53,38 +55,23 @@ const Navbar: React.FC = () => {
             >
               <span className={styles.navLink}>
                 Projects
-                <span className={styles.triangleContainer}>
+                {/* <span className={styles.triangleContainer}>
                   <TriangleIcon />
-                </span>
+                </span> */}
               </span>
 
-              <div
-                className={`${styles.dropdownMenu} ${
-                  isDropdownOpen ? styles.show : ""
-                }`}
-              >
-                <a
-                  href="#main"
-                  onClick={(e) => handleLinkClick(e, "main")}
-                  className={styles.dropdownItem}
-                >
-                  Core
-                </a>
-                <a
-                  href="#secondary"
-                  onClick={(e) => handleLinkClick(e, "secondary")}
-                  className={styles.dropdownItem}
-                >
-                  Secondary
-                </a>
-                <a
-                  href="#sandbox"
-                  onClick={(e) => handleLinkClick(e, "sandbox")}
-                  className={styles.dropdownItem}
-                >
-                  Sandbox
-                </a>
+              <div className={`${styles.dropdownMenu} ${isDropdownOpen ? styles.show : ""}`}>
+                <a href="#main"      onClick={(e) => handleLinkClick(e, "main")}      className={styles.dropdownItem}>Core</a>
+                <a href="#secondary" onClick={(e) => handleLinkClick(e, "secondary")} className={styles.dropdownItem}>Secondary</a>
+                <a href="#sandbox"   onClick={(e) => handleLinkClick(e, "sandbox")}   className={styles.dropdownItem}>Sandbox</a>
               </div>
+            </div>
+
+            {/* Blog */}
+            <div className={styles.navItem}>
+              <Link href="/blog_post" className={styles.navLink}>
+                Blog
+              </Link>
             </div>
 
             {/* Contact */}
@@ -99,15 +86,31 @@ const Navbar: React.FC = () => {
               >
                 Contact
               </a>
-              <span
-                className={`${styles.envelopeContainer} ${
-                  isContactHovered ? styles.moveRight : ""
-                }`}
-              >
+              {/* <span className={`${styles.envelopeContainer} ${isContactHovered ? styles.moveRight : ""}`}>
                 <EnvelopeIcon />
-              </span>
+              </span> */}
             </div>
           </div>
+
+
+
+        </div>
+
+        {/* Mobile links — sotto il contenuto principale */}
+        <div className={styles.navMobile}>
+          <Link href="/" className={styles.navLink}>
+            Projects
+          </Link>
+          <Link href="/blog_post" className={styles.navLink}>
+            Blog
+          </Link>
+          <a
+            href="#contact"
+            onClick={(e) => handleLinkClick(e, "contact")}
+            className={styles.navLink}
+          >
+            Contact
+          </a>
         </div>
       </nav>
 

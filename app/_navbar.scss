@@ -235,5 +235,45 @@
   flex-shrink: 0;
 }
 
+// Aggiungi in fondo a _navbar.scss
 
+// Desktop — nasconde il blocco mobile
+.navDesktop {
+  display: flex;
 
+  @include responsive("md", "max") {
+    display: none;
+  }
+}
+
+// Mobile — nascosto su desktop
+.navMobile {
+  display: none;
+
+  @include responsive("md", "max") {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    padding: 0.5rem 1.2rem 0.8rem;
+    border-top: 1px solid $rule;
+  }
+}
+
+// Su mobile la navbar è più alta per contenere logo + link
+// Sovrascriviamo height con auto
+@include responsive("md", "max") {
+  .navbar {
+    height: auto;
+  }
+
+  .navbarContent {
+    justify-content: center; // logo centrato
+    padding: 0.8rem 1.2rem 0;
+  }
+
+  // Aggiusta il navSpacer — più alto perché la navbar occupa più spazio
+  .navSpacer {
+    height: 110px;
+  }
+}

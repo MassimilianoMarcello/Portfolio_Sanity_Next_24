@@ -2,51 +2,75 @@
 @import "../../app/main.module.scss";
 
 .container {
-  padding: 5rem 3rem 4rem;
+  padding: 0 3rem 0;
   border-bottom: 1px solid $rule;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto;
-  column-gap: 4rem;
 
-  @include responsive("lg", "max") {
-    grid-template-columns: 1fr;
-    padding: 3.5rem 1.2rem 3rem;
+  @include responsive("md", "max") {
+    padding: 0 1.2rem 0;
   }
 }
 
-// ─── Kicker ───────────────────────────────────────────────────────────────────
-.kicker {
-  grid-column: 1 / -1;
-  display: block;
+// ─── Section kicker — bordered pill, identico a Case studies e Contact ────────
+.sectionKicker {
   font-family: $font-mono;
-  font-size: 0.6rem;
-  color: $violet-400;
+  font-size: 0.72rem;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  margin-bottom: 2.5rem;
+  letter-spacing: 0.18em;
+  padding: 2.5rem 0 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  span {
+    color: $violet-400;
+    border: 1px solid $violet-200;
+    border-radius: $radius-sm;
+    padding: 0.25rem 0.75rem 0.3rem;
+    background: $violet-50;
+    letter-spacing: 0.16em;
+    white-space: nowrap;
+  }
+
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: $rule;
+  }
 }
 
-// ─── Hero ─────────────────────────────────────────────────────────────────────
-.hero {
-  grid-column: 1;
-  grid-row: 2;
-  padding-right: 2rem;
-  border-right: 1px solid $rule;
+// ─── Content grid — specchia il categorySection di ProjectList ────────────────
+.contentGrid {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 0 3rem;
+  margin-top: 2rem;
+  padding-bottom: 2.5rem;
 
-  @include responsive("lg", "max") {
+  @include responsive("md", "max") {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding-bottom: 3rem;
+  }
+}
+
+// ─── Hero — colonna sinistra ──────────────────────────────────────────────────
+.hero {
+  border-right: 1px solid $rule;
+  padding-right: 2rem;
+  padding-top: 0.5rem;
+
+  @include responsive("md", "max") {
     border-right: none;
     padding-right: 0;
     border-bottom: 1px solid $rule;
     padding-bottom: 2rem;
-    margin-bottom: 2rem;
   }
 }
 
-// Role/what as the big statement — not the name
 .headline {
   font-family: $font-serif;
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
   font-weight: 600;
   line-height: 1.15;
   letter-spacing: -0.025em;
@@ -55,33 +79,24 @@
 }
 
 .headlineMuted {
-  // Second line slightly lighter — creates internal rhythm
   color: $indigo-600;
   font-weight: 400;
 }
 
-// Name is a byline — present but not dominant
 .byline {
   font-family: $font-mono;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   text-transform: uppercase;
   letter-spacing: 0.13em;
   color: $ink-3;
 }
 
-// ─── Body ─────────────────────────────────────────────────────────────────────
+// ─── Body — colonna destra ────────────────────────────────────────────────────
 .body {
-  grid-column: 2;
-  grid-row: 2;
   display: flex;
   flex-direction: column;
   gap: 1.1rem;
   justify-content: center;
-
-  @include responsive("lg", "max") {
-    grid-column: 1;
-    grid-row: 3;
-  }
 
   p {
     font-family: $font-body;
