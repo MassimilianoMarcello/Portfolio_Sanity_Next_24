@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Contact.module.scss";
 import Link from "next/link";
-import SquareElement from "../ΩΩElements/squareElement"; // Adjust the path as necessary
+import SquareElement from "../ui/squareElement"; // Adjust the path as necessary
 
 const Contact = () => {
   return (

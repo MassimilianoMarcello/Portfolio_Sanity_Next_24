@@ -1,34 +1,66 @@
-// _globals.scss
-// _reset.scss
+// app/globals.scss
+@import "variables";
+@import "mixins";
+
+// IBM Plex Mono via Google Fonts (only mono — Zeitung Pro is local via next/font)
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+// ─── Reset ────────────────────────────────────────────────────────────────────
 *,
 *::before,
 *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  
-  background-color: #fcf7f5;
 }
 
-html, body {
-  font-family: $font-stack;
-  color: $text-color;
-  background-color: $background-color;
-  background-color: red;
+// ─── Base ─────────────────────────────────────────────────────────────────────
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background-color: $bg-page;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-
-
 
 body {
-    line-height: 1.6;
-  
+  font-family: $font-body;   // Zeitung Pro — applied via zf.className in layout.tsx
+  font-weight: 300;          // Light weight for body — Zeitung Pro shines here
+  color: $ink-2;
+  background-color: $bg-page;
+  line-height: 1.6;
+}
+
+// ─── Typography ───────────────────────────────────────────────────────────────
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-serif;  // Zeitung Pro
+  font-weight: 600;
+  color: $title-color;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+p {
+  line-height: 1.75;
+  font-weight: 300;
+}
+
+a {
+  color: $primary-color;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $primary-dark;
   }
-  
-  a {
-    color: $primary-color;
-    text-decoration: none;
-    &:hover {
-      color: darken($primary-color, 10%);
-    }
-  }
+}
+
+// ─── Scrollbar ────────────────────────────────────────────────────────────────
+::-webkit-scrollbar        { width: 5px; }
+::-webkit-scrollbar-track  { background: $bg-page; }
+::-webkit-scrollbar-thumb  { background: $violet-200; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: $violet-400; }
+
+// ─── Utility ──────────────────────────────────────────────────────────────────
+body.no-scroll { overflow: hidden; }
   

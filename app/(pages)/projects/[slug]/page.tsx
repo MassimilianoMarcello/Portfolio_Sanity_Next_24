@@ -5,11 +5,11 @@ import styles from "./singleProject.module.scss";
 import ChallengeLink from "./ChallangeLink";
 import BackToTopButton from "./BackTopButton"; // Importa il Client Component
 import { portableTextComponents } from "./portableTextComponents";
-import RepoAndWebSiteButtons from "@/components/ΩΩElements/RepoAndWebSiteButtons";
-import TriangleIcon from "@/components/ΩΩElements/TriangleIcon";
-import TriangleIconLeftDoubled from "@/components/ΩΩElements/TriangleIconLeftDoubled";
-import SquareElement from "@/components/ΩΩElements/squareElement";
-import SquareDecoration from '@/components/ΩΩElements/squareDecoration';
+import RepoAndWebSiteButtons from "@/components/ui/RepoAndWebSiteButtons";
+import TriangleIcon from "@/components/ui/TriangleIcon";
+import TriangleIconLeftDoubled from "@/components/ui/TriangleIconLeftDoubled";
+import SquareElement from "@/components/ui/squareElement";
+import SquareDecoration from '@/components/ui/squareDecoration';
 import challenge from "@/schemas/challenge";
 type Props = {
   params: { slug: string };

@@ -2,8 +2,8 @@
 
 import React from "react";
 import styles from "./singleProject.module.scss";
-import TriangleIcon from "@/components/ΩΩElements/TriangleIcon";
-import TriangleIconInverted from "@/components/ΩΩElements/TriangleIconInverted";
+import TriangleIcon from "@/components/ui/TriangleIcon";
+import TriangleIconInverted from "@/components/ui/TriangleIconInverted";
 
 const BackToTopButton: React.FC = () => {
   const handleScrollToTop = () => {

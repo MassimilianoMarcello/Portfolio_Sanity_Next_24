@@ -1,141 +1,238 @@
-@import "breakpoints";
-@import "mixins";
+// _navbar.scss
+// Requires: _variables, _mixins (already imported via main.module.scss)
 
 .navbar {
-  padding: 1rem 5rem 0 0;
-  border-bottom: 0.01rem solid $primary-color;
-  background-color: #fafbff;
   position: fixed;
+  top: 0;
   left: 0;
   right: 0;
-  top: 0;
-  height: 80px;
-width: 100%;
+  height: 64px;
   z-index: 1000;
 
-margin-bottom: 20rem;
-  .navbarContent {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  background-color: rgba(250, 250, 248, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid $rule;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 
+  &.scrolled {
+    background-color: rgba(250, 250, 248, 0.97);
+    box-shadow: 0 1px 0 $rule-strong;
+  }
+}
 
-    .logo img {
-      height: 65px;
-      margin-left: 5rem;
-      @include responsive("md","max") {
-       margin-left:1rem;
-      height: 55px;
-      margin-top: 0rem;
-      margin-right: 5rem;
-      }
+.navbarContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 3rem;
 
+  @include responsive("md", "max") {
+    padding: 0 1.2rem;
+  }
+}
+
+// ─── Logo ─────────────────────────────────────────────────────────────────────
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+
+  img {
+    height: 36px;
+    width: auto;
+    display: block;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+  }
+
+  &:hover img {
+    opacity: 1;
+  }
+}
+
+// ─── Nav links row ────────────────────────────────────────────────────────────
+.navbarLinks {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.navItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+// ─── Nav link base ────────────────────────────────────────────────────────────
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-zeitung);
+  font-size: 0.63rem;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: $ink-3;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.45rem 0.8rem;
+  border-radius: $radius-sm;
+  position: relative;
+  transition: color 0.2s ease, background 0.2s ease;
+  white-space: nowrap;
+
+  &::before {
+    content: '▪';
+    font-size: 0.42rem;
+    color: transparent;
+    transition: color 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    color: $violet-600;
+    background: $violet-50;
+
+    &::before {
+      color: $violet-400;
     }
 
-    .navbarLinks {
-      display: flex;
-      gap: 4rem;
-      margin-right: 5rem;
-      @include responsive("md","max") {
-        margin-right: 2rem;
-      }
-
-      .navLink {
-        position: relative;
-        color: $primary-color;
-      
-        padding-bottom: 1rem;
-        padding-right: 2rem;
-        margin-bottom: -1rem;
-        font-size: large;
-        font-weight: 300;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem; // Space between text and triangle
-        cursor: pointer;
-        @include responsive("md","max") {
-          font-size: medium;
-          margin-right: .1rem;
-        }
-        &:hover {
-        transform-style: flat;
-          // transform: scale(1.1);
-        }
-
-        &:hover .triangleContainer {
-          transform: translateX(.5rem); // Move triangle on hover
-        }
-
-        .triangleContainer {
-          display: inline-block;
-          transition: transform 0.3s ease; // Smooth animation
-        }
-
-        .dropdownMenu {
-          position: absolute;
-          top: 100%;
-          left: 0;
-          background-color: white;
-          border: 0.01rem solid $primary-color;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          display: flex;
-          flex-direction: column;
-          z-index: 10;
-          width: 10rem;
-          padding-top: .5rem;
-
-          opacity: 0; // Initially invisible
-          transform: translateY(-10px); // Initially shifted up
-          visibility: hidden; // Prevent early clicks
-          transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s; // Smooth transition
-
-          &.show {
-            opacity: 1; // Visible state
-            transform: translateY(0); // Normal position
-            visibility: visible; // Show the menu
-            transition: opacity 0.3s ease, transform 0.3s ease; // Immediate transition
-          }
-
-          .dropdownItem {
-            padding: 8px 16px;
-            color: $primary-color;
-            text-decoration: none;
-
-            &:hover {
-              background-color: $secondary-color;
-            }
-          }
-     
-        }
-
-      }
-      .contactContainer {
-        display: flex;
-        align-items: center;
-        @include responsive("md","max") {
-margin-left: -4rem;
-        }
-  
-        .envelopeContainer {
-          transition: transform 0.3s ease;
-          margin-top: .5rem;
-          margin-left: -1.4rem;
-  
-          &.moveRight {
-            transform: translateX(.2rem); // Sposta a destra l'icona
-          }
-        }
-      }
+    .triangleContainer {
+      transform: translateX(3px);
     }
   }
 }
 
-.linkProjectsReturn{
-  text-decoration: none;
-  color: $primary-color;
-  margin-left: 46rem;
+// ─── Triangle ────────────────────────────────────────────────────────────────
+.triangleContainer {
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.25s ease;
+}
 
+// ─── Dropdown ────────────────────────────────────────────────────────────────
+.dropdownMenu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 172px;
+  background: $bg-page;
+  border: 1px solid $rule-strong;
+  border-radius: $radius-md;
+  box-shadow: 0 8px 28px rgba(62, 35, 115, 0.1);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.22s ease, transform 0.22s ease;
+
+  &.show {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    pointer-events: auto;
+  }
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.62rem 1rem;
+  font-family: $font-mono;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $ink-3;
+  text-decoration: none;
+  border-bottom: 1px solid $rule;
+  transition: color 0.18s ease, background 0.18s ease;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &::before {
+    content: '▪';
+    font-size: 0.4rem;
+    color: transparent;
+    flex-shrink: 0;
+    transition: color 0.18s ease;
+  }
+
+  &:hover {
+    color: $violet-600;
+    background: $violet-50;
+
+    &::before {
+      color: $violet-400;
+    }
+  }
+}
+
+// ─── Contact / envelope ──────────────────────────────────────────────────────
+.contactContainer {
+  display: flex;
+  align-items: center;
+}
+
+.envelopeContainer {
+  display: inline-flex;
+  align-items: center;
+  margin-left: -0.35rem;
+  color: $ink-4;
+  transition: transform 0.25s ease, color 0.2s ease;
+
+  &.moveRight {
+    transform: translateX(4px);
+    color: $violet-400;
+  }
+}
+
+// ─── Return link — NavbarPages only ──────────────────────────────────────────
+.linkProjectsReturn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: $font-mono;
+  font-size: 0.63rem;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: $ink-3;
+  text-decoration: none;
+  padding: 0.45rem 0.8rem;
+  border-radius: $radius-sm;
+  transition: color 0.2s ease, background 0.2s ease;
+
+  &::before {
+    content: '←';
+    font-size: 0.72rem;
+    font-family: $font-body;
+    color: $violet-400;
+    transition: transform 0.2s ease;
+  }
+
+  &:hover {
+    color: $violet-600;
+    background: $violet-50;
+
+    &::before {
+      transform: translateX(-3px);
+    }
+  }
+}
+
+// ─── Spacer ───────────────────────────────────────────────────────────────────
+.navSpacer {
+  height: 64px;
+  width: 100%;
+  flex-shrink: 0;
 }
 
 

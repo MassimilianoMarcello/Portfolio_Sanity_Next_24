@@ -1,5 +1,38 @@
-// Import delle variabili di colore
+// components/Project_Home/ProjectHome.module.scss
 @import "../../app/main.module.scss";
+
+.homesection {
+      font-family: var(--font-zeitung);
+  width: 100%;
+  min-height: 100vh;
+  background-color: #fafaf8;
+}
+
+// Loading indicator
+.loading {
+    
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 6rem 0;
+}
+
+.loadingDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: $primary-color;
+  animation: pulse 1.2s ease-in-out infinite;
+
+  &:nth-child(2) { animation-delay: 0.2s; }
+  &:nth-child(3) { animation-delay: 0.4s; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50%       { opacity: 1;   transform: scale(1); }
+}
 
 
   

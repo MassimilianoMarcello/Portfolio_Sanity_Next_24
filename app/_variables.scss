@@ -1,21 +1,67 @@
 // _variables.scss
-$primary-color: #9175ba;     
-// $secondary-color:#10c1dd;         // Colore primario (viola)
-$secondary-color: #d4f9fd; 
-$borders-color:#a4a9cf;     // Colore secondario (azzurro chiaro)
-$accent-color: #259296;         // Colore d'accento (verde-teal)
-$background-color: #acd1db;     // Colore di sfondo (celeste tenue)
-$title-color: #164595;          // Colore per titoli (blu intenso)
-$text-color: #9ebedd;           // Colore per testo principale (blu chiaro)
+// ─── Typography ───────────────────────────────────────────────────────────────
+// Zeitung Pro loaded via next/font/local in styles/fonts.ts
+// IBM Plex Mono loaded via next/font/google or local
+$font-serif: var(--font-zeitung), serif;// Display, titles, body — your original
 
-$warning-color: #e74c3c;        // Colore per avvisi o errori (rosso intenso)
-$success-color: #27ae60;        // Colore per messaggi di successo (verde scuro)
-$neutral-gray: #b0b0b0;         // Colore neutro per testo secondario o bordi (grigio chiaro)
-$highlight-color: #f1c40f;      // Colore per evidenziare dettagli (giallo acceso)
+$font-body:  var(--font-zeitung), serif;// Body copy — same family, lighter weight
+$font-mono:    'IBM Plex Mono', monospace;         // Tags, labels, indices
+$font-stack:   $font-body;
 
+// ─── Violet-to-indigo palette ─────────────────────────────────────────────────
+$violet-50:   #f0edf8;
+$violet-100:  #ddd5f0;
+$violet-200:  #c3b3e4;
+$violet-400:  #9175ba;
+$violet-600:  #6a4da0;
+$violet-800:  #3d2373;
+$violet-900:  #1e0f42;
 
-// $font-stack: 'Roboto', sans-serif;
+$indigo-400:  #4f67d8;
+$indigo-600:  #2d47c4;
+$indigo-800:  #1a2d8a;
+
+// ─── Neutrals ─────────────────────────────────────────────────────────────────
+$ink:         #0e0e12;
+$ink-2:       #2e2c38;
+$ink-3:       #6b6878;
+$ink-4:       #a09cb0;
+
+$rule:        rgba(145, 117, 186, 0.15);
+$rule-strong: rgba(145, 117, 186, 0.3);
+
+// ─── Backgrounds ──────────────────────────────────────────────────────────────
+$bg-page:     #fafaf8;
+$bg-surface:  #f4f2f9;
+$bg-elevated: #eeeaf5;
+
+// ─── Semantic aliases ─────────────────────────────────────────────────────────
+$primary-color:  $violet-400;
+$primary-dark:   $violet-600;
+$title-color:    $indigo-600;
+$border-color:   $violet-200;
+$tag-bg:         $violet-50;
+$tag-color:      $violet-800;
+
+// ─── Legacy aliases ───────────────────────────────────────────────────────────
+$secondary-color:  $violet-50;
+$borders-color:    $violet-200;
+$accent-color:     $indigo-400;
+$background-color: $bg-surface;
+$text-color:       $ink-2;
+$neutral-gray:     $ink-4;
+$highlight-color:  #f1c40f;
+
+// ─── Semantic status ──────────────────────────────────────────────────────────
+$success-color: #27ae60;
+$warning-color: #e67e22;
+$error-color:   #e74c3c;
+
+// ─── Spacing / radius ─────────────────────────────────────────────────────────
 $spacing-unit: 16px;
+$radius-sm:    4px;
+$radius-md:    6px;
+$radius-lg:    12px;
 
 
 

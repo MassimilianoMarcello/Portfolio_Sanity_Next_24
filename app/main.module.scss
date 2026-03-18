@@ -1,25 +1,18 @@
-// app/styles/styles.scss
+// app/main.module.scss
+// Central SCSS entry — imported by every component module via @import
+// Exposes variables, mixins, breakpoints, navbar styles.
+// NOTE: CSS Module — no standalone :global() selectors.
+// Global resets and html/body styles live in globals.scss.
 
 @import "_variables";
 @import "_mixins";
 @import "_navbar";
-// @use "_globals";
 
-
-
-.body{
-    // Stile specifico per il progetto principale
-    width: 100%; 
-    height: 100%; 
-    margin: 0;
-    padding: 0;
-  
- 
-  }
-
-  .accatiemmelle{
-    background-color: #fafbff;
-  }
+.pageRoot {
+  width: 100%;
+  min-height: 100vh;
+  background-color: $bg-page;
+}
 
 
 

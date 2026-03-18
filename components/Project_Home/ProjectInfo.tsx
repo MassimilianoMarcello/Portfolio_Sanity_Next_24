@@ -1,91 +1,81 @@
 import { Project } from "@/types/projects";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import styles from "./ProjectList.module.scss";
-import Image from "next/image";
-import RepoAndWebSiteButtons from "../ΩΩElements/RepoAndWebSiteButtons";
+import styles from "./ProjectInfo.module.scss";
 
 interface ProjectInfosProps {
   project: Project;
   openProjectId: string | null;
 }
 
-const ProjectInfos: React.FC<ProjectInfosProps> = ({
-  project,
-  openProjectId,
-}) => {
+const ProjectInfos: React.FC<ProjectInfosProps> = ({ project }) => {
   const router = useRouter();
 
   const generateChallengeId = (title: string) =>
     `challenge-${title.replace(/\s+/g, "-").toLowerCase()}`;
 
   const handleScrollToChallenge = (challengeId: string) => {
+    // Push first, then observe DOM readiness via requestAnimationFrame
     router.push(`/projects/${project.slug}`);
-
-    // Un solo timeout, più pulito
-    setTimeout(() => {
-      const element = document.getElementById(challengeId);
-      if (element) {
-        element.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
-    }, 300); // Tempo sufficiente per montare il DOM (puoi regolare)
+    const attempt = (retries: number) => {
+      requestAnimationFrame(() => {
+        const el = document.getElementById(challengeId);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else if (retries > 0) {
+          attempt(retries - 1);
+        }
+      });
+    };
+    // Give the page a few frames to mount after navigation
+    setTimeout(() => attempt(10), 100);
   };
 
+  if (!project.challenges?.length) {
+    return <p className={styles.empty}>No case study available yet.</p>;
+  }
+
   return (
-    <div
-      className={`${styles.projectInfo} ${
-        project._id === openProjectId ? styles.visible : styles.hidden
-      }`}
-    >
-      {project.challenges?.length ? (
-        <ul className={styles.challengesList}>
-          <div className={styles.blogLinkContainer}>
-            <Link
-              href={`/projects/${project.slug}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.blogLinkPrimary}
+    <div className={styles.drawerContent}>
+      <div className={styles.drawerHeader}>
+        <Link
+          href={`/projects/${project.slug}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.fullCaseLink}
+        >
+          Read full case study
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+            <path
+              d="M2 8L8 2M8 2H3M8 2V7"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </Link>
+        <span className={styles.statusBadge}>Status: {project.status}</span>
+      </div>
+
+      <div className={styles.challengesLabel}>Challenges &amp; solutions</div>
+      <ul className={styles.challengeGrid}>
+        {project.challenges.map((challenge, i) => (
+          <li key={challenge._id} className={styles.challengeItem}>
+            <button
+              className={styles.challengeBtn}
+              onClick={() =>
+                handleScrollToChallenge(generateChallengeId(challenge.title))
+              }
             >
-              <p className={styles.bubbleTitle}>See How I Designed It</p>
-              <Image
-                src="/forward.svg"
-                alt="external link"
-                width={15}
-                height={15}
-              />
-            </Link>
-            <p className={styles.projectStatus}>status: {project.status}</p>
-          </div>
-
-          <h4 className={styles.challangesFaced}>Challenges Faced:</h4>
-
-          {project.challenges.map((challenge) => (
-            <li key={challenge._id} className={styles.challengesListItem}>
-              <button
-                className={styles.buttonChallange}
-                onClick={() =>
-                  handleScrollToChallenge(generateChallengeId(challenge.title))
-                }
-              >
-                {challenge.title}
-              </button>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No challenges faced for this project.</p>
-      )}
-
-      <RepoAndWebSiteButtons
-        githubUrl={project.githubUrl}
-        url={project.url}
-        isAbsolute
-        bottom="0rem"
-        right="2rem"
-      />
+              <span className={styles.challengeNum}>
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              {challenge.title}
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

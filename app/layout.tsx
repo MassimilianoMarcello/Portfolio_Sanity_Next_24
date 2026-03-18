@@ -1,24 +1,22 @@
 "use client";
-
-import Footer from "@/components/ΩFooter/Footer";
+ 
+import Footer from "@/components/Footer/Footer";  // renamed from ΩFooter
 import { zf } from "../styles/fonts";
-// import "./page.module.scss";
-import "./main.module.scss";
-
-
-
+import "./globals.scss";
+import styles from "./main.module.scss";
+ 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="accatiemmelle">
-      <body className={zf.className}>
-  
+<html lang="en" className={zf.variable}>
+  <body className={`${zf.className} ${styles.pageRoot}`}>
         {children}
         <Footer />
       </body>
     </html>
   );
 }
+

@@ -1,29 +1,27 @@
-import React, { useState } from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import styles from "../../app/main.module.scss";
-import TriangleIcon from "../ΩΩElements/TriangleIcon";
-import Space from "./Space";
-import EnvelopeIcon from "../ΩΩElements/EnvelopeIcon";
+import TriangleIcon from "../ui/TriangleIcon";
+import EnvelopeIcon from "../ui/EnvelopeIcon";
 
 const Navbar: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isContactHovered, setIsContactHovered] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  const handleMouseEnterContact = () => {
-    setIsContactHovered(true);
-  };
-
-  const handleMouseLeaveContact = () => {
-    setIsContactHovered(false);
-  };
+  // Add scrolled class for frosted glass intensity
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 8);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      window.scrollTo({
-        top: element.offsetTop,
-        behavior: "smooth",
-      });
+      window.scrollTo({ top: element.offsetTop, behavior: "smooth" });
     }
   };
 
@@ -33,8 +31,8 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <div>
-      <nav className={styles.navbar}>
+    <>
+      <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""}`}>
         <div className={styles.navbarContent}>
           {/* Logo */}
           <Link href="/" className={styles.logo}>
@@ -45,14 +43,17 @@ const Navbar: React.FC = () => {
           <div className={styles.navbarLinks}>
             {/* Projects dropdown */}
             <div
-              className={styles.navLink}
+              className={styles.navItem}
               onMouseEnter={() => setIsDropdownOpen(true)}
               onMouseLeave={() => setIsDropdownOpen(false)}
             >
-              Projects
-              <span className={styles.triangleContainer}>
-                <TriangleIcon />
+              <span className={styles.navLink}>
+                Projects
+                <span className={styles.triangleContainer}>
+                  <TriangleIcon />
+                </span>
               </span>
+
               <div
                 className={`${styles.dropdownMenu} ${
                   isDropdownOpen ? styles.show : ""
@@ -63,30 +64,30 @@ const Navbar: React.FC = () => {
                   onClick={(e) => handleLinkClick(e, "main")}
                   className={styles.dropdownItem}
                 >
-                  Main Projects
+                  Core
                 </a>
                 <a
                   href="#secondary"
                   onClick={(e) => handleLinkClick(e, "secondary")}
                   className={styles.dropdownItem}
                 >
-                  Secondary Projects
+                  Secondary
                 </a>
                 <a
                   href="#sandbox"
                   onClick={(e) => handleLinkClick(e, "sandbox")}
                   className={styles.dropdownItem}
                 >
-                Sandbox
+                  Sandbox
                 </a>
               </div>
             </div>
 
-            {/* Contacts link */}
+            {/* Contact */}
             <div
               className={styles.contactContainer}
-              onMouseEnter={handleMouseEnterContact}
-              onMouseLeave={handleMouseLeaveContact}
+              onMouseEnter={() => setIsContactHovered(true)}
+              onMouseLeave={() => setIsContactHovered(false)}
             >
               <a
                 href="#contact"
@@ -106,8 +107,10 @@ const Navbar: React.FC = () => {
           </div>
         </div>
       </nav>
-      <Space />
-    </div>
+
+      {/* Spacer replaces Space.tsx */}
+      <div className={styles.navSpacer} />
+    </>
   );
 };
 

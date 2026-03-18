@@ -1,14 +1,12 @@
-import React, { useMemo, useCallback } from "react";
-import ProjectInfo from "./ProjectInfo";
-import TechnologiesUsed from "./TechnologiesUsed";
-import { PortableText } from "@portabletext/react";
-import { Project } from "@/types/projects";
-import TriangleIcon from "../ΩΩElements/TriangleIcon";
-import { urlFor } from "@/sanity/sanity.client";
-import Link from "next/link";
-import Image from "next/image";
-import styles from "./ProjectList.module.scss";
-import RepoAndWebSiteButtons from "../ΩΩElements/RepoAndWebSiteButtons";
+import React, { useMemo, useCallback, useState } from 'react';
+import ProjectInfo from './ProjectInfo';
+import TechnologiesUsed from './TechnologiesUsed';
+import { PortableText } from '@portabletext/react';
+import { Project } from '@/types/projects';
+import { urlFor } from '@/sanity/sanity.client';
+import Image from 'next/image';
+import Link from 'next/link';
+import styles from './ProjectList.module.scss';
 
 interface ProjectListProps {
   projects: Project[];
@@ -16,119 +14,191 @@ interface ProjectListProps {
   toggleProjectInfo: (projectId: string | null) => void;
 }
 
-const ProjectList: React.FC<ProjectListProps> = ({ projects, openProjectId, toggleProjectInfo }) => {
-  const [isExiting, setIsExiting] = React.useState(false);
+const CATEGORIES = [
+  {
+    value: 'main',
+    index: '01',
+    kicker: 'Core',
+    title: 'Primary projects',
+    desc: 'Work that demonstrates core skills and professional capability. Each project ships to production.',
+  },
+  {
+    value: 'secondary',
+    index: '02',
+    kicker: 'Depth',
+    title: 'Secondary projects',
+    desc: 'Complementary work that highlights versatility — different stacks, different problem domains.',
+  },
+  {
+    value: 'sandbox',
+    index: '03',
+    kicker: 'Lab',
+    title: 'Sandbox',
+    desc: 'Experiments and explorations. Where new technology meets curiosity.',
+  },
+] as const;
 
-  const toggleProjectInfoHandler = useCallback((projectId: string) => {
-    if (openProjectId === projectId) {
-      setIsExiting(true);
-      setTimeout(() => {
-        toggleProjectInfo(null);
-        setIsExiting(false);
-      }, 100);
-    } else {
-      toggleProjectInfo(projectId);
-    }
-  }, [openProjectId, toggleProjectInfo]);
+const ProjectList: React.FC<ProjectListProps> = ({
+  projects,
+  openProjectId,
+  toggleProjectInfo,
+}) => {
+  const [exitingId, setExitingId] = useState<string | null>(null);
 
-  const handleMouseLeave = () => {
-    setIsExiting(true);
-    setTimeout(() => {
-      toggleProjectInfo(null);
-      setIsExiting(false);
-    }, 200);
-  };
-
-  // Group projects by category (main, secondary, sandbox)
-  const groupedProjects = useMemo(() => {
-    return projects.reduce((acc, project) => {
-      if (!acc[project.importance]) {
-        acc[project.importance] = [];
+  const handleToggle = useCallback(
+    (projectId: string) => {
+      if (openProjectId === projectId) {
+        setExitingId(projectId);
+        setTimeout(() => {
+          toggleProjectInfo(null);
+          setExitingId(null);
+        }, 280);
+      } else {
+        toggleProjectInfo(projectId);
       }
-      acc[project.importance].push(project);
-      return acc;
-    }, {} as Record<string, Project[]>);
-  }, [projects]);
+    },
+    [openProjectId, toggleProjectInfo]
+  );
 
-  // categories are fixed
-  const categories = [
-    { value: "main", label: "Projects that demonstrate core skills and expertise, serving as the strongest examples of professional capabilities." },
-    { value: "secondary", label: "Projects that showcase additional skills and knowledge, complementing the main projects by highlighting versatility and depth." },
-    { value: "sandbox", label: "Projects focused on exploring and experimenting with new technologies, providing a foundation for innovation in future work." },
-  ];
+  const groupedProjects = useMemo(
+    () =>
+      projects.reduce((acc, project) => {
+        if (!acc[project.importance]) acc[project.importance] = [];
+        acc[project.importance].push(project);
+        return acc;
+      }, {} as Record<string, Project[]>),
+    [projects]
+  );
 
-  // categories alwais in the right order
-  const sortedCategories = categories.filter(category => groupedProjects[category.value]);
+  const activeCategories = CATEGORIES.filter(
+    (cat) => groupedProjects[cat.value]?.length
+  );
 
   return (
     <div className={styles.projectListContainer}>
-      {sortedCategories.map((category, index) => (
-        <div
-          key={category.value}
-          id={category.value}
-          className={`${styles.categorySection} ${styles.fadeIn}`}
-          style={{ animationDelay: `${index * 0.2}s` }}
-        >
+      <div className={styles.sectionKicker}>Case studies</div>
 
-          <div className={styles.categoryLabel}>
-            {category.value.toUpperCase()}
-            <p className={styles.categoryDescription}>{category.label}</p>
-          </div>
+      {activeCategories.map((cat) => (
+        <div key={cat.value} className={styles.categorySection} id={cat.value}>
+          <aside className={styles.catSidebar}>
+            <div className={styles.catLabel}>{cat.index} — {cat.kicker}</div>
+            <h2 className={styles.catTitle}>{cat.title}</h2>
+            <p className={styles.catDesc}>{cat.desc}</p>
+          </aside>
 
           <div className={styles.projectCards}>
-            {groupedProjects[category.value]?.map((project) => (
-              
-              <div
-                key={project._id}
-                className={styles.projectCard}
-                onClick={() => toggleProjectInfoHandler(project._id)}
-                onMouseLeave={handleMouseLeave}
-              >
-                  <h3 className={styles.titleMobile}>{project.name.toUpperCase()}</h3>
-                <div className={styles.boxTextProject}>
-               
-                  <div className={styles.triangleIcon}>
-                    <p className={styles.detailsText}>Click for details</p>
-                    <TriangleIcon />
+            {groupedProjects[cat.value].map((project, idx) => {
+              const isOpen = openProjectId === project._id;
+              const isExiting = exitingId === project._id;
+
+              return (
+                <article
+                  key={project._id}
+                  className={`${styles.projectCard} ${isOpen ? styles.cardOpen : ''}`}
+                >
+                  {/* Image */}
+                  <div className={styles.cardImageWrap}>
+                    <Image
+                      className={styles.cardImg}
+                      src={urlFor(project.image).width(600).height(450).fit('crop').url()}
+                      alt={project.imageAlt || project.name}
+                      width={600}
+                      height={450}
+                      priority={idx === 0}
+                    />
+                    <span className={styles.cardYear}>
+                      {new Date(project._createdAt || Date.now()).getFullYear()}
+                    </span>
                   </div>
-                  <h3 className={styles.titleDesktop}>{project.name.toUpperCase()}</h3>
-                  <div className={styles.portableStyle}>
-                    <PortableText value={project.content} />
+
+                  {/* Body */}
+                  <div className={styles.cardBody}>
+                    <div className={styles.cardTop}>
+                      <div className={styles.cardIndex}>
+                        {String(idx + 1).padStart(2, '0')}
+                      </div>
+                      <h3 className={styles.cardTitle}>{project.name}</h3>
+                      <div className={styles.cardDesc}>
+                        <PortableText value={project.content} />
+                      </div>
+                    </div>
+
+                    <div className={styles.cardMeta}>
+                      <TechnologiesUsed technologies={project.technologies} />
+
+                      <div className={styles.cardFooter}>
+                        <div className={styles.cardLinks}>
+                          {/* GitHub — same square marker style */}
+                          {project.githubUrl && (
+                            <Link
+                              href={project.githubUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={styles.actionLink}
+                            >
+                              GitHub ↗
+                            </Link>
+                          )}
+                          {/* Website — same square marker style */}
+                          {project.url && (
+                            <Link
+                              href={project.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={styles.actionLink}
+                            >
+                              Live site ↗
+                            </Link>
+                          )}
+                          {/* Case study — slightly different indigo shade */}
+                          <button
+                            className={styles.caseStudyBtn}
+                            onClick={() => handleToggle(project._id)}
+                            aria-expanded={isOpen}
+                          >
+                            {isOpen ? 'Close ↑' : 'Case study ↓'}
+                          </button>
+                        </div>
+
+                        <div className={`${styles.statusPill} ${styles[project.status] || ''}`}>
+                          <span className={styles.statusDot} />
+                          {project.status === 'live'
+                            ? 'Live'
+                            : project.status === 'wip'
+                            ? 'In progress'
+                            : project.status}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                
-                <div className={styles.boxImageProject}>
-                  
-                  <Image
-                    className={styles.projectImage}
-                    src={urlFor(project.image).width(500).height(500).fit('crop').url()}
-                    alt={project.imageAlt || "Project image"}
-                    width={500}
-                    height={300}
-                    priority
-                  />
-                </div>
-                <div className={styles.visitRepoAndWebsiteButtons}>
-                  <RepoAndWebSiteButtons
-                    githubUrl={project.githubUrl}
-                    url={project.url}
-                    isAbsolute
-                    bottom="0rem"
-                    right="2rem"
-                  />
-                </div>
-                <div className={styles.technologiesUsed}>
-                  <TechnologiesUsed technologies={project.technologies} />
-                </div>
-                {openProjectId === project._id && (
+
+                  {/* Inline challenges drawer */}
                   <div
-                    className={`${styles.infoBubble} ${isExiting ? styles.exit : ""}`}
+                    className={`${styles.drawer} ${isOpen && !isExiting ? styles.drawerOpen : ''} ${isExiting ? styles.drawerExit : ''}`}
                   >
-                    <ProjectInfo project={project} openProjectId={openProjectId} />
+                    <div className={styles.drawerInner}>
+                      <ProjectInfo project={project} openProjectId={openProjectId} />
+                    </div>
                   </div>
-                )}
-              </div>
-            ))}
+
+                  {/* Toggle button */}
+                  <button
+                    className={`${styles.toggleIcon} ${isOpen ? styles.toggleOpen : ''}`}
+                    onClick={() => handleToggle(project._id)}
+                    aria-label={isOpen ? 'Close case study' : 'Open case study'}
+                  >
+                    <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+                      <path
+                        d="M6 1V11M1 6H11"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </button>
+                </article>
+              );
+            })}
           </div>
         </div>
       ))}
