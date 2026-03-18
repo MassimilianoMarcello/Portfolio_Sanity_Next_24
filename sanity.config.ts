@@ -11,6 +11,7 @@ export default defineConfig({
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   basePath: process.env.NEXT_PUBLIC_SANITY_BASE_PATH || '/studio',
   plugins: [structureTool(), visionTool(),codeInput()],
+  
 
   schema: {
     types: schemaTypes,

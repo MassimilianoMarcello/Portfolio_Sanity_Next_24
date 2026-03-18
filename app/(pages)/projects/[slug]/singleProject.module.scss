@@ -3,16 +3,20 @@
 // ─── Layout ───────────────────────────────────────────────────────────────────
 .projectContainer {
   display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: 0 4rem;
+  grid-template-columns: 240px 1fr;
+  gap: 0 5rem;
   min-height: 100vh;
-  padding: 4rem 3rem 6rem;
+  padding: 5rem 3.5rem 8rem;
   max-width: 1200px;
   margin: 0 auto;
 
   @include responsive("lg", "max") {
     grid-template-columns: 1fr;
-    padding: 2rem 1.2rem 4rem;
+    padding: 2rem 1.4rem 5rem;
+  }
+
+  @include responsive("sm", "max") {
+    padding: 1.5rem 1rem 4rem;
   }
 }
 
@@ -26,17 +30,23 @@
 // ─── Sidebar ──────────────────────────────────────────────────────────────────
 .sidebar {
   position: sticky;
-  top: 2rem;
+  top: 2.5rem;
   height: fit-content;
-  border-right: 1px solid $rule;
-  padding-right: 2rem;
+  background: $bg-surface;
+  border-radius: $radius-md;
+  padding: 1.8rem 1.6rem;
 
+  // Tablet: statico, padding ridotto, margine sotto
   @include responsive("lg", "max") {
     position: static;
-    border-right: none;
-    border-bottom: 1px solid $rule;
-    padding-right: 0;
-    padding-bottom: 2rem;
+    margin-bottom: 2.5rem;
+    padding: 1.4rem 1.4rem;
+  }
+
+  // Mobile: layout compatto — kicker + titolo in riga,
+  // challenge list diventa scroll orizzontale di pill
+  @include responsive("sm", "max") {
+    padding: 1.2rem 1rem;
     margin-bottom: 2rem;
   }
 }
@@ -44,140 +54,298 @@
 .sidebarKicker {
   display: block;
   font-family: $font-mono;
-  font-size: 0.58rem;
-  color: $violet-400;
+  font-size: 0.62rem;
+  color: $primary-color;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  margin-bottom: 0.5rem;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.4rem;
 }
 
 .sidebarTitle {
   font-family: $font-serif;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  color: $ink-2;
+  color: $text-color;
   margin-bottom: 2rem;
   line-height: 1.3;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid $rule;
+
+  @include responsive("sm", "max") {
+    font-size: 0.9rem;
+    margin-bottom: 1.2rem;
+    padding-bottom: 1rem;
+  }
 }
 
 .challengeNav {
   margin-bottom: 2rem;
+
+  @include responsive("sm", "max") {
+    margin-bottom: 0;
+  }
 }
 
 .navLabel {
   display: block;
   font-family: $font-mono;
-  font-size: 0.55rem;
-  color: $ink-4;
+  font-size: 0.6rem;
+  color: $neutral-gray;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin-bottom: 0.8rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+
+  @include responsive("sm", "max") {
+    margin-bottom: 0.6rem;
+  }
 }
 
+// Lista verticale su desktop/tablet
+// Scroll orizzontale di pill su mobile
 .challengesList {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.15rem;
+
+  @include responsive("sm", "max") {
+    flex-direction: row;
+    gap: 0.4rem;
+    overflow-x: auto;
+    padding-bottom: 0.4rem;
+    // Nascondi scrollbar ma mantieni funzionalità
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar { display: none; }
+  }
 }
 
 .challengeListItem {
   display: block;
+
+  @include responsive("sm", "max") {
+    flex-shrink: 0; // Impedisce il wrap delle pill
+  }
 }
 
 .challengeNavLink {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-family: $font-mono;
-  font-size: 0.62rem;
+  font-size: 0.58rem;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.07em;
   color: $ink-3;
   text-decoration: none;
-  transition: color 0.2s ease;
+  padding: 0.38rem 0.5rem;
+  border-radius: $radius-sm;
+  transition: color 0.18s ease, background 0.18s ease;
 
   &:hover {
-    color: $violet-600;
+    color: $primary-dark;
+    background: $bg-elevated;
+  }
+
+  // Su mobile diventa pill con bordo
+  @include responsive("sm", "max") {
+    padding: 0.35rem 0.75rem;
+    border: 1px solid $rule-strong;
+    border-radius: 20px;         // pill
+    background: $bg-page;
+    white-space: nowrap;
+    font-size: 0.55rem;
+
+    &:hover {
+      border-color: $primary-color;
+      background: $bg-elevated;
+    }
   }
 }
 
 .navMarker {
-  font-size: 0.45rem;
-  color: $violet-400;
+  font-size: 0.42rem;
+  color: $primary-color;
   flex-shrink: 0;
+
+  // Su mobile il marker non serve nelle pill
+  @include responsive("sm", "max") {
+    display: none;
+  }
 }
 
+// ─── Sidebar actions ──────────────────────────────────────────────────────────
 .sidebarActions {
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
-  margin-top: 2rem;
+  margin-top: 1.8rem;
   padding-top: 1.5rem;
   border-top: 1px solid $rule;
+
+  // Su mobile: riga orizzontale, bottoni affiancati
+  @include responsive("sm", "max") {
+    flex-direction: row;
+    margin-top: 1.2rem;
+    padding-top: 1.2rem;
+    gap: 0.5rem;
+  }
 }
 
-.backLink,
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  font-family: $font-mono;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $ink-2;
+  text-decoration: none;
+  background: $bg-page;
+  border: 1px solid $rule-strong;
+  border-radius: $radius-sm;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  width: 100%;
+  transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+
+  &:hover {
+    color: $primary-dark;
+    border-color: $primary-color;
+    background: $bg-elevated;
+  }
+}
+
+// Su desktop: bottone normale in sidebar
+// Su mobile: FAB fisso in basso a destra
+// Versione sidebar — solo desktop
 .backToTopBtn {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  justify-content: center;
+  gap: 0.45rem;
   font-family: $font-mono;
-  font-size: 0.6rem;
+  font-size: 0.62rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: $ink-3;
+  color: $ink-2;
   text-decoration: none;
-  background: none;
-  border: none;
-  padding: 0;
+  background: $bg-page;
+  border: 1px solid $rule-strong;
+  border-radius: $radius-sm;
+  padding: 0.6rem 1rem;
   cursor: pointer;
-  transition: color 0.2s ease;
+  width: 100%;
+  transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease;
 
   &:hover {
-    color: $violet-600;
+    color: $primary-dark;
+    border-color: $primary-color;
+    background: $bg-elevated;
+  }
+
+  // Su mobile nascosto — lo sostituisce il FAB
+  @include responsive("sm", "max") {
+    display: none;
+  }
+}
+
+// Versione FAB — solo mobile, position fixed
+.backToTopFab {
+  display: none; // nascosto su desktop
+
+  @include responsive("sm", "max") {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1rem;
+    width: auto;
+    font-family: $font-mono;
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $ink-2;
+    background: $bg-page;
+    border: 1px solid $rule-strong;
+    border-radius: 20px;
+    padding: 0.55rem 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(62, 35, 115, 0.12);
+    z-index: 100;
+    transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+
+    &:hover {
+      color: $primary-dark;
+      border-color: $primary-color;
+      background: $bg-elevated;
+    }
   }
 }
 
 // ─── Main content ─────────────────────────────────────────────────────────────
 .mainContent {
+  // min-width: 0 è fondamentale nei grid item —
+  // senza, il figlio può espandersi oltre la colonna e causare scroll orizzontale
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: 5rem;
+
+  @include responsive("sm", "max") {
+    gap: 3.5rem;
+  }
 }
 
 // ─── Header ───────────────────────────────────────────────────────────────────
 .projectHeader {
   border-bottom: 1px solid $rule;
-  padding-bottom: 2.5rem;
+  padding-bottom: 3rem;
+
+  @include responsive("sm", "max") {
+    padding-bottom: 2rem;
+  }
 }
 
 .headerKicker {
   display: block;
   font-family: $font-mono;
-  font-size: 0.58rem;
-  color: $violet-400;
+  font-size: 0.55rem;
+  color: $primary-color;
   text-transform: uppercase;
   letter-spacing: 0.14em;
   margin-bottom: 0.8rem;
+
+  @include responsive("sm", "max") {
+    display: none; // già mostrato nella sidebar su mobile
+  }
 }
 
 .projectTitle {
   font-family: $font-serif;
-  font-size: 2.4rem;
+  font-size: 2.6rem;
   font-weight: 600;
-  background: linear-gradient(135deg, $violet-600 0%, $indigo-600 100%);
+  background: linear-gradient(135deg, $primary-dark 0%, $title-color 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   line-height: 1.15;
   letter-spacing: -0.025em;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.8rem;
 
   @include responsive("lg", "max") {
-    font-size: 1.8rem;
+    font-size: 2rem;
+  }
+
+  @include responsive("sm", "max") {
+    font-size: 1.75rem;
+    margin-bottom: 1.4rem;
   }
 }
 
@@ -186,11 +354,17 @@
   font-family: $font-body;
   font-size: 1rem;
   font-weight: 300;
-  color: $ink-2;
-  line-height: 1.8;
+  color: $text-color;
+  line-height: 1.85;
+  max-width: 68ch;
 
   p {
-    margin: 0 0 1rem;
+    margin: 0 0 1.2rem;
+    &:last-child { margin-bottom: 0; }
+  }
+
+  @include responsive("sm", "max") {
+    font-size: 0.95rem;
   }
 }
 
@@ -202,16 +376,15 @@
 }
 
 .sectionKicker {
-  display: block;
-  font-family: $font-mono;
-  font-size: 0.6rem;
-  color: $ink-3;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  margin-bottom: 3rem;
   display: flex;
   align-items: center;
   gap: 0.8rem;
+  font-family: $font-mono;
+  font-size: 0.58rem;
+  color: $ink-3;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin-bottom: 3.5rem;
 
   &::after {
     content: '';
@@ -219,14 +392,26 @@
     height: 1px;
     background: $rule;
   }
+
+  @include responsive("sm", "max") {
+    margin-bottom: 2rem;
+  }
 }
 
 .challengeItem {
-  padding: 3rem 0;
+  padding: 3.5rem 0;
   border-bottom: 1px solid $rule;
+  scroll-margin-top: 5rem; // 64px navbar + 1rem respiro // Ridotto su mobile — nessun header fisso
+
+  &:first-of-type { padding-top: 0; }
 
   &:last-child {
     border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  @include responsive("sm", "max") {
+    padding: 2.5rem 0;
   }
 }
 
@@ -234,44 +419,275 @@
   display: flex;
   align-items: baseline;
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
+
+  @include responsive("sm", "max") {
+    margin-bottom: 1.8rem;
+    gap: 0.75rem;
+  }
 }
 
 .challengeNum {
   font-family: $font-mono;
-  font-size: 0.58rem;
-  color: $violet-400;
-  letter-spacing: 0.12em;
+  font-size: 0.62rem;
+  color: $primary-color;
+  letter-spacing: 0.1em;
   flex-shrink: 0;
 }
 
 .challengeTitle {
   font-family: $font-serif;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color: $ink;
   line-height: 1.2;
+
+  @include responsive("sm", "max") {
+    font-size: 1.25rem;
+  }
 }
 
 .challengeBlock {
-  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.2rem;
+  padding: 1.4rem 1.6rem;
+  border-radius: $radius-md;
+
+  &:first-of-type {
+    background: $bg-surface;
+    border-left: 2px solid $rule-strong;
+  }
+
+  &:last-of-type {
+    background: $tag-bg;
+    border-left: 2px solid $primary-color;
+  }
+
+  &:only-child {
+    background: $bg-surface;
+    border-left: 2px solid $rule-strong;
+  }
+
+  &:last-child { margin-bottom: 0; }
+
+  @include responsive("sm", "max") {
+    padding: 1.1rem 1.2rem;
+  }
 }
 
 .blockLabel {
   display: block;
   font-family: $font-mono;
-  font-size: 0.55rem;
-  color: $violet-400;
+  font-size: 0.62rem;
+  color: $primary-color;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin-bottom: 0.5rem;
+  letter-spacing: 0.1em;
 }
 
 .blockText {
   font-family: $font-body;
   font-size: 0.95rem;
   font-weight: 300;
-  color: $ink-2;
-  line-height: 1.8;
+  color: $text-color;
+  line-height: 1.85;
   margin: 0;
+  max-width: 65ch;
+
+  @include responsive("sm", "max") {
+    font-size: 0.9rem;
+  }
+}
+
+// ─── Code Block (Shiki) ───────────────────────────────────────────────────────
+.codeBlock {
+  margin: 2rem 0;
+  border-radius: $radius-md;
+  border: 1px solid $rule-strong;
+  overflow: hidden;
+  font-family: $font-mono;
+
+  &:last-child { margin-bottom: 0; }
+}
+
+.codeBlockHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.55rem 1.2rem;
+  background: $bg-elevated;
+  border-bottom: 1px solid $rule-strong;
+}
+
+.codeBlockLang {
+  font-family: $font-mono;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $primary-color;
+}
+
+// react-syntax-highlighter con Prism genera un <pre> con style inline —
+// sovrascriviamo solo padding, font-size e border-radius via !important
+.codeBlockBody {
+  :global(pre[class*="language-"]) {
+    margin: 0 !important;
+    padding: 1.4rem 1.6rem !important;
+    border-radius: 0 !important;
+    font-size: 0.82rem !important;
+    line-height: 1.75 !important;
+    font-family: $font-mono !important;
+
+    @include responsive("sm", "max") {
+      font-size: 0.78rem !important;
+      padding: 1.2rem 1rem !important;
+    }
+  }
+
+  :global(code[class*="language-"]) {
+    font-family: $font-mono !important;
+    font-size: inherit !important;
+  }
+}
+
+// ─── Portable Text ────────────────────────────────────────────────────────────
+
+.ptParagraph {
+  font-family: $font-body;
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: $text-color;
+  line-height: 1.85;
+  margin: 0 0 1.2rem;
+  max-width: 65ch;
+
+  &:last-child { margin-bottom: 0; }
+
+  @include responsive("sm", "max") {
+    font-size: 0.9rem;
+  }
+}
+
+.ptH1,
+.ptH2,
+.ptH3,
+.ptH4 {
+  font-family: $font-serif;
+  font-weight: 600;
+  color: $ink;
+  line-height: 1.2;
+  margin: 2.5rem 0 1rem;
+
+  @include responsive("sm", "max") {
+    margin: 2rem 0 0.8rem;
+  }
+}
+
+.ptH1 { font-size: 1.6rem; @include responsive("sm", "max") { font-size: 1.35rem; } }
+.ptH2 { font-size: 1.3rem; @include responsive("sm", "max") { font-size: 1.15rem; } }
+.ptH3 { font-size: 1.05rem; color: $text-color; }
+.ptH4 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-family: $font-mono;
+  color: $ink-3;
+}
+
+.ptBlockquote {
+  margin: 2rem 0;
+  padding: 1rem 1.5rem;
+  border-left: 2px solid $primary-color;
+  font-family: $font-serif;
+  font-size: 1rem;
+  font-style: italic;
+  color: $text-color;
+  background: $tag-bg;
+  border-radius: 0 $radius-md $radius-md 0;
+
+  @include responsive("sm", "max") {
+    padding: 0.8rem 1.1rem;
+    font-size: 0.95rem;
+  }
+}
+
+.ptList {
+  margin: 1rem 0 1.5rem 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.ptListOrdered {
+  counter-reset: pt-list;
+}
+
+.ptListItem {
+  font-family: $font-body;
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: $text-color;
+  line-height: 1.75;
+  position: relative;
+  padding-left: 1.2rem;
+
+  .ptList:not(.ptListOrdered) &::before {
+    content: '▪';
+    position: absolute;
+    left: 0;
+    font-size: 0.42rem;
+    top: 0.5em;
+    color: $primary-color;
+  }
+
+  .ptListOrdered &::before {
+    counter-increment: pt-list;
+    content: counter(pt-list) '.';
+    position: absolute;
+    left: 0;
+    font-family: $font-mono;
+    font-size: 0.7rem;
+    color: $primary-color;
+    top: 0.05em;
+  }
+
+  @include responsive("sm", "max") {
+    font-size: 0.9rem;
+  }
+}
+
+.ptStrong {
+  font-weight: 600;
+  color: $ink;
+}
+
+.ptEm {
+  font-style: italic;
+  color: $text-color;
+}
+
+.ptInlineCode {
+  font-family: $font-mono;
+  font-size: 0.8em;
+  background: $tag-bg;
+  border: 1px solid $border-color;
+  border-radius: $radius-sm;
+  padding: 0.1em 0.4em;
+  color: $primary-dark;
+}
+
+.ptLink {
+  color: $primary-dark;
+  text-decoration: underline;
+  text-decoration-color: $borders-color;
+  text-underline-offset: 2px;
+  transition: text-decoration-color 0.18s ease, color 0.18s ease;
+
+  &:hover {
+    color: $title-color;
+    text-decoration-color: $title-color;
+  }
 }

@@ -1,5 +1,4 @@
-'use client';
-
+import Link from "next/link";
 import styles from "./singleProject.module.scss";
 
 type ChallengeProps = {
@@ -7,21 +6,15 @@ type ChallengeProps = {
   title: string;
 };
 
-const ChallengeLink = ({ challengeId, title }: ChallengeProps) => {
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    document.getElementById(challengeId)?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  return (
-    <li className={styles.challengeListItem}>
-      <a href={`#${challengeId}`} onClick={handleClick} className={styles.challengeNavLink}>
-        <span className={styles.navMarker}>▪</span>
-        {title}
-      </a>
-    </li>
-  );
-};
+// Pure anchor — no JS needed, browser handles scroll natively via #hash
+const ChallengeLink = ({ challengeId, title }: ChallengeProps) => (
+  <li className={styles.challengeListItem}>
+    <Link href={`#${challengeId}`} className={styles.challengeNavLink}>
+      <span className={styles.navMarker} aria-hidden="true">▪</span>
+      {title}
+    </Link>
+  </li>
+);
 
 export default ChallengeLink;
 

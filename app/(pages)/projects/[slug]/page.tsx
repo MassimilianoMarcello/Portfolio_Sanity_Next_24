@@ -6,6 +6,7 @@ import ChallengeLink from "./ChallangeLink";
 import BackToTopButton from "./BackTopButton";
 import { portableTextComponents } from "./portableTextComponents";
 import RepoAndWebSiteButtons from "@/components/ui/RepoAndWebSiteButtons";
+import FabButton from "./FabButton";
 
 type Props = {
   params: { slug: string };
@@ -21,7 +22,7 @@ export default async function Project({ params }: Props) {
   return (
     <div id="top" className={styles.projectContainer}>
 
-      {/* Fixed sidebar */}
+      {/* Sidebar — desktop sticky, mobile compact top bar */}
       {project.challenges && project.challenges.length > 0 && (
         <aside className={styles.sidebar}>
           <span className={styles.sidebarKicker}>Case study</span>
@@ -49,7 +50,8 @@ export default async function Project({ params }: Props) {
             <Link href="/" className={styles.backLink}>
               ← Back
             </Link>
-            <BackToTopButton />
+            {/* Versione sidebar — visibile solo su desktop */}
+            <BackToTopButton className={styles.backToTopBtn} />
           </div>
         </aside>
       )}
@@ -117,6 +119,10 @@ export default async function Project({ params }: Props) {
           </section>
         )}
       </main>
+
+      {/* FAB Top — visibile solo su mobile */}
+      <FabButton />
+
     </div>
   );
 }

@@ -63,4 +63,40 @@ a {
 
 // ─── Utility ──────────────────────────────────────────────────────────────────
 body.no-scroll { overflow: hidden; }
+
+// ─── Back to top FAB — mobile only ───────────────────────────────────────────
+// Aggiunto qui perché il componente BackToTopButton è usato nel layout
+// e non può importare singleProject.module.scss
+.backToTopFab {
+  display: none;
+
+  @media (max-width: 480px) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #2e2c38;
+    background: #fafaf8;
+    border: 1px solid rgba(145, 117, 186, 0.3);
+    border-radius: 20px;
+    padding: 0.55rem 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(62, 35, 115, 0.12);
+    z-index: 100;
+    transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+
+    &:hover {
+      color: #6a4da0;
+      border-color: #9175ba;
+      background: #eeeaf5;
+    }
+  }
+}
   

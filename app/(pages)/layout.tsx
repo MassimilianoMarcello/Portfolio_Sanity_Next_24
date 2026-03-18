@@ -1,15 +1,21 @@
 "use client";
-
-import NavbarPages from '@/components/_NavBar/NavbarPages'; // Adjust the path as necessary
-
+ 
+import NavbarPages from '@/components/_NavBar/NavbarPages';
+import BackToTopButton from './projects/[slug]/BackTopButton';
+ 
 export default function PagesLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <main>
-    <NavbarPages />
-    {children}</main>; // Questo layout non include la navbar
+  return (
+    <main style={{ overflowX: 'hidden', width: '100%' }}>
+      <NavbarPages />
+      {children}
+      {/* FAB mobile — figlio diretto del main, nessun contesto di stacking */}
+      <BackToTopButton className="backToTopFab" />
+    </main>
+  );
 }
 
 

@@ -1,26 +1,74 @@
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { atomOneLight } from "react-syntax-highlighter/dist/esm/styles/hljs";
-
-const CodeBlock = ({ value }: { value: { code: string; language: string } }) => (
-  <SyntaxHighlighter
-    language={value.language}
-    style={atomOneLight}
-    customStyle={{
-      backgroundColor: "#f4f2f9",
-      borderRadius: "6px",
-      padding: "1.5rem 2rem",
-      fontSize: "0.82rem",
-      lineHeight: "1.7",
-      border: "1px solid rgba(145, 117, 186, 0.3)",
-    }}
-  >
-    {value.code}
-  </SyntaxHighlighter>
-);
+// app/(pages)/projects/[slug]/portableTextComponents.tsx
+import CodeBlock from './CodeBlock';
+import styles from './singleProject.module.scss';
 
 export const portableTextComponents = {
+
+  // ─── Custom block types ─────────────────────────────────────────────────────
   types: {
-    code: ({ value }: any) => <CodeBlock value={value} />,
+    code: ({ value }: { value: { code: string; language?: string } }) => (
+      <CodeBlock
+        code={value.code}
+        language={value.language}
+        className={styles.codeBlock}
+        headerClassName={styles.codeBlockHeader}
+        langClassName={styles.codeBlockLang}
+        bodyClassName={styles.codeBlockBody}
+      />
+    ),
+  },
+
+  // ─── Block styles ───────────────────────────────────────────────────────────
+  block: {
+    normal:     ({ children }: any) => <p className={styles.ptParagraph}>{children}</p>,
+    h1:         ({ children }: any) => <h1 className={styles.ptH1}>{children}</h1>,
+    h2:         ({ children }: any) => <h2 className={styles.ptH2}>{children}</h2>,
+    h3:         ({ children }: any) => <h3 className={styles.ptH3}>{children}</h3>,
+    h4:         ({ children }: any) => <h4 className={styles.ptH4}>{children}</h4>,
+    blockquote: ({ children }: any) => <blockquote className={styles.ptBlockquote}>{children}</blockquote>,
+  },
+
+  // ─── Lists ──────────────────────────────────────────────────────────────────
+  list: {
+    bullet: ({ children }: any) => <ul className={styles.ptList}>{children}</ul>,
+    number: ({ children }: any) => <ol className={`${styles.ptList} ${styles.ptListOrdered}`}>{children}</ol>,
+  },
+  listItem: {
+    bullet: ({ children }: any) => <li className={styles.ptListItem}>{children}</li>,
+    number: ({ children }: any) => <li className={styles.ptListItem}>{children}</li>,
+  },
+
+  // ─── Inline marks ───────────────────────────────────────────────────────────
+  marks: {
+    strong: ({ children }: any) => <strong className={styles.ptStrong}>{children}</strong>,
+    em:     ({ children }: any) => <em className={styles.ptEm}>{children}</em>,
+    code:   ({ children }: any) => <code className={styles.ptInlineCode}>{children}</code>,
+    link: ({ children, value }: any) => {
+      const isExternal = value?.href && !value.href.startsWith('/');
+      return (
+        <a
+          href={value?.href}
+          className={styles.ptLink}
+          {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+        >
+          {children}
+          {isExternal && (
+            <svg
+              width="9" height="9" viewBox="0 0 10 10" fill="none"
+              style={{ display: 'inline-block', marginLeft: '0.2em', verticalAlign: 'middle' }}
+            >
+              <path
+                d="M2 8L8 2M8 2H3M8 2V7"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          )}
+        </a>
+      );
+    },
   },
 };
 
