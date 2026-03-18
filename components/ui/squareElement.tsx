@@ -14,7 +14,7 @@ const SquareElement: React.FC<SquareProps> = ({ title, positions, colors }) => {
     { top: "80%", left: "80%" },
   ];
 
-  const defaultColors = ["red", "blue", "green", "purple"];
+  const defaultColors = ["#9175ba", "#6a4da0", "#4f67d8", "#2d47c4"];
 
   return (
     <div className={styles.container}>
@@ -27,7 +27,7 @@ const SquareElement: React.FC<SquareProps> = ({ title, positions, colors }) => {
             left: pos.left,
             backgroundColor: colors ? colors[index] : defaultColors[index],
           }}
-        ></span>
+        />
       ))}
       <h1 className={styles.projectTitle}>{title}</h1>
     </div>

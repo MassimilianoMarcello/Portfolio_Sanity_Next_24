@@ -1,66 +1,60 @@
 @import "../../app/main.module.scss";
-.visitRepoAndWebsiteButtons {
+
+.buttons {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 0;
-  background-color: #fafbff;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .absolutePosition {
   position: absolute;
 }
 
-.styledButton {
-  display: flex;
+.actionLink {
+  display: inline-flex;
   align-items: center;
-  padding: 1rem;
-  border-radius: 5px;
-  font-size: 15px;
-  font-weight: 400;
-  text-align: center;
+  gap: 0.35rem;
+  font-family: $font-mono;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $violet-600;
   text-decoration: none;
-  transition: background-color 0.3s ease;
-  color: inherit;
+  position: relative;
+  transition: color 0.2s ease;
 
-  a {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    text-decoration: none;
-    color: $primary-color;
-  
-
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: $violet-400;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
   }
 
-  img {
-    transition: transform 0.3s ease;
-   
-    background-color: #fafbff;
-    
- 
-  }
-  .github{
-    margin-right: -1.5rem;
-    background-color: #fafbff;
-  }
-  span{
-    width: 6rem;
-    margin-right: -.4rem;
-    background-color: #fafbff;
-  }
+  &:hover {
+    color: $indigo-600;
 
-  &:hover img {
-    transform: translateX(5px);
+    &::after {
+      transform: scaleX(1);
+    }
   }
 }
 
-.styledButtonGit {
-  @extend .styledButton;
-}
+.marker {
+  font-size: 0.5rem;
+  color: $violet-400;
+  transition: color 0.2s ease, transform 0.2s ease;
 
-.styledButtonWebsite {
-  @extend .styledButton;
+  .actionLink:hover & {
+    color: $indigo-600;
+    transform: scale(1.4);
+  }
 }
 
 

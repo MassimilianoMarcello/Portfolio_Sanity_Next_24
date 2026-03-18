@@ -3,14 +3,10 @@ import { PortableText } from "@portabletext/react";
 import Link from "next/link";
 import styles from "./singleProject.module.scss";
 import ChallengeLink from "./ChallangeLink";
-import BackToTopButton from "./BackTopButton"; // Importa il Client Component
+import BackToTopButton from "./BackTopButton";
 import { portableTextComponents } from "./portableTextComponents";
 import RepoAndWebSiteButtons from "@/components/ui/RepoAndWebSiteButtons";
-import TriangleIcon from "@/components/ui/TriangleIcon";
-import TriangleIconLeftDoubled from "@/components/ui/TriangleIconLeftDoubled";
-import SquareElement from "@/components/ui/squareElement";
-import SquareDecoration from '@/components/ui/squareDecoration';
-import challenge from "@/schemas/challenge";
+
 type Props = {
   params: { slug: string };
 };
@@ -19,132 +15,108 @@ export default async function Project({ params }: Props) {
   const project = await getProject(params.slug);
 
   if (!project) {
-    return <div>Project not found.</div>;
+    return <div className={styles.notFound}>Project not found.</div>;
   }
 
   return (
     <div id="top" className={styles.projectContainer}>
-      <div className={styles.contentWrapper}>
-        <div className={styles.titleContainer}>
-          <h1 className={styles.howIMade}>How Designed:</h1>
-          <h1 className={styles.titleProject}>{project.name}</h1>
 
+      {/* Fixed sidebar */}
+      {project.challenges && project.challenges.length > 0 && (
+        <aside className={styles.sidebar}>
+          <span className={styles.sidebarKicker}>Case study</span>
+          <p className={styles.sidebarTitle}>{project.name}</p>
+
+          <nav className={styles.challengeNav}>
+            <span className={styles.navLabel}>Challenges</span>
+            <ul className={styles.challengesList}>
+              {project.challenges.map((challenge) => {
+                const challengeId = `challenge-${challenge.title
+                  .replace(/\s+/g, "-")
+                  .toLowerCase()}`;
+                return (
+                  <ChallengeLink
+                    key={challenge._id}
+                    challengeId={challengeId}
+                    title={challenge.title}
+                  />
+                );
+              })}
+            </ul>
+          </nav>
+
+          <div className={styles.sidebarActions}>
+            <Link href="/" className={styles.backLink}>
+              ← Back
+            </Link>
+            <BackToTopButton />
+          </div>
+        </aside>
+      )}
+
+      {/* Main content */}
+      <main className={styles.mainContent}>
+
+        {/* Header */}
+        <header className={styles.projectHeader}>
+          <span className={styles.headerKicker}>Case study</span>
+          <h1 className={styles.projectTitle}>{project.name}</h1>
           <RepoAndWebSiteButtons
             githubUrl={project.githubUrl}
             url={project.url}
           />
-        </div>
-        <div className={styles.projectDescription}>
-      
-      <SquareDecoration
-        squares={[
-          { top: '-2rem', left: '-3.5rem', size: '15px' },
-          { bottom: '-2rem', right: '-3.5rem', size: '25px' },
-          { bottom: '-21.93rem', left: '-3.5rem', size: '20px' },
-          { bottom: '-21.93rem', right: '-3.5rem', size: '20px' },
-          
+        </header>
 
-        ]}
-      />
-
-          <div className={styles.projectDescriptionBorderTop}></div>
+        {/* Description */}
+        <section className={styles.projectDescription}>
           {project.content ? (
-            <PortableText
-              value={project.content}
-              components={portableTextComponents}
-            />
+            <PortableText value={project.content} components={portableTextComponents} />
           ) : (
             <p>No content available for this project.</p>
           )}
-        </div>
-      </div>
+        </section>
 
-      {project.challenges && project.challenges.length > 0 ? (
-        <div className={styles.challengesSection}>
-      
-          <ul className={styles.challengesList}>
-<div className={styles.titleProjectOnIndexContainer}>
-<h5 className={styles.titleProjectOnIndex}>{project.name}</h5>
-</div>
-        
-            <div className={styles.challengesIndexContainer }>
-          
-              <span className={styles.squareIndex}></span>
-              <h4 className={styles.challengesIndexTitle}>Challenges Index:</h4>
-            </div>
+        {/* Challenges */}
+        {project.challenges && project.challenges.length > 0 && (
+          <section className={styles.challengeDetails}>
+            <span className={styles.sectionKicker}>Challenges &amp; solutions</span>
 
-            {project.challenges.map((challenge) => {
-              const challengeId = `challenge-${challenge.title
-                .replace(/\s+/g, "-")
-                .toLowerCase()}`;
-
-              return (
-                <ChallengeLink
-                  key={challenge._id}
-                  challengeId={challengeId}
-                  title={challenge.title}
-                />
-              );
-            })}
-
-            <div className={styles.buttonsIndex}>
-              <Link href={`/`} className={styles.backToProject}>
-              <span className={styles.iconTriangle}>
-              <TriangleIconLeftDoubled />
-              </span>
-               
-                <span>Back</span>
-              </Link>
-
-              <BackToTopButton />
-            </div>
-          </ul>
-
-          <div className={styles.challengeDetails}>
-            {project.challenges.map((challenge) => {
+            {project.challenges.map((challenge, i) => {
               const challengeId = `challenge-${challenge.title
                 .replace(/\s+/g, "-")
                 .toLowerCase()}`;
               return (
-                <div
-                  id={challengeId}
-                  key={challenge._id}
-                  className={styles.challengeItem}
-                >
-                  {/* same classes than index */}
-                  <div className={`${styles.challengesIndexContainer} ${styles.withborder}`}>
-                    <h5 className={styles.challengesIndexTitle}>
-                      {challenge.title}
-                    </h5>
-                    <div className={styles.squareIndex}></div>
+                <div id={challengeId} key={challenge._id} className={styles.challengeItem}>
+                  <div className={styles.challengeHeader}>
+                    <span className={styles.challengeNum}>
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <h2 className={styles.challengeTitle}>{challenge.title}</h2>
                   </div>
-                  <h5>Challange</h5>
+
                   {challenge.description && (
-                    <p className={styles.challangeDescription}>
-                      {challenge.description}
-                    </p>
+                    <div className={styles.challengeBlock}>
+                      <span className={styles.blockLabel}>Challenge</span>
+                      <p className={styles.blockText}>{challenge.description}</p>
+                    </div>
                   )}
-                  <h5>Solution</h5>
+
                   {challenge.solution && (
-                    <p className={styles.challangeDescription}>
-                      {challenge.solution}
-                    </p>
+                    <div className={styles.challengeBlock}>
+                      <span className={styles.blockLabel}>Solution</span>
+                      <p className={styles.blockText}>{challenge.solution}</p>
+                    </div>
                   )}
 
                   {challenge.content && (
-                    <PortableText
-                      value={challenge.content}
-                      components={portableTextComponents}
-                    />
+                    <PortableText value={challenge.content} components={portableTextComponents} />
                   )}
                 </div>
               );
             })}
-          </div>
-        </div>
-      ) : (
-        <p>No challenges faced for this project.</p>
-      )}
+          </section>
+        )}
+      </main>
     </div>
   );
 }

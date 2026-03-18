@@ -1,21 +1,46 @@
 @import '../../app/main.module.scss';
 
-
 .footer-container {
-    background-color: #282c34;
-    color: #ffffff;
-    text-align: center;
-    padding: 1rem;
-    font-size: 0.9rem;
-    height: 5rem;
-    margin-left: -.5rem;
-    margin-right: -.5rem;
-    margin-top: 5rem;
+  border-top: 1px solid $rule;
+  padding: 2rem 3rem;
 
-    p {
-      margin:3rem 0;
+  @include responsive("md", "max") {
+    padding: 1.5rem 1.2rem;
+  }
+}
 
-      letter-spacing: 0.5px;
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-copy,
+.footer-location {
+  font-family: $font-mono;
+  font-size: 0.58rem;
+  color: $ink-4;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+
+  a {
+    font-family: $font-mono;
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $ink-3;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $violet-600;
     }
   }
-  
+}

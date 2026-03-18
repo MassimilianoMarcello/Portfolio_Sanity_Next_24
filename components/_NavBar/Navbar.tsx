@@ -3,15 +3,13 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import styles from "../../app/main.module.scss";
-import TriangleIcon from "../ui/TriangleIcon";
-import EnvelopeIcon from "../ui/EnvelopeIcon";
+import { TriangleIcon, EnvelopeIcon } from "../ui/Icons";
 
 const Navbar: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isContactHovered, setIsContactHovered] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Add scrolled class for frosted glass intensity
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 8);
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -28,11 +26,18 @@ const Navbar: React.FC = () => {
   const handleLinkClick = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
     scrollToSection(id);
+    setIsDropdownOpen(false);
   };
 
   return (
     <>
-      <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""}`}>
+      <nav
+        className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""}`}
+        onMouseLeave={() => {
+          setIsDropdownOpen(false);
+          setIsContactHovered(false);
+        }}
+      >
         <div className={styles.navbarContent}>
           {/* Logo */}
           <Link href="/" className={styles.logo}>
@@ -45,7 +50,6 @@ const Navbar: React.FC = () => {
             <div
               className={styles.navItem}
               onMouseEnter={() => setIsDropdownOpen(true)}
-              onMouseLeave={() => setIsDropdownOpen(false)}
             >
               <span className={styles.navLink}>
                 Projects
@@ -87,7 +91,6 @@ const Navbar: React.FC = () => {
             <div
               className={styles.contactContainer}
               onMouseEnter={() => setIsContactHovered(true)}
-              onMouseLeave={() => setIsContactHovered(false)}
             >
               <a
                 href="#contact"
@@ -108,7 +111,6 @@ const Navbar: React.FC = () => {
         </div>
       </nav>
 
-      {/* Spacer replaces Space.tsx */}
       <div className={styles.navSpacer} />
     </>
   );

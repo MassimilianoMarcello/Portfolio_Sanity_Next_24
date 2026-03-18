@@ -1,151 +1,166 @@
 @import "../../app/main.module.scss";
 
+// ─── Container ────────────────────────────────────────────────────────────────
 .contactContainer {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  min-height: 42rem;
-  border-top: 0.01rem solid $primary-color;
-
-  :nth-child(3) {
-    margin-top: 5rem;
-  }
-}
-.mainBox {
-  margin-top: 4rem;
-
-  .squareTitleContainer {
-    position: sticky;
-    top: 2rem;
-    z-index: 10;
-  }
-}
-
-.contactContent {
-  grid-column: 2 / 4;
-  text-align: left;
-  margin-left: -2.5rem;
-  margin-top: 5rem;
-  margin-right: 2rem;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
-  padding-left: 4rem;
+  padding: 0 3rem 5rem;
+  border-top: 1px solid $rule;
 
   @include responsive("md", "max") {
-    grid-column: 1 / 4;
-    margin-top: -3rem;
-    padding: 0 2rem;
-    margin-right: -3rem;
-  }
-
-  .titleContact {
-    color: $primary-color;
-    font-size: 1.5rem;
-    font-weight: 600;
-    padding: 6rem 0 0.5rem 4rem;
-
-    @include responsive("md", "max") {
-      padding: 2rem;
-    }
-  }
-
-  .titleDescription {
-    font-size: 1rem;
-    font-weight: 200;
-    margin-top: -1rem;
-    margin-bottom: 2rem;
-    padding: 0rem 0 0.5rem 4rem;
-    color: $primary-color;
-
-    @include responsive("md", "max") {
-      padding: 0 2rem;
-    }
-  }
-
-  // Aggiungiamo una classe generale per i link
-  .link {
-    display: block;
-    font-size: 1rem;
-    font-weight: 100;
-    margin-bottom: 1rem;
-    margin-top: 0.5rem;
-    text-decoration: none;
-    padding: 0rem 0 0.5rem 4rem;
-    color: $primary-color;
-    transition: color 0.3s ease, text-decoration 0.3s ease;
-    @include responsive("md", "max") {
-      padding: 0 2rem;
-      margin: 3rem 0;
-    }
-    &:hover {
-      color: $background-color;
-      text-decoration: underline;
-    }
-
-    @include responsive("md", "max") {
-      padding: 0 2rem;
-    }
-  }
-
-  .label {
-    // color: #465567;
-    font-weight: 400;
-  }
-  .labelContent {
-    font-weight: 100;
-    margin-left: 2rem;
-    background-color: #eeffff;
-    padding: 0.2rem 0.5rem;
-  }
-
-  .mailLink,
-  .Linkdin,
-  .twitter,
-  .github {
-    word-break: break-word;
-    margin-bottom: 1rem;
+    padding: 0 1.2rem 3rem;
   }
 }
 
-.messageButton,
-.followButton {
-  display: block;
-  background-color: white;
-  color: $primary-color;
-  font-family: var(--font-zeitung-pro);
+// ─── Section kicker ───────────────────────────────────────────────────────────
+.sectionKicker {
+  font-family: $font-mono;
+  font-size: 0.6rem;
+  color: $ink-3;
   text-transform: uppercase;
-  font-weight: 300;
-  border: 0.1rem solid $primary-color;
-  border-radius: 0px;
-  padding: 0.5rem 0.95rem;
-  text-align: center;
-  font-size: 0.7rem;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-  cursor: pointer;
-  margin-top: 4rem;
-  margin-bottom: 4rem;
-  margin-left: 4rem;
-  text-decoration: none;
-  list-style: none;
-  text-decoration: none;
+  letter-spacing: 0.14em;
+  padding: 2.5rem 0 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
 
-  &:hover {
-    background-color: $primary-color;
-    color: $background-color;
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: $rule;
   }
 }
 
-.followMeContainer,
-.getInTouchContainer {
-  border: solid 0.01rem $primary-color;
-  margin: 4rem 2rem;
+// ─── Grid ─────────────────────────────────────────────────────────────────────
+.contactGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem 4rem;
+  margin-top: 3rem;
+
+  @include responsive("md", "max") {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
 }
 
-.styleLink {
-  color: $primary-color;
-  font-weight: 400;
+// ─── Block ────────────────────────────────────────────────────────────────────
+.contactBlock {
+  border-top: 1px solid $rule;
+  padding-top: 2rem;
+}
+
+.blockKicker {
+  display: block;
+  font-family: $font-mono;
+  font-size: 0.6rem;
+  color: $violet-400;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin-bottom: 0.8rem;
+}
+
+.blockTitle {
+  font-family: $font-serif;
+  font-size: 1.45rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, $violet-600 0%, $indigo-600 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+  margin-bottom: 0.8rem;
+}
+
+.blockDesc {
+  font-family: $font-body;
+  font-size: 0.78rem;
+  color: $ink-3;
+  line-height: 1.65;
+  font-weight: 300;
+  margin-bottom: 1.5rem;
+}
+
+// ─── Link list ────────────────────────────────────────────────────────────────
+.linkList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+}
+
+.contactLink {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
   text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover .linkValue {
+    color: $violet-600;
+  }
+}
+
+.linkLabel {
+  font-family: $font-mono;
+  font-size: 0.58rem;
+  color: $ink-4;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  min-width: 60px;
+}
+
+.linkValue {
+  font-family: $font-body;
+  font-size: 0.85rem;
+  color: $ink-2;
+  font-weight: 300;
+  transition: color 0.2s ease;
+}
+
+// ─── Action button ────────────────────────────────────────────────────────────
+.actionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: $font-mono;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $violet-600;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.2s ease;
+
+  &::before {
+    content: '▪';
+    font-size: 0.5rem;
+    color: $violet-400;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: $violet-400;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
 
   &:hover {
-    background-color: $primary-color;
-    color: $background-color;
+    color: $indigo-600;
+
+    &::before {
+      color: $indigo-600;
+      transform: scale(1.4);
+    }
+
+    &::after {
+      transform: scaleX(1);
+    }
   }
 }
