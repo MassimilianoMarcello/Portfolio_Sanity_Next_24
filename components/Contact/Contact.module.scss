@@ -11,32 +11,23 @@
   }
 }
 
-// ─── Section kicker — same bordered pill as "Case studies" ───────────────────
+// ─── Section kicker — pill tag compatta, no riga ─────────────────────────────
 .sectionKicker {
-  font-family: $font-mono;
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  padding: 2.5rem 0 0.8rem;
+  padding: 1.2rem 0 0;
   display: flex;
   align-items: center;
-  gap: 1rem;
 
   span {
-    color: $violet-600;
+    font-family: $font-mono;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: $violet-400;
     border: 1px solid $violet-200;
     border-radius: $radius-sm;
-    padding: 0.25rem 0.75rem 0.3rem;
+    padding: 0.2rem 0.65rem;
     background: $violet-50;
-    letter-spacing: 0.16em;
     white-space: nowrap;
-  }
-
-  &::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: $rule;
   }
 }
 
