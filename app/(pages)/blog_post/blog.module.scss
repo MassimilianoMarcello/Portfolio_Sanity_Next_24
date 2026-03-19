@@ -99,9 +99,9 @@
   transition: background 0.18s ease;
 
   &:hover {
-    .postTitle { color: $primary-dark; }
-    .postReadMore { color: $primary-dark; gap: 0.5rem; }
-    .postThumbImg { transform: scale(1.03); }
+    .postCardTitle  { color: $primary-dark; }
+    .postReadMore   { color: $primary-dark; gap: 0.5rem; }
+    .postThumbImg   { transform: scale(1.03); }
   }
 
   &:not(:has(.postThumb)) {
@@ -141,7 +141,8 @@
   transition: transform 0.3s ease;
 }
 
-.postContent {
+// Rinominato da .postContent per evitare conflitto col singolo post
+.postCardContent {
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
@@ -179,7 +180,8 @@
   padding: 0.2rem 0.6rem;
 }
 
-.postTitle {
+// Rinominato da .postTitle per evitare conflitto col singolo post
+.postCardTitle {
   font-family: $font-serif;
   font-size: 1.3rem;
   font-weight: 600;
@@ -247,6 +249,9 @@
 .postSidebar {
   position: sticky;
   top: 2.5rem;
+  // height: fit-content è essenziale — senza, l'elemento si estende a tutta
+  // l'altezza del parent e sticky non scatta mai.
+  // overflow: MAI su questo elemento, invalida il contesto sticky.
   height: fit-content;
   background: $bg-surface;
   border-radius: $radius-md;
@@ -263,15 +268,27 @@
   }
 }
 
+// "Blog" — badge leggero, allineato in cima alla sidebar alla stessa
+// altezza del badge "Article" nel main header.
+// Bg: $primary-color al 12% → testo $primary-dark garantisce contrasto WCAG AA.
 .sidebarKicker {
   display: block;
+  width: fit-content;
   font-family: $font-mono;
-  font-size: 0.62rem;
-  color: $primary-color;
+  font-size: 0.65rem;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  margin-bottom: 0.4rem;
+  color: $primary-dark;
+  background: rgba($primary-color, 0.12);
+
+  padding: 0.28rem 0.65rem;
+  margin-bottom: 1rem; 
+  margin-top: -1.7rem;
+  
+  user-select: none;
 }
+
 
 .sidebarTitle {
   font-family: $font-serif;
@@ -337,6 +354,190 @@
   color: $ink-2;
 }
 
+// ─── TOC sidebar block ────────────────────────────────────────────────────────
+
+.sidebarToc {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid $rule;
+  max-height: 40vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: $rule transparent;
+  &::-webkit-scrollbar       { width: 3px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb { background: $rule-strong; border-radius: 2px; }
+}
+
+.toc {
+  // Desktop: chevron hidden, nav always visible
+  @include responsive("lg", "min") {
+    .tocChevron { display: none; }
+    .tocNav     { display: block !important; }
+  }
+}
+
+.tocHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-bottom: 0.8rem;
+  cursor: pointer;
+
+  @include responsive("lg", "min") {
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+.tocLabel {
+  font-family: $font-mono;
+  font-size: 0.6rem;
+  color: $neutral-gray;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.tocChevron {
+  color: $ink-4;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.tocChevronOpen {
+  transform: rotate(180deg);
+}
+
+// Mobile: collapsed by default
+.tocNav {
+  display: none;
+
+  @include responsive("lg", "min") {
+    display: block;
+  }
+}
+
+.tocNavOpen {
+  display: block;
+}
+
+.tocList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-left: 1px solid $rule;
+}
+
+.tocItem {}
+
+.tocItemH3 {}
+
+.tocLink {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  width: 100%;
+  background: none;
+  border: none;
+  border-left: 1px solid transparent;
+  margin-left: -1px;
+  padding: 0.35rem 0.75rem;
+  font-family: $font-mono;
+  font-size: 0.6rem;
+  color: $ink-3;
+  text-align: left;
+  cursor: pointer;
+  line-height: 1.4;
+  transition: color 0.15s ease, border-color 0.15s ease;
+
+  &:hover {
+    color: $ink;
+  }
+}
+
+.tocLinkActive {
+  color: $primary-dark;
+  border-left-color: $primary-color;
+}
+
+.tocItemH3 .tocLink {
+  padding-left: 1.4rem;
+  font-size: 0.58rem;
+  color: $ink-4;
+
+  &:hover          { color: $ink-2; }
+  &.tocLinkActive  { color: $primary-color; border-left-color: $primary-color; }
+}
+
+.tocIndentDot {
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+  margin-bottom: 0.1em;
+}
+
+.tocLinkText {
+  flex: 1;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+// ─── Back to top — fixed, mobile only ────────────────────────────────────────
+
+.backToTop {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: $font-mono;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $ink-2;
+  background: $bg-surface;
+  border: 1px solid $rule-strong;
+  border-radius: $radius-sm;
+  padding: 0.55rem 0.85rem;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(6px);
+  transition: opacity 0.2s ease, transform 0.2s ease, color 0.15s ease, border-color 0.15s ease;
+
+  &:hover {
+    color: $primary-dark;
+    border-color: $primary-color;
+  }
+
+  @include responsive("lg", "min") {
+    display: none;
+  }
+}
+
+.backToTopVisible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+// ─── Sidebar actions ──────────────────────────────────────────────────────────
+
 .sidebarActions {
   padding-top: 1.5rem;
   border-top: 1px solid $rule;
@@ -385,21 +586,26 @@
   }
 }
 
+// Badge "Article" nel main header — stesso peso visivo del .sidebarKicker Blog,
+// bg pieno perché qui il contrasto con $bg-page è garantito (viola su bianco/scuro)
 .postHeaderKicker {
-  display: block;
+  display: inline-flex;
+  align-items: center;
   font-family: $font-mono;
-  font-size: 0.6rem;
-  color: $primary-color;
+  font-size: 0.55rem;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  margin-bottom: 0.8rem;
-
-  @include responsive("sm", "max") {
-    display: none;
-  }
+  letter-spacing: 0.12em;
+  color: $bg-page;
+  background: $primary-color;
+  border-radius: $radius-sm;
+  padding: 0.28rem 0.65rem;
+  margin-bottom: 1.2rem;
+  user-select: none;
 }
 
-.postTitle {
+// Rinominato da .postTitle (singolo post) per evitare conflitto con .postCardTitle
+.postHeadingTitle {
   font-family: $font-serif;
   font-size: 2.4rem;
   font-weight: 600;
@@ -450,9 +656,10 @@
   text-align: center;
 }
 
-// ─── Post article content ─────────────────────────────────────────────────────
+// ─── Post article ─────────────────────────────────────────────────────────────
 
-.postContent {
+// Rinominato da .postContent (articolo) per evitare conflitto con .postCardContent
+.postArticle {
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -554,6 +761,14 @@
   }
 }
 
+// Fix: SVG icona link esterno — tolto style inline, usa classe
+.ptLinkIcon {
+  display: inline-block;
+  margin-left: 0.2em;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
 // ─── Inline images ────────────────────────────────────────────────────────────
 
 .ptImage {
@@ -602,10 +817,25 @@
 .codeBlockHeader {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding: 0.55rem 1.2rem;
   background: $bg-elevated;
   border-bottom: 1px solid $rule-strong;
+}
+
+// Tre dot decorativi a sinistra — bilanciano la lang label a destra
+.codeBlockDots {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+
+  span {
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: $rule-strong;
+  }
 }
 
 .codeBlockLang {

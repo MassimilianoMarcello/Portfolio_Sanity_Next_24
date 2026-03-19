@@ -9,7 +9,7 @@ export default function PagesLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main style={{ overflowX: 'hidden', width: '100%' }}>
+    <main style={{ overflowX: 'clip', width: '100%' }}>
       <NavbarPages />
       {children}
       {/* FAB mobile — figlio diretto del main, nessun contesto di stacking */}

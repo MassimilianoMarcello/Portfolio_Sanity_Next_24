@@ -4,11 +4,32 @@ import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../blog.module.scss';
-import { blogPortableTextComponents } from '../blogPortableTextComponents';
+import { blogPortableTextComponents, slugifyHeading } from '../blogPortableTextComponents';
+import TableOfContents, { type TocItem } from './TableOfContents';
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
+
+// ─── Extract TOC items from Portable Text blocks (server-side) ───────────────
+function extractTocItems(content: any[]): TocItem[] {
+  if (!Array.isArray(content)) return [];
+  return content.reduce<TocItem[]>((acc, block) => {
+    if (block._type !== 'block') return acc;
+    if (block.style !== 'h2' && block.style !== 'h3') return acc;
+    const text = (block.children ?? [])
+      .filter((c: any) => c._type === 'span')
+      .map((c: any) => c.text ?? '')
+      .join('');
+    if (!text) return acc;
+    acc.push({
+      id:    slugifyHeading(text),
+      text,
+      level: block.style === 'h2' ? 2 : 3,
+    });
+    return acc;
+  }, []);
+}
 
 export default async function PostPage({ params }: Props) {
   const { slug } = await params;
@@ -18,12 +39,21 @@ export default async function PostPage({ params }: Props) {
     return <div className={styles.notFound}>Post not found.</div>;
   }
 
+  const tocItems = extractTocItems(post.content);
+
   return (
     <div className={styles.postContainer}>
 
       <aside className={styles.postSidebar}>
         <span className={styles.sidebarKicker}>Blog</span>
         <p className={styles.sidebarTitle}>{post.title}</p>
+
+        {/* TOC prima dei tag */}
+        {tocItems.length > 0 && (
+          <div className={styles.sidebarToc}>
+            <TableOfContents items={tocItems} />
+          </div>
+        )}
 
         {post.tags && post.tags.length > 0 && (
           <div className={styles.sidebarTags}>
@@ -53,15 +83,18 @@ export default async function PostPage({ params }: Props) {
 
         <div className={styles.sidebarActions}>
           <Link href="/blog_post" className={styles.backLink}>
-            ← All posts
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M8 5H2M2 5L5 2M2 5L5 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            All posts
           </Link>
         </div>
       </aside>
 
       <main className={styles.postMain}>
         <header className={styles.postHeader}>
-          <span className={styles.postHeaderKicker}>Blog</span>
-          <h1 className={styles.postTitle}>{post.title}</h1>
+          <span className={styles.postHeaderKicker}>Article</span>
+          <h1 className={styles.postHeadingTitle}>{post.title}</h1>
           {post.excerpt && (
             <p className={styles.postHeaderExcerpt}>{post.excerpt}</p>
           )}
@@ -84,7 +117,7 @@ export default async function PostPage({ params }: Props) {
           )}
         </header>
 
-        <article className={styles.postContent}>
+        <article className={styles.postArticle}>
           <PortableText
             value={post.content}
             components={blogPortableTextComponents}
