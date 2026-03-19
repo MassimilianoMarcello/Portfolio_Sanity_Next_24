@@ -4,7 +4,7 @@ import styles from './singleProject.module.scss';
 
 export const portableTextComponents = {
 
-  // ─── Custom block types ─────────────────────────────────────────────────────
+  // ─── Custom block types ───────────────────────────────────────────────────
   types: {
     code: ({ value }: { value: { code: string; language?: string } }) => (
       <CodeBlock
@@ -16,11 +16,16 @@ export const portableTextComponents = {
         bodyClassName={styles.codeBlockBody}
       />
     ),
+    callout: ({ value }: { value: { text: string } }) => (
+      <div className={styles.ptCallout}>{value.text}</div>
+    ),
+    divider: () => <hr className={styles.ptDivider} />,
   },
 
-  // ─── Block styles ───────────────────────────────────────────────────────────
+  // ─── Block styles — single object, all styles here ────────────────────────
   block: {
     normal:     ({ children }: any) => <p className={styles.ptParagraph}>{children}</p>,
+    lead:       ({ children }: any) => <p className={styles.ptLead}>{children}</p>,
     h1:         ({ children }: any) => <h1 className={styles.ptH1}>{children}</h1>,
     h2:         ({ children }: any) => <h2 className={styles.ptH2}>{children}</h2>,
     h3:         ({ children }: any) => <h3 className={styles.ptH3}>{children}</h3>,
@@ -28,7 +33,7 @@ export const portableTextComponents = {
     blockquote: ({ children }: any) => <blockquote className={styles.ptBlockquote}>{children}</blockquote>,
   },
 
-  // ─── Lists ──────────────────────────────────────────────────────────────────
+  // ─── Lists ────────────────────────────────────────────────────────────────
   list: {
     bullet: ({ children }: any) => <ul className={styles.ptList}>{children}</ul>,
     number: ({ children }: any) => <ol className={`${styles.ptList} ${styles.ptListOrdered}`}>{children}</ol>,
@@ -38,7 +43,7 @@ export const portableTextComponents = {
     number: ({ children }: any) => <li className={styles.ptListItem}>{children}</li>,
   },
 
-  // ─── Inline marks ───────────────────────────────────────────────────────────
+  // ─── Inline marks ─────────────────────────────────────────────────────────
   marks: {
     strong: ({ children }: any) => <strong className={styles.ptStrong}>{children}</strong>,
     em:     ({ children }: any) => <em className={styles.ptEm}>{children}</em>,

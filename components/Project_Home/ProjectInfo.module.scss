@@ -5,183 +5,142 @@
   font-family: $font-body;
 }
 
-// ─── Header ───────────────────────────────────────────────────────────────────
-.drawerHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 0.8rem;
-  margin-bottom: 1.4rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid $rule;
-}
-
-.fullCaseLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-family: $font-mono;
-  font-size: 0.72rem;           // was 0.62rem
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: $violet-400;           // was $violet-600
-  text-decoration: none;
-  position: relative;
-  transition: color 0.2s ease;
-
-  &::before {
-    content: '▪';
-    font-size: 0.55rem;
-    color: $violet-400;
-    transition: color 0.2s ease, transform 0.2s ease;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: $violet-400;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.25s ease;
-  }
-
-  svg { transition: transform 0.2s ease; }
-
-  &:hover {
-    color: $indigo-400;         // was $indigo-600
-
-    &::before { color: $indigo-400; transform: scale(1.4); }
-    &::after  { transform: scaleX(1); }
-    svg       { transform: translate(2px, -2px); }
-  }
-}
-
-// Status badge
-.statusBadge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-family: $font-mono;
-  font-size: 0.6rem;            // was 0.58rem
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: $ink-3;
-
-  &::before {
-    content: '';
-    display: inline-block;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: $ink-4;
-    flex-shrink: 0;
-  }
-
-  &[data-status="live"]::before     { background: $success-color; }
-  &[data-status="wip"]::before      { background: $warning-color; }
-  &[data-status="archived"]::before { background: $ink-4; }
-}
-
-// ─── Challenges label — pill, lighter violet ──────────────────────────────────
-.challengesLabel {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-family: $font-mono;
-  font-size: 0.62rem;           // was 0.6rem
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  margin-bottom: 1rem;
-
-  span {
-    color: $violet-400;         // was $violet-600
-    border: 1px solid $violet-200;
-    border-radius: $radius-sm;
-    padding: 0.2rem 0.6rem 0.25rem;
-    background: $violet-50;
-    letter-spacing: 0.14em;
-    white-space: nowrap;
-  }
-
-  &::after {
-    content: '';
-    display: block;
-    width: 2rem;
-    height: 1px;
-    background: $rule;
-  }
-}
-
-// ─── Challenge grid ───────────────────────────────────────────────────────────
-.challengeGrid {
+// ─── Two-column layout ────────────────────────────────────────────────────────
+.drawerLayout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0 2rem;
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  align-items: start;
 
   @include responsive("md", "max") {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
+}
+
+// ─── Left: challenge menu ─────────────────────────────────────────────────────
+.menuSection {}
+
+.menuLabel {
+  display: block;
+  font-family: $font-mono;
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: $ink-4;
+  margin-bottom: 0.6rem;
+}
+
+.challengeList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .challengeItem {
-  border-bottom: 1px solid $rule;
+  border-top: 1px solid $rule;
+
+  &:last-child { border-bottom: 1px solid $rule; }
 }
 
-.challengeBtn {
-  width: 100%;
-  text-align: left;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: $font-body;
-  font-size: 0.92rem;           // was 0.83rem
-  color: $ink-2;
-  padding: 0.6rem 0;
+// Each challenge — clearly a menu item: number + title + arrow
+.challengeLink {
   display: flex;
-  align-items: baseline;
-  gap: 0.55rem;
-  line-height: 1.4;
-  position: relative;
-  transition: color 0.2s ease;
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: $violet-400;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.22s ease;
-  }
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.55rem 0;
+  text-decoration: none;
+  color: $ink-2;
+  transition: color 0.18s ease, padding-left 0.18s ease;
 
   &:hover {
-    color: $violet-400;         // was $violet-600
+    color: $violet-400;
+    padding-left: 0.3rem;   // subtle indent on hover — reads as interactive
 
-    &::after { transform: scaleX(1); }
+    .challengeNum  { color: $violet-400; }
+    .challengeArrow { opacity: 1; transform: translate(2px, -2px); }
   }
 }
 
 .challengeNum {
   font-family: $font-mono;
-  font-size: 0.6rem;            // was 0.56rem
+  font-size: 0.58rem;
   color: $ink-4;
   flex-shrink: 0;
-  letter-spacing: 0.06em;
-  transition: color 0.2s ease;
+  letter-spacing: 0.08em;
+  transition: color 0.18s ease;
+  min-width: 1.4rem;
+}
 
-  .challengeBtn:hover & {
+.challengeTitle {
+  font-family: $font-body;
+  font-size: 0.88rem;
+  font-weight: 300;
+  flex: 1;
+  line-height: 1.4;
+}
+
+.challengeArrow {
+  flex-shrink: 0;
+  color: $violet-200;           // visibile ma muto a riposo
+  opacity: 1;                   // sempre visibile — segnala che è un link
+  transition: color 0.18s ease, transform 0.18s ease;
+
+  .challengeLink:hover & {
     color: $violet-400;
+    transform: translateX(3px); // si sposta a destra su hover
+  }
+}
+
+// ─── Right: CTA block ─────────────────────────────────────────────────────────
+.ctaSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  padding-left: 2rem;
+  border-left: 1px solid $rule;
+
+  @include responsive("md", "max") {
+    align-items: flex-start;
+    padding-left: 0;
+    border-left: none;
+    border-top: 1px solid $rule;
+    padding-top: 1rem;
+  }
+}
+
+.ctaLabel {
+  font-family: $font-mono;
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: $ink-4;
+}
+
+// Clearly a button — filled, not text
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: $font-mono;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $bg-page;
+  background: linear-gradient(135deg, $violet-400, $indigo-400);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: $radius-sm;
+  white-space: nowrap;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+
+  svg { transition: transform 0.2s ease; }
+
+  &:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+    svg { transform: translate(2px, -2px); }
   }
 }
 

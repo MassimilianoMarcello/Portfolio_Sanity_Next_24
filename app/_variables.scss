@@ -1,17 +1,15 @@
 // _variables.scss
 // ─── Typography ───────────────────────────────────────────────────────────────
-// Zeitung Pro loaded via next/font/local in styles/fonts.ts
-// IBM Plex Mono loaded via next/font/google or local
-$font-serif: var(--font-zeitung), serif;// Display, titles, body — your original
-
-$font-body:  var(--font-zeitung), serif;// Body copy — same family, lighter weight
-$font-mono:    'IBM Plex Mono', monospace;         // Tags, labels, indices
+$font-serif:   var(--font-zeitung), serif;
+$font-body:    var(--font-zeitung), serif;
+$font-mono:    'IBM Plex Mono', monospace;
 $font-stack:   $font-body;
 
 // ─── Violet-to-indigo palette ─────────────────────────────────────────────────
 $violet-50:   #f0edf8;
 $violet-100:  #ddd5f0;
 $violet-200:  #c3b3e4;
+$violet-300:  #aa93d2;   // mid — PT list accent, card edge markers
 $violet-400:  #9175ba;
 $violet-600:  #6a4da0;
 $violet-800:  #3d2373;
@@ -62,6 +60,15 @@ $spacing-unit: 16px;
 $radius-sm:    4px;
 $radius-md:    6px;
 $radius-lg:    12px;
+
+// ─── Portable Text tokens — shared across singleProject and blog ──────────────
+$pt-accent-color:       $violet-300;   // list item left accent (rest)
+$pt-accent-hover:       $violet-400;   // list item left accent (hover)
+$pt-accent-height:      60%;           // accent line covers only 60% of item height, centered
+$pt-divider-color:      $rule;
+$pt-lead-size:          1.1rem;        // .ptLead first paragraph
+$pt-callout-bg:         $violet-50;
+$pt-callout-border:     $violet-400;
 
 
 

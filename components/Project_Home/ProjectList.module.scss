@@ -1,49 +1,6 @@
 // components/Project_Home/ProjectList.module.scss
 @import "../../app/main.module.scss";
 
-@mixin action-link($color, $hover-color) {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-family: $font-mono;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: $color;
-  text-decoration: none;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  position: relative;
-  transition: color 0.2s ease;
-
-  &::before {
-    content: '▪';
-    font-size: 0.55rem;
-    color: $color;
-    transition: color 0.2s ease, transform 0.2s ease;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0; right: 0;
-    height: 1px;
-    background: $color;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.25s ease;
-  }
-
-  &:hover {
-    color: $hover-color;
-    &::before { color: $hover-color; transform: scale(1.4); }
-    &::after  { transform: scaleX(1); }
-  }
-}
-
 // ─── Outer container ──────────────────────────────────────────────────────────
 .projectListContainer {
   padding: 0 3rem 5rem;
@@ -153,7 +110,6 @@
 }
 
 // ─── Individual card ──────────────────────────────────────────────────────────
-// Grid: techRow spans full width (row 1), then image + body side by side (row 2)
 .projectCard {
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -175,31 +131,46 @@
   }
 }
 
-// ─── Tech row — full width, top of card, no padding-top ──────────────────────
+// ─── Tech row ─────────────────────────────────────────────────────────────────
 .techRow {
   grid-column: 1 / -1;
   grid-row: 1;
-  padding: 0.7rem 0 0.6rem;
-  margin-bottom: 1.5rem;
+  background-color: $bg-elevated;
+  padding: 0.7rem 1.5rem 0.6rem;
+  margin: 0 -1.5rem 1.5rem;
+  border-radius: $radius-md $radius-md 0 0;
+
+  @include responsive("md", "max") {
+    padding: 0.7rem 1rem 0.6rem;
+    margin: 0 -1rem 1.2rem;
+  }
+}
+
+// ─── Left column: image + status ─────────────────────────────────────────────
+.cardLeft {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  align-self: start;
+
+  @include responsive("md", "max") {
+    grid-column: 1;
+    grid-row: 2;
+  }
 }
 
 // ─── Image ────────────────────────────────────────────────────────────────────
 .cardImageWrap {
-  grid-column: 1;
-  grid-row: 2;
   position: relative;
   overflow: hidden;
   border-radius: $radius-md;
   border: 1px solid $rule-strong;
   aspect-ratio: 4 / 3;
   background: $bg-elevated;
-  align-self: start;
 
-  @include responsive("md", "max") {
-    grid-column: 1;
-    grid-row: 2;
-    aspect-ratio: 16 / 9;
-  }
+  @include responsive("md", "max") { aspect-ratio: 16 / 9; }
 }
 
 .cardImg {
@@ -225,7 +196,31 @@
   padding: 2px 6px;
 }
 
-// ─── Body ─────────────────────────────────────────────────────────────────────
+// ─── Status — under image ─────────────────────────────────────────────────────
+.statusPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: $font-mono;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: $ink-3;
+}
+
+.statusDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: $ink-4;
+  flex-shrink: 0;
+
+  &[data-status="live"]     { background: $success-color; }
+  &[data-status="wip"]      { background: $warning-color; }
+  &[data-status="archived"] { background: $ink-4; }
+}
+
+// ─── Right column: body ───────────────────────────────────────────────────────
 .cardBody {
   grid-column: 2;
   grid-row: 2;
@@ -239,6 +234,8 @@
     grid-row: 3;
   }
 }
+
+.cardTop {}
 
 .cardTitle {
   font-family: $font-serif;
@@ -263,13 +260,7 @@
   p { margin: 0; }
 }
 
-.cardMeta {
-  display: flex;
-  flex-direction: column;
-  gap: 0.9rem;
-}
-
-// ─── Footer ───────────────────────────────────────────────────────────────────
+// ─── Footer: links left, case study right ────────────────────────────────────
 .cardFooter {
   display: flex;
   align-items: center;
@@ -281,35 +272,63 @@
 .cardLinks {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  gap: 0.5rem;
   flex-wrap: wrap;
 }
 
-.actionLink   { @include action-link($violet-400, $indigo-400); }
-.caseStudyBtn { @include action-link($indigo-400, $indigo-600); }
+// GitHub / Live — small filled buttons
+.actionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: $font-mono;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $violet-600;
+  background: $violet-50;
+  border: 1px solid $violet-200;
+  border-radius: $radius-sm;
+  padding: 0.3rem 0.7rem;
+  text-decoration: none;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
 
-// ─── Status pill ──────────────────────────────────────────────────────────────
-.statusPill {
+  &:hover {
+    background: $violet-400;
+    color: #fff;
+    border-color: $violet-400;
+  }
+}
+
+// Case study — toggle button, right side, visually distinct
+.caseStudyBtn {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
   font-family: $font-mono;
-  font-size: 0.6rem;
+  font-size: 0.62rem;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: $ink-3;
+  letter-spacing: 0.1em;
+  color: $bg-page;
+  background: linear-gradient(135deg, $violet-400, $indigo-400);
+  border: none;
+  border-radius: $radius-sm;
+  padding: 0.35rem 0.8rem;
+  cursor: pointer;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+
+  svg { transition: transform 0.25s ease; }
+
+  &:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+  }
 }
 
-.statusDot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: $ink-4;
-  flex-shrink: 0;
-
-  &[data-status="live"]     { background: $success-color; }
-  &[data-status="wip"]      { background: $warning-color; }
-  &[data-status="archived"] { background: $ink-4; }
+// Open state — inverted colors
+.caseStudyOpen {
+  background: $indigo-800;
+  color: $violet-200;
 }
 
 // ─── Drawer ───────────────────────────────────────────────────────────────────
@@ -331,36 +350,6 @@
   border-radius: $radius-md;
   padding: 1.5rem 2rem;
   margin-top: 1.2rem;
-}
-
-// ─── Toggle ───────────────────────────────────────────────────────────────────
-.toggleIcon {
-  position: absolute;
-  top: 0.7rem;
-  right: 0;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  border: 1px solid $rule-strong;
-  background: $bg-page;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: $ink-3;
-  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-
-  svg { transition: transform 0.3s ease; }
-
-  &:hover { border-color: $violet-400; color: $violet-400; }
-}
-
-.toggleOpen {
-  background: linear-gradient(135deg, $violet-400, $indigo-400);
-  border-color: transparent;
-  color: #fff;
-
-  svg { transform: rotate(45deg); }
 }
 
 // ─── Animation ────────────────────────────────────────────────────────────────

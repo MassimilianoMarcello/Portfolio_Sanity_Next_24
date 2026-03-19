@@ -1,4 +1,5 @@
 @import "../../main.module.scss";
+@import "../../_portableText.scss";
 
 // ─── Blog list ────────────────────────────────────────────────────────────────
 
@@ -103,7 +104,6 @@
     .postThumbImg { transform: scale(1.03); }
   }
 
-  // Senza cover image — solo indice e content
   &:not(:has(.postThumb)) {
     grid-template-columns: 2rem 1fr;
   }
@@ -113,7 +113,6 @@
     gap: 0 1rem;
     padding: 2rem 0;
 
-    // Nascondi thumb su mobile
     .postThumb { display: none; }
   }
 }
@@ -396,11 +395,10 @@
   margin-bottom: 0.8rem;
 
   @include responsive("sm", "max") {
-    display: none; // già nella sidebar
+    display: none;
   }
 }
 
-// .postTitle riusato sia in lista che in singolo post
 .postTitle {
   font-family: $font-serif;
   font-size: 2.4rem;
@@ -523,49 +521,12 @@
   border-radius: 0 $radius-md $radius-md 0;
 }
 
-.ptList {
-  margin: 1rem 0 1.8rem 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  max-width: 65ch;
-}
+// ─── Lists — shared mixin, blog-specific sizing ───────────────────────────────
+@include pt-lists;
+@include pt-extras;
 
-.ptListOrdered {
-  counter-reset: pt-list;
-}
-
-.ptListItem {
-  font-family: $font-body;
-  font-size: 1rem;
-  font-weight: 300;
-  color: $text-color;
-  line-height: 1.75;
-  position: relative;
-  padding-left: 1.4rem;
-
-  .ptList:not(.ptListOrdered) &::before {
-    content: '▪';
-    position: absolute;
-    left: 0;
-    font-size: 0.42rem;
-    top: 0.55em;
-    color: $primary-color;
-  }
-
-  .ptListOrdered &::before {
-    counter-increment: pt-list;
-    content: counter(pt-list) '.';
-    position: absolute;
-    left: 0;
-    font-family: $font-mono;
-    font-size: 0.72rem;
-    color: $primary-color;
-    top: 0.05em;
-  }
-}
+.ptList     { margin: 1rem 0 1.8rem 0; max-width: 65ch; }
+.ptListItem { font-size: 1rem; font-weight: 300; color: $text-color; line-height: 1.75; }
 
 .ptStrong { font-weight: 600; color: $ink; }
 .ptEm     { font-style: italic; color: $text-color; }
@@ -593,7 +554,8 @@
   }
 }
 
-// Immagine inline nel PortableText
+// ─── Inline images ────────────────────────────────────────────────────────────
+
 .ptImage {
   margin: 2.5rem 0;
   display: flex;

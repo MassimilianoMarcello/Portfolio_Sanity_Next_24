@@ -1,0 +1,163 @@
+// app/_portableText.scss
+// ─── Shared Portable Text mixins ─────────────────────────────────────────────
+// Import this after _variables in any module that uses PortableText.
+// Each module still owns its own sizing/spacing — only structural patterns live here.
+
+// ─── List styles — no bullet, short centered accent line ─────────────────────
+@mixin pt-lists {
+
+  .ptList {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .ptListOrdered {
+    counter-reset: pt-list;
+  }
+
+  .ptListItem {
+    position: relative;
+    padding: 0.55rem 0 0.55rem 1.3rem;
+    background: transparent;
+    transition: background 0.18s ease;
+
+    // Divider between items — no double borders
+    & + & {
+      border-top: 1px solid $pt-divider-color;
+    }
+
+    // Short centered accent line — pseudo element, not border-left
+    // Covers $pt-accent-height of the item height, vertically centered
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 2px;
+      height: $pt-accent-height;   // 60% — centered, doesn't reach top/bottom edges
+      background: $pt-accent-color;
+      border-radius: 2px;
+      transition: background 0.18s ease, height 0.18s ease;
+    }
+
+    &:hover {
+      background: $bg-surface;
+
+      &::before {
+        background: $pt-accent-hover;
+        height: 80%;   // grows slightly on hover — subtle feedback
+      }
+    }
+
+    // Ordered — number replaces accent line
+    .ptListOrdered & {
+      padding-left: 0;
+      display: grid;
+      grid-template-columns: 2rem 1fr;
+      gap: 0 0.5rem;
+      border-top: 1px solid $pt-divider-color;
+
+      &:first-child { border-top: none; }
+
+      // Remove the ::before accent line for ordered items
+      &::before {
+        display: none;
+      }
+
+      // Number via ::after instead
+      &::after {
+        counter-increment: pt-list;
+        content: counter(pt-list, decimal-leading-zero);
+        font-family: $font-mono;
+        font-size: 0.62rem;
+        color: $violet-400;
+        letter-spacing: 0.06em;
+        padding-top: 0.18em;
+        grid-column: 1;
+        grid-row: 1;
+        align-self: start;
+      }
+    }
+  }
+}
+
+// ─── Extra refined elements ───────────────────────────────────────────────────
+@mixin pt-extras {
+
+  // Lead paragraph — first p after a heading, larger and slightly heavier
+  // Usage in Sanity: add a custom block style "lead" or apply manually
+  .ptLead {
+    font-family: $font-body;
+    font-weight: 400;   // slightly heavier than 300 body
+    font-size: $pt-lead-size;
+    color: $ink-2;
+    line-height: 1.8;
+    margin: 0 0 1.6rem;
+
+    &:last-child { margin-bottom: 0; }
+  }
+
+  // Callout block — custom Sanity block type for notes/tips/warnings
+  // Add a "callout" type in your schema to use this
+  .ptCallout {
+    margin: 1.8rem 0;
+    padding: 1rem 1.2rem 1rem 1.4rem;
+    background: $pt-callout-bg;
+    border-left: 2px solid $pt-callout-border;
+    border-radius: 0 $radius-md $radius-md 0;
+    font-family: $font-body;
+    font-size: 0.92rem;
+    font-weight: 300;
+    color: $ink-2;
+    line-height: 1.75;
+  }
+
+  // Divider — <hr> styled as the card divider pattern
+  // A thin line with a small centered violet rect
+  .ptDivider {
+    border: none;
+    margin: 2.5rem 0;
+    position: relative;
+    height: 1px;
+    background: $rule;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 24px;
+      height: 3px;
+      background: $violet-300;
+      border-radius: 2px;
+    }
+  }
+
+  // Caption — for images, figures, small contextual notes
+  .ptCaption {
+    font-family: $font-mono;
+    font-size: 0.6rem;
+    color: $ink-4;
+    letter-spacing: 0.06em;
+    line-height: 1.5;
+    margin-top: 0.5rem;
+  }
+
+  // Keyboard shortcut — inline <kbd> styling
+  .ptKbd {
+    font-family: $font-mono;
+    font-size: 0.78em;
+    background: $bg-elevated;
+    border: 1px solid $rule-strong;
+    border-bottom-width: 2px;
+    border-radius: $radius-sm;
+    padding: 0.1em 0.4em;
+    color: $ink-2;
+    white-space: nowrap;
+  }
+}
