@@ -52,20 +52,14 @@ const ProjectList: React.FC<ProjectListProps> = ({
   toggleProjectInfo,
 }) => {
   const [exitingId, setExitingId] = useState<string | null>(null);
-  // Ref to track the auto-close timeout so we can cancel it on re-enter
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleToggle = useCallback(
     (projectId: string) => {
-      // Cancel any pending auto-close
       if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
-
       if (openProjectId === projectId) {
         setExitingId(projectId);
-        setTimeout(() => {
-          toggleProjectInfo(null);
-          setExitingId(null);
-        }, 280);
+        setTimeout(() => { toggleProjectInfo(null); setExitingId(null); }, 280);
       } else {
         toggleProjectInfo(projectId);
       }
@@ -73,39 +67,31 @@ const ProjectList: React.FC<ProjectListProps> = ({
     [openProjectId, toggleProjectInfo]
   );
 
-  // Auto-close after 1.5s when mouse leaves the card
   const handleMouseLeave = useCallback(
     (projectId: string) => {
       if (openProjectId !== projectId) return;
       closeTimerRef.current = setTimeout(() => {
         setExitingId(projectId);
-        setTimeout(() => {
-          toggleProjectInfo(null);
-          setExitingId(null);
-        }, 280);
+        setTimeout(() => { toggleProjectInfo(null); setExitingId(null); }, 280);
       }, 1500);
     },
     [openProjectId, toggleProjectInfo]
   );
 
-  // Cancel auto-close if mouse re-enters the card
   const handleMouseEnter = useCallback(() => {
     if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
   }, []);
 
   const groupedProjects = useMemo(
-    () =>
-      projects.reduce((acc, project) => {
-        if (!acc[project.importance]) acc[project.importance] = [];
-        acc[project.importance].push(project);
-        return acc;
-      }, {} as Record<string, Project[]>),
+    () => projects.reduce((acc, project) => {
+      if (!acc[project.importance]) acc[project.importance] = [];
+      acc[project.importance].push(project);
+      return acc;
+    }, {} as Record<string, Project[]>),
     [projects]
   );
 
-  const activeCategories = CATEGORIES.filter(
-    (cat) => groupedProjects[cat.value]?.length
-  );
+  const activeCategories = CATEGORIES.filter(cat => groupedProjects[cat.value]?.length);
 
   return (
     <div className={styles.projectListContainer}>
@@ -135,6 +121,11 @@ const ProjectList: React.FC<ProjectListProps> = ({
                   onMouseLeave={() => handleMouseLeave(project._id)}
                   onMouseEnter={handleMouseEnter}
                 >
+                  {/* Technologies — spans full top, grid-column 1 / -1 */}
+                  <div className={styles.techRow}>
+                    <TechnologiesUsed technologies={project.technologies} />
+                  </div>
+
                   {/* Image */}
                   <div className={styles.cardImageWrap}>
                     <Image
@@ -153,9 +144,6 @@ const ProjectList: React.FC<ProjectListProps> = ({
                   {/* Body */}
                   <div className={styles.cardBody}>
                     <div className={styles.cardTop}>
-                      <div className={styles.cardIndex}>
-                        {String(idx + 1).padStart(2, '0')}
-                      </div>
                       <h3 className={styles.cardTitle}>{project.name}</h3>
                       <div className={styles.cardDesc}>
                         <PortableText value={project.content} />
@@ -163,8 +151,6 @@ const ProjectList: React.FC<ProjectListProps> = ({
                     </div>
 
                     <div className={styles.cardMeta}>
-                      <TechnologiesUsed technologies={project.technologies} />
-
                       <div className={styles.cardFooter}>
                         <div className={styles.cardLinks}>
                           {project.githubUrl && (
@@ -197,10 +183,7 @@ const ProjectList: React.FC<ProjectListProps> = ({
                         </div>
 
                         <div className={styles.statusPill}>
-                          <span
-                            className={styles.statusDot}
-                            data-status={status}
-                          />
+                          <span className={styles.statusDot} data-status={status} />
                           {STATUS_LABEL[status] ?? status}
                         </div>
                       </div>
@@ -208,9 +191,7 @@ const ProjectList: React.FC<ProjectListProps> = ({
                   </div>
 
                   {/* Drawer */}
-                  <div
-                    className={`${styles.drawer} ${isOpen && !isExiting ? styles.drawerOpen : ''} ${isExiting ? styles.drawerExit : ''}`}
-                  >
+                  <div className={`${styles.drawer} ${isOpen && !isExiting ? styles.drawerOpen : ''} ${isExiting ? styles.drawerExit : ''}`}>
                     <div className={styles.drawerInner}>
                       <ProjectInfo project={project} openProjectId={openProjectId} />
                     </div>
@@ -223,12 +204,7 @@ const ProjectList: React.FC<ProjectListProps> = ({
                     aria-label={isOpen ? 'Close case study' : 'Open case study'}
                   >
                     <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-                      <path
-                        d="M6 1V11M1 6H11"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                      />
+                      <path d="M6 1V11M1 6H11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
                     </svg>
                   </button>
                 </article>

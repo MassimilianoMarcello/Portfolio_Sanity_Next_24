@@ -1,13 +1,12 @@
 // components/Project_Home/ProjectList.module.scss
 @import "../../app/main.module.scss";
 
-// ─── Mixin: action link (▪ + underline grow) ──────────────────────────────────
 @mixin action-link($color, $hover-color) {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
   font-family: $font-mono;
-  font-size: 0.75rem;           // was 0.62rem — GitHub/Live più leggibili
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: $color;
@@ -30,8 +29,7 @@
     content: '';
     position: absolute;
     bottom: -2px;
-    left: 0;
-    right: 0;
+    left: 0; right: 0;
     height: 1px;
     background: $color;
     transform: scaleX(0);
@@ -41,34 +39,24 @@
 
   &:hover {
     color: $hover-color;
-
-    &::before {
-      color: $hover-color;
-      transform: scale(1.4);
-    }
-
-    &::after {
-      transform: scaleX(1);
-    }
+    &::before { color: $hover-color; transform: scale(1.4); }
+    &::after  { transform: scaleX(1); }
   }
 }
 
 // ─── Outer container ──────────────────────────────────────────────────────────
 .projectListContainer {
   padding: 0 3rem 5rem;
-
-  @include responsive("md", "max") {
-    padding: 0 1.2rem 3rem;
-  }
+  @include responsive("md", "max") { padding: 0 1.2rem 3rem; }
 }
 
-// ─── Section kicker — sticky pill tag ───────────────────────────────────────
+// ─── Section kicker ───────────────────────────────────────────────────────────
 .sectionKicker {
   position: sticky;
-  top: 64px; // altezza navbar
+  top: 64px;
   z-index: 10;
-  padding: 0.6rem 3rem; // stesso padding orizzontale del container
-  margin: 0 -3rem;      // sfonda i bordi del container per andare full-width
+  padding: 0.6rem 3rem;
+  margin: 0 -3rem;
   background: $bg-page;
   display: flex;
   align-items: center;
@@ -88,7 +76,7 @@
   }
 
   @include responsive("md", "max") {
-    top: 110px; // navbar mobile più alta
+    top: 110px;
     padding: 0.6rem 1.2rem;
     margin: 0 -1.2rem;
   }
@@ -100,23 +88,15 @@
   grid-template-columns: 200px 1fr;
   gap: 0 3rem;
   margin-top: 1.5rem;
-  padding-top: 0;
-
-  // Il primo categorySection non ha border-top — è già separato dalla pill
-  &:first-of-type {
-    border-top: none;
-    margin-top: 1rem;
-  }
   opacity: 0;
   animation: fadeUp 0.5s ease forwards;
 
+  &:first-of-type { margin-top: 1rem; }
   &:nth-child(2) { animation-delay: 0.05s; }
   &:nth-child(3) { animation-delay: 0.15s; }
   &:nth-child(4) { animation-delay: 0.25s; }
 
-  @include responsive("md", "max") {
-    grid-template-columns: 1fr;
-  }
+  @include responsive("md", "max") { grid-template-columns: 1fr; }
 }
 
 // ─── Sidebar ──────────────────────────────────────────────────────────────────
@@ -150,7 +130,7 @@
   font-family: $font-serif;
   font-size: 1.45rem;
   font-weight: 600;
-  background: linear-gradient(135deg, $violet-400 0%, $indigo-400 100%); // was 600→600, now lighter
+  background: linear-gradient(135deg, $violet-400 0%, $indigo-400 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -173,38 +153,51 @@
 }
 
 // ─── Individual card ──────────────────────────────────────────────────────────
+// Grid: techRow spans full width (row 1), then image + body side by side (row 2)
 .projectCard {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  grid-template-rows: auto auto;
-  gap: 2rem;
-  padding: 2.5rem 1rem 2.5rem 0;
-  border-bottom: 1px solid $rule;
+  grid-template-rows: auto auto auto;
+  gap: 0 2rem;
+  padding: 0 1.5rem 2rem;
+  margin-bottom: 1.5rem;
+  background: $bg-surface;
+  border-radius: $radius-md;
   position: relative;
   transition: background 0.25s ease;
 
-  &:hover {
-    background: $bg-surface;
-  }
+  &:hover { background: $bg-elevated; }
 
   @include responsive("md", "max") {
     grid-template-columns: 1fr;
-    gap: 1.2rem;
-    padding: 1.8rem 0;
+    padding: 0 1rem 1.5rem;
+    margin-bottom: 1rem;
   }
+}
+
+// ─── Tech row — full width, top of card, no padding-top ──────────────────────
+.techRow {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  padding: 0.7rem 0 0.6rem;
+  margin-bottom: 1.5rem;
 }
 
 // ─── Image ────────────────────────────────────────────────────────────────────
 .cardImageWrap {
+  grid-column: 1;
+  grid-row: 2;
   position: relative;
   overflow: hidden;
   border-radius: $radius-md;
   border: 1px solid $rule-strong;
   aspect-ratio: 4 / 3;
   background: $bg-elevated;
-  grid-row: 1;
+  align-self: start;
 
   @include responsive("md", "max") {
+    grid-column: 1;
+    grid-row: 2;
     aspect-ratio: 16 / 9;
   }
 }
@@ -216,9 +209,7 @@
   display: block;
   transition: transform 0.5s ease;
 
-  .projectCard:hover & {
-    transform: scale(1.03);
-  }
+  .projectCard:hover & { transform: scale(1.03); }
 }
 
 .cardYear {
@@ -236,30 +227,24 @@
 
 // ─── Body ─────────────────────────────────────────────────────────────────────
 .cardBody {
+  grid-column: 2;
+  grid-row: 2;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 1.2rem;
-  grid-row: 1;
 
   @include responsive("md", "max") {
-    grid-row: 2;
+    grid-column: 1;
+    grid-row: 3;
   }
-}
-
-.cardIndex {
-  font-family: $font-mono;
-  font-size: 0.62rem;           // was 0.58rem
-  color: $ink-3;                // was $ink-4 — più visibile
-  letter-spacing: 0.12em;
-  margin-bottom: 0.35rem;
 }
 
 .cardTitle {
   font-family: $font-serif;
   font-size: 1.6rem;
   font-weight: 600;
-  background: linear-gradient(120deg, $violet-400 0%, $indigo-400 60%, $indigo-600 100%); // lighter
+  background: linear-gradient(120deg, $violet-400 0%, $indigo-400 60%, $indigo-600 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -270,7 +255,7 @@
 
 .cardDesc {
   font-family: $font-body;
-  font-size: 0.92rem;           // was 0.88rem
+  font-size: 0.92rem;
   color: $ink-2;
   line-height: 1.75;
   font-weight: 300;
@@ -284,7 +269,7 @@
   gap: 0.9rem;
 }
 
-// ─── Footer row ───────────────────────────────────────────────────────────────
+// ─── Footer ───────────────────────────────────────────────────────────────────
 .cardFooter {
   display: flex;
   align-items: center;
@@ -300,7 +285,6 @@
   flex-wrap: wrap;
 }
 
-// lighter violet for action links — was $violet-600 (too dark)
 .actionLink   { @include action-link($violet-400, $indigo-400); }
 .caseStudyBtn { @include action-link($indigo-400, $indigo-600); }
 
@@ -310,7 +294,7 @@
   align-items: center;
   gap: 0.4rem;
   font-family: $font-mono;
-  font-size: 0.6rem;            // was 0.58rem
+  font-size: 0.6rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: $ink-3;
@@ -328,17 +312,14 @@
   &[data-status="archived"] { background: $ink-4; }
 }
 
-// ─── Challenges drawer ────────────────────────────────────────────────────────
+// ─── Drawer ───────────────────────────────────────────────────────────────────
 .drawer {
   grid-column: 1 / -1;
+  grid-row: 3;
   overflow: hidden;
   max-height: 0;
   opacity: 0;
   transition: max-height 0.38s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.28s ease;
-
-  @include responsive("md", "max") {
-    grid-column: 1;
-  }
 }
 
 .drawerOpen  { max-height: 600px; opacity: 1; }
@@ -349,14 +330,14 @@
   border: 1px solid $rule-strong;
   border-radius: $radius-md;
   padding: 1.5rem 2rem;
-  margin-bottom: 0.5rem;
+  margin-top: 1.2rem;
 }
 
-// ─── Toggle icon ─────────────────────────────────────────────────────────────
+// ─── Toggle ───────────────────────────────────────────────────────────────────
 .toggleIcon {
   position: absolute;
-  top: 2.5rem;
-  right: -0.5rem;
+  top: 0.7rem;
+  right: 0;
   width: 26px;
   height: 26px;
   border-radius: 50%;
@@ -371,19 +352,11 @@
 
   svg { transition: transform 0.3s ease; }
 
-  &:hover {
-    border-color: $violet-400;
-    color: $violet-400;
-  }
-
-  @include responsive("md", "max") {
-    top: 1.8rem;
-    right: 0;
-  }
+  &:hover { border-color: $violet-400; color: $violet-400; }
 }
 
 .toggleOpen {
-  background: linear-gradient(135deg, $violet-400, $indigo-400); // lighter gradient
+  background: linear-gradient(135deg, $violet-400, $indigo-400);
   border-color: transparent;
   color: #fff;
 

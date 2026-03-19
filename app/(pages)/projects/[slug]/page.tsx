@@ -9,11 +9,12 @@ import RepoAndWebSiteButtons from "@/components/ui/RepoAndWebSiteButtons";
 import FabButton from "./FabButton";
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export default async function Project({ params }: Props) {
-  const project = await getProject(params.slug);
+  const { slug } = await params;
+  const project = await getProject(slug);
 
   if (!project) {
     return <div className={styles.notFound}>Project not found.</div>;
@@ -22,7 +23,6 @@ export default async function Project({ params }: Props) {
   return (
     <div id="top" className={styles.projectContainer}>
 
-      {/* Sidebar — desktop sticky, mobile compact top bar */}
       {project.challenges && project.challenges.length > 0 && (
         <aside className={styles.sidebar}>
           <span className={styles.sidebarKicker}>Case study</span>
@@ -50,16 +50,13 @@ export default async function Project({ params }: Props) {
             <Link href="/" className={styles.backLink}>
               ← Back
             </Link>
-            {/* Versione sidebar — visibile solo su desktop */}
             <BackToTopButton className={styles.backToTopBtn} />
           </div>
         </aside>
       )}
 
-      {/* Main content */}
       <main className={styles.mainContent}>
 
-        {/* Header */}
         <header className={styles.projectHeader}>
           <span className={styles.headerKicker}>Case study</span>
           <h1 className={styles.projectTitle}>{project.name}</h1>
@@ -69,7 +66,6 @@ export default async function Project({ params }: Props) {
           />
         </header>
 
-        {/* Description */}
         <section className={styles.projectDescription}>
           {project.content ? (
             <PortableText value={project.content} components={portableTextComponents} />
@@ -78,7 +74,6 @@ export default async function Project({ params }: Props) {
           )}
         </section>
 
-        {/* Challenges */}
         {project.challenges && project.challenges.length > 0 && (
           <section className={styles.challengeDetails}>
             <span className={styles.sectionKicker}>Challenges &amp; solutions</span>
@@ -120,7 +115,6 @@ export default async function Project({ params }: Props) {
         )}
       </main>
 
-      {/* FAB Top — visibile solo su mobile */}
       <FabButton />
 
     </div>

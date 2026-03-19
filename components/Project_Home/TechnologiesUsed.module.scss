@@ -4,7 +4,7 @@
 .technologiesList {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem;
+
   list-style: none;
   padding: 0;
   margin: 0;
@@ -14,10 +14,10 @@
     font-size: 0.58rem;
     text-transform: uppercase;
     letter-spacing: 0.09em;
-    background: $tag-bg;          // $violet-50
+    background: $bg-page;         
     color: $tag-color;             // $violet-800
     padding: 0.2rem 0.6rem;
-    border-radius: $radius-sm;
+   
     border: 1px solid $rule;
     transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
 

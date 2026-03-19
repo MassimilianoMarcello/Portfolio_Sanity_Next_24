@@ -1,95 +1,96 @@
-// app/(pages)/blog_post/page.tsx
-// Server Component
-import { getPosts } from '@/sanity/sanity.query';
-import { Post } from '@/types/blog';
-import Link from 'next/link';
+// app/(pages)/blog_post/[slug]/page.tsx
+import { getPost } from '@/sanity/sanity.query';
+import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
-import styles from './blog.module.scss';
+import Link from 'next/link';
+import styles from '../blog.module.scss';
+import { blogPortableTextComponents } from '../blogPortableTextComponents';
 
-export default async function BlogPage() {
-  const posts: Post[] = await getPosts();
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
+export default async function PostPage({ params }: Props) {
+  const { slug } = await params;
+  const post = await getPost(slug);
+
+  if (!post) {
+    return <div className={styles.notFound}>Post not found.</div>;
+  }
 
   return (
-    <div className={styles.blogContainer}>
+    <div className={styles.postContainer}>
 
-      {/* Header */}
-      <header className={styles.blogHeader}>
-        <span className={styles.headerKicker}>Writing</span>
-        <h1 className={styles.blogTitle}>Blog</h1>
-        <p className={styles.blogSubtitle}>
-          Thoughts on code, design, and the things built in between.
-        </p>
-      </header>
+      <aside className={styles.postSidebar}>
+        <span className={styles.sidebarKicker}>Blog</span>
+        <p className={styles.sidebarTitle}>{post.title}</p>
 
-      {/* Post list */}
-      {posts.length === 0 ? (
-        <p className={styles.empty}>No posts yet. Check back soon.</p>
-      ) : (
-        <ul className={styles.postList}>
-          {posts.map((post, i) => (
-            <li key={post._id} className={styles.postItem}>
-              <Link href={`/blog_post/${post.slug}`} className={styles.postLink}>
-
-                {/* Index */}
-                <span className={styles.postIndex}>
-                  {String(i + 1).padStart(2, '0')}
+        {post.tags && post.tags.length > 0 && (
+          <div className={styles.sidebarTags}>
+            <span className={styles.sidebarTagsLabel}>Tags</span>
+            <div className={styles.sidebarTagList}>
+              {post.tags.map(tag => (
+                <span key={tag._id} className={styles.sidebarTag}>
+                  {tag.title}
                 </span>
+              ))}
+            </div>
+          </div>
+        )}
 
-                {/* Cover image — opzionale */}
-                {post.coverImage?.url && (
-                  <div className={styles.postThumb}>
-                    <Image
-                      src={post.coverImage.url}
-                      alt={post.coverImage.alt || post.title}
-                      fill
-                      sizes="120px"
-                      className={styles.postThumbImg}
-                    />
-                  </div>
-                )}
+        {post.publishedAt && (
+          <div className={styles.sidebarDate}>
+            <span className={styles.sidebarDateLabel}>Published</span>
+            <time dateTime={post.publishedAt}>
+              {new Date(post.publishedAt).toLocaleDateString('en-GB', {
+                day:   'numeric',
+                month: 'long',
+                year:  'numeric',
+              })}
+            </time>
+          </div>
+        )}
 
-                {/* Content */}
-                <div className={styles.postContent}>
-                  <div className={styles.postMeta}>
-                    {post.publishedAt && (
-                      <time className={styles.postDate} dateTime={post.publishedAt}>
-                        {new Date(post.publishedAt).toLocaleDateString('en-GB', {
-                          day:   'numeric',
-                          month: 'short',
-                          year:  'numeric',
-                        })}
-                      </time>
-                    )}
-                    {post.tags && post.tags.length > 0 && (
-                      <div className={styles.postTags}>
-                        {post.tags.map(tag => (
-                          <span key={tag._id} className={styles.postTag}>
-                            {tag.title}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+        <div className={styles.sidebarActions}>
+          <Link href="/blog_post" className={styles.backLink}>
+            ← All posts
+          </Link>
+        </div>
+      </aside>
 
-                  <h2 className={styles.postTitle}>{post.title}</h2>
+      <main className={styles.postMain}>
+        <header className={styles.postHeader}>
+          <span className={styles.postHeaderKicker}>Blog</span>
+          <h1 className={styles.postTitle}>{post.title}</h1>
+          {post.excerpt && (
+            <p className={styles.postHeaderExcerpt}>{post.excerpt}</p>
+          )}
+          {post.coverImage?.url && (
+            <figure className={styles.coverImageWrap}>
+              <Image
+                src={post.coverImage.url}
+                alt={post.coverImage.alt || post.title}
+                width={900}
+                height={500}
+                className={styles.coverImage}
+                priority
+              />
+              {post.coverImage.caption && (
+                <figcaption className={styles.coverCaption}>
+                  {post.coverImage.caption}
+                </figcaption>
+              )}
+            </figure>
+          )}
+        </header>
 
-                  {post.excerpt && (
-                    <p className={styles.postExcerpt}>{post.excerpt}</p>
-                  )}
-
-                  <span className={styles.postReadMore}>
-                    Read
-                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                      <path d="M2 8L8 2M8 2H3M8 2V7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </span>
-                </div>
-
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
+        <article className={styles.postContent}>
+          <PortableText
+            value={post.content}
+            components={blogPortableTextComponents}
+          />
+        </article>
+      </main>
 
     </div>
   );
