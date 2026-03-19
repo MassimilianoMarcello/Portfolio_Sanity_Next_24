@@ -25,7 +25,11 @@ export default async function BlogPage() {
         <ul className={styles.postList}>
           {posts.map((post, i) => (
             <li key={post._id} className={styles.postItem}>
-              <Link href={`/blog_post/${post.slug}`} className={styles.postLink}>
+              <Link
+                href={`/blog_post/${post.slug}`}
+                className={styles.postLink}
+                aria-label={post.title}
+              >
                 <span className={styles.postIndex}>
                   {String(i + 1).padStart(2, '0')}
                 </span>
@@ -42,7 +46,7 @@ export default async function BlogPage() {
                   </div>
                 )}
 
-                <div className={styles.postContent}>
+                <div className={styles.postCardContent}>
                   <div className={styles.postMeta}>
                     {post.publishedAt && (
                       <time className={styles.postDate} dateTime={post.publishedAt}>
@@ -63,13 +67,16 @@ export default async function BlogPage() {
                       </div>
                     )}
                   </div>
-                  <h2 className={styles.postTitle}>{post.title}</h2>
+
+                  <h2 className={styles.postCardTitle}>{post.title}</h2>
+
                   {post.excerpt && (
                     <p className={styles.postExcerpt}>{post.excerpt}</p>
                   )}
+
                   <span className={styles.postReadMore}>
                     Read
-                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
                       <path d="M2 8L8 2M8 2H3M8 2V7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </span>
