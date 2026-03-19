@@ -4,7 +4,6 @@ import styles from './singleProject.module.scss';
 
 export const portableTextComponents = {
 
-  // ─── Custom block types ───────────────────────────────────────────────────
   types: {
     code: ({ value }: { value: { code: string; language?: string } }) => (
       <CodeBlock
@@ -12,17 +11,13 @@ export const portableTextComponents = {
         language={value.language}
         className={styles.codeBlock}
         headerClassName={styles.codeBlockHeader}
+        dotsClassName={styles.codeBlockDots}
         langClassName={styles.codeBlockLang}
         bodyClassName={styles.codeBlockBody}
       />
     ),
-    callout: ({ value }: { value: { text: string } }) => (
-      <div className={styles.ptCallout}>{value.text}</div>
-    ),
-    divider: () => <hr className={styles.ptDivider} />,
   },
 
-  // ─── Block styles — single object, all styles here ────────────────────────
   block: {
     normal:     ({ children }: any) => <p className={styles.ptParagraph}>{children}</p>,
     lead:       ({ children }: any) => <p className={styles.ptLead}>{children}</p>,
@@ -33,17 +28,23 @@ export const portableTextComponents = {
     blockquote: ({ children }: any) => <blockquote className={styles.ptBlockquote}>{children}</blockquote>,
   },
 
-  // ─── Lists ────────────────────────────────────────────────────────────────
   list: {
     bullet: ({ children }: any) => <ul className={styles.ptList}>{children}</ul>,
-    number: ({ children }: any) => <ol className={`${styles.ptList} ${styles.ptListOrdered}`}>{children}</ol>,
-  },
-  listItem: {
-    bullet: ({ children }: any) => <li className={styles.ptListItem}>{children}</li>,
-    number: ({ children }: any) => <li className={styles.ptListItem}>{children}</li>,
+    // ↓ solo ptListOrdered — rimosso ptList che portava display:flex e interferiva col grid dei <li>
+    number: ({ children }: any) => <ol className={styles.ptListOrdered}>{children}</ol>,
   },
 
-  // ─── Inline marks ─────────────────────────────────────────────────────────
+  listItem: {
+    bullet: ({ children }: any) => <li className={styles.ptListItem}>{children}</li>,
+    // span wrapper — forza tutto il contenuto (testo + inline marks)
+    // in grid-column 2, lasciando grid-column 1 al numero ::after del mixin
+    number: ({ children }: any) => (
+      <li className={styles.ptListItem}>
+        <span className={styles.ptListItemText}>{children}</span>
+      </li>
+    ),
+  },
+
   marks: {
     strong: ({ children }: any) => <strong className={styles.ptStrong}>{children}</strong>,
     em:     ({ children }: any) => <em className={styles.ptEm}>{children}</em>,
@@ -59,16 +60,11 @@ export const portableTextComponents = {
           {children}
           {isExternal && (
             <svg
+              className={styles.ptLinkIcon}
               width="9" height="9" viewBox="0 0 10 10" fill="none"
-              style={{ display: 'inline-block', marginLeft: '0.2em', verticalAlign: 'middle' }}
+              aria-hidden="true"
             >
-              <path
-                d="M2 8L8 2M8 2H3M8 2V7"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
+              <path d="M2 8L8 2M8 2H3M8 2V7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           )}
         </a>

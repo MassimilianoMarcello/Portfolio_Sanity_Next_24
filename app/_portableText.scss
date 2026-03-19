@@ -6,15 +6,23 @@
 // ─── List styles — no bullet, short centered accent line ─────────────────────
 @mixin pt-lists {
 
-  .ptList {
+  // Stili comuni a entrambe le liste
+  .ptList,
+  .ptListOrdered {
     padding: 0;
     list-style: none;
-    display: flex;
-    flex-direction: column;
     gap: 0;
   }
 
+  // Unordered — flex column, accent line laterale sui <li>
+  .ptList {
+    display: flex;
+    flex-direction: column;
+  }
+
+  // Ordered — block, così i <li> con display:grid funzionano liberamente
   .ptListOrdered {
+    display: block;
     counter-reset: pt-list;
   }
 
@@ -24,13 +32,12 @@
     background: transparent;
     transition: background 0.18s ease;
 
-    // Divider between items — no double borders
+    // Divider tra item — niente doppi bordi
     & + & {
       border-top: 1px solid $pt-divider-color;
     }
 
-    // Short centered accent line — pseudo element, not border-left
-    // Covers $pt-accent-height of the item height, vertically centered
+    // Accent line — pseudo element centrato verticalmente
     &::before {
       content: '';
       position: absolute;
@@ -38,7 +45,7 @@
       top: 50%;
       transform: translateY(-50%);
       width: 2px;
-      height: $pt-accent-height;   // 60% — centered, doesn't reach top/bottom edges
+      height: $pt-accent-height;
       background: $pt-accent-color;
       border-radius: 2px;
       transition: background 0.18s ease, height 0.18s ease;
@@ -49,12 +56,12 @@
 
       &::before {
         background: $pt-accent-hover;
-        height: 80%;   // grows slightly on hover — subtle feedback
+        height: 80%;
       }
     }
 
-    // Ordered — number replaces accent line
-    .ptListOrdered & {
+    // Ordered — il numero sostituisce l'accent line
+    .ptListOrdered > & {
       padding-left: 0;
       display: grid;
       grid-template-columns: 2rem 1fr;
@@ -63,12 +70,12 @@
 
       &:first-child { border-top: none; }
 
-      // Remove the ::before accent line for ordered items
+      // Rimuove ::before accent line per gli ordered
       &::before {
         display: none;
       }
 
-      // Number via ::after instead
+      // Numero via ::after
       &::after {
         counter-increment: pt-list;
         content: counter(pt-list, decimal-leading-zero);
@@ -89,10 +96,9 @@
 @mixin pt-extras {
 
   // Lead paragraph — first p after a heading, larger and slightly heavier
-  // Usage in Sanity: add a custom block style "lead" or apply manually
   .ptLead {
     font-family: $font-body;
-    font-weight: 400;   // slightly heavier than 300 body
+    font-weight: 400;
     font-size: $pt-lead-size;
     color: $ink-2;
     line-height: 1.8;
@@ -101,8 +107,7 @@
     &:last-child { margin-bottom: 0; }
   }
 
-  // Callout block — custom Sanity block type for notes/tips/warnings
-  // Add a "callout" type in your schema to use this
+  // Callout block
   .ptCallout {
     margin: 1.8rem 0;
     padding: 1rem 1.2rem 1rem 1.4rem;
@@ -116,8 +121,7 @@
     line-height: 1.75;
   }
 
-  // Divider — <hr> styled as the card divider pattern
-  // A thin line with a small centered violet rect
+  // Divider
   .ptDivider {
     border: none;
     margin: 2.5rem 0;
@@ -138,7 +142,7 @@
     }
   }
 
-  // Caption — for images, figures, small contextual notes
+  // Caption
   .ptCaption {
     font-family: $font-mono;
     font-size: 0.6rem;
@@ -148,7 +152,7 @@
     margin-top: 0.5rem;
   }
 
-  // Keyboard shortcut — inline <kbd> styling
+  // Keyboard shortcut
   .ptKbd {
     font-family: $font-mono;
     font-size: 0.78em;

@@ -1,3 +1,4 @@
+// app/(pages)/projects/[slug]/page.tsx
 import { getProject } from "@/sanity/sanity.query";
 import { PortableText } from "@portabletext/react";
 import Link from "next/link";
@@ -47,8 +48,11 @@ export default async function Project({ params }: Props) {
           </nav>
 
           <div className={styles.sidebarActions}>
-            <Link href="/" className={styles.backLink}>
-              ← Back
+            <Link href="/projects" className={styles.backLink}>
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                <path d="M8 5H2M2 5L5 2M2 5L5 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              All projects
             </Link>
             <BackToTopButton className={styles.backToTopBtn} />
           </div>
@@ -58,7 +62,7 @@ export default async function Project({ params }: Props) {
       <main className={styles.mainContent}>
 
         <header className={styles.projectHeader}>
-          <span className={styles.headerKicker}>Case study</span>
+          <span className={styles.headerKicker}>Project Deep Dive</span>
           <h1 className={styles.projectTitle}>{project.name}</h1>
           <RepoAndWebSiteButtons
             githubUrl={project.githubUrl}
