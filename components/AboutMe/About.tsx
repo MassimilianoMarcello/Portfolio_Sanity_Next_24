@@ -13,15 +13,14 @@ const About = () => {
         <div className={styles.hero}>
           <h1 className={styles.headline}>
             Full-stack developer<br />
-            <span className={styles.headlineMuted}>building production systems.</span>
+            <span className={styles.headlineMuted}>focused on frontend architecture and design systems.</span>
           </h1>
           <p className={styles.byline}>Massimiliano Marcello · Brussels</p>
         </div>
 
         <div className={styles.body}>
           <p>
-            Currently the only developer at a pre-seed startup — building on
-            Google Cloud Platform with Kubernetes and Terraform.
+          Currently building BeSpoken — a component system for Phoenix LiveView based on Atomic Design principles, with Tailwind and DaisyUI.
           </p>
           <p>
             My path wasn't linear: communications, radio journalism, restaurant
