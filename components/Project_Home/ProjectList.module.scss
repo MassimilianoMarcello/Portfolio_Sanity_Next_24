@@ -162,6 +162,7 @@
 }
 
 // ─── Image ────────────────────────────────────────────────────────────────────
+// ─── Image ────────────────────────────────────────────────────────────────────
 .cardImageWrap {
   position: relative;
   overflow: hidden;
@@ -169,6 +170,26 @@
   border: 1px solid $rule-strong;
   aspect-ratio: 4 / 3;
   background: $bg-elevated;
+
+  // Overlay gradient sempre presente, si intensifica al hover
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 40%,
+      rgba($indigo-800, 0.55) 100%
+    );
+    border-radius: $radius-md;
+    opacity: 0.6;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+  }
+
+  .projectCard:hover &::after {
+    opacity: 1;
+  }
 
   @include responsive("md", "max") { aspect-ratio: 16 / 9; }
 }
