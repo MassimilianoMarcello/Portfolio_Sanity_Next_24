@@ -15,6 +15,9 @@ export default async function Home() {
     <section className={styles.homesection}>
       <Navbar />
       <HeaderSection />
+       <div className={styles.sectionDivider}>
+    <span>Case studies</span>
+  </div>
       <ProjectListClient projects={projects} />
       <Contact />
     </section>

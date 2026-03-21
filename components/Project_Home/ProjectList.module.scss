@@ -7,6 +7,36 @@
   @include responsive("md", "max") { padding: 0 1.2rem 3rem; }
 }
 
+// ─── Section divider — transizione tra intro e case studies ──────────────────
+.sectionDivider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 3rem;
+  margin: 0;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: $rule;
+  }
+
+  span {
+    font-family: $font-mono;
+    font-size: 0.52rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: $ink-4;
+    white-space: nowrap;
+  }
+
+  @include responsive("md", "max") {
+    padding: 0.5rem 1.2rem;
+  }
+}
+
 // ─── Section kicker ───────────────────────────────────────────────────────────
 .sectionKicker {
   position: sticky;
@@ -24,8 +54,8 @@
     font-size: 0.62rem;
     text-transform: uppercase;
     letter-spacing: 0.16em;
-    color: $violet-400;
-    border: 1px solid $violet-200;
+    color: $violet-600;
+    border: 1.5px solid $violet-400;
     border-radius: $radius-sm;
     padding: 0.2rem 0.65rem;
     background: $violet-50;
@@ -223,10 +253,14 @@
   align-items: center;
   gap: 0.4rem;
   font-family: $font-mono;
-  font-size: 0.6rem;
+  font-size: 0.58rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: $ink-3;
+  color: $violet-600;
+  background: $violet-50;
+  border: 1px solid $violet-200;
+  border-radius: 20px;
+  padding: 0.22rem 0.6rem;
 }
 
 .statusDot {

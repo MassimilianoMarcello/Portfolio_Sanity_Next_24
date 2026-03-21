@@ -21,8 +21,8 @@
     font-size: 0.62rem;
     text-transform: uppercase;
     letter-spacing: 0.16em;
-    color: $violet-400;
-    border: 1px solid $violet-200;
+    color: $violet-600;
+    border: 1.5px solid $violet-300;
     border-radius: $radius-sm;
     padding: 0.2rem 0.65rem;
     background: $violet-50;
@@ -75,11 +75,25 @@
 }
 
 .byline {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-family: $font-mono;
   font-size: 0.6rem;
   text-transform: uppercase;
   letter-spacing: 0.13em;
-  color: $ink-3;
+  color: $violet-400;
+  font-weight: 500;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: $violet-300;
+    flex-shrink: 0;
+  }
 }
 
 // ─── Body — colonna destra ────────────────────────────────────────────────────
@@ -100,8 +114,14 @@
 }
 
 .current {
-  color: $ink-3 !important;
-  font-style: italic;
-  padding-left: 1rem;
-  border-left: 2px solid $violet-200;
+  background: $violet-50;
+  border-radius: $radius-sm;
+  padding: 0.65rem 1rem !important;
+  border-left: 2px solid $violet-300;
+  border-radius: 0 $radius-sm $radius-sm 0;
+
+  p, & {
+    color: $violet-600 !important;
+    font-style: normal;
+  }
 }
