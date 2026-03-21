@@ -27,7 +27,7 @@
   font-size: 0.58rem;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: $ink-4;
+  color: $violet-400;
   margin-bottom: 0.6rem;
 }
 
@@ -82,13 +82,13 @@
 
 .challengeArrow {
   flex-shrink: 0;
-  color: $violet-200;           // visibile ma muto a riposo
-  opacity: 1;                   // sempre visibile — segnala che è un link
+  color: $violet-300;
+  opacity: 1;
   transition: color 0.18s ease, transform 0.18s ease;
 
   .challengeLink:hover & {
     color: $violet-400;
-    transform: translateX(3px); // si sposta a destra su hover
+    transform: translateX(3px);
   }
 }
 
@@ -115,10 +115,10 @@
   font-size: 0.58rem;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: $ink-4;
+  color: $violet-400;
 }
 
-// Clearly a button — filled, not text
+// Clearly a button — filled, coerente col sistema
 .ctaBtn {
   display: inline-flex;
   align-items: center;
@@ -128,17 +128,17 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: $bg-page;
-  background: linear-gradient(135deg, $violet-400, $indigo-400);
+  background: $violet-600;
   text-decoration: none;
   padding: 0.5rem 1rem;
   border-radius: $radius-sm;
   white-space: nowrap;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: background 0.2s ease, transform 0.2s ease;
 
   svg { transition: transform 0.2s ease; }
 
   &:hover {
-    opacity: 0.88;
+    background: $violet-400;
     transform: translateY(-1px);
     svg { transform: translate(2px, -2px); }
   }

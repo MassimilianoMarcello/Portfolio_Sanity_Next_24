@@ -179,7 +179,7 @@
 // ─── Left column: image + status ─────────────────────────────────────────────
 .cardLeft {
   grid-column: 1;
-  grid-row: 2;
+  grid-row: 2 / 4;
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
@@ -187,7 +187,7 @@
 
   @include responsive("md", "max") {
     grid-column: 1;
-    grid-row: 2;
+    grid-row: 3;
   }
 }
 
@@ -278,7 +278,7 @@
 // ─── Right column: body ───────────────────────────────────────────────────────
 .cardBody {
   grid-column: 2;
-  grid-row: 2;
+  grid-row: 3;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -286,11 +286,24 @@
 
   @include responsive("md", "max") {
     grid-column: 1;
-    grid-row: 3;
+    grid-row: 4;
   }
 }
 
 .cardTop {}
+
+// ─── Title row — sopra immagine su mobile ────────────────────────────────────
+.cardTitleRow {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+  padding-bottom: 0.5rem;
+
+  @include responsive("md", "max") {
+    grid-column: 1;
+    grid-row: 2;
+  }
+}
 
 .cardTitle {
   font-family: $font-serif;
@@ -311,8 +324,53 @@
   color: $ink-2;
   line-height: 1.75;
   font-weight: 300;
+  position: relative;
+  max-height: 6.5rem;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2.5rem;
+    background: linear-gradient(to bottom, transparent, $bg-surface);
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
 
   p { margin: 0; }
+}
+
+.cardDescExpanded {
+  max-height: 40rem;
+
+  &::after { opacity: 0; }
+}
+
+.readMoreBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: $font-mono;
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $violet-400;
+  background: none;
+  border: none;
+  padding: 0.3rem 0;
+  cursor: pointer;
+  margin-top: 0.8rem;
+  transition: color 0.18s ease;
+
+  &:hover { color: $violet-600; }
+
+  svg { transition: transform 0.25s ease; }
+
+  &.readMoreExpanded svg { transform: rotate(180deg); }
 }
 
 // ─── Footer: links left, case study right ────────────────────────────────────
@@ -380,10 +438,11 @@
   }
 }
 
-// Open state — inverted colors
+// Open state — leggero, coerente col sistema
 .caseStudyOpen {
-  background: $indigo-800;
-  color: $violet-200;
+  background: $violet-50;
+  color: $violet-600;
+  border: 1px solid $violet-300;
 }
 
 // ─── Drawer ───────────────────────────────────────────────────────────────────
@@ -400,8 +459,8 @@
 .drawerExit  { max-height: 0;     opacity: 0; }
 
 .drawerInner {
-  background: linear-gradient(160deg, $violet-50 0%, $bg-surface 100%);
-  border: 1px solid $rule-strong;
+  background: $violet-50;
+  border: 1px solid $violet-200;
   border-radius: $radius-md;
   padding: 1.5rem 2rem;
   margin-top: 1.2rem;
@@ -411,4 +470,89 @@
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+// ─── Mobile fullscreen panel ──────────────────────────────────────────────────
+.mobileOverlay {
+  display: none;
+
+  @include responsive("md", "max") {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    z-index: 40;
+    pointer-events: none;
+    transition: background 0.3s ease;
+
+    &.mobileOverlayVisible {
+      background: rgba(0, 0, 0, 0.45);
+      pointer-events: all;
+    }
+  }
+}
+
+.mobilePanel {
+  display: none;
+
+  @include responsive("md", "max") {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: $bg-page;
+    transform: translateY(100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &.mobilePanelOpen {
+      transform: translateY(0);
+    }
+  }
+}
+
+.mobilePanelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 1.2rem 1rem;
+  border-bottom: 1px solid $rule;
+  flex-shrink: 0;
+}
+
+.mobilePanelTitle {
+  font-family: $font-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: $indigo-800;
+  line-height: 1.2;
+  flex: 1;
+  padding-right: 1rem;
+}
+
+.mobilePanelClose {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid $rule;
+  background: $bg-surface;
+  color: $ink-2;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.18s ease, border-color 0.18s ease;
+
+  &:hover {
+    background: $violet-50;
+    border-color: $violet-200;
+    color: $violet-600;
+  }
+}
+
+.mobilePanelBody {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem 1.2rem;
+  -webkit-overflow-scrolling: touch;
 }
