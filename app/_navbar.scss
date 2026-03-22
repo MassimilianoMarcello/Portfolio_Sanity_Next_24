@@ -73,9 +73,10 @@
   gap: 0.3rem;
   font-family: var(--font-zeitung);
   font-size: 0.63rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.13em;
-  color: $ink-3;
+  color: $violet-400;
   text-decoration: none;
   background: none;
   border: none;
@@ -156,7 +157,7 @@
   font-size: 0.6rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: $ink-3;
+  color: $violet-400;
   text-decoration: none;
   border-bottom: 1px solid $rule;
   transition: color 0.18s ease, background 0.18s ease;
@@ -211,7 +212,7 @@
   font-size: 0.63rem;
   text-transform: uppercase;
   letter-spacing: 0.13em;
-  color: $ink-3;
+  color: $violet-400;
   text-decoration: none;
   padding: 0.45rem 0.8rem;
   border-radius: $radius-sm;

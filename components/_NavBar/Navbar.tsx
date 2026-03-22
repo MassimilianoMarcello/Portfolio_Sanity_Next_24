@@ -61,9 +61,9 @@ const Navbar: React.FC = () => {
               </span>
 
               <div className={`${styles.dropdownMenu} ${isDropdownOpen ? styles.show : ""}`}>
-                <a href="#main"      onClick={(e) => handleLinkClick(e, "main")}      className={styles.dropdownItem}>Core</a>
-                <a href="#secondary" onClick={(e) => handleLinkClick(e, "secondary")} className={styles.dropdownItem}>Secondary</a>
-                <a href="#sandbox"   onClick={(e) => handleLinkClick(e, "sandbox")}   className={styles.dropdownItem}>Sandbox</a>
+                <a href="#main"      onClick={(e) => handleLinkClick(e, "main")}      className={styles.dropdownItem}>main</a>
+                <a href="#secondary" onClick={(e) => handleLinkClick(e, "secondary")} className={styles.dropdownItem}>secondary</a>
+                <a href="#sandbox"   onClick={(e) => handleLinkClick(e, "sandbox")}   className={styles.dropdownItem}>sandbox</a>
               </div>
             </div>
 
