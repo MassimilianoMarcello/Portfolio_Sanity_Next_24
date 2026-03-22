@@ -9,7 +9,7 @@
   height: 64px;
   z-index: 1000;
 
-  background-color: rgba(250, 250, 248, 0.88);
+  background-color:#fbfcfe;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid $rule;
@@ -105,6 +105,13 @@
     .triangleContainer {
       transform: translateX(3px);
     }
+  }
+
+  @include responsive("sm", "max") {
+    font-size: 0.58rem;
+    padding: 0.35rem 0.55rem;
+    letter-spacing: 0.1em;
+    white-space: normal;
   }
 }
 
@@ -254,9 +261,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 0.2rem;
     padding: 0.5rem 1.2rem 0.8rem;
     border-top: 1px solid $rule;
+  }
+
+  @include responsive("sm", "max") {
+    gap: 0.1rem;
+    padding: 0.4rem 0.5rem 0.6rem;
   }
 }
 
@@ -265,14 +278,15 @@
 @include responsive("md", "max") {
   .navbar {
     height: auto;
+    overflow: hidden;
+    width: 100%;
   }
 
   .navbarContent {
-    justify-content: center; // logo centrato
+    justify-content: center;
     padding: 0.8rem 1.2rem 0;
   }
 
-  // Aggiusta il navSpacer — più alto perché la navbar occupa più spazio
   .navSpacer {
     height: 110px;
   }
