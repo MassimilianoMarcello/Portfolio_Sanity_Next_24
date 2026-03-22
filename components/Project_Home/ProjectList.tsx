@@ -181,22 +181,23 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects, openProjectId, togg
                           onClick={() => handleToggle(project._id)}
                           aria-expanded={isOpen}
                         >
-                          Case study
+                          {isOpen && !isMobile ? 'Close' : 'Case study'}
                           <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-                            <path d="M6 1V11M1 6H11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                            <path
+                              d={isOpen && !isMobile ? "M2 2L10 10M10 2L2 10" : "M6 1V11M1 6H11"}
+                              stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"
+                            />
                           </svg>
                         </button>
                       </div>
                     </div>
 
-                    {/* Drawer — desktop only */}
-                    {!isMobile && (
-                      <div className={`${styles.drawer} ${isOpen && !isExiting ? styles.drawerOpen : ''} ${isExiting ? styles.drawerExit : ''}`}>
-                        <div className={styles.drawerInner}>
-                          <ProjectInfo project={project} openProjectId={openProjectId} />
-                        </div>
+                    {/* Drawer — nascosto su mobile via CSS */}
+                    <div className={`${styles.drawer} ${isOpen && !isExiting ? styles.drawerOpen : ''} ${isExiting ? styles.drawerExit : ''}`}>
+                      <div className={styles.drawerInner}>
+                        <ProjectInfo project={project} openProjectId={openProjectId} />
                       </div>
-                    )}
+                    </div>
 
                   </article>
                 );
@@ -206,36 +207,45 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects, openProjectId, togg
         ))}
       </div>
 
-      {/* Mobile fullscreen panel */}
-      {isMobile && (
-        <>
-          <div
-            className={`${styles.mobileOverlay} ${openProjectId && !exitingId ? styles.mobileOverlayVisible : ''}`}
-            onClick={() => openProjectId && handleToggle(openProjectId)}
-          />
-          <div className={`${styles.mobilePanel} ${openProjectId && !exitingId ? styles.mobilePanelOpen : ''}`}>
-            <div className={styles.mobilePanelHeader}>
-              <span className={styles.mobilePanelTitle}>
-                {openProject?.name ?? ''}
-              </span>
-              <button
-                className={styles.mobilePanelClose}
-                onClick={() => openProjectId && handleToggle(openProjectId)}
-                aria-label="Close"
-              >
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M3 3L13 13M13 3L3 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                </svg>
-              </button>
-            </div>
-            <div className={styles.mobilePanelBody}>
-              {openProject && (
-                <ProjectInfo project={openProject} openProjectId={openProjectId} />
-              )}
-            </div>
+      {/* Mobile fullscreen panel — sempre nel DOM, CSS gestisce visibilità */}
+      <>
+        <div
+          className={`${styles.mobileOverlay} ${openProjectId && !exitingId ? styles.mobileOverlayVisible : ''}`}
+          onClick={() => openProjectId && handleToggle(openProjectId)}
+        />
+        <div className={`${styles.mobilePanel} ${openProjectId && !exitingId ? styles.mobilePanelOpen : ''}`}>
+          <div className={styles.mobilePanelHeader}>
+            <span className={styles.mobilePanelTitle}>
+              {openProject?.name ?? ''}
+            </span>
+            <button
+              className={styles.mobilePanelClose}
+              onClick={() => openProjectId && handleToggle(openProjectId)}
+              aria-label="Close"
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 3L13 13M13 3L3 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
+            </button>
           </div>
-        </>
-      )}
+          <div className={styles.mobilePanelBody}>
+            {openProject && (
+              <ProjectInfo project={openProject} openProjectId={openProjectId} />
+            )}
+          </div>
+          <div className={styles.mobilePanelFooter}>
+            <button
+              className={styles.mobilePanelCloseBar}
+              onClick={() => openProjectId && handleToggle(openProjectId)}
+            >
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M2 2L10 10M10 2L2 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
+              Close
+            </button>
+          </div>
+        </div>
+      </>
     </>
   );
 };

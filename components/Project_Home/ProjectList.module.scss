@@ -143,7 +143,7 @@
 .projectCard {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  grid-template-rows: auto auto auto;
+  grid-template-rows: auto auto auto auto;
   gap: 0 2rem;
   padding: 0 1.5rem 2rem;
   margin-bottom: 1.5rem;
@@ -448,11 +448,13 @@
 // ─── Drawer ───────────────────────────────────────────────────────────────────
 .drawer {
   grid-column: 1 / -1;
-  grid-row: 3;
+  grid-row: 4;
   overflow: hidden;
   max-height: 0;
   opacity: 0;
   transition: max-height 0.38s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.28s ease;
+
+  @include responsive("md", "max") { display: none; }
 }
 
 .drawerOpen  { max-height: 600px; opacity: 1; }
@@ -530,23 +532,32 @@
 }
 
 .mobilePanelClose {
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: center;
   width: 36px;
   height: 36px;
+  min-width: 36px;
   border-radius: 50%;
-  border: 1px solid $rule;
-  background: $bg-surface;
-  color: $ink-2;
+  border: 1px solid $violet-300;
+  background: $violet-50;
+  color: $violet-600;
   cursor: pointer;
   flex-shrink: 0;
+  visibility: visible;
+  opacity: 1;
   transition: background 0.18s ease, border-color 0.18s ease;
 
+  svg {
+    display: block;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
   &:hover {
-    background: $violet-50;
-    border-color: $violet-200;
-    color: $violet-600;
+    background: $violet-100;
+    border-color: $violet-400;
   }
 }
 
@@ -555,4 +566,38 @@
   overflow-y: auto;
   padding: 1.5rem 1.2rem;
   -webkit-overflow-scrolling: touch;
+}
+
+.mobilePanelFooter {
+  display: none;
+
+  @include responsive("md", "max") {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border-top: 1px solid $rule;
+    flex-shrink: 0;
+  }
+}
+
+.mobilePanelCloseBar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: $font-mono;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: $violet-600;
+  background: $violet-50;
+  border: 1.5px solid $violet-300;
+  border-radius: $radius-sm;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  width: 100%;
+  justify-content: center;
+  transition: background 0.18s ease;
+
+  &:hover { background: $violet-100; }
 }
