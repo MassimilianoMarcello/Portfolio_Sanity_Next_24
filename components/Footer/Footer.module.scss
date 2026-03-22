@@ -22,7 +22,7 @@
 .copy {
   font-family: $font-mono;
   font-size: 0.56rem;
-  color: $ink-4;
+  color: $violet-300;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
@@ -38,12 +38,11 @@
   font-size: 0.58rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: $ink-3;
+  color: $violet-400;
   text-decoration: none;
   position: relative;
   transition: color 0.2s ease;
 
-  // Underline grow on hover — consistent with other action links
   &::after {
     content: '';
     position: absolute;
@@ -70,7 +69,7 @@
 .location {
   font-family: $font-mono;
   font-size: 0.56rem;
-  color: $ink-4;
+  color: $violet-300;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }

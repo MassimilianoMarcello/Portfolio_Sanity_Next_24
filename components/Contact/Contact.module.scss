@@ -22,8 +22,8 @@
     font-size: 0.62rem;
     text-transform: uppercase;
     letter-spacing: 0.16em;
-    color: $violet-400;
-    border: 1px solid $violet-200;
+    color: $violet-600;
+    border: 1.5px solid $violet-400;
     border-radius: $radius-sm;
     padding: 0.2rem 0.65rem;
     background: $violet-50;
@@ -85,7 +85,7 @@
   font-family: $font-serif;
   font-size: 1.45rem;
   font-weight: 600;
-  background: linear-gradient(135deg, $violet-600 0%, $indigo-600 100%);
+  background: linear-gradient(135deg, $violet-400 0%, $indigo-400 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -96,7 +96,7 @@
 .blockDesc {
   font-family: $font-body;
   font-size: 0.78rem;
-  color: $ink-3;
+  color: $ink-2;
   line-height: 1.65;
   font-weight: 300;
   margin-bottom: 1.5rem;
@@ -125,7 +125,7 @@
 .linkLabel {
   font-family: $font-mono;
   font-size: 0.58rem;
-  color: $ink-4;
+  color: $violet-400;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   min-width: 60px;
