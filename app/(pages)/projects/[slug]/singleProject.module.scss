@@ -131,7 +131,11 @@
 .challengeListItem {
   display: block;
 
-  @include responsive("sm", "max") { flex-shrink: 0; }
+  @include responsive("sm", "max") {
+    flex-shrink: 1;
+    min-width: 0;
+    max-width: calc(50% - 0.2rem);
+  }
 }
 
 // Reset button defaults per <button> usato in ChallengeLink
@@ -161,7 +165,7 @@
   }
 
   @include responsive("sm", "max") {
-    width: auto;
+    width: 100%;
     max-width: 100%;
     border: 1px solid $rule-strong;
     border-left: 1px solid $rule-strong;
@@ -170,6 +174,8 @@
     background: $bg-page;
     white-space: normal;
     font-size: 0.55rem;
+    text-align: center;
+    justify-content: center;
 
     &:hover {
       border-color: $primary-color;
