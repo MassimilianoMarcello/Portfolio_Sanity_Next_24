@@ -29,6 +29,10 @@
     background: $violet-50;
     white-space: nowrap;
   }
+
+  @include responsive("md", "max") {
+    padding: 2.5rem 0 0;
+  }
 }
 
 // ─── Layout: sidebar left (empty spacer) + content right ─────────────────────
@@ -42,6 +46,7 @@
   @include responsive("md", "max") {
     grid-template-columns: 1fr;
     gap: 2rem;
+    padding-left: 1rem;
   }
 }
 
@@ -85,7 +90,7 @@
   font-family: $font-serif;
   font-size: 1.45rem;
   font-weight: 600;
-  background: linear-gradient(135deg, $violet-400 0%, $indigo-400 100%);
+  background: linear-gradient(135deg, $violet-600 0%, $indigo-600 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -96,7 +101,7 @@
 .blockDesc {
   font-family: $font-body;
   font-size: 0.78rem;
-  color: $ink-2;
+  color: $ink-3;
   line-height: 1.65;
   font-weight: 300;
   margin-bottom: 1.5rem;
@@ -125,7 +130,7 @@
 .linkLabel {
   font-family: $font-mono;
   font-size: 0.58rem;
-  color: $violet-400;
+  color: $ink-4;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   min-width: 60px;

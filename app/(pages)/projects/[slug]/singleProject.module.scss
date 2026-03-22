@@ -298,6 +298,8 @@
 // ─── Main content ─────────────────────────────────────────────────────────────
 .mainContent {
   min-width: 0;
+  max-width: 100%;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   gap: 5rem;
@@ -483,6 +485,7 @@
 .codeBlock {
   display: block;
   width: 100%;
+  max-width: 100%;
   margin: 2rem 0;
   border-radius: $radius-md;
   border: 1px solid $rule-strong;
@@ -524,6 +527,10 @@
 }
 
 .codeBlockBody {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+
   :global(pre[class*="language-"]) {
     margin: 0 !important;
     padding: 1.4rem 1.6rem !important;
@@ -531,6 +538,9 @@
     font-size: 0.82rem !important;
     line-height: 1.75 !important;
     font-family: $font-mono !important;
+    white-space: pre !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
 
     @include responsive("sm", "max") {
       font-size: 0.78rem !important;
@@ -541,6 +551,7 @@
   :global(code[class*="language-"]) {
     font-family: $font-mono !important;
     font-size: inherit !important;
+    white-space: pre !important;
   }
 }
 
