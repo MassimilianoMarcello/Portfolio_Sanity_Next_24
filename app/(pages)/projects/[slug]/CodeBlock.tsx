@@ -34,8 +34,24 @@ export default function CodeBlock({
         <SyntaxHighlighter
           language={language}
           style={coldarkDark}
-          customStyle={{ margin: 0, borderRadius: 0, fontSize: '0.82rem', lineHeight: '1.75' }}
-          codeTagProps={{ style: { fontFamily: 'inherit' } }}
+          wrapLines={true}
+          wrapLongLines={true}
+          customStyle={{
+            margin: 0,
+            borderRadius: 0,
+            fontSize: '0.82rem',
+            lineHeight: '1.75',
+            whiteSpace: 'pre-wrap',
+            wordBreak: 'break-word',
+            overflowWrap: 'break-word',
+          }}
+          codeTagProps={{
+            style: {
+              fontFamily: 'inherit',
+              whiteSpace: 'pre-wrap',
+              wordBreak: 'break-word',
+            }
+          }}
         >
           {code}
         </SyntaxHighlighter>
