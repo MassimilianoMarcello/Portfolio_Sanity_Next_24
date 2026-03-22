@@ -21,6 +21,7 @@
 
   @include responsive("sm", "max") {
     padding: 1.5rem 1rem 4rem;
+    max-width: 100%;
   }
 }
 
@@ -49,6 +50,9 @@
   @include responsive("sm", "max") {
     padding: 1.2rem 1rem;
     margin-bottom: 2rem;
+    overflow: hidden;
+    max-width: 100%;
+    width: 100%;
   }
 }
 
@@ -116,13 +120,11 @@
 
   @include responsive("sm", "max") {
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 0.4rem;
     border-left: none;
-    overflow-x: auto;
+    max-width: 100%;
     padding-bottom: 0.4rem;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    &::-webkit-scrollbar { display: none; }
   }
 }
 
@@ -160,12 +162,13 @@
 
   @include responsive("sm", "max") {
     width: auto;
+    max-width: 100%;
     border: 1px solid $rule-strong;
     border-left: 1px solid $rule-strong;
     margin-left: 0;
     border-radius: 20px;
     background: $bg-page;
-    white-space: nowrap;
+    white-space: normal;
     font-size: 0.55rem;
 
     &:hover {
