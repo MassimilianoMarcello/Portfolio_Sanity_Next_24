@@ -2,17 +2,17 @@
 @import "../../app/main.module.scss";
 
 .container {
-  padding: 0 3rem 0;
+  padding: 0 3rem 2rem;
   border-bottom: 1px solid $rule;
 
   @include responsive("md", "max") {
-    padding: 0 1.2rem 0;
+    padding: 0 1.2rem 1.5rem;
   }
 }
 
 // ─── Section kicker — pill tag compatta, no riga ─────────────────────────────
 .sectionKicker {
-  padding: 1.2rem 0 0;
+  padding: 2rem 0 0;
   display: flex;
   align-items: center;
 
@@ -21,8 +21,8 @@
     font-size: 0.62rem;
     text-transform: uppercase;
     letter-spacing: 0.16em;
-    color: $violet-600;
-    border: 1.5px solid $violet-300;
+    color: $violet-400;
+    border: 1px solid $violet-200;
     border-radius: $radius-sm;
     padding: 0.2rem 0.65rem;
     background: $violet-50;
@@ -35,13 +35,13 @@
   display: grid;
   grid-template-columns: 400px 1fr;
   gap: 0 3rem;
-  margin-top: 2rem;
-  padding-bottom: 2.5rem;
+  margin-top: 2.5rem;
+  padding-bottom: 4rem;
 
   @include responsive("md", "max") {
     grid-template-columns: 1fr;
     gap: 2rem;
-    padding-bottom: 3rem;
+    padding-bottom: 3.5rem;
   }
 }
 
@@ -75,32 +75,18 @@
 }
 
 .byline {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
   font-family: $font-mono;
   font-size: 0.6rem;
   text-transform: uppercase;
   letter-spacing: 0.13em;
-  color: $violet-400;
-  font-weight: 500;
-
-  &::before {
-    content: '';
-    display: inline-block;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: $violet-300;
-    flex-shrink: 0;
-  }
+  color: $ink-3;
 }
 
 // ─── Body — colonna destra ────────────────────────────────────────────────────
 .body {
   display: flex;
   flex-direction: column;
-  gap: 1.1rem;
+  gap: 1.4rem;
   justify-content: center;
 
   p {
@@ -114,14 +100,8 @@
 }
 
 .current {
-  background: $violet-50;
-  border-radius: $radius-sm;
-  padding: 0.65rem 1rem !important;
-  border-left: 2px solid $violet-300;
-  border-radius: 0 $radius-sm $radius-sm 0;
-
-  p, & {
-    color: $violet-600 !important;
-    font-style: normal;
-  }
+  color: $ink-3 !important;
+  font-style: italic;
+  padding-left: 1rem;
+  border-left: 2px solid $violet-200;
 }

@@ -147,12 +147,16 @@
   gap: 0 2rem;
   padding: 0 1.5rem 2rem;
   margin-bottom: 1.5rem;
-  background: $bg-surface;
+  background: $bg-page;
+  border: 1px solid $rule-strong;
   border-radius: $radius-md;
   position: relative;
-  transition: background 0.25s ease;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 
-  &:hover { background: $bg-elevated; }
+  &:hover {
+    border-color: $violet-200;
+    box-shadow: 0 2px 12px rgba(145, 117, 186, 0.08);
+  }
 
   @include responsive("md", "max") {
     grid-template-columns: 1fr;
@@ -165,7 +169,8 @@
 .techRow {
   grid-column: 1 / -1;
   grid-row: 1;
-  background-color: $bg-elevated;
+  background-color: $bg-surface;
+  border-bottom: 1px solid $rule;
   padding: 0.7rem 1.5rem 0.6rem;
   margin: 0 -1.5rem 1.5rem;
   border-radius: $radius-md $radius-md 0 0;
@@ -201,24 +206,24 @@
   aspect-ratio: 4 / 3;
   background: $bg-elevated;
 
-  // Overlay gradient sempre presente, si intensifica al hover
+  // Overlay gradient — sottile a riposo, si intensifica al hover
   &::after {
     content: '';
     position: absolute;
     inset: 0;
     background: linear-gradient(
       to bottom,
-      transparent 40%,
-      rgba($indigo-800, 0.55) 100%
+      transparent 50%,
+      rgba($indigo-800, 0.35) 100%
     );
     border-radius: $radius-md;
-    opacity: 0.6;
+    opacity: 0.5;
     transition: opacity 0.35s ease;
     pointer-events: none;
   }
 
   .projectCard:hover &::after {
-    opacity: 1;
+    opacity: 0.9;
   }
 
   @include responsive("md", "max") { aspect-ratio: 16 / 9; }
@@ -229,9 +234,13 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.5s ease;
+  filter: brightness(0.92) contrast(1.05) saturate(1.08);
+  transition: transform 0.5s ease, filter 0.4s ease;
 
-  .projectCard:hover & { transform: scale(1.03); }
+  .projectCard:hover & {
+    transform: scale(1.03);
+    filter: brightness(1) contrast(1.05) saturate(1.12);
+  }
 }
 
 .cardYear {
@@ -325,7 +334,7 @@
   line-height: 1.75;
   font-weight: 300;
   position: relative;
-  max-height: 6.5rem;
+  max-height: 11rem;
   overflow: hidden;
   transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -336,18 +345,22 @@
     left: 0;
     right: 0;
     height: 2.5rem;
-    background: linear-gradient(to bottom, transparent, $bg-surface);
+    background: linear-gradient(to bottom, transparent, $bg-page);
     pointer-events: none;
     transition: opacity 0.3s ease;
   }
 
   p { margin: 0; }
+
+  @include responsive("md", "max") {
+    max-height: 6.5rem;
+  }
 }
 
 .cardDescExpanded {
-  max-height: 40rem;
+  max-height: 40rem !important;
 
-  &::after { opacity: 0; }
+  &::after { opacity: 0 !important; }
 }
 
 .readMoreBtn {
@@ -422,27 +435,27 @@
   font-size: 0.62rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: $bg-page;
-  background: linear-gradient(135deg, $violet-400, $indigo-400);
-  border: none;
+  color: $violet-600;
+  background: $violet-50;
+  border: 1px solid $violet-200;
   border-radius: $radius-sm;
   padding: 0.35rem 0.8rem;
   cursor: pointer;
-  transition: opacity 0.18s ease, transform 0.18s ease;
+  transition: background 0.18s ease, border-color 0.18s ease;
 
   svg { transition: transform 0.25s ease; }
 
   &:hover {
-    opacity: 0.88;
-    transform: translateY(-1px);
+    background: $violet-100;
+    border-color: $violet-400;
   }
 }
 
-// Open state — leggero, coerente col sistema
+// Open state
 .caseStudyOpen {
-  background: $violet-50;
-  color: $violet-600;
-  border: 1px solid $violet-300;
+  background: $violet-600;
+  color: $bg-page;
+  border-color: $violet-600;
 }
 
 // ─── Drawer ───────────────────────────────────────────────────────────────────
@@ -461,8 +474,8 @@
 .drawerExit  { max-height: 0;     opacity: 0; }
 
 .drawerInner {
-  background: $violet-50;
-  border: 1px solid $violet-200;
+  background: $bg-page;
+  border: 1px solid $rule-strong;
   border-radius: $radius-md;
   padding: 1.5rem 2rem;
   margin-top: 1.2rem;
