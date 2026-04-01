@@ -1,6 +1,6 @@
 "use client";
  
-import NavbarPages from '@/components/_NavBar/NavbarPages';
+import NavbarPages from '@/components/NavBar/NavbarPages';
 import BackToTopButton from './projects/[slug]/BackTopButton';
  
 export default function PagesLayout({

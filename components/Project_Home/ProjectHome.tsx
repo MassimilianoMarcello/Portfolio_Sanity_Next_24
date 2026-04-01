@@ -6,7 +6,7 @@ import HeaderSection from './HeaderSection';
 import ProjectListClient from './ProjectListClient';
 import styles from './ProjectHome.module.scss';
 import Contact from '../Contact/Contact';
-import Navbar from '../_NavBar/Navbar';
+import Navbar from '../NavBar/Navbar';
 
 export default async function Home() {
   const projects: Project[] = await getProjects();
