@@ -96,9 +96,12 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects, openProjectId, togg
         {activeCategories.map((cat) => (
           <div key={cat.value} className={styles.categorySection} id={cat.value}>
             <aside className={styles.catSidebar}>
-              <div className={styles.catLabel}>{cat.index} — {cat.kicker}</div>
+              <div className={styles.catSidebarBox}>
+                  <div className={styles.catLabel}>{cat.index} — {cat.kicker}</div>
               <h2 className={styles.catTitle}>{cat.title}</h2>
               <p className={styles.catDesc}>{cat.desc}</p>
+              </div>
+            
             </aside>
 
             <div className={styles.projectCards}>

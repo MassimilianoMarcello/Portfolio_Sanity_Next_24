@@ -3,7 +3,9 @@
 
 // ─── Outer container ──────────────────────────────────────────────────────────
 .projectListContainer {
-  padding: 0 3rem 5rem;
+  padding: 0 4rem 5rem 5rem;  // ← più padding a sinistra
+  max-width: 1400px;
+  margin: 0 auto;
   @include responsive("md", "max") { padding: 0 1.2rem 3rem; }
 }
 
@@ -43,11 +45,16 @@
   top: 64px;
   z-index: 10;
   padding: 0.6rem 3rem;
-  margin: 0 -3rem;
-  background: $bg-page;
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
+  margin: 1rem -4rem;
+  width: 17.7rem;
+  
+  // invece di un colore fisso, diventa vetro opaco
+  background: rgba($bg-page, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  
+  // bordo sottile sotto per separarlo dal contenuto
+ 
 
   span {
     font-family: $font-mono;
@@ -58,7 +65,7 @@
     border: 1.5px solid $violet-400;
     border-radius: $radius-sm;
     padding: 0.2rem 0.65rem;
-    background: $violet-50;
+    background: rgba($violet-50, 0.9);
     white-space: nowrap;
   }
 
@@ -72,20 +79,36 @@
 // ─── Category section ─────────────────────────────────────────────────────────
 .categorySection {
   display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 0 3rem;
-  margin-top: 1.5rem;
+  grid-template-columns: 310px 1fr;  // sidebar leggermente più larga
+  gap: 0 4rem;                        // ← più spazio tra sidebar e card
+  margin-top: 2.5rem;                 // ← più respiro tra sezioni
   opacity: 0;
   animation: fadeUp 0.5s ease forwards;
 
-  &:first-of-type { margin-top: 1rem; }
+  &:first-of-type { margin-top: 1.5rem; }
   &:nth-child(2) { animation-delay: 0.05s; }
   &:nth-child(3) { animation-delay: 0.15s; }
   &:nth-child(4) { animation-delay: 0.25s; }
 
+  &:nth-child(even) {
+   
+    margin-left: -4rem;
+    margin-right: -4rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+
+    @include responsive("md", "max") {
+      margin-left: -1.2rem;
+      margin-right: -1.2rem;
+      padding-left: 1.2rem;
+      padding-right: 1.2rem;
+    }
+  }
+
   @include responsive("md", "max") { grid-template-columns: 1fr; }
 }
-
 // ─── Sidebar ──────────────────────────────────────────────────────────────────
 .catSidebar {
   position: sticky;
@@ -93,6 +116,8 @@
   height: fit-content;
   padding-right: 2rem;
   border-right: 1px solid $rule;
+  margin-right: -1.5rem;
+
 
   @include responsive("md", "max") {
     position: static;
@@ -101,6 +126,9 @@
     padding-right: 0;
     padding-bottom: 1.2rem;
     margin-bottom: 1.5rem;
+  }
+  .catSidebarBox{
+    max-width: 12rem;
   }
 }
 
