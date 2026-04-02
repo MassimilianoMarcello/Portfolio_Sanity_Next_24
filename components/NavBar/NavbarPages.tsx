@@ -25,7 +25,7 @@ const NavbarPages: React.FC = () => {
           {/* Back to projects */}
           <div className={styles.navbarLinks}>
             <Link href="/" className={styles.linkProjectsReturn}>
-              Projects
+              Case Studies
             </Link>
           </div>
         </div>

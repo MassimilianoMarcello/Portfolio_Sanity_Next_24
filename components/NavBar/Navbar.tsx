@@ -54,7 +54,7 @@ const Navbar: React.FC = () => {
               onMouseEnter={() => setIsDropdownOpen(true)}
             >
               <span className={styles.navLink}>
-                Projects
+                Case Studies
                 {/* <span className={styles.triangleContainer}>
                   <TriangleIcon />
                 </span> */}
@@ -99,7 +99,7 @@ const Navbar: React.FC = () => {
         {/* Mobile links — sotto il contenuto principale */}
         <div className={styles.navMobile}>
           <Link href="/" className={styles.navLink}>
-            Projects
+            Case Studies
           </Link>
           <Link href="/blog_post" className={styles.navLink}>
             Blog

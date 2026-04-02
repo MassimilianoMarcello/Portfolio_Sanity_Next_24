@@ -37,6 +37,27 @@ const project = {
       title: "GitHub URL",
       type: "url",
     },
+     {
+  name: "problem",
+  title: "Problem",
+  type: "text",
+  rows: 2,
+  description: "What problem did this project solve? (1-2 sentences)",
+},
+{
+  name: "solution",
+  title: "Solution",
+  type: "text",
+  rows: 2,
+  description: "How did you solve it? (approach/architecture)",
+},
+{
+  name: "impact",
+  title: "Impact",
+  type: "text",
+  rows: 2,
+  description: "What changed? What was the result?",
+},
     {
       name: "content",
       title: "Content",
@@ -72,6 +93,7 @@ const project = {
         layout: "radio",
       },
     },
+   
     {
       name: "challenges",
       title: "Challenges",

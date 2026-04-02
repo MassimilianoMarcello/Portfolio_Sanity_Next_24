@@ -1,33 +1,20 @@
 // components/Project_Home/ProjectInfo.module.scss
 @import "../../app/main.module.scss";
 
-.drawerContent {
-  font-family: $font-body;
+// ─── Challenges block ─────────────────────────────────────────────────────────
+.challengesBlock {
+  border-top: 1px solid $rule;
+  padding-top: 0.9rem;
 }
-
-// ─── Two-column layout ────────────────────────────────────────────────────────
-.drawerLayout {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 2rem;
-  align-items: start;
-
-  @include responsive("md", "max") {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-}
-
-// ─── Left: challenge menu ─────────────────────────────────────────────────────
-.menuSection {}
 
 .menuLabel {
   display: block;
   font-family: $font-mono;
-  font-size: 0.58rem;
+  font-size: 0.62rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: $violet-400;
+  color: $violet-600;
   margin-bottom: 0.6rem;
 }
 
@@ -43,7 +30,6 @@
   &:last-child { border-bottom: 1px solid $rule; }
 }
 
-// Each challenge — clearly a menu item: number + title + arrow
 .challengeLink {
   display: flex;
   align-items: center;
@@ -55,10 +41,10 @@
 
   &:hover {
     color: $violet-400;
-    padding-left: 0.3rem;   // subtle indent on hover — reads as interactive
+    padding-left: 0.3rem;
 
-    .challengeNum  { color: $violet-400; }
-    .challengeArrow { opacity: 1; transform: translate(2px, -2px); }
+    .challengeNum   { color: $violet-400; }
+    .challengeArrow { transform: translateX(3px); }
   }
 }
 
@@ -74,7 +60,7 @@
 
 .challengeTitle {
   font-family: $font-body;
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   font-weight: 300;
   flex: 1;
   line-height: 1.4;
@@ -83,71 +69,9 @@
 .challengeArrow {
   flex-shrink: 0;
   color: $violet-300;
-  opacity: 1;
   transition: color 0.18s ease, transform 0.18s ease;
 
   .challengeLink:hover & {
     color: $violet-400;
-    transform: translateX(3px);
   }
-}
-
-// ─── Right: CTA block ─────────────────────────────────────────────────────────
-.ctaSection {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.5rem;
-  padding-left: 2rem;
-  border-left: 1px solid $rule;
-
-  @include responsive("md", "max") {
-    align-items: flex-start;
-    padding-left: 0;
-    border-left: none;
-    border-top: 1px solid $rule;
-    padding-top: 1rem;
-  }
-}
-
-.ctaLabel {
-  font-family: $font-mono;
-  font-size: 0.58rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: $violet-400;
-}
-
-// Clearly a button — filled, coerente col sistema
-.ctaBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: $font-mono;
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: $bg-page;
-  background: $violet-600;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: $radius-sm;
-  white-space: nowrap;
-  transition: background 0.2s ease, transform 0.2s ease;
-
-  svg { transition: transform 0.2s ease; }
-
-  &:hover {
-    background: $violet-400;
-    transform: translateY(-1px);
-    svg { transform: translate(2px, -2px); }
-  }
-}
-
-// ─── Empty state ──────────────────────────────────────────────────────────────
-.empty {
-  font-family: $font-body;
-  font-size: 0.88rem;
-  color: $ink-3;
-  font-style: italic;
 }

@@ -17,7 +17,7 @@ const TechnologiesUsed: React.FC<TechnologiesUsedProps> = ({ technologies }) => 
    
       <ul className={styles.technologiesList}>
         {technologies.map((tech) => (
-          <li key={tech._id}>{tech.name.toUpperCase()}</li> // Usa tech.name per visualizzare il nome della tecnologia
+          <li key={tech._id}>{tech.name.toUpperCase()}</li> 
         ))}
       </ul>
     </div>
