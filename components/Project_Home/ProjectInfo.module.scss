@@ -3,8 +3,8 @@
 
 // ─── Challenges block ─────────────────────────────────────────────────────────
 .challengesBlock {
-  border-top: 1px solid $rule;
-  padding-top: 0.9rem;
+ 
+  padding-top: 0.1rem;
 }
 
 .menuLabel {
@@ -22,6 +22,7 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  margin-top: 1rem;
 }
 
 .challengeItem {
