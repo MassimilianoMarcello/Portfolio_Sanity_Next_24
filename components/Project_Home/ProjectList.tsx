@@ -1,5 +1,4 @@
-// components/Project_Home/ProjectList.tsx
-"use client";
+
 
 import React, { useMemo } from 'react';
 import ProjectInfo from './ProjectInfo';

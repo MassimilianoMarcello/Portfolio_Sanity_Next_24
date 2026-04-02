@@ -19,7 +19,7 @@ const NavbarPages: React.FC = () => {
         <div className={styles.navbarContent}>
           {/* Logo */}
           <Link href="/" className={styles.logo}>
-            <img src="/logo-grey.webp" alt="Logo" />
+            <img src="/logo-massdevdev.png" alt="Logo" />
           </Link>
 
           {/* Back to projects */}

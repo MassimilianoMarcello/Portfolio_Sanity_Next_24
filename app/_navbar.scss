@@ -52,6 +52,25 @@
     opacity: 1;
   }
 }
+.logotext {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+  margin-left: -54rem;
+
+  img {
+    height: 30px;
+    width: auto;
+    display: block;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+  }
+
+  &:hover img {
+    opacity: 1;
+  }
+}
 
 // ─── Nav links row ────────────────────────────────────────────────────────────
 .navbarLinks {

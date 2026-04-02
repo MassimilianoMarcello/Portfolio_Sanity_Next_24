@@ -39,15 +39,16 @@ const Navbar: React.FC = () => {
         }}
       >
         <div className={styles.navbarContent}>
-
           {/* Logo */}
           <Link href="/" className={styles.logo}>
-            <img src="/logo-grey.webP" alt="Logo" />
+            <img src="/logo_only.svg" alt="Logo" />
+          </Link>
+          <Link href="/" className={styles.logotext}>
+            <img src="/massdev_text.svg" alt="Logo" />
           </Link>
 
           {/* Desktop links */}
           <div className={`${styles.navbarLinks} ${styles.navDesktop}`}>
-
             {/* Projects dropdown */}
             <div
               className={styles.navItem}
@@ -60,10 +61,30 @@ const Navbar: React.FC = () => {
                 </span> */}
               </span>
 
-              <div className={`${styles.dropdownMenu} ${isDropdownOpen ? styles.show : ""}`}>
-                <a href="#main"      onClick={(e) => handleLinkClick(e, "main")}      className={styles.dropdownItem}>main</a>
-                <a href="#secondary" onClick={(e) => handleLinkClick(e, "secondary")} className={styles.dropdownItem}>secondary</a>
-                <a href="#sandbox"   onClick={(e) => handleLinkClick(e, "sandbox")}   className={styles.dropdownItem}>sandbox</a>
+              <div
+                className={`${styles.dropdownMenu} ${isDropdownOpen ? styles.show : ""}`}
+              >
+                <a
+                  href="#main"
+                  onClick={(e) => handleLinkClick(e, "main")}
+                  className={styles.dropdownItem}
+                >
+                  main
+                </a>
+                <a
+                  href="#secondary"
+                  onClick={(e) => handleLinkClick(e, "secondary")}
+                  className={styles.dropdownItem}
+                >
+                  secondary
+                </a>
+                <a
+                  href="#sandbox"
+                  onClick={(e) => handleLinkClick(e, "sandbox")}
+                  className={styles.dropdownItem}
+                >
+                  sandbox
+                </a>
               </div>
             </div>
 
@@ -91,9 +112,6 @@ const Navbar: React.FC = () => {
               </span> */}
             </div>
           </div>
-
-
-
         </div>
 
         {/* Mobile links — sotto il contenuto principale */}
