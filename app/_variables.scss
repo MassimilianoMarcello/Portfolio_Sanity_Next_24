@@ -19,6 +19,9 @@ $indigo-400:  #4f67d8;
 $indigo-600:  #2d47c4;
 $indigo-800:  #1a2d8a;
 
+$accent-blue-light: #ebf7ff;
+$accent-blue: #a4c4dc;
+
 // ─── Neutrals ─────────────────────────────────────────────────────────────────
 $ink:         #0e0e12;
 $ink-2:       #2e2c38;
@@ -30,9 +33,11 @@ $rule-strong: rgba(145, 117, 186, 0.3);
 
 // ─── Backgrounds ──────────────────────────────────────────────────────────────
 $bg-page:     #fbfcfe;
+$bg-accent-light:   #ebf7ff;
 $bg-surface:  #f4f2f9;
 $bg-elevated: #eeeaf5;
 $bg-warm: #f5f3ee;
+
 
 // ─── Semantic aliases ─────────────────────────────────────────────────────────
 $primary-color:  $violet-400;
@@ -45,6 +50,7 @@ $tag-color:      $violet-800;
 // ─── Legacy aliases ───────────────────────────────────────────────────────────
 $secondary-color:  $violet-50;
 $borders-color:    $violet-200;
+$borders-accent-light: $accent-blue;
 $accent-color:     $indigo-400;
 $background-color: $bg-surface;
 $text-color:       $ink-2;

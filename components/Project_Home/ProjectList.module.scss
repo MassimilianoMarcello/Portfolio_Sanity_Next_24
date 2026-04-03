@@ -162,9 +162,9 @@
 .techRow {
   grid-column: 1 / -1;
   grid-row: 1;
-  background-color: #f5f5f3;
+  background-color: $bg-accent-light;
   border-bottom: 1px solid #e2e0e8;
-   background: #f6fcff;
+  
  
   padding: 0.7rem 1.5rem 0.6rem;
   // margin rimosso: overflow:hidden sulla card gestisce i bordi
@@ -435,9 +435,9 @@
 .impactSection {
   grid-column: 1 / -1;
   grid-row: 4;
-  background: #ebf7ff;
-  border-bottom: 1px solid #a4c4dc;
-  border-top: 1px solid #a4c4dc;
+  background: $bg-accent-light;
+  border-bottom: 1px solid $borders-accent-light;
+  border-top: 1px solid $borders-accent-light;
   padding: 1.1rem 2rem 1.2rem;
   display: flex;
   flex-direction: column;
