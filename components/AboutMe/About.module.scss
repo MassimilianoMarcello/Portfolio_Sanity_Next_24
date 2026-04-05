@@ -10,7 +10,7 @@
   }
 }
 
-// ─── Section kicker — pill tag compatta, no riga ─────────────────────────────
+// ─── Section kicker ───────────────────────────────────────────────────────────
 .sectionKicker {
   padding: 2rem 0 0;
   display: flex;
@@ -30,10 +30,10 @@
   }
 }
 
-// ─── Content grid — specchia il categorySection di ProjectList ────────────────
+// ─── Content grid ─────────────────────────────────────────────────────────────
 .contentGrid {
   display: grid;
-  grid-template-columns: 400px 1fr;
+  grid-template-columns: 1fr 1.4fr; // ← proporzionale, non px fissi
   gap: 0 3rem;
   margin-top: 2.5rem;
   padding-bottom: 4rem;
@@ -47,15 +47,17 @@
 
 // ─── Hero — colonna sinistra ──────────────────────────────────────────────────
 .hero {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; // ← era center: causa del problema byline
   border-right: 1px solid $rule;
-  padding-right: 2rem;
-  padding-top: 0.5rem;
+  padding: 3rem 2.5rem;
+  background-color: $violet-50;
 
   @include responsive("md", "max") {
     border-right: none;
-    padding-right: 0;
     border-bottom: 1px solid $rule;
-    padding-bottom: 2rem;
+    padding: 1.5rem 0 2rem;
   }
 }
 
@@ -66,7 +68,7 @@
   line-height: 1.15;
   letter-spacing: -0.025em;
   color: $indigo-800;
-  margin-bottom: 1.2rem;
+  margin: 0 0 1.2rem;
 }
 
 .headlineMuted {
@@ -80,6 +82,8 @@
   text-transform: uppercase;
   letter-spacing: 0.13em;
   color: $ink-3;
+  margin-top: auto; // ← spinge in fondo alla hero card
+  padding-top: 1.8rem; // ← mantiene spazio visivo minimo
 }
 
 // ─── Body — colonna destra ────────────────────────────────────────────────────
@@ -88,6 +92,7 @@
   flex-direction: column;
   gap: 1.4rem;
   justify-content: center;
+  padding: 3rem 0;
 
   p {
     font-family: $font-body;
@@ -100,7 +105,7 @@
 }
 
 .current {
-  color: $ink-3 !important;
+  color: $ink-3; // ← rimosso !important: non serve con specificità corretta
   font-style: italic;
   padding-left: 1rem;
   border-left: 2px solid $violet-200;
