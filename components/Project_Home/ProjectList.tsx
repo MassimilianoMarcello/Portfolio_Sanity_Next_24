@@ -54,11 +54,13 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
 
           {/* Cards */}
           <div className={styles.projectCards}>
-            {groupedProjects[cat.value].map((project, idx) => {
+            {groupedProjects[cat.value].map((project, idx,arr) => {
+              
               const status = project.status || 'archived';
               const hasSummary = project.problem || project.solution || project.impact;
 
               return (
+                 <React.Fragment key={project._id}>
                 <article key={project._id} className={styles.projectCard}>
 
                   {/* ── ROW 1: Tech strip ── */}
@@ -182,6 +184,8 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
                   </div>
 
                 </article>
+                {idx < arr.length - 1 && <div className={styles.cardSeparator} />}
+                  </React.Fragment>
               );
             })}
           </div>

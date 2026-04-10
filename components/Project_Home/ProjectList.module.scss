@@ -117,29 +117,37 @@
 .projectCards {
   display: flex;
   flex-direction: column;
+  // linea sottile tra card
+  .projectCard + .projectCard {
+    padding-top: 0; 
+   
+  }
 }
 
 // ─── Individual card ──────────────────────────────────────────────────────────
 .projectCard {
-  display: flex;          // ← era grid 1fr 2fr ma tutto usava grid-column: 1/-1
+  display: flex;          
   flex-direction: column; // ← più semplice e onesto: le sezioni si stackano
-  margin-bottom: 1.5rem;
+  margin-bottom: 3rem;
   background: #ffffff;
   border: 1px solid $rule-strong;
   border-radius: $radius-md;
   overflow: hidden;
   position: relative;
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
+box-shadow: 2px 2px 0px 0px $indigo-100; // Aggiunta dell'effetto "offset shadow"
 
   &:hover {
-    border-color: $violet-300;
-    box-shadow: 0 2px 12px rgba($violet-400, 0.08);
+ border-color: $violet-300;
+    box-shadow: 0 4px 16px rgba($violet-400, 0.12);
   }
 
   @include responsive("md", "max") {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
   }
 }
+
+
 
 // ─── Tech row ─────────────────────────────────────────────────────────────────
 .techRow {
