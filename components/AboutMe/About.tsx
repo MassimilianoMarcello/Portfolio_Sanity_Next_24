@@ -11,6 +11,8 @@ const About = () => {
 
       <div className={styles.contentGrid}>
         <div className={styles.hero}>
+          <img src="/massi.png" alt="Massimiliano Marcello" className={styles.avatar} />
+
           <h1 className={styles.headline}>
             Full-stack developer<br />
             <span className={styles.headlineMuted}>focused on frontend architecture and design systems.</span>

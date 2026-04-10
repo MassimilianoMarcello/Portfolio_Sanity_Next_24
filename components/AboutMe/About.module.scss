@@ -19,6 +19,7 @@
   span {
     font-family: $font-mono;
     font-size: 0.64rem;
+  
     text-transform: uppercase;
     letter-spacing: 0.16em;
     color: $violet-400;
@@ -96,7 +97,7 @@
 
   p {
     font-family: $font-body;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 0.92rem;
     color: $ink-2;
     line-height: 1.85;
@@ -109,4 +110,14 @@
   font-style: italic;
   padding-left: 1rem;
   border-left: 2px solid $violet-200;
+}
+
+.avatar {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center; 
+  margin-bottom: 1.8rem;
+  border: 2px solid $violet-200;
 }
