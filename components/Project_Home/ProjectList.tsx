@@ -46,7 +46,8 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
           {/* Sidebar */}
           <aside className={styles.catSidebar}>
             <div className={styles.catSidebarBox}>
-              <div className={styles.catLabel}>{cat.index} — {cat.kicker}</div>
+              <div className={styles.catLabel} data-index={cat.index}>{cat.index} — {cat.kicker}</div>
+
               <h2 className={styles.catTitle}>{cat.title}</h2>
               <p className={styles.catDesc}>{cat.desc}</p>
             </div>

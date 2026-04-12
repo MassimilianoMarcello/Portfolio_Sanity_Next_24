@@ -1,27 +1,64 @@
 // components/AboutMe/About.module.scss
 @import "../../app/main.module.scss";
 
+// ─── Container ────────────────────────────────────────────────────────────────
 .container {
-padding: 0 4rem 2rem 5rem;
+  padding: 0 4rem 6rem 5rem;    // ← allineato a ProjectList
   max-width: 1400px;
   margin: 0 auto;
   border-bottom: 1px solid $rule;
+  position: relative;
+  overflow: hidden;
+
+  // ── Dot grid — texture ambientale ──────────────────────────────────────────
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba($violet-300, 0.15) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none;
+    z-index: 0;
+    mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.5) 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.5) 100%);
+  }
+
+  // ── Logo watermark ─────────────────────────────────────────────────────────
+&::after {
+  content: '';
+  position: absolute;
+  bottom: 0rem;
+  right: 2rem;
+  width: 120px;
+  height: 120px;
+  background-image: url('/logo_only.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.07;
+  pointer-events: none;
+  z-index: 0;
+  user-select: none;
+}
 
   @include responsive("md", "max") {
-    padding: 0 1.2rem 1.5rem;
+    padding: 0 1.2rem 4rem;
+
+    &::after { display: none; }
   }
 }
 
 // ─── Section kicker ───────────────────────────────────────────────────────────
 .sectionKicker {
-padding: 2rem 0 0;
+  padding: 2rem 0 0;
   display: flex;
   align-items: center;
+  position: relative;
+  z-index: 1;
+  // ← rimosso margin-left: 4rem
 
   span {
     font-family: $font-mono;
     font-size: 0.64rem;
-  
     text-transform: uppercase;
     letter-spacing: 0.16em;
     color: $violet-400;
@@ -39,8 +76,11 @@ padding: 2rem 0 0;
   grid-template-columns: 1fr 1.4fr;
   gap: 0 3rem;
   margin-top: 2.5rem;
-  padding-bottom: 4rem;
-  border: solid 1px $rule;
+  padding-bottom: 5rem;
+  position: relative;
+  z-index: 1;
+  // ← rimosso margin-left: 4rem
+  // ← rimosso border debug
 
   @include responsive("md", "max") {
     grid-template-columns: 1fr;
@@ -53,17 +93,26 @@ padding: 2rem 0 0;
 .hero {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; // ← era center: causa del problema byline
+  align-items: flex-start;
   border-right: 1px solid $rule;
-  padding: 1rem 1.5rem;
+  padding: 2rem 1.5rem 2rem;    // ← più aria, rimosso margin-top: 4rem
   background-color: $violet-50;
- margin-top: 4rem;
 
   @include responsive("md", "max") {
     border-right: none;
     border-bottom: 1px solid $rule;
     padding: 1.5rem 0 2rem;
   }
+}
+
+.avatar {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  margin-bottom: 1.8rem;
+  border: 2px solid $violet-200;
 }
 
 .headline {
@@ -73,14 +122,12 @@ padding: 2rem 0 0;
   line-height: 1.15;
   letter-spacing: -0.025em;
   color: $indigo-800;
-  margin: 1.2rem 0 1.2rem;
-  
+  margin: 1.2rem 0;
 }
 
 .headlineMuted {
   color: $indigo-600;
   font-weight: 400;
-  
 }
 
 .byline {
@@ -89,27 +136,17 @@ padding: 2rem 0 0;
   text-transform: uppercase;
   letter-spacing: 0.13em;
   color: $ink-3;
-  margin-top: auto; // ← spinge in fondo alla hero card
-  padding-top: 1.8rem; // ← mantiene spazio visivo minimo
-  
-}
-.avatar {
-  width: 112px;
-  height: 112px;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: center; 
-  margin-bottom: 1.8rem;
-  border: 2px solid $violet-200;
+  margin-top: auto;
+  padding-top: 1.8rem;
 }
 
 // ─── Body — colonna destra ────────────────────────────────────────────────────
 .body {
   display: flex;
   flex-direction: column;
-  gap: 1.4rem;
+  gap: 1.6rem;                  // ← leggermente più aria tra i paragrafi
   justify-content: center;
-  padding: 3rem;
+  padding: 3rem 3rem 3rem 3rem;
 
   p {
     font-family: $font-body;
@@ -118,16 +155,14 @@ padding: 2rem 0 0;
     color: $ink-2;
     line-height: 1.85;
     margin: 0;
-   
   }
 }
 
 .current {
-  color: $ink-3; 
+  color: $ink-3;
   font-style: italic;
   padding-left: 1rem;
   border-left: 2px solid $violet-200;
-  
 }
 
 

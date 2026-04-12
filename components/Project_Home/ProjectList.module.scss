@@ -15,7 +15,7 @@
   position: sticky;
   top: 64px;
   z-index: 10;
-  padding: 0.6rem 0;
+  padding: .6rem 0;
   margin: 1rem 0;
   background: rgba($bg-page, 0.85);
   backdrop-filter: blur(8px);
@@ -46,8 +46,10 @@
   grid-template-columns: 310px 1fr;
   gap: 0 4rem;
   margin-top: 2.5rem;
+
   opacity: 0;
   animation: fadeUp 0.5s ease forwards;
+  
 
   &:first-of-type { margin-top: 1.5rem; }
   &:nth-child(2)  { animation-delay: 0.05s; }
@@ -57,31 +59,40 @@
   &:nth-child(even) {
     background: $bg-surface; // ← usa token invece di hack con margini negativi
     border-radius: $radius-lg;
-    padding: 2rem;
+    padding: 2rem 0;
+  
   }
 
   @include responsive("md", "max") { grid-template-columns: 1fr; }
 }
 
 // ─── Sidebar ──────────────────────────────────────────────────────────────────
+
 .catSidebar {
   position: sticky;
   top: 5rem;
   height: fit-content;
   padding-right: 2rem;
   border-right: 1px solid $rule;
-  // ← rimosso margin-right: -1.5rem (hack di compensazione)
+  border-left: 2px solid $violet-300;
+  padding-left: 1rem;
 
   @include responsive("md", "max") {
     position: static;
     border-right: none;
+    border-left: none;        // ← rimuovi anche qui su mobile
     border-bottom: 1px solid $rule;
     padding-right: 0;
+    padding-left: 0;          // ← reset su mobile
     padding-bottom: 1.2rem;
     margin-bottom: 1.5rem;
   }
 
-  .catSidebarBox { max-width: 12rem; }
+  .catSidebarBox {
+    max-width: 12rem;
+    position: relative;
+    // ← rimosso padding-left: 1rem
+  }
 }
 
 .catLabel {
@@ -91,6 +102,9 @@
   text-transform: uppercase;
   letter-spacing: 0.14em;
   margin-bottom: 0.55rem;
+  position: relative;
+
+
 }
 
 .catTitle {
@@ -103,6 +117,8 @@
   background-clip: text;
   line-height: 1.2;
   margin-bottom: 0.9rem;
+  margin-top: 1rem;
+  padding-top: .5rem;
 }
 
 .catDesc {
