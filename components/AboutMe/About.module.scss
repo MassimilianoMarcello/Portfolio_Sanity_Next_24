@@ -15,6 +15,7 @@
   padding: 2rem 0 0;
   display: flex;
   align-items: center;
+ margin-left: 4rem;
 
   span {
     font-family: $font-mono;
@@ -37,7 +38,9 @@
   grid-template-columns: 1fr 1.4fr; // ← proporzionale, non px fissi
   gap: 0 3rem;
   margin-top: 2.5rem;
+  margin-left: 4rem;
   padding-bottom: 4rem;
+  border: solid 1px $rule; // per evitare overflow da gap su mobile
 
   @include responsive("md", "max") {
     grid-template-columns: 1fr;
@@ -52,8 +55,9 @@
   flex-direction: column;
   align-items: flex-start; // ← era center: causa del problema byline
   border-right: 1px solid $rule;
-  padding: 3rem 2.5rem;
+  padding: 1rem 1.5rem;
   background-color: $violet-50;
+ margin-top: 4rem;
 
   @include responsive("md", "max") {
     border-right: none;
@@ -69,12 +73,14 @@
   line-height: 1.15;
   letter-spacing: -0.025em;
   color: $indigo-800;
-  margin: 0 0 1.2rem;
+  margin: 1.2rem 0 1.2rem;
+  
 }
 
 .headlineMuted {
   color: $indigo-600;
   font-weight: 400;
+  
 }
 
 .byline {
@@ -85,33 +91,8 @@
   color: $ink-3;
   margin-top: auto; // ← spinge in fondo alla hero card
   padding-top: 1.8rem; // ← mantiene spazio visivo minimo
+  
 }
-
-// ─── Body — colonna destra ────────────────────────────────────────────────────
-.body {
-  display: flex;
-  flex-direction: column;
-  gap: 1.4rem;
-  justify-content: center;
-  padding: 3rem 0;
-
-  p {
-    font-family: $font-body;
-    font-weight: 400;
-    font-size: 0.92rem;
-    color: $ink-2;
-    line-height: 1.85;
-    margin: 0;
-  }
-}
-
-.current {
-  color: $ink-3; // ← rimosso !important: non serve con specificità corretta
-  font-style: italic;
-  padding-left: 1rem;
-  border-left: 2px solid $violet-200;
-}
-
 .avatar {
   width: 112px;
   height: 112px;
@@ -121,3 +102,32 @@
   margin-bottom: 1.8rem;
   border: 2px solid $violet-200;
 }
+
+// ─── Body — colonna destra ────────────────────────────────────────────────────
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  justify-content: center;
+  padding: 3rem;
+
+  p {
+    font-family: $font-body;
+    font-weight: 400;
+    font-size: 0.92rem;
+    color: $ink-2;
+    line-height: 1.85;
+    margin: 0;
+   
+  }
+}
+
+.current {
+  color: $ink-3; 
+  font-style: italic;
+  padding-left: 1rem;
+  border-left: 2px solid $violet-200;
+  
+}
+
+
