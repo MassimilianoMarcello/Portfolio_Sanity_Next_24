@@ -130,15 +130,16 @@
   flex-direction: column; // ← più semplice e onesto: le sezioni si stackano
   margin-bottom: 3rem;
   background: #ffffff;
-  border: 1px solid $rule-strong;
+  // border: 1px solid $rule-strong;
+   border: 1px solid $violet-200;
   border-radius: $radius-md;
   overflow: hidden;
   position: relative;
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
-box-shadow: 2px 2px 0px 0px $indigo-100; // Aggiunta dell'effetto "offset shadow"
+box-shadow: 4px 4px 0px 0px $indigo-100; // Aggiunta dell'effetto "offset shadow"
 
   &:hover {
- border-color: $violet-300;
+ border: 1px solid $violet-400;
     box-shadow: 0 4px 16px rgba($violet-400, 0.12);
   }
 
@@ -495,16 +496,16 @@ box-shadow: 2px 2px 0px 0px $indigo-100; // Aggiunta dell'effetto "offset shadow
   font-size: 0.62rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: $bg-page;
-  background: $violet-600;
-  border: 1.5px solid $violet-600;
+  color: #ffffff;
+  background: $color-action;
+  border: 1.5px solid $color-action;
   border-radius: $radius-sm;
   padding: 0.35rem 0.8rem;
   text-decoration: none;
   position: relative;
   overflow: hidden;
   transition: background 0.18s ease, border-color 0.18s ease;
-
+ 
   &::after {
     content: '';
     position: absolute;
@@ -516,14 +517,21 @@ box-shadow: 2px 2px 0px 0px $indigo-100; // Aggiunta dell'effetto "offset shadow
     border-width: 0 10px 10px 0;
     border-color: transparent rgba(255, 255, 255, 0.2) transparent transparent;
   }
-
+ 
   svg { transition: transform 0.2s ease; }
-
+ 
   &:hover {
-    background: $violet-800;
-    border-color: $violet-800;
+    background: $color-action-dark;
+    border-color: $color-action-dark;
     svg { transform: translate(1px, -1px); }
   }
+}
+
+
+.cardSeparator {
+  height: 1px;
+  background: $rule-strong;
+  margin: 0 1.5rem 3rem;  // rientrato, non full-width — più elegante
 }
 
 // ─── Animation ────────────────────────────────────────────────────────────────

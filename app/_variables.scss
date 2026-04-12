@@ -45,8 +45,12 @@ $primary-color:  $violet-400;
 $primary-dark:   $violet-600;
 $title-color:    $indigo-600;
 $border-color:   $violet-200;
+$color-action:       #d8457b;
+$color-action-dark:  #ff7eae;   // hover/active state
+$color-action-soft:  rgba(#bf7a93, 0.08);  // per eventuali ghost variant future
 $tag-bg:         $violet-50;
 $tag-color:      $violet-800;
+
 
 // ─── Legacy aliases ───────────────────────────────────────────────────────────
 $secondary-color:  $violet-50;
