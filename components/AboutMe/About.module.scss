@@ -3,7 +3,7 @@
 
 // ─── Container ────────────────────────────────────────────────────────────────
 .container {
-  padding: 0 4rem 6rem 5rem;    // ← allineato a ProjectList
+  padding: 0 4rem 6rem 5rem;
   max-width: 1400px;
   margin: 0 auto;
   border-bottom: 1px solid $rule;
@@ -24,21 +24,21 @@
   }
 
   // ── Logo watermark ─────────────────────────────────────────────────────────
-&::after {
-  content: '';
-  position: absolute;
-  bottom: 0rem;
-  right: 2rem;
-  width: 120px;
-  height: 120px;
-  background-image: url('/logo_only.svg');
-  background-repeat: no-repeat;
-  background-size: contain;
-  opacity: 0.07;
-  pointer-events: none;
-  z-index: 0;
-  user-select: none;
-}
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0rem;
+    right: 2rem;
+    width: 120px;
+    height: 120px;
+    background-image: url('/logo_only.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.07;
+    pointer-events: none;
+    z-index: 0;
+    user-select: none;
+  }
 
   @include responsive("md", "max") {
     padding: 0 1.2rem 4rem;
@@ -54,7 +54,6 @@
   align-items: center;
   position: relative;
   z-index: 1;
-  // ← rimosso margin-left: 4rem
 
   span {
     font-family: $font-mono;
@@ -79,8 +78,6 @@
   padding-bottom: 5rem;
   position: relative;
   z-index: 1;
-  // ← rimosso margin-left: 4rem
-  // ← rimosso border debug
 
   @include responsive("md", "max") {
     grid-template-columns: 1fr;
@@ -95,7 +92,7 @@
   flex-direction: column;
   align-items: flex-start;
   border-right: 1px solid $rule;
-  padding: 2rem 1.5rem 2rem;    // ← più aria, rimosso margin-top: 4rem
+  padding: 2rem 1.5rem 2rem;
   background-color: $violet-50;
 
   @include responsive("md", "max") {
@@ -126,7 +123,7 @@
 }
 
 .headlineMuted {
-  color: $indigo-600;
+  color: $violet-400;      // ← era $indigo-600, ora più distinto
   font-weight: 400;
 }
 
@@ -144,9 +141,9 @@
 .body {
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;                  // ← leggermente più aria tra i paragrafi
-  justify-content: center;
-  padding: 3rem 3rem 3rem 3rem;
+  gap: 1.6rem;
+  justify-content: flex-start;   // ← era center, causava il dislivello
+  padding: 2rem 3rem 3rem;       // ← padding-top ridotto per allinearsi alla hero
 
   p {
     font-family: $font-body;

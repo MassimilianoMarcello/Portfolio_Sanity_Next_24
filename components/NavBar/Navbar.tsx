@@ -41,11 +41,9 @@ const Navbar: React.FC = () => {
         <div className={styles.navbarContent}>
           {/* Logo */}
           <Link href="/" className={styles.logo}>
-            <img src="/logo_only.svg" alt="Logo" />
+            <img src="/logo_massdev.svg" alt="Logo" />
           </Link>
-          <Link href="/" className={styles.logotext}>
-            <img src="/massdev-textlogo.svg" alt="Logo" />
-          </Link>
+   
 
           {/* Desktop links */}
           <div className={`${styles.navbarLinks} ${styles.navDesktop}`}>
