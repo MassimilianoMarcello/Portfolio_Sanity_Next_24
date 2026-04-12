@@ -69,10 +69,10 @@
 
 .challengeArrow {
   flex-shrink: 0;
-  color: $violet-300;
+  color: $violet-400;
   transition: color 0.18s ease, transform 0.18s ease;
 
   .challengeLink:hover & {
-    color: $violet-400;
+    color: $violet-600;
   }
 }

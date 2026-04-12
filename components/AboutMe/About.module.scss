@@ -2,7 +2,9 @@
 @import "../../app/main.module.scss";
 
 .container {
-  padding: 0 3rem 2rem;
+padding: 0 4rem 2rem 5rem;
+  max-width: 1400px;
+  margin: 0 auto;
   border-bottom: 1px solid $rule;
 
   @include responsive("md", "max") {
@@ -12,10 +14,9 @@
 
 // ─── Section kicker ───────────────────────────────────────────────────────────
 .sectionKicker {
-  padding: 2rem 0 0;
+padding: 2rem 0 0;
   display: flex;
   align-items: center;
- margin-left: 4rem;
 
   span {
     font-family: $font-mono;
@@ -35,12 +36,11 @@
 // ─── Content grid ─────────────────────────────────────────────────────────────
 .contentGrid {
   display: grid;
-  grid-template-columns: 1fr 1.4fr; // ← proporzionale, non px fissi
+  grid-template-columns: 1fr 1.4fr;
   gap: 0 3rem;
   margin-top: 2.5rem;
-  margin-left: 4rem;
   padding-bottom: 4rem;
-  border: solid 1px $rule; // per evitare overflow da gap su mobile
+  border: solid 1px $rule;
 
   @include responsive("md", "max") {
     grid-template-columns: 1fr;
