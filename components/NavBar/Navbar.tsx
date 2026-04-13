@@ -40,7 +40,11 @@ const Navbar: React.FC = () => {
       >
         <div className={styles.navbarContent}>
           {/* Logo */}
-          <Link href="/" className={styles.logo}>
+          <Link
+            href="/"
+            className={styles.logo}
+            onMouseEnter={() => setIsDropdownOpen(false)}
+          >
             <img src="/logo_massdev.svg" alt="Logo" />
           </Link>
    
@@ -87,7 +91,7 @@ const Navbar: React.FC = () => {
             </div>
 
             {/* Blog */}
-            <div className={styles.navItem}>
+            <div className={styles.navItem} onMouseEnter={() => setIsDropdownOpen(false)}>
               <Link href="/blog_post" className={styles.navLink}>
                 Blog
               </Link>
@@ -96,7 +100,7 @@ const Navbar: React.FC = () => {
             {/* Contact */}
             <div
               className={styles.contactContainer}
-              onMouseEnter={() => setIsContactHovered(true)}
+              onMouseEnter={() => { setIsDropdownOpen(false); setIsContactHovered(true); }}
             >
               <a
                 href="#contact"

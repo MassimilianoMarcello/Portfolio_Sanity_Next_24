@@ -460,7 +460,8 @@
   padding: 1.4rem 1.6rem;
   border-radius: $radius-md;
 
-  &:first-of-type {
+  &:first-of-type,
+  &:only-child {
     background: $bg-surface;
     border-left: 2px solid $rule-strong;
   }
@@ -468,11 +469,6 @@
   &:last-of-type {
     background: $tag-bg;
     border-left: 2px solid $primary-color;
-  }
-
-  &:only-child {
-    background: $bg-surface;
-    border-left: 2px solid $rule-strong;
   }
 
   &:last-child { margin-bottom: 0; }
@@ -543,7 +539,9 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: $rule-strong;
+    &:nth-child(1) { background: #ff5f57; }
+    &:nth-child(2) { background: #febc2e; }
+    &:nth-child(3) { background: #28c840; }
   }
 }
 
