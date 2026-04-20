@@ -1,9 +1,11 @@
 // components/Project_Home/ProjectList.module.scss
 @import "../../app/main.module.scss";
+@import "../../app/_section-kicker.scss"; 
 
 // ─── Outer container ──────────────────────────────────────────────────────────
 .projectListContainer {
-  padding: 0 4rem 5rem 5rem;
+  // FIX: padding ora usa $spacing-page-* tokens — allineato con About e Contact
+  padding: 0 $spacing-page-x-right 5rem $spacing-page-x;
   max-width: 1400px;
   margin: 0 auto;
 
@@ -11,33 +13,9 @@
 }
 
 // ─── Section kicker ───────────────────────────────────────────────────────────
+// FIX: sostituisce implementazione locale con il mixin condiviso, variante sticky
 .sectionKicker {
-  position: sticky;
-  top: 64px;
-  z-index: 10;
-  padding: .6rem 0;
-  margin: 1rem 0;
-  background: rgba($bg-page, 0.85);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-
-  span {
-    font-family: $font-mono;
-    font-size: 0.62rem;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: $violet-600;
-    border: 1.5px solid $violet-400;
-    border-radius: $radius-sm;
-    padding: 0.2rem 0.65rem;
-    background: rgba($violet-50, 0.9);
-    white-space: nowrap;
-  }
-
-  @include responsive("md", "max") {
-    top: 110px;
-    padding: 0.6rem 0;
-  }
+  @include section-kicker($sticky: true);
 }
 
 // ─── Category section ─────────────────────────────────────────────────────────
@@ -48,25 +26,36 @@
   margin-top: 2.5rem;
 
   animation: fadeUp 0.5s ease both;
-  
 
   &:first-of-type { margin-top: 1.5rem; }
   &:nth-child(2)  { animation-delay: 0.05s; }
   &:nth-child(3)  { animation-delay: 0.15s; }
   &:nth-child(4)  { animation-delay: 0.25s; }
 
+  // FIX: aggiunto padding orizzontale al band di colore even
+  // Prima il background finiva contro i bordi del container senza rientro
   &:nth-child(even) {
-    background: $bg-surface; // ← usa token invece di hack con margini negativi
+    background: $bg-surface;
     border-radius: $radius-lg;
-    padding: 2rem 0;
-  
+    padding: 2rem $spacing-page-x-right 2rem $spacing-page-x;
+    // Compensazione negativa per mantenere l'allineamento del contenuto
+    // con le altre sezioni nonostante il padding aggiunto
+    margin-left: -$spacing-page-x;
+    margin-right: -$spacing-page-x-right;
   }
 
-  @include responsive("md", "max") { grid-template-columns: 1fr; }
+  @include responsive("md", "max") {
+    grid-template-columns: 1fr;
+
+    &:nth-child(even) {
+      margin-left: -1.2rem;
+      margin-right: -1.2rem;
+      padding: 1.5rem 1.2rem;
+    }
+  }
 }
 
 // ─── Sidebar ──────────────────────────────────────────────────────────────────
-
 .catSidebar {
   position: sticky;
   top: 5rem;
@@ -79,10 +68,10 @@
   @include responsive("md", "max") {
     position: static;
     border-right: none;
-    border-left: none;        // ← rimuovi anche qui su mobile
+    border-left: none;
     border-bottom: 1px solid $rule;
     padding-right: 0;
-    padding-left: 0;          // ← reset su mobile
+    padding-left: 0;
     padding-bottom: 1.2rem;
     margin-bottom: 1.5rem;
   }
@@ -90,7 +79,6 @@
   .catSidebarBox {
     max-width: 12rem;
     position: relative;
-    // ← rimosso padding-left: 1rem
   }
 }
 
@@ -102,8 +90,6 @@
   letter-spacing: 0.14em;
   margin-bottom: 0.55rem;
   position: relative;
-
-
 }
 
 .catTitle {
@@ -132,29 +118,27 @@
 .projectCards {
   display: flex;
   flex-direction: column;
-  // linea sottile tra card
+
   .projectCard + .projectCard {
-    padding-top: 0; 
-   
+    padding-top: 0;
   }
 }
 
 // ─── Individual card ──────────────────────────────────────────────────────────
 .projectCard {
-  display: flex;          
-  flex-direction: column; // ← più semplice e onesto: le sezioni si stackano
+  display: flex;
+  flex-direction: column;
   margin-bottom: 3rem;
   background: $bg-page;
-  // border: 1px solid $rule-strong;
-   border: 1px solid $violet-200;
+  border: 1px solid $violet-200;
   border-radius: $radius-md;
   overflow: hidden;
   position: relative;
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
-box-shadow: 4px 4px 0px 0px $indigo-100; // Aggiunta dell'effetto "offset shadow"
+  box-shadow: 4px 4px 0px 0px $indigo-100;
 
   &:hover {
- border: 1px solid $violet-400;
+    border: 1px solid $violet-400;
     box-shadow: 0 4px 16px rgba($violet-400, 0.12);
   }
 
@@ -162,8 +146,6 @@ box-shadow: 4px 4px 0px 0px $indigo-100; // Aggiunta dell'effetto "offset shadow
     margin-bottom: 2rem;
   }
 }
-
-
 
 // ─── Tech row ─────────────────────────────────────────────────────────────────
 .techRow {
@@ -255,7 +237,7 @@ box-shadow: 4px 4px 0px 0px $indigo-100; // Aggiunta dell'effetto "offset shadow
   &[data-status="archived"]            { background: $ink-4; }
 }
 
-// ─── Content row: immagine SX + problem/solution DX ───────────────────────────
+// ─── Content row ──────────────────────────────────────────────────────────────
 .contentRow {
   display: grid;
   grid-template-columns: 1fr 1.6fr;
@@ -319,7 +301,7 @@ box-shadow: 4px 4px 0px 0px $indigo-100; // Aggiunta dell'effetto "offset shadow
 
 .browserUrl {
   flex: 1;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba($color-white, 0.7);  // FIX: era rgba(255, 255, 255, 0.7) hardcoded
   border-radius: $radius-sm;
   padding: 0.18rem 0.6rem;
   font-family: $font-mono;
@@ -421,7 +403,7 @@ box-shadow: 4px 4px 0px 0px $indigo-100; // Aggiunta dell'effetto "offset shadow
   margin: 0;
 }
 
-// ─── Impact — full width, bg azzurro ──────────────────────────────────────────
+// ─── Impact ───────────────────────────────────────────────────────────────────
 .impactSection {
   background: $bg-accent-light;
   border-top: 1px solid $accent-blue;
@@ -440,14 +422,14 @@ box-shadow: 4px 4px 0px 0px $indigo-100; // Aggiunta dell'effetto "offset shadow
   font-weight: 800;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: $indigo-800; // ← era #1a3a52 hardcoded
+  color: $indigo-800;
 }
 
 .impactText {
   font-family: $font-body;
   font-size: 0.82rem;
   line-height: 1.65;
-  color: $indigo-600; // ← era #1e3d56 hardcoded
+  color: $indigo-600;
   font-weight: 300;
   max-width: 640px;
   margin: 0;
@@ -456,8 +438,8 @@ box-shadow: 4px 4px 0px 0px $indigo-100; // Aggiunta dell'effetto "offset shadow
 // ─── Challenges ───────────────────────────────────────────────────────────────
 .challengesSection {
   padding: 1rem 1.5rem;
-  background: $bg-surface; // ← era #f5f5f3 hardcoded
-  border-bottom: 1px solid $rule; // ← era #e8e8e4 hardcoded
+  background: $bg-surface;
+  border-bottom: 1px solid $rule;
 }
 
 // ─── Footer ───────────────────────────────────────────────────────────────────
@@ -511,7 +493,8 @@ box-shadow: 4px 4px 0px 0px $indigo-100; // Aggiunta dell'effetto "offset shadow
   font-size: 0.62rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #ffffff;
+  // FIX: era #ffffff hardcoded — ora usa $color-white token
+  color: $color-white;
   background: $color-action;
   border: 1.5px solid $color-action;
   border-radius: $radius-sm;
@@ -520,7 +503,7 @@ box-shadow: 4px 4px 0px 0px $indigo-100; // Aggiunta dell'effetto "offset shadow
   position: relative;
   overflow: hidden;
   transition: background 0.18s ease, border-color 0.18s ease;
- 
+
   &::after {
     content: '';
     position: absolute;
@@ -530,11 +513,11 @@ box-shadow: 4px 4px 0px 0px $indigo-100; // Aggiunta dell'effetto "offset shadow
     height: 0;
     border-style: solid;
     border-width: 0 10px 10px 0;
-    border-color: transparent rgba(255, 255, 255, 0.2) transparent transparent;
+    border-color: transparent rgba($color-white, 0.2) transparent transparent;
   }
- 
+
   svg { transition: transform 0.2s ease; }
- 
+
   &:hover {
     background: $color-action-dark;
     border-color: $color-action-dark;
@@ -542,11 +525,10 @@ box-shadow: 4px 4px 0px 0px $indigo-100; // Aggiunta dell'effetto "offset shadow
   }
 }
 
-
 .cardSeparator {
   height: 1px;
   background: $rule-strong;
-  margin: 0 1.5rem 3rem;  // rientrato, non full-width — più elegante
+  margin: 0 1.5rem 3rem;
 }
 
 // ─── Animation ────────────────────────────────────────────────────────────────

@@ -1,9 +1,11 @@
 // components/AboutMe/About.module.scss
 @import "../../app/main.module.scss";
+@import "../../app/_section-kicker.scss"; 
 
 // ─── Container ────────────────────────────────────────────────────────────────
 .container {
-  padding: 0 4rem 6rem 5rem;
+  // FIX: padding ora usa $spacing-page-* tokens invece di valori raw incoerenti
+  padding: 0 $spacing-page-x-right 6rem $spacing-page-x;
   max-width: 1400px;
   margin: 0 auto;
   border-bottom: 1px solid $rule;
@@ -48,25 +50,9 @@
 }
 
 // ─── Section kicker ───────────────────────────────────────────────────────────
+// FIX: sostituisce implementazione locale con il mixin condiviso
 .sectionKicker {
-  padding: 2rem 0 0;
-  display: flex;
-  align-items: center;
-  position: relative;
-  z-index: 1;
-
-  span {
-    font-family: $font-mono;
-    font-size: 0.64rem;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: $violet-400;
-    border: 1px solid $violet-200;
-    border-radius: $radius-sm;
-    padding: 0.2rem 0.65rem;
-    background: $violet-50;
-    white-space: nowrap;
-  }
+  @include section-kicker();
 }
 
 // ─── Content grid ─────────────────────────────────────────────────────────────
@@ -123,7 +109,7 @@
 }
 
 .headlineMuted {
-  color: $violet-400;      // ← era $indigo-600, ora più distinto
+  color: $violet-400;
   font-weight: 400;
 }
 
@@ -142,8 +128,8 @@
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
-  justify-content: flex-start;   // ← era center, causava il dislivello
-  padding: 2rem 3rem 3rem;       // ← padding-top ridotto per allinearsi alla hero
+  justify-content: flex-start;
+  padding: 2rem 3rem 3rem;
 
   p {
     font-family: $font-body;

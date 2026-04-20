@@ -29,6 +29,9 @@ $ink-2:       #2e2c38;
 $ink-3:       #6b6878;
 $ink-4:       #a09cb0;
 
+// FIX: token per bianco puro — elimina #ffffff hardcoded nei componenti
+$color-white: #ffffff;
+
 $rule:        rgba(145, 117, 186, 0.15);
 $rule-strong: rgba(145, 117, 186, 0.3);
 
@@ -47,7 +50,7 @@ $title-color:    $indigo-600;
 $border-color:   $violet-200;
 $color-action:       #d8457b;
 $color-action-dark:  #ff7eae;   // hover/active state
-$color-action-soft:  rgba(#bf7a93, 0.08);  // per eventuali ghost variant future
+$color-action-soft:  rgba(#bf7a93, 0.08);
 $tag-bg:         $violet-50;
 $tag-color:      $violet-800;
 
@@ -73,23 +76,19 @@ $radius-sm:    4px;
 $radius-md:    6px;
 $radius-lg:    12px;
 
+// FIX: spacing semantici per padding di pagina — elimina valori raw incoerenti
+// (About usava 5rem sx, ProjectList usava 5rem sx ma 4rem dx — ora uniformi)
+$spacing-page-x:       5rem;   // padding orizzontale standard sezioni
+$spacing-page-x-right: 4rem;   // lato destro (leggermente meno per compensare scroll)
+$spacing-page-y-bottom: 6rem;  // padding bottom standard
+
 // ─── Portable Text tokens — shared across singleProject and blog ──────────────
-$pt-accent-color:       $violet-300;   // list item left accent (rest)
-$pt-accent-hover:       $violet-400;   // list item left accent (hover)
-$pt-accent-height:      60%;           // accent line covers only 60% of item height, centered
+$pt-accent-color:       $violet-300;
+$pt-accent-hover:       $violet-400;
+$pt-accent-height:      60%;
 $pt-divider-color:      $rule;
-$pt-lead-size:          1.1rem;        // .ptLead first paragraph
+$pt-lead-size:          1.1rem;
 $pt-callout-bg:         $violet-50;
 $pt-callout-border:     $violet-400;
-
-
-
-
-
-
-
-
-
-  
 
   

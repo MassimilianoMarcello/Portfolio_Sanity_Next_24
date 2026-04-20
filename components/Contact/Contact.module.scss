@@ -1,9 +1,11 @@
 // components/Contact/Contact.module.scss
 @import "../../app/main.module.scss";
+@import "../../app/_section-kicker.scss"; 
 
 // ─── Container ────────────────────────────────────────────────────────────────
 .contactContainer {
-  padding: 0 4rem 7rem 5rem;   // ← allineato a ProjectList
+  // FIX: padding ora usa $spacing-page-* tokens — allineato con About e ProjectList
+  padding: 0 $spacing-page-x-right 7rem $spacing-page-x;
   max-width: 1400px;
   margin: 0 auto;
   border-top: 1px solid $rule;
@@ -49,37 +51,16 @@
 }
 
 // ─── Section kicker ───────────────────────────────────────────────────────────
+// FIX: sostituisce implementazione locale con il mixin condiviso
 .sectionKicker {
-  padding: 2rem 0 0;             // ← stesso ritmo di About e ProjectList
-  display: flex;
-  align-items: center;
-  position: relative;
-  z-index: 1;
-
-  span {
-    font-family: $font-mono;
-    font-size: 0.62rem;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: $violet-600;
-    border: 1.5px solid $violet-400;
-    border-radius: $radius-sm;
-    padding: 0.2rem 0.65rem;
-    background: $violet-50;
-    white-space: nowrap;
-  }
-
-  @include responsive("md", "max") {
-    padding: 2.5rem 0 0;
-  }
+  @include section-kicker();
 }
 
 // ─── Layout grid ──────────────────────────────────────────────────────────────
-// Specchia categorySection di ProjectList: 310px sidebar + 1fr content
 .contactGrid {
   display: grid;
-  grid-template-columns: 310px 1fr;   // ← era 200px, ora allineato
-  gap: 0 4rem;                         // ← stesso gap di ProjectList
+  grid-template-columns: 310px 1fr;
+  gap: 0 4rem;
   margin-top: 3.5rem;
   position: relative;
   z-index: 1;
@@ -91,7 +72,6 @@
   }
 }
 
-// Spacer sinistro — mantiene allineamento con le sidebar dei progetti
 .contactSpacer {
   border-right: 1px solid $rule;
 
@@ -106,12 +86,12 @@
   grid-template-columns: 1fr 1fr;
   gap: 0 4rem;
   border-top: 1px solid $rule;
-  padding-top: 3rem;               // ← più aria
+  padding-top: 3rem;
 
   @include responsive("md", "max") {
     grid-template-columns: 1fr;
     gap: 0;
-    border-top: none;          // ← evita doppio bordo con contactGrid
+    border-top: none;
     padding-top: 0;
   }
 }
@@ -124,7 +104,6 @@
     border-top: 1px solid $rule;
     padding: 2.5rem 0;
 
-    // Rimuove il padding extra sull'ultimo blocco
     &:last-child {
       padding-bottom: 0;
     }
@@ -143,7 +122,7 @@
 
 .blockTitle {
   font-family: $font-serif;
-  font-size: 1.6rem;               // ← leggermente più grande
+  font-size: 1.6rem;
   font-weight: 600;
   background: linear-gradient(135deg, $violet-600 0%, $indigo-600 100%);
   -webkit-background-clip: text;
@@ -159,14 +138,14 @@
   color: $ink-3;
   line-height: 1.75;
   font-weight: 300;
-  margin-bottom: 2rem;             // ← più aria prima dei link
+  margin-bottom: 2rem;
 }
 
 // ─── Link list ────────────────────────────────────────────────────────────────
 .linkList {
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;                     // ← più aria tra le righe
+  gap: 0.9rem;
   margin-bottom: 2.5rem;
 }
 
@@ -201,15 +180,14 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  min-width: 0;              // ← permette shrink in flex
+  min-width: 0;
 
   @include responsive("md", "max") {
     font-size: 0.8rem;
   }
 }
 
-// ─── Action button — outline con $color-action ────────────────────────────────
-// Stesso colore del caseStudyBtn, peso visivo inferiore (outline vs filled)
+// ─── Action button ────────────────────────────────────────────────────────────
 .actionBtn {
   display: inline-flex;
   align-items: center;
@@ -224,13 +202,12 @@
   border-radius: $radius-sm;
   padding: 0.4rem 0.9rem;
   text-decoration: none;
-  margin-top: auto;                // ← spinge il bottone in fondo al block
+  margin-top: auto;
   width: fit-content;
   position: relative;
   overflow: hidden;
   transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 
-  // corner cut — stesso motivo geometrico del caseStudyBtn
   &::after {
     content: '';
     position: absolute;
@@ -245,12 +222,13 @@
   }
 
   &:hover {
-    color: #fff;
+    // FIX: era #fff hardcoded — ora usa $color-white token
+    color: $color-white;
     background: $color-action;
     border-color: $color-action;
 
     &::after {
-      border-color: transparent rgba(255,255,255,0.2) transparent transparent;
+      border-color: transparent rgba($color-white, 0.2) transparent transparent;
     }
   }
 
