@@ -11,6 +11,7 @@
   border-bottom: 1px solid $rule;
   position: relative;
   overflow: hidden;
+  
 
   // ── Dot grid — texture ambientale ──────────────────────────────────────────
   &::before {
@@ -40,6 +41,7 @@
     pointer-events: none;
     z-index: 0;
     user-select: none;
+    
   }
 
   @include responsive("md", "max") {
@@ -64,6 +66,7 @@
   padding-bottom: 5rem;
   position: relative;
   z-index: 1;
+  
 
   @include responsive("md", "max") {
     grid-template-columns: 1fr;
@@ -80,6 +83,8 @@
   border-right: 1px solid $rule;
   padding: 2rem 1.5rem 2rem;
   background-color: $violet-50;
+  box-shadow: -4px -4px 0px 0px $indigo-100;
+  border-radius: 5px;
 
   @include responsive("md", "max") {
     border-right: none;
@@ -96,6 +101,7 @@
   object-position: center;
   margin-bottom: 1.8rem;
   border: 2px solid $violet-200;
+   
 }
 
 .headline {
