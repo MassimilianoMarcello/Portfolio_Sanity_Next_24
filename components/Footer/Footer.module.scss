@@ -16,10 +16,14 @@
   margin: 0 auto;
 
   @include responsive("md", "max") {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
-    padding: 1.5rem 1.2rem;
+    display: grid;
+    grid-template-columns: 1fr auto;   // copyright sx — location dx
+    grid-template-areas:
+      "copy  location"
+      "links links";
+    align-items: center;
+    gap: 1.25rem 0;
+    padding: 1.5rem 1rem;
   }
 }
 
@@ -30,6 +34,10 @@
   color: $ink-3;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+
+  @include responsive("md", "max") {
+    grid-area: copy;
+  }
 }
 
 // ─── Nav links ────────────────────────────────────────────────────────────────
@@ -38,8 +46,11 @@
   gap: 1.8rem;
 
   @include responsive("md", "max") {
+    grid-area: links;
     flex-wrap: wrap;
-    gap: 1rem 1.5rem;
+    gap: 0.75rem 1.25rem;
+    border-top: 1px solid $rule;
+    padding-top: 1.25rem;
   }
 }
 
@@ -83,4 +94,9 @@
   color: $ink-3;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+
+  @include responsive("md", "max") {
+    grid-area: location;
+    text-align: right;
+  }
 }
