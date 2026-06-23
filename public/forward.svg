@@ -1,12 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" id="Forward">
-  <defs>
-    <clipPath id="a">
-      <rect width="50" height="50" fill="none" transform="translate(787.102 289.522)"></rect>
-    </clipPath>
-  </defs>
-  <g transform="translate(-787.102 -289.522)" fill="#000000" class="color000000 svgShape">
-    <g clip-path="url(#a)" fill="#000000" class="color000000 svgShape">
-      <path fill="none" stroke="#755fc2" stroke-miterlimit="10" stroke-width="2" d="M803.894,338.522h0a7.2,7.2,0,0,1-5.08-12.3l11.663-11.622-11.712-11.753a7.228,7.228,0,0,1,5.12-12.33h0a7.222,7.222,0,0,1,5.108,2.115l16.224,16.21a8,8,0,0,1,.005,11.313l-16.237,16.252A7.2,7.2,0,0,1,803.894,338.522Z" class="colorStroke1a1818 svgStroke"></path>
-    </g>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" id="Forward" viewBox="0 0 50 50"><defs><clipPath id="a"><rect width="50" height="50" fill="none" transform="translate(787.102 289.522)"/></clipPath></defs><g fill="#000" class="color000000 svgShape"><g fill="#000" class="color000000 svgShape" clip-path="url(#a)" transform="translate(-787.102 -289.522)"><path fill="none" stroke="#755fc2" stroke-miterlimit="10" stroke-width="2" d="M803.894,338.522h0a7.2,7.2,0,0,1-5.08-12.3l11.663-11.622-11.712-11.753a7.228,7.228,0,0,1,5.12-12.33h0a7.222,7.222,0,0,1,5.108,2.115l16.224,16.21a8,8,0,0,1,.005,11.313l-16.237,16.252A7.2,7.2,0,0,1,803.894,338.522Z" class="colorStroke1a1818 svgStroke"/></g></g></svg>
