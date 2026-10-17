@@ -98,10 +98,11 @@
   height: 112px;
   border-radius: 50%;
   object-fit: cover;
-  object-position: center;
+  
+  object-position: 40% 20%;
   margin-bottom: 1.8rem;
   border: 2px solid $violet-200;
-   
+  
 }
 
 .headline {
