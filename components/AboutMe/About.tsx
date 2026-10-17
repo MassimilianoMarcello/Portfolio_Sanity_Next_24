@@ -11,7 +11,7 @@ const About = () => {
 
       <div className={styles.contentGrid}>
         <div className={styles.hero}>
-          <img src="/massi.png" alt="Massimiliano Marcello" className={styles.avatar} />
+          <img src="/massi2.png" alt="Massimiliano Marcello" className={styles.avatar} />
 
           <h1 className={styles.headline}>
             Full-stack developer<br />
