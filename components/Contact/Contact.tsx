@@ -22,7 +22,7 @@ const Contact = () => {
           {/* Get in touch */}
           <div className={styles.contactBlock}>
             <span className={styles.blockKicker}>Get in touch</span>
-            <h2 className={styles.blockTitle}>Let's talk</h2>
+            <h2 className={styles.blockTitle}>Let&apos;s talk</h2>
             <p className={styles.blockDesc}>
               Open to projects, collaborations, and opportunities.
               I read every message.

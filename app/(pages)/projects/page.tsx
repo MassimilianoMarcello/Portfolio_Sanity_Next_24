@@ -1,14 +1,6 @@
-import ProjectHome from "@/components/Project_Home/ProjectHome"
+import { redirect } from "next/navigation";
 
-
-
-const MyProjects = () => {
-  return (
-    <div>
- {/* <ProjectHome/> */}
-   
-    </div>
-  )
+// /projects non ha contenuto proprio: l'elenco dei progetti vive in home.
+export default function MyProjects() {
+  redirect("/");
 }
-
-export default MyProjects

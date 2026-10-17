@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styles from "./About.module.scss";
 
 const About = () => {
@@ -11,7 +12,15 @@ const About = () => {
 
       <div className={styles.contentGrid}>
         <div className={styles.hero}>
-          <img src="/massi2.png" alt="Massimiliano Marcello" className={styles.avatar} />
+          {/* massi2.png pesa ~830 KB per un avatar da 112px: next/image lo serve ridimensionato. */}
+          <Image
+            src="/massi2.png"
+            alt="Massimiliano Marcello"
+            width={112}
+            height={112}
+            priority
+            className={styles.avatar}
+          />
 
           <h1 className={styles.headline}>
             Full-stack developer<br />
@@ -25,7 +34,7 @@ const About = () => {
           Currently building BeSpoken — a component system for Phoenix LiveView based on Atomic Design principles, with Tailwind and DaisyUI.
           </p>
           <p>
-            My path wasn't linear: communications, radio journalism, restaurant
+            My path wasn&apos;t linear: communications, radio journalism, restaurant
             kitchens, social work. What connects all of it is learning complex
             systems quickly and making them work for real people. Same approach
             to code — structure, clarity, attention to who uses the product.

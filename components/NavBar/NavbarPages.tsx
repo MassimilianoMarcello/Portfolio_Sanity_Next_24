@@ -15,11 +15,12 @@ const NavbarPages: React.FC = () => {
 
   return (
     <>
-      <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""}`}>
+      <nav aria-label="Main" className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""}`}>
         <div className={styles.navbarContent}>
           {/* Logo */}
           <Link href="/" className={styles.logo}>
-            <img src="/logo_massdev.svg" alt="Logo" />
+            {/* eslint-disable-next-line @next/next/no-img-element -- SVG: next/image non lo ottimizza */}
+            <img src="/logo_massdev.svg" alt="Massimiliano Marcello — home" />
           </Link>
 
           {/* Back to projects */}

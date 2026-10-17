@@ -22,7 +22,9 @@ const challenge = {
         name: "slug",
         title: "Slug",
         type: "slug",
-        options: { source: "title" }
+        options: { source: "title" },
+        // Lo slug alimenta l'ancora #challenge-<slug> usata dai link della home.
+        validation: (Rule: { required: () => unknown }) => Rule.required(),
       },
 
       {

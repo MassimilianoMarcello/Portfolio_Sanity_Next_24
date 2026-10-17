@@ -1,5 +1,8 @@
 // app/(pages)/projects/[slug]/page.tsx
-import { getProject } from "@/sanity/sanity.query";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { getProject, getProjectSlugs } from "@/sanity/sanity.query";
+import { challengeId } from "@/lib/challengeId";
 import { PortableText } from "@portabletext/react";
 import Link from "next/link";
 import styles from "./singleProject.module.scss";
@@ -13,13 +16,45 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+export async function generateStaticParams() {
+  const slugs = await getProjectSlugs();
+  return slugs.map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const project = await getProject(slug);
+
+  if (!project) return { title: "Project not found" };
+
+  const description =
+    project.problem ||
+    project.impact ||
+    `Case study: ${project.name}, by Massimiliano Marcello.`;
+
+  return {
+    title: project.name,
+    description,
+    alternates: { canonical: `/projects/${slug}` },
+    openGraph: {
+      type: "article",
+      title: project.name,
+      description,
+      url: `/projects/${slug}`,
+      ...(project.image
+        ? { images: [{ url: project.image, alt: project.imageAlt || project.name }] }
+        : {}),
+    },
+  };
+}
+
 export default async function Project({ params }: Props) {
   const { slug } = await params;
   const project = await getProject(slug);
 
-  if (!project) {
-    return <div className={styles.notFound}>Project not found.</div>;
-  }
+  // 404 vero invece di una pagina 200 con un div: i motori di ricerca
+  // non la indicizzano come contenuto.
+  if (!project) notFound();
 
   return (
     <div id="top" className={styles.projectContainer}>
@@ -32,23 +67,19 @@ export default async function Project({ params }: Props) {
           <nav className={styles.challengeNav}>
             <span className={styles.navLabel}>Challenges</span>
             <ul className={styles.challengesList}>
-              {project.challenges.map((challenge) => {
-                const challengeId = `challenge-${challenge.title
-                  .replace(/\s+/g, "-")
-                  .toLowerCase()}`;
-                return (
-                  <ChallengeLink
-                    key={challenge._id}
-                    challengeId={challengeId}
-                    title={challenge.title}
-                  />
-                );
-              })}
+              {project.challenges.map((challenge, i) => (
+                <ChallengeLink
+                  key={challenge._id}
+                  challengeId={challengeId(challenge, i)}
+                  title={challenge.title}
+                />
+              ))}
             </ul>
           </nav>
 
           <div className={styles.sidebarActions}>
-            <Link href="/projects" className={styles.backLink}>
+            {/* Torna alla card di questo progetto nella home, non in cima alla pagina */}
+            <Link href={`/#project-${project.slug}`} className={styles.backLink}>
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
                 <path d="M8 5H2M2 5L5 2M2 5L5 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -83,11 +114,8 @@ export default async function Project({ params }: Props) {
             <span className={styles.sectionKicker}>Challenges &amp; solutions</span>
 
             {project.challenges.map((challenge, i) => {
-              const challengeId = `challenge-${challenge.title
-                .replace(/\s+/g, "-")
-                .toLowerCase()}`;
               return (
-                <div id={challengeId} key={challenge._id} className={styles.challengeItem}>
+                <div id={challengeId(challenge, i)} key={challenge._id} className={styles.challengeItem}>
                   <div className={styles.challengeHeader}>
                     <span className={styles.challengeNum}>
                       {String(i + 1).padStart(2, "0")}

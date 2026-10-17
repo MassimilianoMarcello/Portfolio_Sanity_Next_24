@@ -1,6 +1,7 @@
 // components/Project_Home/ProjectInfo.tsx
 import { Project } from "@/types/projects";
 import Link from "next/link";
+import { challengeId } from "@/lib/challengeId";
 import styles from "./ProjectInfo.module.scss";
 
 interface ProjectInfoProps {
@@ -20,7 +21,7 @@ const ProjectInfo: React.FC<ProjectInfoProps> = ({ project }) => {
         {project.challenges.map((challenge, i) => (
           <li key={challenge._id} className={styles.challengeItem}>
             <Link
-              href={`/projects/${resolveSlug(project.slug)}#challenge-${resolveSlug(challenge.slug)}`}
+              href={`/projects/${resolveSlug(project.slug)}#${challengeId(challenge, i)}`}
               className={styles.challengeLink}
             >
               <span className={styles.challengeNum}>
@@ -35,6 +36,7 @@ const ProjectInfo: React.FC<ProjectInfoProps> = ({ project }) => {
                 height="12"
                 viewBox="0 0 12 12"
                 fill="none"
+                aria-hidden="true"
               >
                 <path
                   d="M2 6H10M10 6L6 2M10 6L6 10"

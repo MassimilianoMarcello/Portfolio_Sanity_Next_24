@@ -1,14 +1,19 @@
-"use client"; 
+"use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useId } from "react";
 import Link from "next/link";
 import styles from "../../app/main.module.scss";
-import { TriangleIcon, EnvelopeIcon } from "../ui/Icons";
+
+const SECTIONS = [
+  { id: "main",      label: "Primary projects" },
+  { id: "secondary", label: "Secondary projects" },
+  { id: "sandbox",   label: "Sandbox" },
+] as const;
 
 const Navbar: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isContactHovered, setIsContactHovered] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const menuId = useId();
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 8);
@@ -16,82 +21,73 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      window.scrollTo({ top: element.offsetTop, behavior: "smooth" });
-    }
-  };
-
-  const handleLinkClick = (e: React.MouseEvent, id: string) => {
-    e.preventDefault();
-    scrollToSection(id);
-    setIsDropdownOpen(false);
-  };
+  // Gli scroll alle sezioni sono ancore native: `scroll-behavior: smooth` è in
+  // globals.scss e `scroll-margin-top` sulle sezioni compensa la navbar fissa.
+  // Prima si usava `offsetTop`, che ignorava l'altezza della navbar.
+  const closeDropdown = () => setIsDropdownOpen(false);
 
   return (
     <>
       <nav
+        aria-label="Main"
         className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""}`}
-        onMouseLeave={() => {
-          setIsDropdownOpen(false);
-          setIsContactHovered(false);
-        }}
+        onMouseLeave={closeDropdown}
       >
         <div className={styles.navbarContent}>
           {/* Logo */}
           <Link
             href="/"
             className={styles.logo}
-            onMouseEnter={() => setIsDropdownOpen(false)}
+            onMouseEnter={closeDropdown}
           >
-            <img src="/logo_massdev.svg" alt="Logo" />
+            {/* eslint-disable-next-line @next/next/no-img-element -- SVG: next/image non lo ottimizza */}
+            <img src="/logo_massdev.svg" alt="Massimiliano Marcello — home" />
           </Link>
-   
 
           {/* Desktop links */}
           <div className={`${styles.navbarLinks} ${styles.navDesktop}`}>
-            {/* Projects dropdown */}
+            {/* Case studies dropdown: si apre con hover, focus da tastiera e si chiude con Esc */}
             <div
               className={styles.navItem}
               onMouseEnter={() => setIsDropdownOpen(true)}
+              onFocus={() => setIsDropdownOpen(true)}
+              onBlur={(e) => {
+                if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+                  closeDropdown();
+                }
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Escape") closeDropdown();
+              }}
             >
-              <span className={styles.navLink}>
+              <button
+                type="button"
+                className={styles.navLink}
+                aria-expanded={isDropdownOpen}
+                aria-controls={menuId}
+              >
                 Case Studies
-                {/* <span className={styles.triangleContainer}>
-                  <TriangleIcon />
-                </span> */}
-              </span>
+              </button>
 
               <div
+                id={menuId}
                 className={`${styles.dropdownMenu} ${isDropdownOpen ? styles.show : ""}`}
               >
-                <a
-                  href="#main"
-                  onClick={(e) => handleLinkClick(e, "main")}
-                  className={styles.dropdownItem}
-                >
-                  main
-                </a>
-                <a
-                  href="#secondary"
-                  onClick={(e) => handleLinkClick(e, "secondary")}
-                  className={styles.dropdownItem}
-                >
-                  secondary
-                </a>
-                <a
-                  href="#sandbox"
-                  onClick={(e) => handleLinkClick(e, "sandbox")}
-                  className={styles.dropdownItem}
-                >
-                  sandbox
-                </a>
+                {SECTIONS.map(({ id, label }) => (
+                  <a
+                    key={id}
+                    href={`#${id}`}
+                    onClick={closeDropdown}
+                    className={styles.dropdownItem}
+                  >
+                    {label}
+                  </a>
+                ))}
               </div>
             </div>
 
             {/* Blog */}
-            <div className={styles.navItem} onMouseEnter={() => setIsDropdownOpen(false)}>
+            <div className={styles.navItem} onMouseEnter={closeDropdown}>
               <Link href="/blog_post" className={styles.navLink}>
                 Blog
               </Link>
@@ -100,35 +96,24 @@ const Navbar: React.FC = () => {
             {/* Contact */}
             <div
               className={styles.contactContainer}
-              onMouseEnter={() => { setIsDropdownOpen(false); setIsContactHovered(true); }}
+              onMouseEnter={closeDropdown}
             >
-              <a
-                href="#contact"
-                onClick={(e) => handleLinkClick(e, "contact")}
-                className={styles.navLink}
-              >
+              <a href="#contact" className={styles.navLink}>
                 Contact
               </a>
-              {/* <span className={`${styles.envelopeContainer} ${isContactHovered ? styles.moveRight : ""}`}>
-                <EnvelopeIcon />
-              </span> */}
             </div>
           </div>
         </div>
 
         {/* Mobile links — sotto il contenuto principale */}
         <div className={styles.navMobile}>
-          <Link href="/" className={styles.navLink}>
+          <a href="#main" className={styles.navLink}>
             Case Studies
-          </Link>
+          </a>
           <Link href="/blog_post" className={styles.navLink}>
             Blog
           </Link>
-          <a
-            href="#contact"
-            onClick={(e) => handleLinkClick(e, "contact")}
-            className={styles.navLink}
-          >
+          <a href="#contact" className={styles.navLink}>
             Contact
           </a>
         </div>

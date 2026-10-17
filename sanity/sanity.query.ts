@@ -53,8 +53,11 @@ export async function getProject(slug: string): Promise<Project> {
       name,
       "slug": slug.current,
       "image": image.asset->url,
+      "imageAlt": image.alt,
       url,
       content,
+      problem,
+      impact,
       importance,
       githubUrl,
       "technologies": technologies[]-> {
@@ -72,6 +75,27 @@ export async function getProject(slug: string): Promise<Project> {
       }
     }`,
     { slug },
+    { next: { revalidate: 60 } }
+  );
+}
+
+// Solo gli slug: servono a generateStaticParams e alla sitemap, senza scaricare i contenuti.
+export async function getProjectSlugs(): Promise<string[]> {
+  const slugs: (string | null)[] = await client.fetch(
+    groq`*[_type == "project" && defined(slug.current)].slug.current`,
+    {},
+    { next: { revalidate: 60 } }
+  );
+  return slugs.filter((s): s is string => Boolean(s));
+}
+
+export async function getPostSlugs(): Promise<{ slug: string; updatedAt: string }[]> {
+  return client.fetch(
+    groq`*[_type == "post" && defined(slug.current)]{
+      "slug": slug.current,
+      "updatedAt": coalesce(_updatedAt, publishedAt, _createdAt)
+    }`,
+    {},
     { next: { revalidate: 60 } }
   );
 }

@@ -536,3 +536,18 @@
   from { opacity: 0; transform: translateY(14px); pointer-events: none; }
   to   { opacity: 1; transform: translateY(0);    pointer-events: auto; }
 }
+
+// Compensa la navbar fissa quando si arriva da un'ancora.
+// Regola separata: evita dichiarazioni dopo regole annidate (mixed-decls di Sass).
+.categorySection {
+  scroll-margin-top: 5rem;
+
+  @include responsive("md", "max") { scroll-margin-top: 8.5rem; }
+}
+
+// Compensa la navbar fissa quando si torna alla card da un case study (#project-<slug>).
+.projectCard {
+  scroll-margin-top: 5rem;
+
+  @include responsive("md", "max") { scroll-margin-top: 8.5rem; }
+}

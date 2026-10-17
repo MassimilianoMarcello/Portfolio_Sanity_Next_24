@@ -240,3 +240,11 @@
     font-size: 0.65rem;
   }
 }
+
+// Compensa la navbar fissa quando si arriva da un'ancora.
+// Regola separata: evita dichiarazioni dopo regole annidate (mixed-decls di Sass).
+.contactContainer {
+  scroll-margin-top: 5rem;
+
+  @include responsive("md", "max") { scroll-margin-top: 8.5rem; }
+}
