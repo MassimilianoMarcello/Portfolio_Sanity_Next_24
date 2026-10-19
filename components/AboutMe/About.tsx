@@ -12,15 +12,15 @@ const About = () => {
 
       <div className={styles.contentGrid}>
         <div className={styles.hero}>
-          {/* massi2.png pesa ~830 KB per un avatar da 112px: next/image lo serve ridimensionato. */}
-          <Image
+        
+          {/* <Image
             src="/massi2.png"
             alt="Massimiliano Marcello"
             width={112}
             height={112}
             priority
             className={styles.avatar}
-          />
+          /> */}
 
           <h1 className={styles.headline}>
             Full-stack developer<br />
