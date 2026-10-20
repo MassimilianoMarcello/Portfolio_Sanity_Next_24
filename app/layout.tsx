@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Footer from "@/components/Footer/Footer";
 import { zf } from "../styles/fonts";
-// @ts-expect-error Next.js bundles global SCSS imports without TypeScript declarations.
+
 import "./design-tokens.scss";
-// @ts-expect-error Next.js bundles global SCSS imports without TypeScript declarations.
+
 import "./globals.scss";
 import styles from "./main.module.scss";
 

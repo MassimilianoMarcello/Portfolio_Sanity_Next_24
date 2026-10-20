@@ -6,7 +6,7 @@ import { challengeId } from "@/lib/challengeId";
 import { PortableText } from "@portabletext/react";
 import Link from "next/link";
 import styles from "./singleProject.module.scss";
-import ChallengeLink from "./ChallangeLink";
+import ChallengeLink from "./ChallengeLink";
 import BackToTopButton from "./BackTopButton";
 import { portableTextComponents } from "./portableTextComponents";
 import RepoAndWebSiteButtons from "@/components/ui/RepoAndWebSiteButtons";
