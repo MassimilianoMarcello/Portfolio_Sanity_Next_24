@@ -1,20 +1,20 @@
-import styles from "./Footer.module.scss";
 import Link from "next/link";
+import { SITE } from "@/lib/site";
+import styles from "./Footer.module.scss";
 
 const LINKS = [
-  { label: "Email",    href: "mailto:massdevone@gmail.com",                                        external: false },
-  { label: "GitHub",   href: "https://github.com/massimilianomarcello",                            external: true  },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/massimiliano-marcello-4195681a7",        external: true  },
-  { label: "Twitter",  href: "https://x.com/MassDev",                                             external: true  },
+  { label: "Email",    href: `mailto:${SITE.email}`, external: false },
+  { label: "GitHub",   href: SITE.github,            external: true  },
+  { label: "LinkedIn", href: SITE.linkedin,          external: true  },
+  { label: "Twitter",  href: SITE.twitter,           external: true  },
 ];
 
 const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
-
         <span className={styles.copy}>
-          &copy; {new Date().getFullYear()} Massimiliano Marcello
+          &copy; {new Date().getFullYear()} {SITE.name}
         </span>
 
         <nav className={styles.links} aria-label="Social links">
@@ -30,12 +30,10 @@ const Footer = () => {
           ))}
         </nav>
 
-        <span className={styles.location}>Brussels</span>
-
+        <span className={styles.location}>{SITE.city}</span>
       </div>
     </footer>
   );
 };
 
 export default Footer;
-

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import styles from "../../app/main.module.scss";
+import styles from "./Navbar.module.scss";
 
 const NavbarPages: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -26,7 +26,7 @@ const NavbarPages: React.FC = () => {
           {/* Back to projects */}
           <div className={styles.navbarLinks}>
             <Link href="/" className={styles.linkProjectsReturn}>
-              Case Studies
+              Case studies
             </Link>
           </div>
         </div>

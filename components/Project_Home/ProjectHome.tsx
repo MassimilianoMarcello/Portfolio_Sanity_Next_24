@@ -1,7 +1,7 @@
 // components/Project_Home/ProjectHome.tsx
 import { getProjects } from '@/sanity/sanity.query';
 import { Project } from '@/types/projects';
-import HeaderSection from './HeaderSection';
+import About from '../AboutMe/About';
 import ProjectList from './ProjectList';
 import styles from './ProjectHome.module.scss';
 import Contact from '../Contact/Contact';
@@ -13,7 +13,7 @@ export default async function Home() {
   return (
     <section className={styles.homesection}>
       <Navbar />
-      <HeaderSection />
+      <About />
       <ProjectList projects={projects} />
       <Contact />
     </section>

@@ -3,6 +3,7 @@
 // I componenti usano SOLO var(--…): per cambiare tema o ritoccare un valore si tocca qui.
 // Importalo una volta in app/layout.tsx:  import "./design-tokens.scss";
 // Solo le variabili: main.module.scss importa anche _navbar, che emetterebbe CSS (.navbar, .pageRoot…) nel foglio globale.
+@use "sass:color";
 @use "./variables" as *;
 
 :root {
@@ -39,6 +40,9 @@
   --space-7: 3rem;
   --space-8: 4rem;
 
+  // ── Layout: colonna laterale condivisa da ProjectList e Contact (le card partono alla stessa x)
+  --aside-width: 15rem;
+
   // ── Raggi
   --radius-sm: #{$radius-sm};
   --radius-md: #{$radius-md};
@@ -69,10 +73,10 @@
   --color-action-hover: #{$indigo-800};
   --color-on-action:    #{$color-white};
 
-  --color-success:      #{darken($success-color, 20%)};
+  --color-success:      #{color.adjust($success-color, $lightness: -20%)};
   --color-success-bg:   #{rgba($success-color, 0.1)};
   --color-success-line: #{rgba($success-color, 0.35)};
-  --color-warning:      #{darken($warning-color, 25%)};
+  --color-warning:      #{color.adjust($warning-color, $lightness: -25%)};
   --color-warning-bg:   #{rgba($warning-color, 0.12)};
   --color-warning-line: #{rgba($warning-color, 0.4)};
   --color-neutral-bg:   #{rgba($ink-4, 0.1)};
@@ -80,6 +84,11 @@
 
   // ── Elevazione: un solo livello, solo come risposta all'interazione
   --shadow-1: 0 4px 16px #{rgba($indigo-800, 0.1)};
+
+  // ── Navbar: unica fonte per altezza (prima: navbar 72px, spacer 64px, kicker 64px, ChallengeLink 74px)
+  --navbar-height: 72px;
+  --navbar-height-mobile: 110px;
+  --color-bg-nav: #{$color-white};
 
   // ── Focus
   --focus-ring: 2px solid #{$violet-600};

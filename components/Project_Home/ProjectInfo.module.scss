@@ -1,10 +1,12 @@
 // components/Project_Home/ProjectInfo.module.scss
+@use "../../app/core" as *;
+
 .challengesBlock {
   padding: var(--space-4) var(--space-5);
   background: var(--color-bg-page); // una sola tinta (Impact); niente seconda fascia lavanda
   border-bottom: 1px solid var(--color-border);
 
-  @media (max-width: 767px) { padding: var(--space-4); }
+  @include responsive("md", "max") { padding: var(--space-4); }
 }
 
 .challengeList {

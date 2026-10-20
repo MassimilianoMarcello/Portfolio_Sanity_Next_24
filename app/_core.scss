@@ -1,0 +1,4 @@
+// app/_core.scss — unico punto d'ingresso Sass per i componenti: SOLO variabili e mixin, nessun CSS emesso.
+// Uso:  @use "../../app/core" as *;
+@forward "variables";
+@forward "mixins";

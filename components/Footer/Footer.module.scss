@@ -1,7 +1,7 @@
 // components/Footer/Footer.module.scss
-// @import (non @use) per coerenza con ProjectList: serve solo per il mixin responsive e $spacing-page-*.
+// core: mixin `responsive` e $spacing-page-*.
 // Tutto il resto passa dai token globali (app/design-tokens.scss).
-@import "../../app/main.module.scss";
+@use "../../app/core" as *;
 
 .footer {
   border-top: 1px solid var(--color-border);

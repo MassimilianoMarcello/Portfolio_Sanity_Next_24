@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
 import Footer from "@/components/Footer/Footer";
 import { zf } from "../styles/fonts";
-
 import "./design-tokens.scss";
-
 import "./globals.scss";
 import styles from "./main.module.scss";
 
 const SITE_URL = "https://massdev.dev";
 const SITE_NAME = "Massimiliano Marcello";
 const SITE_DESCRIPTION =
-  "Frontend engineer focused on architecture and design systems, based in Brussels. Case studies, code and writing.";
+  "Frontend engineer focused on UI architecture and design systems, based in Brussels. Case studies, code and writing.";
 
 // Il layout è un server component (prima era "use client", il che impediva
 // di esportare metadata). I componenti interattivi dichiarano "use client" da soli.

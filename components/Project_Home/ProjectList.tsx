@@ -1,5 +1,5 @@
 // components/Project_Home/ProjectList.tsx
-import React, { useMemo } from "react";
+// Server Component: niente React.memo / useMemo (non c'è mai un re-render da evitare).
 import type { CSSProperties } from "react";
 import type { Project } from "@/types/projects";
 import Eyebrow from "@/components/ui/Eyebrow";
@@ -16,16 +16,27 @@ const CATEGORIES = [
   { value: "sandbox",   kicker: "Lab",   title: "Sandbox",            desc: "Experiments and explorations. Where new technology meets curiosity." },
 ] as const;
 
-const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
-  const grouped = useMemo(
-    () =>
-      projects.reduce<Record<string, Project[]>>((acc, project) => {
-        (acc[project.importance] ??= []).push(project);
-        return acc;
-      }, {}),
-    [projects]
-  );
+const KNOWN: readonly string[] = CATEGORIES.map((c) => c.value);
+const FALLBACK = "sandbox";
 
+function groupByImportance(projects: Project[]) {
+  const grouped: Record<string, Project[]> = {};
+  for (const project of projects) {
+    let key: string = project.importance;
+    if (!KNOWN.includes(key)) {
+      // Prima questi progetti sparivano senza avviso. Ora finiscono in Sandbox e in dev si vede il warning.
+      if (process.env.NODE_ENV === "development") {
+        console.warn(`[ProjectList] "${project.name}": importance "${key}" non riconosciuta → ${FALLBACK}`);
+      }
+      key = FALLBACK;
+    }
+    (grouped[key] ??= []).push(project);
+  }
+  return grouped;
+}
+
+export default function ProjectList({ projects }: ProjectListProps) {
+  const grouped = groupByImportance(projects);
   const activeCategories = CATEGORIES.filter((cat) => grouped[cat.value]?.length);
 
   return (
@@ -41,7 +52,6 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
               id={cat.value}
               aria-labelledby={headingId}
               className={styles.categorySection}
-              // la fascia colorata dipende dall'indice tra le categorie attive, non dalla posizione nel DOM
               data-tone={catIndex % 2 === 1 ? "tinted" : "plain"}
               style={{ "--i": catIndex } as CSSProperties}
             >
@@ -66,6 +76,4 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
       </div>
     </div>
   );
-};
-
-export default React.memo(ProjectList);
+}

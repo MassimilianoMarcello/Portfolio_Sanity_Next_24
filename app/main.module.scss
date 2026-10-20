@@ -6,7 +6,8 @@
 
 @import "_variables";
 @import "_mixins";
-@import "_navbar";
+// _navbar è stato spostato in components/NavBar/Navbar.module.scss:
+// importarlo qui duplicava tutto il CSS della navbar in ogni modulo che importa main.
 
 .pageRoot {
   width: 100%;

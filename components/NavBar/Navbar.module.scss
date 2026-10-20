@@ -1,0 +1,241 @@
+// components/NavBar/Navbar.module.scss
+// Prima in app/_navbar.scss, importato da main.module.scss → il CSS della navbar finiva copiato
+// in ogni modulo che importava main. Ora vive accanto ai componenti che lo usano.
+@use "../../app/core" as *;
+
+.navbar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: var(--navbar-height);
+  z-index: 1000;
+  background-color: var(--color-bg-nav);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color 300ms ease, box-shadow 300ms ease;
+
+  &.scrolled {
+    background-color: color-mix(in srgb, var(--color-bg-nav) 97%, transparent);
+    box-shadow: 0 1px 0 var(--color-border-strong);
+  }
+
+  @include responsive("md", "max") {
+    height: auto;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce) { transition: none; }
+}
+
+.navbarContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 var(--space-7);
+
+  @include responsive("md", "max") {
+    justify-content: center;
+    padding: var(--space-3) var(--space-4) 0;
+  }
+}
+
+// ─── Logo ─────────────────────────────────────────────────────────────────────
+.logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  text-decoration: none;
+
+  img {
+    display: block;
+    width: auto;
+    height: calc(var(--navbar-height) - 2px);
+    opacity: 0.8;
+    transition: opacity 180ms ease;
+  }
+
+  &:hover img,
+  &:focus-visible img { opacity: 1; }
+
+  &:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  @media (prefers-reduced-motion: reduce) { img { transition: none; } }
+}
+
+// ─── Link row ─────────────────────────────────────────────────────────────────
+.navbarLinks {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.navItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.contactContainer {
+  display: flex;
+  align-items: center;
+}
+
+// Link di navigazione: azioni → sans, sentence case, stessa scala di Button
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  color: var(--color-text);
+  text-decoration: none;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: color 180ms ease, background 180ms ease;
+
+  &:hover {
+    color: var(--color-brand);
+    background: var(--color-bg-surface);
+  }
+
+  &:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+  }
+
+  @include responsive("sm", "max") {
+    padding: var(--space-2);
+    white-space: normal;
+  }
+
+  @media (prefers-reduced-motion: reduce) { transition: none; }
+}
+
+// ─── Dropdown ────────────────────────────────────────────────────────────────
+.dropdownMenu {
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  left: 0;
+  min-width: 11rem;
+  overflow: hidden;
+  background: var(--color-bg-page);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-1);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-6px);
+  transition: opacity 200ms ease, transform 200ms ease;
+
+  &.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) { transition: none; transform: none; }
+}
+
+.dropdownItem {
+  display: block;
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-border);
+  transition: color 180ms ease, background 180ms ease;
+
+  &:last-child { border-bottom: none; }
+
+  &:hover {
+    color: var(--color-brand);
+    background: var(--color-bg-surface);
+  }
+
+  &:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: -2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) { transition: none; }
+}
+
+// ─── Return link — solo NavbarPages ──────────────────────────────────────────
+.linkProjectsReturn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-text);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: color 180ms ease, background 180ms ease;
+
+  &::before {
+    content: "←";
+    transition: transform 180ms ease;
+  }
+
+  &:hover {
+    color: var(--color-brand);
+    background: var(--color-bg-surface);
+    &::before { transform: translateX(-3px); }
+  }
+
+  &:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+    &::before { transition: none; }
+    &:hover::before { transform: none; }
+  }
+}
+
+// ─── Desktop / mobile ────────────────────────────────────────────────────────
+.navDesktop {
+  display: flex;
+  @include responsive("md", "max") { display: none; }
+}
+
+.navMobile {
+  display: none;
+
+  @include responsive("md", "max") {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-1);
+    padding: var(--space-2) var(--space-4) var(--space-3);
+    border-top: 1px solid var(--color-border);
+  }
+}
+
+// ─── Spacer: stessa altezza della navbar (prima 64px contro 72px reali) ──────
+.navSpacer {
+  width: 100%;
+  height: var(--navbar-height);
+  flex-shrink: 0;
+
+  @include responsive("md", "max") { height: var(--navbar-height-mobile); }
+}

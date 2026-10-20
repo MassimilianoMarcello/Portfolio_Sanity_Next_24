@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useId } from "react";
 import Link from "next/link";
-import styles from "../../app/main.module.scss";
+import styles from "./Navbar.module.scss";
 
 const SECTIONS = [
   { id: "main",      label: "Primary projects" },
@@ -66,7 +66,7 @@ const Navbar: React.FC = () => {
                 aria-expanded={isDropdownOpen}
                 aria-controls={menuId}
               >
-                Case Studies
+                Case studies
               </button>
 
               <div
@@ -108,7 +108,7 @@ const Navbar: React.FC = () => {
         {/* Mobile links — sotto il contenuto principale */}
         <div className={styles.navMobile}>
           <a href="#main" className={styles.navLink}>
-            Case Studies
+            Case studies
           </a>
           <Link href="/blog_post" className={styles.navLink}>
             Blog

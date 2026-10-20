@@ -8,7 +8,9 @@ type ChallengeProps = {
   title:       string;
 };
 
-const NAVBAR_HEIGHT = 74;
+// Legge l'altezza reale dal token CSS (--navbar-height): niente numero duplicato nel JS
+const getNavbarHeight = () =>
+  parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--navbar-height")) || 72;
 
 const ChallengeLink = ({ challengeId, title }: ChallengeProps) => {
   const [isActive, setIsActive] = useState(false);
@@ -17,10 +19,11 @@ const ChallengeLink = ({ challengeId, title }: ChallengeProps) => {
     const el = document.getElementById(challengeId);
     if (!el) return;
 
+    const navbarHeight = getNavbarHeight();
     const observer = new IntersectionObserver(
       ([entry]) => setIsActive(entry.isIntersecting),
       {
-        rootMargin: `-${NAVBAR_HEIGHT}px 0px -60% 0px`,
+        rootMargin: `-${navbarHeight}px 0px -60% 0px`,
         threshold: 0,
       }
     );
@@ -32,13 +35,15 @@ const ChallengeLink = ({ challengeId, title }: ChallengeProps) => {
   const handleClick = useCallback(() => {
     const el = document.getElementById(challengeId);
     if (!el) return;
-    const top = el.getBoundingClientRect().top + window.scrollY - NAVBAR_HEIGHT;
+    const top = el.getBoundingClientRect().top + window.scrollY - getNavbarHeight();
     window.scrollTo({ top, behavior: "smooth" });
   }, [challengeId]);
 
   return (
     <li className={styles.challengeListItem}>
       <button
+        type="button"
+        aria-current={isActive ? "true" : undefined}
         className={`${styles.challengeNavLink} ${isActive ? styles.challengeNavLinkActive : ''}`}
         onClick={handleClick}
       >

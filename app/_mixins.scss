@@ -1,20 +1,6 @@
 // _mixins.scss
-// @mixin flex-center {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//   }
-  
-//   @mixin responsive($breakpoint) {
-//     @if $breakpoint == 'tablet' {
-//       @media (max-width: 768px) { @content; }
-//     } @else if $breakpoint == 'mobile' {
-//       @media (max-width: 480px) { @content; }
-//     }
-//   }
-
-
-  @import "breakpoints";
+@use "sass:map";
+@use "breakpoints" as *;
 
 @mixin flex-center {
   display: flex;
@@ -23,7 +9,7 @@
 }
 
 @mixin responsive($size, $type: "max") {
-  $breakpoint: map-get($breakpoints, $size);
+  $breakpoint: map.get($breakpoints, $size);
 
   @if $breakpoint {
     @if $type == "max" {
@@ -35,4 +21,3 @@
     @warn "Il breakpoint #{$size} non è definito.";
   }
 }
-  

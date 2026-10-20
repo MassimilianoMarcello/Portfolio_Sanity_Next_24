@@ -1,6 +1,6 @@
 // components/Project_Home/ProjectCard.module.scss
 // Solo var(--…): nessuna primitiva Sass, nessun valore hardcoded.
-@use "../../app/main.module.scss" as *;
+@use "../../app/core" as *;
 
 .card {
   display: flex;
@@ -9,7 +9,7 @@
   border: 1px solid var(--color-border-brand);
   border-radius: var(--radius-md);
   overflow: hidden;
-  scroll-margin-top: 5rem; // navbar fissa quando si torna da un case study (#project-<slug>)
+  scroll-margin-top: calc(var(--navbar-height) + var(--space-4)); // sotto la navbar fissa (ritorno da un case study)
   transition: border-color 180ms ease, box-shadow 180ms ease;
 
   &:hover {
@@ -17,7 +17,7 @@
     box-shadow: var(--shadow-1);
   }
 
-  @include responsive("md", "max") { scroll-margin-top: 8.5rem; }
+  @include responsive("md", "max") { scroll-margin-top: calc(var(--navbar-height-mobile) + var(--space-4)); }
   @media (prefers-reduced-motion: reduce) { transition: none; }
 }
 

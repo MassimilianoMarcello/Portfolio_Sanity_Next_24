@@ -1,8 +1,6 @@
 // components/Project_Home/ProjectList.module.scss
-// @import (non @use): _section-kicker.scss legge variabili globali come $bg-page senza importarle.
-// Si passa a @use dopo aver aggiunto `@use "./main.module.scss" as *;` in cima a quel partial.
-@import "../../app/main.module.scss";
-@import "../../app/_section-kicker.scss";
+@use "../../app/core" as *;
+@use "../../app/section-kicker" as *;
 
 .projectListContainer {
   max-width: 1400px;
@@ -25,9 +23,9 @@
 
 .categorySection {
   display: grid;
-  grid-template-columns: 240px 1fr;
+  grid-template-columns: var(--aside-width) 1fr;
   gap: 0 var(--space-7);
-  scroll-margin-top: 5rem;
+  scroll-margin-top: calc(var(--navbar-height) + var(--space-4));
   animation: fadeIn 500ms ease both;
   animation-delay: calc(var(--i, 0) * 80ms);
 
@@ -41,7 +39,7 @@
 
   @include responsive("md", "max") {
     grid-template-columns: 1fr;
-    scroll-margin-top: 8.5rem;
+    scroll-margin-top: calc(var(--navbar-height-mobile) + var(--space-4));
 
     &[data-tone="tinted"] {
       margin-inline: calc(-1 * var(--space-4));
@@ -55,7 +53,7 @@
 .catHeader {
   position: sticky;
   // sotto navbar + kicker sticky: se si sovrappone ancora, alza questo valore
-  top: 9rem;
+  top: calc(var(--navbar-height) + 4.5rem);
   align-self: start;
   padding-right: var(--space-5);
   border-right: 1px solid var(--color-border);

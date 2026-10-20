@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getProject, getProjectSlugs } from "@/sanity/sanity.query";
 import { challengeId } from "@/lib/challengeId";
+import { getImageUrl, resolveSlug } from "@/lib/projects";
 import { PortableText } from "@portabletext/react";
 import Link from "next/link";
 import styles from "./singleProject.module.scss";
@@ -27,6 +28,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!project) return { title: "Project not found" };
 
+  // project.image è un oggetto immagine Sanity, non un URL: va risolto
+  const ogImage = getImageUrl(project.image);
+
   const description =
     project.problem ||
     project.impact ||
@@ -41,8 +45,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: project.name,
       description,
       url: `/projects/${slug}`,
-      ...(project.image
-        ? { images: [{ url: project.image, alt: project.imageAlt || project.name }] }
+      ...(ogImage
+        ? { images: [{ url: ogImage, alt: project.imageAlt || project.name }] }
         : {}),
     },
   };
@@ -79,7 +83,7 @@ export default async function Project({ params }: Props) {
 
           <div className={styles.sidebarActions}>
             {/* Torna alla card di questo progetto nella home, non in cima alla pagina */}
-            <Link href={`/#project-${project.slug}`} className={styles.backLink}>
+            <Link href={`/#project-${resolveSlug(project.slug)}`} className={styles.backLink}>
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
                 <path d="M8 5H2M2 5L5 2M2 5L5 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>

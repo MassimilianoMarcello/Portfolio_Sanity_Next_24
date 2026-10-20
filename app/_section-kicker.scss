@@ -1,9 +1,10 @@
 // app/_section-kicker.scss
 // Mixin condiviso per l'etichetta di sezione (About, ProjectList, Contact).
-// Usa solo custom properties (app/design-tokens.scss) + il mixin `responsive`:
-// il file che lo importa deve aver già importato main.module.scss (@import).
+// Usa solo custom properties (app/design-tokens.scss) + il mixin `responsive`, che importa da sé.
 //
-// Altezza navbar: 64px desktop / 110px mobile. Se cambi la navbar, aggiorna qui.
+// L'offset sticky segue --navbar-height (app/design-tokens.scss).
+
+@use "./mixins" as *;
 
 @mixin section-kicker($sticky: false) {
   display: flex;
@@ -14,7 +15,7 @@
 
   @if $sticky {
     position: sticky;
-    top: 64px;
+    top: var(--navbar-height);
     z-index: 10;
     margin: var(--space-4) 0;
     padding: var(--space-2) 0;
@@ -22,7 +23,7 @@
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 
-    @include responsive("md", "max") { top: 110px; }
+    @include responsive("md", "max") { top: var(--navbar-height-mobile); }
   }
 
   // Stessa lingua di Eyebrow e StatusPill: sans, sentence case, bordo sottile
