@@ -1,52 +1,46 @@
-// _section-kicker.scss
-// ─── Shared sectionKicker mixin ───────────────────────────────────────────────
-// Prima: tre implementazioni leggermente diverse in About, ProjectList, Contact
-//   - About:       border: 1px solid $violet-200,  color: $violet-400
-//   - ProjectList: border: 1.5px solid $violet-400, color: $violet-600  ← sticky variant
-//   - Contact:     border: 1.5px solid $violet-400, color: $violet-600
+// app/_section-kicker.scss
+// Mixin condiviso per l'etichetta di sezione (About, ProjectList, Contact).
+// Usa solo custom properties (app/design-tokens.scss) + il mixin `responsive`:
+// il file che lo importa deve aver già importato main.module.scss (@import).
 //
-// Ora: un unico mixin con variante opzionale $sticky per ProjectList.
-// Importa questo file in main.module.scss (o direttamente nei moduli che lo usano).
+// Altezza navbar: 64px desktop / 110px mobile. Se cambi la navbar, aggiorna qui.
 
 @mixin section-kicker($sticky: false) {
-  padding: 2rem 0 0;
   display: flex;
   align-items: center;
   position: relative;
   z-index: 1;
+  padding: var(--space-6) 0 0;
 
   @if $sticky {
     position: sticky;
     top: 64px;
-    padding: 0.6rem 0;
-    margin: 1rem 0;
-    background: rgba($bg-page, 0.85);
+    z-index: 10;
+    margin: var(--space-4) 0;
+    padding: var(--space-2) 0;
+    background: color-mix(in srgb, var(--color-bg-page) 85%, transparent);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    z-index: 10;
 
-    @include responsive("md", "max") {
-      top: 110px;
-      padding: 0.6rem 0;
-    }
+    @include responsive("md", "max") { top: 110px; }
   }
 
+  // Stessa lingua di Eyebrow e StatusPill: sans, sentence case, bordo sottile
   span {
-    font-family: $font-mono;
-    font-size: 0.62rem;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: $violet-600;
-    border: 1.5px solid $violet-400;
-    border-radius: $radius-sm;
-    padding: 0.2rem 0.65rem;
-    background: rgba($violet-50, 0.9);
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-snug);
+    letter-spacing: var(--tracking-label);
+    color: var(--color-brand);
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border-brand);
+    border-radius: var(--radius-sm);
+    padding: var(--space-1) var(--space-3);
     white-space: nowrap;
   }
 
   @if not $sticky {
-    @include responsive("md", "max") {
-      padding: 2.5rem 0 0;
-    }
+    @include responsive("md", "max") { padding: var(--space-6) 0 0; }
   }
 }

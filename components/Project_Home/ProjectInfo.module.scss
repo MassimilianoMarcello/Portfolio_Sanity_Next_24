@@ -1,78 +1,59 @@
 // components/Project_Home/ProjectInfo.module.scss
-@import "../../app/main.module.scss";
-
-// ─── Challenges block ─────────────────────────────────────────────────────────
 .challengesBlock {
- 
-  padding-top: 0.1rem;
-}
+  padding: var(--space-4) var(--space-5);
+  background: var(--color-bg-page); // una sola tinta (Impact); niente seconda fascia lavanda
+  border-bottom: 1px solid var(--color-border);
 
-.menuLabel {
-  display: block;
-  font-family: $font-mono;
-  font-size: 0.62rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: $violet-600;
-  margin-bottom: 0.6rem;
+  @media (max-width: 767px) { padding: var(--space-4); }
 }
 
 .challengeList {
   list-style: none;
+  margin: var(--space-3) 0 0;
   padding: 0;
-  margin: 0;
-  margin-top: 1rem;
 }
 
 .challengeItem {
-  border-top: 1px solid $rule;
-
-  &:last-child { border-bottom: 1px solid $rule; }
+  border-top: 1px solid var(--color-border);
+  &:last-child { border-bottom: 1px solid var(--color-border); }
 }
 
 .challengeLink {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
-  padding: 0.55rem 0;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  color: var(--color-text);
   text-decoration: none;
-  color: $ink-2;
-  transition: color 0.18s ease, padding-left 0.18s ease;
+  transition: color 180ms ease;
 
-  &:hover {
-    color: $violet-400;
-    padding-left: 0.3rem;
+  &:hover { color: var(--color-brand); }
+  &:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
 
-    .challengeNum   { color: $violet-400; }
-    .challengeArrow { transform: translateX(3px); }
+  &:hover .challengeArrow { transform: translateX(3px); }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+    &:hover .challengeArrow { transform: none; }
   }
 }
 
 .challengeNum {
-  font-family: $font-mono;
-  font-size: 0.58rem;
-  color: $ink-4;
   flex-shrink: 0;
-  letter-spacing: 0.08em;
-  transition: color 0.18s ease;
-  min-width: 1.4rem;
+  min-width: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
 }
 
 .challengeTitle {
-  font-family: $font-body;
-  font-size: 0.85rem;
-  font-weight: 300;
   flex: 1;
-  line-height: 1.4;
+  font-size: var(--text-sm);
+  line-height: var(--leading-snug);
 }
 
 .challengeArrow {
   flex-shrink: 0;
-  color: $violet-400;
-  transition: color 0.18s ease, transform 0.18s ease;
-
-  .challengeLink:hover & {
-    color: $violet-600;
-  }
+  color: var(--color-brand);
+  transition: transform 180ms ease;
 }

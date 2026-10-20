@@ -1,0 +1,86 @@
+// app/design-tokens.scss
+// Unico punto in cui le variabili Sass (primitive) diventano custom properties CSS.
+// I componenti usano SOLO var(--…): per cambiare tema o ritoccare un valore si tocca qui.
+// Importalo una volta in app/layout.tsx:  import "./design-tokens.scss";
+// Solo le variabili: main.module.scss importa anche _navbar, che emetterebbe CSS (.navbar, .pageRoot…) nel foglio globale.
+@use "./variables" as *;
+
+:root {
+  // ── Famiglie tipografiche
+  --font-body:  #{$font-body};
+  --font-serif: #{$font-serif};
+  --font-mono:  #{$font-mono};
+
+  // ── Scala tipografica (5 passi, rem)
+  --text-xs: 0.75rem;    // 12px  label, tag, metadati
+  --text-sm: 0.875rem;   // 14px  testo di card
+  --text-md: 1rem;       // 16px  testo corrente
+  --text-lg: 1.25rem;    // 20px  titolo card
+  --text-xl: 1.5rem;     // 24px  titolo sezione
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+
+  --leading-tight: 1.2;
+  --leading-snug: 1.4;
+  --leading-body: 1.6;
+
+  --tracking-label: 0.02em;
+  --tracking-tag: 0.06em;
+
+  // ── Scala di spaziatura (base 4px)
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  // ── Raggi
+  --radius-sm: #{$radius-sm};
+  --radius-md: #{$radius-md};
+  --radius-lg: #{$radius-lg};
+
+  // ── Colori semantici (mappati sulle primitive Sass)
+  --color-bg-page:     #{$bg-page};
+  --color-bg-surface:  #{$bg-surface};
+  --color-bg-accent:   #{$bg-accent-light};
+  --color-bg-elevated: #{$bg-elevated};
+
+  --color-border:        #{$rule};
+  --color-border-strong: #{$rule-strong};
+  --color-border-brand:  #{$violet-200};
+  --color-border-accent: #{$accent-blue};
+
+  --color-text:        #{$ink-2};
+  --color-text-muted:  #{$ink-3};   // $ink-4 è riservato a elementi decorativi
+  --color-heading:     #{$indigo-800};
+
+  --color-brand:        #{$violet-600};
+  --color-brand-strong: #{$indigo-800};
+  --color-tag:          #{$tag-color};
+
+  // Azione primaria: era $color-action (rosa). Qui è indaco per dialogare con la palette.
+  // Per tornare al rosa basta cambiare queste due righe.
+  --color-action:       #{$indigo-600};
+  --color-action-hover: #{$indigo-800};
+  --color-on-action:    #{$color-white};
+
+  --color-success:      #{darken($success-color, 20%)};
+  --color-success-bg:   #{rgba($success-color, 0.1)};
+  --color-success-line: #{rgba($success-color, 0.35)};
+  --color-warning:      #{darken($warning-color, 25%)};
+  --color-warning-bg:   #{rgba($warning-color, 0.12)};
+  --color-warning-line: #{rgba($warning-color, 0.4)};
+  --color-neutral-bg:   #{rgba($ink-4, 0.1)};
+  --color-neutral-line: #{rgba($ink-4, 0.3)};
+
+  // ── Elevazione: un solo livello, solo come risposta all'interazione
+  --shadow-1: 0 4px 16px #{rgba($indigo-800, 0.1)};
+
+  // ── Focus
+  --focus-ring: 2px solid #{$violet-600};
+}

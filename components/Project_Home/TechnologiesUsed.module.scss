@@ -1,31 +1,8 @@
-// components/Project_Home/TechnologiesUsed.module.scss
-@import "../../app/main.module.scss";
-
-.technologiesList {
+.list {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem;
-  list-style: none;
-  padding: 0;
+  gap: var(--space-2);
   margin: 0;
-
-  li {
- 
-    font-family: $font-mono;
-    font-size: 0.58rem;
-    text-transform: uppercase;
-    letter-spacing: 0.09em;
-    background: $bg-page;
-    color: $tag-color;             // $violet-800
-    padding: 0.2rem 0.6rem;
-    border-radius: $radius-sm;
-    border: 1px solid $rule;
-    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
-
-    &:hover {
-      background: $violet-100;
-      color: $violet-800;
-      border-color: $violet-200;
-    }
-  }
+  padding: 0;
+  list-style: none;
 }

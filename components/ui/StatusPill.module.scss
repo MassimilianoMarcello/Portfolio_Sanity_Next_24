@@ -1,0 +1,37 @@
+.pill {
+  --pill-fg: var(--color-text-muted);
+  --pill-bg: var(--color-neutral-bg);
+  --pill-line: var(--color-neutral-line);
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  color: var(--pill-fg);
+  background: var(--pill-bg);
+  border: 1px solid var(--pill-line);
+  border-radius: 999px;
+  padding: var(--space-1) var(--space-3);
+
+  &[data-status="live"] {
+    --pill-fg: var(--color-success);
+    --pill-bg: var(--color-success-bg);
+    --pill-line: var(--color-success-line);
+  }
+  &[data-status="wip"] {
+    --pill-fg: var(--color-warning);
+    --pill-bg: var(--color-warning-bg);
+    --pill-line: var(--color-warning-line);
+  }
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}

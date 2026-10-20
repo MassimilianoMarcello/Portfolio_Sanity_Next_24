@@ -1,27 +1,14 @@
-import Image from "next/image";
 import styles from "./About.module.scss";
 
 const About = () => {
   return (
     <section className={styles.container}>
-
-      {/* Bordered pill kicker — same as Case studies and Contact */}
       <div className={styles.sectionKicker}>
         <span>Intro</span>
       </div>
 
       <div className={styles.contentGrid}>
         <div className={styles.hero}>
-        
-          {/* <Image
-            src="/massi2.png"
-            alt="Massimiliano Marcello"
-            width={112}
-            height={112}
-            priority
-            className={styles.avatar}
-          /> */}
-
           <h1 className={styles.headline}>
             Full-stack developer<br />
             <span className={styles.headlineMuted}>focused on frontend architecture and design systems.</span>
@@ -31,7 +18,7 @@ const About = () => {
 
         <div className={styles.body}>
           <p>
-          Currently building BeSpoken — a component system for Phoenix LiveView based on Atomic Design principles, with Tailwind and DaisyUI.
+            Currently building BeSpoken — a component system for Phoenix LiveView based on Atomic Design principles, with Tailwind and DaisyUI.
           </p>
           <p>
             My path wasn&apos;t linear: communications, radio journalism, restaurant
@@ -45,7 +32,6 @@ const About = () => {
           </p>
         </div>
       </div>
-
     </section>
   );
 };

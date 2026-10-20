@@ -1,0 +1,12 @@
+.eyebrow {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-label);
+  line-height: var(--leading-snug);
+  color: var(--color-brand);
+
+  &[data-variant="accent"] { color: var(--color-brand-strong); }
+  &[data-variant="muted"]  { color: var(--color-text-muted); }
+}

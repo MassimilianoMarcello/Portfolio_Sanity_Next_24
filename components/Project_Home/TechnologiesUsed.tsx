@@ -1,29 +1,29 @@
-import React from 'react';
-import styles from './TechnologiesUsed.module.scss';
+import React from "react";
+import Tag from "@/components/ui/Tag";
+import styles from "./TechnologiesUsed.module.scss";
 
 interface Technology {
   _id: string;
   name: string;
-  slug: string; // Aggiungi altri campi se necessario
+  slug?: string;
 }
 
 interface TechnologiesUsedProps {
-  technologies: Technology[];
+  technologies?: Technology[];
 }
 
 const TechnologiesUsed: React.FC<TechnologiesUsedProps> = ({ technologies }) => {
+  if (!technologies?.length) return null;
+
   return (
-    <div>
-   
-      <ul className={styles.technologiesList}>
-        {technologies.map((tech) => (
-          <li key={tech._id}>{tech.name.toUpperCase()}</li> 
-        ))}
-      </ul>
-    </div>
+    <ul className={styles.list} aria-label="Technologies used">
+      {technologies.map((tech) => (
+        <li key={tech._id}>
+          <Tag>{tech.name}</Tag>
+        </li>
+      ))}
+    </ul>
   );
 };
 
 export default TechnologiesUsed;
-
-

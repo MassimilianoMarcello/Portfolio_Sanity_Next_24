@@ -1,158 +1,126 @@
 // components/AboutMe/About.module.scss
 @import "../../app/main.module.scss";
-@import "../../app/_section-kicker.scss"; 
+@import "../../app/_section-kicker.scss";
 
-// ─── Container ────────────────────────────────────────────────────────────────
 .container {
-  // FIX: padding ora usa $spacing-page-* tokens invece di valori raw incoerenti
-  padding: 0 $spacing-page-x-right 6rem $spacing-page-x;
+  position: relative;
   max-width: 1400px;
   margin: 0 auto;
-  border-bottom: 1px solid $rule;
-  position: relative;
+  padding: 0 $spacing-page-x-right var(--space-8) $spacing-page-x;
+  border-bottom: 1px solid var(--color-border);
   overflow: hidden;
-  
 
-  // ── Dot grid — texture ambientale ──────────────────────────────────────────
+  // Texture ambientale (decorativa)
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(circle, rgba($violet-300, 0.15) 1px, transparent 1px);
+    background-image: radial-gradient(circle, color-mix(in srgb, var(--color-border-brand) 45%, transparent) 1px, transparent 1px);
     background-size: 28px 28px;
+    mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.5) 40%, rgba(0, 0, 0, 0.5) 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.5) 40%, rgba(0, 0, 0, 0.5) 100%);
     pointer-events: none;
-    z-index: 0;
-    mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.5) 100%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.5) 100%);
   }
 
-  // ── Logo watermark ─────────────────────────────────────────────────────────
+  // Logo in filigrana (decorativo)
   &::after {
-    content: '';
+    content: "";
     position: absolute;
-    bottom: 0rem;
-    right: 2rem;
+    right: var(--space-6);
+    bottom: 0;
     width: 120px;
     height: 120px;
-    background-image: url('/logo_only.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
+    background: url("/logo_only.svg") no-repeat / contain;
     opacity: 0.07;
     pointer-events: none;
-    z-index: 0;
     user-select: none;
-    
   }
 
   @include responsive("md", "max") {
-    padding: 0 1.2rem 4rem;
-
+    padding: 0 var(--space-4) var(--space-7);
     &::after { display: none; }
   }
 }
 
-// ─── Section kicker ───────────────────────────────────────────────────────────
-// FIX: sostituisce implementazione locale con il mixin condiviso
 .sectionKicker {
   @include section-kicker();
 }
 
-// ─── Content grid ─────────────────────────────────────────────────────────────
 .contentGrid {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: 0 3rem;
-  margin-top: 2.5rem;
-  padding-bottom: 5rem;
   position: relative;
   z-index: 1;
-  
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 0 var(--space-7);
+  margin-top: var(--space-6);
+  padding-bottom: var(--space-8);
 
   @include responsive("md", "max") {
     grid-template-columns: 1fr;
-    gap: 2rem;
-    padding-bottom: 3.5rem;
+    gap: var(--space-6);
+    padding-bottom: var(--space-7);
   }
 }
-// ─── Hero — colonna sinistra ──────────────────────────────────────────────────
 
+// Colonna sinistra: stessa lingua delle card (bordo sottile, raggio token, niente ombra dura)
 .hero {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  border-right: 1px solid $rule;
-  padding: 2rem 1.5rem 2rem;
-  background-color: $violet-50;
-  box-shadow: -4px -4px 0px 0px $indigo-100;
-  border-radius: 5px;
+  padding: var(--space-6) var(--space-5);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-brand);
+  border-radius: var(--radius-md);
 
-  @include responsive("md", "max") {
-    border-right: none;
-    border-bottom: 1px solid $rule;
-    padding: 1.5rem 0 2rem;
-  }
-}
-
-.avatar {
-  width: 112px;
-  height: 112px;
-  border-radius: 50%;
-  object-fit: cover;
-  
-  object-position: 40% 20%;
-  margin-bottom: 1.8rem;
-  border: 2px solid $violet-200;
-  
+  @include responsive("md", "max") { padding: var(--space-5) var(--space-4); }
 }
 
 .headline {
-  font-family: $font-serif;
-  font-size: clamp(1.4rem, 2.5vw, 2rem);
-  font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: -0.025em;
-  color: $indigo-800;
-  margin: 1.2rem 0;
+  margin: var(--space-3) 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 2.5vw, 2rem); // display: unico valore fuori scala, volutamente fluido
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-tight);
+  letter-spacing: -0.02em;
+  color: var(--color-heading);
 }
 
+// Seconda riga: peso leggero ma colore leggibile (prima violet-400, contrasto debole)
 .headlineMuted {
-  color: $violet-400;
-  font-weight: 400;
+  font-weight: var(--weight-regular);
+  color: var(--color-text-muted);
 }
 
 .byline {
-  font-family: $font-mono;
-  font-size: 0.6rem;
-  text-transform: uppercase;
-  letter-spacing: 0.13em;
-  color: $ink-3;
-  margin-top: auto;
-  padding-top: 1.8rem;
+  margin: auto 0 0;
+  padding-top: var(--space-5);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-tag);
+  color: var(--color-text-muted);
 }
 
-// ─── Body — colonna destra ────────────────────────────────────────────────────
 .body {
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
-  justify-content: flex-start;
-  padding: 2rem 3rem 3rem;
+  gap: var(--space-5);
+  padding: var(--space-6) var(--space-7) var(--space-7);
 
   p {
-    font-family: $font-body;
-    font-weight: 400;
-    font-size: 0.92rem;
-    color: $ink-3;
-    line-height: 1.85;
+    max-width: 65ch;
     margin: 0;
+    font-family: var(--font-body);
+    font-size: var(--text-md);
+    font-weight: var(--weight-regular);
+    line-height: var(--leading-body);
+    color: var(--color-text);
   }
+
+  @include responsive("md", "max") { padding: 0; }
 }
 
 .current {
-  color: $ink-3;
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--color-border-brand);
   font-style: italic;
-  padding-left: 1rem;
-  border-left: 2px solid $violet-200;
 }
-
-
