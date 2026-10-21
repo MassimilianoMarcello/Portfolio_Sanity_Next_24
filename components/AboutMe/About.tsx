@@ -1,4 +1,3 @@
-
 import styles from "./About.module.scss";
 
 const About = () => {
@@ -8,34 +7,28 @@ const About = () => {
         <span>Intro</span>
       </div>
 
+      {/* La frase più importante della pagina: a tutta larghezza, fuori da qualsiasi card */}
       <h1 className={styles.headline}>
-        Frontend Engineer<br />
-        <span className={styles.headlineMuted}>
-          exploring component design and usability.
-        </span>
+        Full-stack developer<br />
+        <span className={styles.headlineMuted}>focused on frontend architecture and design systems.</span>
       </h1>
 
       <div className={styles.contentGrid}>
-        <p className={styles.byline}>
-          Massimiliano Marcello · Brussels
-        </p>
+        <p className={styles.byline}>Massimiliano Marcello · Brussels</p>
 
         <div className={styles.body}>
           <p>
-            I&apos;m currently contributing to beSpoken, where I&apos;m exploring
-            component design with Phoenix LiveView, Tailwind CSS and DaisyUI.
+            Currently building BeSpoken — a component system for Phoenix LiveView based on Atomic Design principles, with Tailwind and DaisyUI.
           </p>
-
           <p>
-            It&apos;s early days. I&apos;ve built a couple of basic components and
-            encountered problems I hadn&apos;t anticipated. It&apos;s made me realise
-            how many decisions sit behind something that looks simple on screen.
+            My path wasn&apos;t linear: communications, radio journalism, restaurant
+            kitchens, social work. What connects all of it is learning complex
+            systems quickly and making them work for real people. Same approach
+            to code — structure, clarity, attention to who uses the product.
           </p>
-
           <p className={styles.current}>
-            I&apos;m interested in how people interact with interfaces, and in
-            designing components that help them understand what to do,
-            navigate with confidence and accomplish what they came for.
+            Expanding into Elixir and Phoenix. Long-term focus on distributed
+            systems and real-time applications.
           </p>
         </div>
       </div>
@@ -44,4 +37,3 @@ const About = () => {
 };
 
 export default About;
-

@@ -11,7 +11,7 @@
 }
 
 .sectionKicker {
-  @include section-kicker($sticky: true);
+  @include section-kicker(); // non più sticky: era un terzo livello fisso sopra navbar e sidebar
 }
 
 .categories {
@@ -52,8 +52,7 @@
 
 .catHeader {
   position: sticky;
-  // sotto navbar + kicker sticky: se si sovrappone ancora, alza questo valore
-  top: calc(var(--navbar-height) + 4.5rem);
+  top: calc(var(--navbar-height) + var(--space-5)); // solo la navbar è fissa sopra di lei
   align-self: start;
   padding-right: var(--space-5);
   border-right: 1px solid var(--color-border);

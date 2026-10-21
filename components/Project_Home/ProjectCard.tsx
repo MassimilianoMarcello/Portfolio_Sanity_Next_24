@@ -1,13 +1,14 @@
 // components/Project_Home/ProjectCard.tsx
+// La card deve bastare a un lettore non tecnico: titolo, esito (Impact), prova (screenshot), problema/soluzione.
+// Le challenge vivono nel case study: qui compare solo il loro numero dentro il bottone.
 import Image from "next/image";
 import type { Project } from "@/types/projects";
-import { getHostname, getImageUrl, normalizeStatus, resolveSlug } from "@/lib/projects";
+import { getImageUrl, getHostname, normalizeStatus, resolveSlug } from "@/lib/projects";
 import BrowserFrame from "@/components/ui/BrowserFrame";
 import Button from "@/components/ui/Button";
 import Eyebrow from "@/components/ui/Eyebrow";
 import StatusPill from "@/components/ui/StatusPill";
 import { ArrowUpRightIcon, ExternalIcon, GitHubIcon } from "@/components/ui/icons";
-import ProjectInfo from "./ProjectInfo";
 import TechnologiesUsed from "./TechnologiesUsed";
 import styles from "./ProjectCard.module.scss";
 
@@ -22,21 +23,34 @@ export default function ProjectCard({ project, priority = false }: ProjectCardPr
   const status = normalizeStatus(project.status);
   const imageUrl = getImageUrl(project.image);
   const hasSummary = Boolean(project.problem || project.solution);
+  const challengeCount = project.challenges?.length ?? 0;
+  const challengeLabel = `${challengeCount} key challenge${challengeCount === 1 ? "" : "s"}`;
 
   return (
     <article id={`project-${slug}`} className={styles.card}>
-      <div className={styles.techRow}>
-        <TechnologiesUsed technologies={project.technologies} />
-      </div>
+      <header className={styles.header}>
+        <div className={styles.titleRow}>
+          <h3 className={styles.title}>{project.name}</h3>
+          {status && <StatusPill status={status} />}
+        </div>
 
-      <header className={styles.titleRow}>
-        <h3 className={styles.title}>{project.name}</h3>
-        {status && <StatusPill status={status} />}
+        <TechnologiesUsed technologies={project.technologies} />
+
+        {project.impact && (
+          <div className={styles.impact}>
+            <Eyebrow variant="accent">Impact</Eyebrow>
+            <p className={styles.impactText}>{project.impact}</p>
+          </div>
+        )}
       </header>
 
       <div className={styles.contentRow}>
         <div className={styles.media}>
-          <BrowserFrame host={getHostname(project.url, project.name)}>
+          {/* Barra del browser solo se esiste un sito live: niente host inventato per librerie o progetti senza URL */}
+          <BrowserFrame
+            variant={project.url ? "browser" : "bare"}
+            host={project.url ? getHostname(project.url, project.name) : undefined}
+          >
             {imageUrl ? (
               <Image
                 src={imageUrl}
@@ -74,44 +88,30 @@ export default function ProjectCard({ project, priority = false }: ProjectCardPr
         </div>
       </div>
 
-      {project.impact && (
-        <div className={styles.impact}>
-          <Eyebrow variant="accent">Impact</Eyebrow>
-          <p className={styles.impactText}>{project.impact}</p>
-        </div>
-      )}
-
-      <ProjectInfo project={project} />
-
       <footer className={styles.footer}>
         {slug && (
           <Button
             href={`/projects/${slug}`}
             variant="primary"
             iconAfter={<ArrowUpRightIcon />}
-            aria-label={`View case study: ${project.name}`}
+            aria-label={
+              challengeCount > 0
+                ? `View case study: ${project.name}, ${challengeLabel}`
+                : `View case study: ${project.name}`
+            }
           >
             View case study
+            {challengeCount > 0 && <span className={styles.buttonMeta}>· {challengeLabel}</span>}
           </Button>
         )}
         <div className={styles.links}>
           {project.githubUrl && (
-            <Button
-              href={project.githubUrl}
-              external
-              icon={<GitHubIcon />}
-              aria-label={`GitHub repository: ${project.name}`}
-            >
+            <Button href={project.githubUrl} external icon={<GitHubIcon />} aria-label={`GitHub repository: ${project.name}`}>
               GitHub
             </Button>
           )}
           {project.url && (
-            <Button
-              href={project.url}
-              external
-              icon={<ExternalIcon />}
-              aria-label={`Live site: ${project.name}`}
-            >
+            <Button href={project.url} external icon={<ExternalIcon />} aria-label={`Live site: ${project.name}`}>
               Live
             </Button>
           )}

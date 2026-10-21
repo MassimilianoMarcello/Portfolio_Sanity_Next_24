@@ -1,5 +1,6 @@
 // components/Project_Home/ProjectCard.module.scss
-// Solo var(--…): nessuna primitiva Sass, nessun valore hardcoded.
+// Tre sezioni (header · contenuto · footer), un solo bordo, nessuna fascia colorata, nessun hover:
+// la card non è cliccabile, quindi non promette interazione. Solo var(--…).
 @use "../../app/core" as *;
 
 .card {
@@ -9,37 +10,30 @@
   border: 1px solid var(--color-border-brand);
   border-radius: var(--radius-md);
   overflow: hidden;
-  scroll-margin-top: calc(var(--navbar-height) + var(--space-4)); // sotto la navbar fissa (ritorno da un case study)
-  transition: border-color 180ms ease, box-shadow 180ms ease;
+  scroll-margin-top: calc(var(--navbar-height) + var(--space-4));
 
-  &:hover {
-    border-color: var(--color-brand);
-    box-shadow: var(--shadow-1);
+  @include responsive("md", "max") {
+    scroll-margin-top: calc(var(--navbar-height-mobile) + var(--space-4));
   }
-
-  @include responsive("md", "max") { scroll-margin-top: calc(var(--navbar-height-mobile) + var(--space-4)); }
-  @media (prefers-reduced-motion: reduce) { transition: none; }
 }
 
-.techRow {
-  padding: var(--space-3) var(--space-5);
-  background: var(--color-bg-accent);
-  border-bottom: 1px solid var(--color-border-strong);
+// ─── Header: titolo + stato, stack inline, esito ─────────────────────────────
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border-bottom: 1px solid var(--color-border);
 
-  @include responsive("md", "max") { padding: var(--space-3) var(--space-4); }
+  @include responsive("md", "max") { padding: var(--space-4); }
 }
 
-// Un solo asse: tutto a sinistra, pill a destra e visibile anche su mobile (va a capo)
 .titleRow {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-2) var(--space-4);
-  padding: var(--space-4) var(--space-5);
-  border-bottom: 1px solid var(--color-border);
-
-  @include responsive("md", "max") { padding: var(--space-3) var(--space-4); }
 }
 
 .title {
@@ -49,21 +43,39 @@
   font-weight: var(--weight-semibold);
   line-height: var(--leading-tight);
   letter-spacing: -0.01em;
-  color: var(--color-heading); // tinta unita: il gradiente con text-fill trasparente spariva in forced-colors
+  color: var(--color-heading);
 }
 
-// Immagine = colonna più larga
+// Impact: la frase che un lettore non tecnico deve portarsi via
+.impact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-top: var(--space-2);
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--color-brand);
+}
+
+.impactText {
+  max-width: 62ch;
+  margin: 0;
+  font-size: var(--text-md);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-snug);
+  color: var(--color-heading);
+}
+
+// ─── Contenuto: prova (immagine, colonna più larga) + problema/soluzione ─────
 .contentRow {
   display: grid;
   grid-template-columns: 1.6fr 1fr;
-  border-bottom: 1px solid var(--color-border);
 
   @include responsive("md", "max") { grid-template-columns: 1fr; }
 }
 
 .media {
-  padding: var(--space-5);
   align-self: start;
+  padding: var(--space-5);
 
   @include responsive("md", "max") { padding: var(--space-4); }
 }
@@ -85,9 +97,9 @@
   border-left: 1px solid var(--color-border);
 
   @include responsive("md", "max") {
+    padding: var(--space-4);
     border-left: none;
     border-top: 1px solid var(--color-border);
-    padding: var(--space-4);
   }
 }
 
@@ -99,7 +111,6 @@
 
 .text {
   margin: 0;
-  font-family: var(--font-body);
   font-size: var(--text-sm);
   font-weight: var(--weight-regular);
   line-height: var(--leading-body);
@@ -113,26 +124,7 @@
   color: var(--color-text-muted);
 }
 
-.impact {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-  padding: var(--space-4) var(--space-5);
-  background: var(--color-bg-accent);
-  border-bottom: 1px solid var(--color-border-accent);
-
-  @include responsive("md", "max") { padding: var(--space-4); }
-}
-
-.impactText {
-  margin: 0;
-  max-width: 70ch;
-  font-size: var(--text-sm);
-  font-weight: var(--weight-regular);
-  line-height: var(--leading-body);
-  color: var(--color-heading);
-}
-
+// ─── Footer ──────────────────────────────────────────────────────────────────
 .footer {
   display: flex;
   flex-wrap: wrap;
@@ -140,8 +132,14 @@
   justify-content: space-between;
   gap: var(--space-3);
   padding: var(--space-3) var(--space-5);
+  border-top: 1px solid var(--color-border);
 
   @include responsive("md", "max") { padding: var(--space-3) var(--space-4); }
+}
+
+.buttonMeta {
+  font-weight: var(--weight-regular);
+  opacity: 0.85;
 }
 
 .links {
